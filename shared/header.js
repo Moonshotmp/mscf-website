@@ -13,7 +13,7 @@
 
 (function() {
     const headerHTML = `
-    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-brand-gray/20" id="navbar">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-brand-gray/20" id="navbar">
         <div class="container mx-auto px-4 flex justify-between items-center h-20">
             <a href="/" class="flex-shrink-0">
                 <img src="/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto">
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark/95 backdrop-blur-sm border-t border-brand-gray/20">
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-sm border-t border-brand-gray/20">
             <div class="px-4 py-4 space-y-1 text-center">
                 <a href="/#memberships" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Memberships</a>
                 <a href="/pt/" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Personal Training</a>

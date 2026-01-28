@@ -16,7 +16,7 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-brand-gray/20" id="navbar">
         <div class="container mx-auto px-4 flex justify-between items-center h-20">
             <a href="/" class="flex-shrink-0">
-                <img src="/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto">
+                <img src="/images/moonshot crossfit text cloud color.png" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto">
             </a>
 
             <!-- Desktop Navigation -->

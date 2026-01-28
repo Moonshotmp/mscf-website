@@ -19,7 +19,7 @@
         <div class="container mx-auto px-4">
             <!-- Logo and CTAs -->
             <div class="text-center mb-8">
-                <img src="/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6">
+                <img src="/images/moonshot crossfit text cloud color.png" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6">
                 <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
                     <a href="/intro/" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">Book Your Free Intro</a>
                     <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPage/Main?q=Memberships%7CLocationId%3D9972" target="_blank" class="btn btn-secondary font-bold px-6 py-3 rounded-lg">View Memberships</a>

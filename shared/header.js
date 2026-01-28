@@ -20,14 +20,14 @@
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-6 items-center text-white">
-                <a href="/#memberships" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Memberships</a>
-                <a href="/pt/" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Personal Training</a>
-                <a href="/#schedule" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Schedule</a>
-                <a href="/kids/" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Kids</a>
-                <a href="/#drop-in" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Drop In</a>
-                <a href="/#contact" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Contact</a>
-                <a href="/intro/" class="btn btn-primary text-sm px-4 py-2 rounded-lg">Book Free Intro</a>
+            <nav class="hidden md:flex space-x-6 items-center text-white font-heading">
+                <a href="/#memberships" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Memberships</a>
+                <a href="/pt/" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Personal Training</a>
+                <a href="/#schedule" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Schedule</a>
+                <a href="/kids/" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Kids</a>
+                <a href="/#drop-in" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Drop In</a>
+                <a href="/#contact" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Contact</a>
+                <a href="/intro/" class="btn btn-primary text-sm px-4 py-2 rounded-lg font-body font-bold">Book Free Intro</a>
             </nav>
 
             <!-- Mobile Menu Button -->

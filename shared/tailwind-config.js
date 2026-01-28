@@ -24,7 +24,7 @@ tailwind.config = {
                 }
             },
             fontFamily: {
-                heading: ['Poppins', 'sans-serif'],
+                heading: ['Oswald', 'sans-serif'],
                 body: ['Poppins', 'sans-serif']
             }
         }

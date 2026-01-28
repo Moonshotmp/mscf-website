@@ -17,6 +17,7 @@ tailwind.config = {
                     light: '#F0EEE9',     // warm cream text
                     gray: '#B2BFBE',      // muted sage gray
                     slate: '#2C353E',     // dark slate for cards
+                    gold: '#B8986E',      // warm gold accent
                     // Keep moonlight blue as accent option
                     blue: '#8cb2f5',
                     'blue-light': '#a8c5f7'

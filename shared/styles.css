@@ -21,6 +21,7 @@
     --brand-blue: #8cb2f5;
     --brand-blue-light: #a8c5f7;
     --brand-accent: #F0EEE9;
+    --brand-gold: #B8986E;
 }
 
 /* ========================================
@@ -70,16 +71,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .border-moonlight-blue {
-    border-color: var(--brand-light);
+    border-color: var(--brand-gold);
+}
+
+/* Gold accent for icons */
+.icon-gold {
+    color: var(--brand-gold);
 }
 
 .text-brand-blue { color: var(--brand-blue); }
 .text-brand-light { color: var(--brand-light); }
 .text-brand-gray { color: var(--brand-gray); }
+.text-brand-gold { color: var(--brand-gold); }
 
 .bg-brand-dark { background-color: var(--brand-dark); }
 .bg-brand-slate { background-color: var(--brand-slate); }
 .bg-brand-blue { background-color: var(--brand-blue); }
+.bg-brand-gold { background-color: var(--brand-gold); }
+
+.border-brand-gold { border-color: var(--brand-gold); }
 
 /* ========================================
    Buttons
@@ -139,7 +149,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .schedule-day {
     background-color: var(--brand-card);
-    border-left: 4px solid var(--brand-light);
+    border-left: 4px solid var(--brand-gold);
     display: flex;
     flex-direction: column;
 }
@@ -285,7 +295,7 @@ summary::-webkit-details-marker {
     padding: 1.5rem;
     background-color: rgb(17, 24, 39);
     border-radius: 0.5rem;
-    border-left: 4px solid var(--brand-light);
+    border-left: 4px solid var(--brand-gold);
 }
 
 .faq-item h3 {

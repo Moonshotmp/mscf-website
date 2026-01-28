@@ -11,9 +11,12 @@
     <meta name="description" content="Get answers to all your questions about Moonshot CrossFit near Chicago O'Hare. Find info on getting started, safety for beginners, pricing, class types, drop-in policies, and achieving your fitness goals.">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/shared/tailwind-config.js"></script>
+    <link rel="stylesheet" href="/shared/styles.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <!-- SEO: JSON-LD Schema Markup for Rich Results -->
     <script type="application/ld+json" id="faq-schema"></script>
@@ -106,25 +109,15 @@
 <body class="bg-gray-900 text-gray-100">
     <div id="top"></div>
 
-    <!-- Header Section -->
-    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 py-4 shadow-lg shadow-black/20">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                <a href="https://moonshotcrossfit.com/" target="_blank" aria-label="Go to Moonshot CrossFit Homepage">
-                    <img src="https://moonshotcrossfit.com/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-16 w-16" onerror="this.onerror=null;this.src='https://placehold.co/100x100/111827/F3F4F6?text=Logo';">
-                </a>
-                <h1 class="header-font text-2xl md:text-3xl text-white">Frequently Asked Questions</h1>
-            </div>
-            <div class="flex items-center gap-6">
-                <a href="https://moonshotcrossfit.com/" target="_blank" class="text-gray-300 hover:text-sky-400 transition-colors font-bold hidden sm:block">
-                    Back to Home
-                </a>
-                <a href="https://moonshotcrossfit.com/book-intro/" target="_blank" class="btn-primary px-6 py-2 rounded-lg text-center">
-                    Book a Free Intro
-                </a>
-            </div>
+    <!-- Header (auto-injected) -->
+    <script src="/shared/header.js"></script>
+
+    <!-- Page Title Section -->
+    <div class="bg-gray-800 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl md:text-4xl font-black text-white uppercase tracking-wider">Frequently Asked Questions</h1>
         </div>
-    </header>
+    </div>
 
     <!-- Navigation & Search -->
     <nav class="bg-gray-800 py-4 sticky top-[104px] md:top-[96px] z-40">
@@ -153,44 +146,8 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-700 mt-16 py-12">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            
-            <!-- Local SEO: Address and Hours -->
-            <div class="grid md:grid-cols-2 gap-8 mb-10 text-left">
-                <div id="contact-info">
-                    <h3 class="header-font text-xl text-white mb-4">Find Us</h3>
-                    <p class="font-bold text-gray-200">Moonshot CrossFit</p>
-                    <p>542 Busse Hwy, Park Ridge, IL 60068</p>
-                    <a href="https://www.google.com/maps/place/Moonshot+CrossFit/" target="_blank" class="text-sky-400 hover:underline mt-2 inline-block">Get Directions</a>
-                </div>
-                <div id="hours-info">
-                    <h3 class="header-font text-xl text-white mb-4">Class Schedule</h3>
-                    <div class="space-y-3 text-sm">
-                        <div>
-                            <p><strong class="text-gray-200">Weekday Classes</strong></p>
-                            <p class="pl-4">5:30am, 6:30am, 9:30am, 4:30pm, 5:30pm, 6:30pm</p>
-                            <p class="pl-4">10:30am <span class="text-gray-400">(Mon, Wed, Fri only)</span></p>
-                        </div>
-                        <div>
-                            <p><strong class="text-gray-200">Saturday Classes</strong></p>
-                            <p class="pl-4">8am, 9am, 10am Bootcamp</p>
-                        </div>
-                        <div>
-                            <p><strong class="text-gray-200">Open Gym</strong></p>
-                            <p class="pl-4">12:00pm - 1:00pm <span class="text-gray-400">(Mon, Tue, Wed, Fri)</span></p>
-                            <p class="pl-4">9:00am - 10:30am <span class="text-gray-400">(Sun)</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <p class="mb-4"><a href="https://moonshotcrossfit.com/" target="_blank" class="text-sky-400 hover:underline font-semibold">Back to Main Site</a></p>
-            <p>&copy; 2025 Moonshot CrossFit. All Rights Reserved.</p>
-            <p class="mt-2">Ready to start? <a href="https://moonshotcrossfit.com/book-intro/" target="_blank" class="text-sky-400 hover:underline">Book Your Free Intro Today!</a></p>
-        </div>
-    </footer>
+    <!-- Footer (auto-injected) -->
+    <script src="/shared/footer.js"></script>
 
     <!-- Back to Top Button -->
     <a href="#top" id="back-to-top" class="fixed bottom-5 right-5 bg-sky-500 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none hover:bg-sky-600">

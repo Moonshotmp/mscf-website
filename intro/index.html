@@ -7,11 +7,13 @@
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Teko for headings, Roboto for body -->
+    <script src="/shared/tailwind-config.js"></script>
+    <link rel="stylesheet" href="/shared/styles.css">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -40,21 +42,20 @@
 </head>
 <body class="antialiased">
 
-    <!-- Header Section -->
-    <header class="hero-gradient">
-        <div class="max-w-4xl mx-auto px-6 py-16 text-center">
-            <div class="mb-4">
-                <h1 class="text-6xl md:text-7xl font-bold tracking-wider text-white">MOONSHOT</h1>
-                <p class="text-2xl md:text-3xl text-moonshot-blue font-semibold tracking-widest -mt-2 md:-mt-4">CROSSFIT</p>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-3">
+    <!-- Header (auto-injected) -->
+    <script src="/shared/header.js"></script>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16 md:py-24">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-wider text-white mb-4">
                 Book Your Free Intro
-            </h2>
-            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light">
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
                 This is a no-pressure 1-on-1 session to tour our facility, meet a coach, and set your personal fitness goals.
             </p>
         </div>
-    </header>
+    </section>
 
     <!-- Main Content: Single Column Layout -->
     <main class="w-full">
@@ -98,21 +99,8 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black">
-        <div class="max-w-4xl mx-auto px-6 py-12 text-center text-gray-500">
-            <p class="mb-4">542 Busse Hwy, Park Ridge, IL 60068</p>
-            <div class="flex justify-center gap-4 mb-6">
-                <a href="https://moonshotcrossfit.com" target="_blank" class="btn-hover text-center bg-moonshot-blue text-black font-bold py-3 px-6 rounded-md text-base uppercase tracking-wider transition-transform duration-200 ease-in-out">
-                    Main Website
-                </a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Moonshot+CrossFit+Park+Ridge" target="_blank" class="btn-hover text-center bg-transparent border-2 border-moonshot-blue text-moonshot-blue font-bold py-3 px-6 rounded-md text-base uppercase tracking-wider transition-transform duration-200 ease-in-out">
-                    Read Reviews
-                </a>
-            </div>
-            <p>&copy; 2024 Moonshot CrossFit. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <!-- Footer (auto-injected) -->
+    <script src="/shared/footer.js"></script>
 
 </body>
 </html>

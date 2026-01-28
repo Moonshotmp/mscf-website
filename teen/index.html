@@ -11,11 +11,13 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
+    <script src="/shared/tailwind-config.js"></script>
+    <link rel="stylesheet" href="/shared/styles.css">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
         /* Custom styles to extend Tailwind */
@@ -54,22 +56,8 @@
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
-    <header class="absolute top-0 left-0 right-0 z-10 p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Updated with Logo and link to Schedule section -->
-            <a href="#schedule">
-                <img src="https://moonshotcrossfit.com/images/moonshotlogo.png" alt="Moonshot CrossFit Logo" class="h-10" onerror="this.onerror=null;this.src='https://placehold.co/200x50/ffffff/111827?text=MOONSHOT';">
-            </a>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#program" class="text-gray-300 hover:text-white transition">Program</a>
-                <a href="#coach" class="text-gray-300 hover:text-white transition">Coach</a>
-                <a href="#sports" class="text-gray-300 hover:text-white transition">Sports</a>
-                <a href="#schedule" class="text-gray-300 hover:text-white transition">Schedule</a>
-                <a href="#contact" class="text-gray-300 hover:text-white transition">Sign Up</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Header (auto-injected) -->
+    <script src="/shared/header.js"></script>
 
     <!-- Hero Section -->
     <section class="hero-section relative h-screen flex items-center justify-center text-center">
@@ -298,18 +286,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-8">
-        <div class="container mx-auto px-4 text-center text-gray-500">
-            <p>&copy; 2025 Moonshot CrossFit. All Rights Reserved.</p>
-            <p>Park Ridge, IL | <a href="#" class="hover:text-indigo-400">Privacy Policy</a></p>
-            <!-- New Kids Program Link -->
-            <p class="mt-4">
-                <span class="text-gray-400">Have a child under the age of 11? </span>
-                <a href="https://moonshotcrossfit.com/kids/" class="hover:text-indigo-400 font-semibold">Explore our specialized Kids CrossFit program.</a>
-            </p>
-        </div>
-    </footer>
+    <!-- Footer (auto-injected) -->
+    <script src="/shared/footer.js"></script>
 
 
     <script>

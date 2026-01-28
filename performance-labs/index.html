@@ -14,18 +14,8 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"></noscript>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Poppins', sans-serif; background-color: #000; color: #fff; }
-    .moonlight-blue { color: #8cb2f5; }
-    .bg-moonlight-blue { background-color: #8cb2f5; }
-    .card { background-color: #111827; border: 1px solid #374151; }
-    .btn { transition: all 0.3s ease; }
-    .btn-primary { background-color: #8cb2f5; color: #000; }
-    .btn-primary:hover { background-color: #a8c5f7; transform: scale(1.03); }
-    .btn-secondary { background-color: transparent; border: 2px solid #8cb2f5; color: #8cb2f5; }
-    .btn-secondary:hover { background-color: #8cb2f5; color: #000; }
-  </style>
+  <script src="/shared/tailwind-config.js"></script>
+  <link rel="stylesheet" href="/shared/styles.css">
 
   <script type="application/ld+json">
   {
@@ -79,17 +69,8 @@
   </script>
 </head>
 <body class="antialiased">
-  <header class="bg-black border-b border-gray-800">
-    <div class="container mx-auto px-4 py-5 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <img src="/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-12 w-auto" width="60" height="60">
-        <span class="font-black uppercase tracking-wider">Moonshot CrossFit</span>
-      </a>
-      <div class="flex gap-3">
-        <a href="/intro" class="btn btn-primary font-bold px-5 py-2 rounded-lg">Book Free Intro</a>
-      </div>
-    </div>
-  </header>
+  <!-- Header (auto-injected) -->
+  <script src="/shared/header.js"></script>
 
   <main class="container mx-auto px-4 py-12 max-w-3xl">
     <p class="text-sm text-gray-400 uppercase tracking-widest mb-3">Performance • Recovery • Data</p>
@@ -158,11 +139,7 @@
     </div>
   </main>
 
-  <footer class="bg-black border-t border-gray-800 py-10">
-    <div class="container mx-auto px-4 text-center text-gray-400">
-      <p class="mb-4">&copy; 2026 Moonshot CrossFit. All Rights Reserved.</p>
-      <a href="https://moonshotcrossfit.com" class="text-gray-500 hover:text-white transition-colors text-sm uppercase tracking-wider">Back to MoonshotCrossFit.com</a>
-    </div>
-  </footer>
+  <!-- Footer (auto-injected) -->
+  <script src="/shared/footer.js"></script>
 </body>
 </html>

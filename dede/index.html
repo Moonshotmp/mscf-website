@@ -4,112 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coach Dede - Personal Training | Moonshot CrossFit</title>
-    <!-- Tailwind CSS CDN -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/shared/tailwind-config.js"></script>
     <link rel="stylesheet" href="/shared/styles.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Dark background similar to Moonshot CrossFit */
-            color: #e2e8f0; /* Light text color */
-        }
-        .container {
-            max-width: 1200px;
-        }
-        /* Updated accent color to a blue shade */
-        .text-accent {
-            color: #4299e1; /* A bluish accent color */
-        }
-        .btn-primary {
-            background-color: #4299e1; /* Blue button background */
-            color: #1a202c;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #3182ce; /* Darker blue on hover */
-        }
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #cbd5e0;
-        }
-        .quote-section {
-            background-color: #2d3748; /* Slightly lighter dark background for contrast */
-            padding: 4rem 0;
-        }
-        .footer-link {
-            color: #cbd5e0;
-            transition: color 0.3s ease;
-        }
-        .footer-link:hover {
-            color: #4299e1; /* Blue hover for footer links */
-        }
-        .price-item {
-            background-color: #2d3748;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
 </head>
-<body class="antialiased">
+<body>
     <!-- Header (auto-injected) -->
     <script src="/shared/header.js"></script>
 
     <main>
-        <!-- Hero Section -->
-        <section class="relative bg-gray-800 py-16 md:py-24 overflow-hidden">
+        <section class="relative bg-brand-slate py-16 md:py-24 overflow-hidden">
             <div class="container mx-auto flex flex-col md:flex-row items-center justify-center px-4">
                 <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0 md:pr-12">
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-brand-light leading-tight mb-4 font-heading">
                         Coach Dede
                     </h1>
-                    <h2 class="text-2xl md:text-3xl font-semibold text-accent mb-6">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-brand-gold mb-6 font-heading">
                         Personal Trainer & CrossFit Coach
                     </h2>
-                    <p class="text-lg text-gray-300 mb-4">
+                    <p class="text-lg text-brand-gray mb-4">
                         NASM CPT, CrossFit L2, NASP Olympic Weightlifting, ISSA CSCS
                     </p>
-                    <!-- Reverted to a simple button or text for the hero section -->
-                    <a href="#contact" class="btn-primary inline-block mt-4">Contact Dede</a>
+                    <a href="#contact" class="btn btn-primary inline-block mt-4 px-6 py-3 rounded-lg">Contact Dede</a>
                 </div>
                 <div class="md:w-1/2 flex justify-center md:justify-end">
-                    <img src="https://moonshotcrossfit.com/images/Dede.JPG" alt="Coach Dede Profile" class="rounded-full shadow-xl w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-accent">
+                    <img src="/images/Dede.JPG" alt="Coach Dede Profile" class="rounded-full shadow-xl w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-brand-gold">
                 </div>
             </div>
         </section>
 
-        <!-- About Dede Section -->
-        <section class="py-16 md:py-20 bg-gray-900">
+        <section class="py-16 md:py-20 bg-brand-dark">
             <div class="container mx-auto px-4">
-                <h3 class="section-title">About Dede</h3>
+                <h3 class="section-title text-center mb-12">About Dede</h3>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="text-lg text-gray-300 space-y-6">
+                    <div class="text-lg text-brand-gray space-y-6">
                         <p>
-                            I’ve been a personal trainer for over a decade and coaching CrossFit since 2019. I fell in love with CrossFit back in 2017 and never looked back. It’s been a huge part of my life ever since. As a competitive Masters athlete, I’ve earned podium finishes in both individual and team divisions, including two second place finishes in my age group and in the Masters team category.
+                            I've been a personal trainer for over a decade and coaching CrossFit since 2019. I fell in love with CrossFit back in 2017 and never looked back. It's been a huge part of my life ever since. As a competitive Masters athlete, I've earned podium finishes in both individual and team divisions, including two second place finishes in my age group and in the Masters team category.
                         </p>
                         <p>
-                            Coaching and competing fuel my passion, but what truly drives me is helping others discover their strength physically and mentally. There’s nothing more rewarding than walking alongside someone on their fitness journey and watching them grow into the best version of themselves.
+                            Coaching and competing fuel my passion, but what truly drives me is helping others discover their strength physically and mentally. There's nothing more rewarding than walking alongside someone on their fitness journey and watching them grow into the best version of themselves.
                         </p>
                         <p>
-                            This isn’t just a job. It’s my purpose. If I can help you become healthier, stronger, and happier, that’s the greatest reward I could ask for.
+                            This isn't just a job. It's my purpose. If I can help you become healthier, stronger, and happier, that's the greatest reward I could ask for.
                         </p>
                         <p>
-                            Let’s take that first step together.
+                            Let's take that first step together.
                         </p>
-                        <h4 class="text-xl font-bold text-accent mt-6 mb-2">Certifications</h4>
-                        <ul class="list-disc list-inside text-gray-300">
+                        <h4 class="text-xl font-bold text-brand-gold mt-6 mb-2 font-heading">Certifications</h4>
+                        <ul class="list-disc list-inside text-brand-gray">
                             <li>NASM Certified Personal Trainer</li>
                             <li>CrossFit Level 2 Coach</li>
                             <li>NASP Certified Sports Performance Coach in Olympic Weightlifting</li>
@@ -117,55 +65,51 @@
                         </ul>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <img src="https://moonshotcrossfit.com/images/dedebike.JPG" alt="Dede on a bike" class="rounded-lg shadow-lg object-cover w-full h-auto">
-                        <img src="https://moonshotcrossfit.com/images/dedebike2.JPG" alt="Dede coaching on a bike" class="rounded-lg shadow-lg object-cover w-full h-auto">
-                        <img src="https://moonshotcrossfit.com/images/DedeMuscleUp.JPG" alt="Dede doing a muscle up" class="rounded-lg shadow-lg object-cover w-full h-auto sm:col-span-2 mx-auto">
+                        <img src="/images/dedebike.JPG" alt="Dede on a bike" class="rounded-lg shadow-lg object-cover w-full h-auto">
+                        <img src="/images/dedebike2.JPG" alt="Dede coaching on a bike" class="rounded-lg shadow-lg object-cover w-full h-auto">
+                        <img src="/images/DedeMuscleUp.JPG" alt="Dede doing a muscle up" class="rounded-lg shadow-lg object-cover w-full h-auto sm:col-span-2 mx-auto">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Training Rates Section -->
-        <section class="py-16 md:py-20 bg-gray-800">
+        <section class="py-16 md:py-20 bg-brand-slate">
             <div class="container mx-auto px-4 text-center">
-                <h3 class="section-title">Personal Training Rates</h3>
+                <h3 class="section-title mb-12">Personal Training Rates</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                    <div class="price-item">
-                        <h4 class="text-2xl font-bold text-accent mb-2">Single Session</h4>
-                        <p class="text-4xl font-extrabold text-white">$105<span class="text-lg font-normal">/hr</span></p>
+                    <div class="card p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold text-brand-gold mb-2 font-heading">Single Session</h4>
+                        <p class="text-4xl font-extrabold text-brand-light">$105<span class="text-lg font-normal text-brand-gray">/hr</span></p>
                     </div>
-                    <div class="price-item">
-                        <h4 class="text-2xl font-bold text-accent mb-2">5-Pack</h4>
-                        <p class="text-4xl font-extrabold text-white">$475</p>
+                    <div class="card p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold text-brand-gold mb-2 font-heading">5-Pack</h4>
+                        <p class="text-4xl font-extrabold text-brand-light">$475</p>
                     </div>
-                    <div class="price-item">
-                        <h4 class="text-2xl font-bold text-accent mb-2">10-Pack</h4>
-                        <p class="text-4xl font-extrabold text-white">$895</p>
+                    <div class="card p-6 rounded-lg">
+                        <h4 class="text-2xl font-bold text-brand-gold mb-2 font-heading">10-Pack</h4>
+                        <p class="text-4xl font-extrabold text-brand-light">$895</p>
                     </div>
                 </div>
-                <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPortal/PaymentPlans.aspx?LocationId=9972&OnlineMembershipId=295918" target="_blank" class="btn-primary text-xl px-8 py-4 inline-block">
+                <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPortal/PaymentPlans.aspx?LocationId=9972&OnlineMembershipId=295918" target="_blank" class="btn btn-primary text-xl px-8 py-4 inline-block rounded-lg">
                     Purchase Training Now
                 </a>
             </div>
         </section>
 
-        <!-- Quote Section -->
-        <section class="quote-section">
+        <section class="py-16 md:py-20 bg-brand-dark">
             <div class="container mx-auto px-4 text-center">
-                <p class="text-3xl md:text-4xl italic font-light text-white mb-4">
-                    “If I can help you become healthier, stronger, and happier, that’s the greatest reward I could ask for.”
+                <p class="text-3xl md:text-4xl italic font-light text-brand-light mb-4 max-w-4xl mx-auto">
+                    "If I can help you become healthier, stronger, and happier, that's the greatest reward I could ask for."
                 </p>
             </div>
         </section>
 
-        <!-- Contact Section (Form moved here) -->
-        <section id="contact" class="py-16 md:py-20 bg-gray-800">
+        <section id="contact" class="py-16 md:py-20 bg-brand-slate">
             <div class="container mx-auto px-4 text-center">
-                <h3 class="section-title">Ready to Start Your Journey?</h3>
-                <p class="text-xl text-gray-300 mb-8">
+                <h3 class="section-title mb-8">Ready to Start Your Journey?</h3>
+                <p class="text-xl text-brand-gray mb-8">
                     Fill out the form below to connect with Coach Dede and discuss your fitness goals.
                 </p>
-                <!-- Embedded Form for Contact -->
                 <div class="mt-8 mx-auto mb-12" style="max-width: 600px; min-height: 750px;">
                     <iframe
                         src="https://api.leadconnectorhq.com/widget/form/qL5K8zCLMx7tUUSs2Jgo"
@@ -183,8 +127,7 @@
                         data-layout-iframe-id="inline-qL5K8zCLMx7tUUSs2Jgo"
                         data-form-id="qL5K8zCLMx7tUUSs2Jgo"
                         title="Dede Personal Training Form"
-                    >
-                    </iframe>
+                    ></iframe>
                     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
                 </div>
             </div>

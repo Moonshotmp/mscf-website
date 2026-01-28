@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Training | Moonshot CrossFit | Park Ridge, IL</title>
+    <meta name="description" content="1-on-1 personal training at Moonshot CrossFit in Park Ridge. Get a customized plan from our expert coaches to accelerate your fitness results.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"></noscript>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y74MV32LC2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y74MV32LC2');
+    </script>
+    
+    <link rel="icon" href="/images/MoonshotLogo.png" type="image/png">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; background-color: #000000; color: #FFFFFF; }
+        .moonlight-blue { color: #8cb2f5; }
+        .bg-moonlight-blue { background-color: #8cb2f5; }
+        .border-moonlight-blue { border-color: #8cb2f5; }
+        .hero-section {
+            /* ===== UPDATED: Background Image ===== */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/Peterowing.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title { font-weight: 900; font-size: 2.5rem; line-height: 1.2; text-transform: uppercase; letter-spacing: 1px; }
+        @media (min-width: 768px) { .section-title { font-size: 3rem; } }
+        .card { background-color: #111827; border: 1px solid #374151; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(140, 178, 245, 0.2); }
+        .btn { transition: all 0.3s ease; }
+        .btn-primary { background-color: #8cb2f5; color: #000; }
+        .btn-primary:hover { background-color: #a8c5f7; transform: scale(1.05); }
+        .btn-secondary { background-color: transparent; border: 2px solid #8cb2f5; color: #8cb2f5; }
+        .btn-secondary:hover { background-color: #8cb2f5; color: #000; }
+        
+        /* ===== NEW: Scrollbar Hiding Utility ===== */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none;  scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-black/80 backdrop-blur-sm sticky top-0 z-30 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/">
+                <img src="/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto" width="80" height="80">
+            </a>
+            <nav class="hidden md:flex space-x-6 items-center text-white">
+                <a href="#why-pt" class="hover:text-moonlight-blue transition-colors">Why PT?</a>
+                <a href="#coaches" class="hover:text-moonlight-blue transition-colors">Coaches</a>
+                <a href="#contact" class="hover:text-moonlight-blue transition-colors">Contact</a>
+                <a href="https://moonshotcrossfit.com/intro" target="_blank" class="btn btn-primary text-sm px-4 py-2 rounded-lg">Book Free Intro</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white" aria-label="Open mobile menu">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 mt-4 rounded-lg p-4">
+            <a href="#why-pt" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Why PT?</a>
+            <a href="#coaches" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Coaches</a>
+            <a href="#contact" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Contact</a>
+            <a href="https://moonshotcrossfit.com/intro" target="_blank" class="block w-full mt-4 btn btn-primary text-center px-4 py-2 rounded-lg">Book Your Free Intro</a>
+        </div>
+    </header>
+
+    <section class="hero-section h-[70vh] min-h-[500px] flex items-center justify-center text-center relative">
+        <div class="container mx-auto px-4 z-10">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider">Your Goals. Our Coaching.</h1>
+            <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-gray-200">One-on-one personal training to fast-track your results, build confidence, and master new skills.</p>
+            <a href="#coaches" class="mt-8 inline-block btn btn-primary font-bold text-lg px-10 py-4 rounded-lg shadow-lg">
+                Learn More
+            </a>
+        </div>
+    </section>
+
+    <section id="why-pt" class="py-20 md:py-32 bg-black">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="section-title mb-12">The Fastest Path to Your Goals</h2>
+            <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4"><i data-lucide="clipboard-list" class="w-16 h-16 moonlight-blue"></i></div>
+                    <h3 class="text-2xl font-bold mb-2">Tailored Programming</h3>
+                    <p class="text-gray-300">Your plan is 100% customized to your body, your goals, and your lifestyle. Whether you're training for a competition or recovering from an injury, we build the program for you.</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4"><i data-lucide="zap" class="w-16 h-16 moonlight-blue"></i></div>
+                    <h3 class="text-2xl font-bold mb-2">Accelerated Results</h3>
+                    <p class="text-300">Focused, one-on-one attention means faster progress. We'll refine your technique, push your limits safely, and ensure every session is a step toward your specific objective.</p>
+                </div>
+                <div class="text-center">
+                    <div class="flex justify-center items-center mb-4"><i data-lucide="heart-handshake" class="w-16 h-16 moonlight-blue"></i></div>
+                    <h3 class="text-2xl font-bold mb-2">Accountability & Support</h3>
+                    <p class="text-gray-300">Your coach is your partner. We provide the structure, motivation, and expert guidance to keep you consistent and confident on your fitness journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coaches" class="py-20 md:py-32 bg-black">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-center mb-12">Find Your Perfect Coach</h2>
+            <p class="text-center text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                Our expert coaches each bring a unique style and expertise. Explore their profiles and find the right fit to accelerate your fitness journey. You're welcome to book time with any of them!
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card p-6 rounded-lg flex flex-col items-center text-center">
+                    <img src="/images/Dede.JPG" alt="Coach Dede" class="w-40 h-40 mx-auto rounded-full border-4 border-moonlight-blue object-cover mb-4">
+                    <h3 class="font-bold text-xl mb-1">Coach Dede</h3>
+                    <p class="text-gray-400 mb-3">Base Rate: $105/hr</p>
+                    <a href="/dede" class="btn btn-secondary text-sm px-6 py-2 rounded-lg">View Profile</a>
+                </div>
+                
+                <div class="card p-6 rounded-lg flex flex-col items-center text-center">
+                    <img src="/images/coachjames.jpg" alt="Coach James" class="w-40 h-40 mx-auto rounded-full border-4 border-moonlight-blue object-cover mb-4">
+                    <h3 class="font-bold text-xl mb-1">Coach James</h3>
+                    <p class="text-gray-400 mb-3">Base Rate: $250/hr</p>
+                    <a href="/james" class="btn btn-secondary text-sm px-6 py-2 rounded-lg">View Profile</a>
+                </div>
+                
+                <div class="card p-6 rounded-lg flex flex-col items-center text-center">
+                    <img src="/images/sarah1.jpg" alt="Coach Sarah" class="w-40 h-40 mx-auto rounded-full border-4 border-moonlight-blue object-cover mb-4">
+                    <h3 class="font-bold text-xl mb-1">Coach Sarah</h3>
+                    <p class="text-gray-400 mb-3">Base Rate: $100/hr</p>
+                    <div class="flex flex-col items-center mt-2">
+                        <a href="/sarah" class="btn btn-secondary text-sm px-6 py-2 rounded-lg mb-2">View Profile</a>
+                        <p class="text-gray-400 text-sm mb-1">Youth PT Base Rate: $75/hr</p>
+                        <a href="/sarah/youthpt" class="btn btn-secondary text-sm px-6 py-2 rounded-lg">Youth PT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-20 md:py-32 bg-gray-900/50">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+             <h2 class="section-title mb-12">Coaching That Makes a Difference</h2>
+            <div class="space-y-12">
+                <div class="p-6 bg-gray-900 rounded-lg border-l-4 border-moonlight-blue text-left"><i data-lucide="quote" class="w-10 h-10 mb-4 moonlight-blue opacity-50"></i><p class="text-xl italic">"The owners and coaches are amazing and make you feel comfortable no matter your fitness level. The community is so welcoming and supportive!"</p><p class="mt-4 font-bold text-gray-300">&ndash; Lauren B., Google Review</p></div>
+                <div class="p-6 bg-gray-900 rounded-lg border-l-4 border-moonlight-blue text-left"><i data-lucide="quote" class="w-10 h-10 mb-4 moonlight-blue opacity-50"></i><p class="text-xl italic">"Great coaching, great programming, great community. Highly recommend for any fitness level."</p><p class="mt-4 font-bold text-gray-300">&ndash; Brian F., Google Review</p></div>
+            </div>
+            <a href="https://www.google.com/search?q=moonshot+crossfit+park+ridge+reviews" target="_blank" class="mt-12 inline-flex items-center space-x-2 text-moonlight-blue font-semibold hover:underline"><span>Read More on Google</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-20 md:py-32 bg-gray-900/50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="section-title mb-12">Your Journey Starts Here</h2>
+            <div class="grid md:grid-cols-3 gap-8 items-start max-w-5xl mx-auto relative">
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0 border-t-2 border-dashed border-gray-600" style="transform: translateY(-2rem);"></div>
+                <div class="relative flex flex-col items-center"><div class="bg-moonlight-blue text-black rounded-full w-16 h-16 flex items-center justify-center text-3xl font-bold mb-4 z-10">1</div><h3 class="text-xl font-bold">Book a Free Intro</h3><p class="text-gray-400 mt-2">Meet a coach, tour the gym, and discuss your goals. No pressure, no workout—just a conversation.</p></div>
+                <div class="relative flex flex-col items-center"><div class="bg-moonlight-blue text-black rounded-full w-16 h-16 flex items-center justify-center text-3xl font-bold mb-4 z-10">2</div><h3 class="text-xl font-bold">Get Your Custom Plan</h3><p class="text-gray-400 mt-2">Your coach will design a training program and nutrition guidance tailored specifically to you.</p></div>
+                <div class="relative flex flex-col items-center"><div class="bg-moonlight-blue text-black rounded-full w-16 h-16 flex items-center justify-center text-3xl font-bold mb-4 z-10">3</div><h3 class="text-xl font-bold">Train & Track Progress</h3><p class="text-gray-400 mt-2">Start your 1-on-1 sessions and track your results with our app to see your hard work pay off.</p></div>
+            </div>
+            </div>
+    </section>
+
+    <section id="final-cta" class="py-20 md:py-32 bg-moonlight-blue text-black">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="section-title text-black mb-4">Let's Get to Work.</h2>
+            <p class="text-xl max-w-2xl mx-auto">Book your free intro and start training with a Moonshot coach today.</p>
+            <a href="https://moonshotcrossfit.com/intro" target="_blank" class="mt-8 inline-block btn bg-black text-white hover:bg-gray-800 font-bold text-lg px-10 py-4 rounded-lg shadow-lg">
+                Book Free Intro
+            </a>
+        </div>
+    </section>
+    
+    <footer id="contact" class="bg-black py-12">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <a href="/"><img src="/images/MoonshotLogo.png" loading="lazy" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6" width="80" height="80"></a>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
+                 <a href="https://moonshotcrossfit.com/intro" target="_blank" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">Book Your Free Intro</a>
+                 <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPage/Main?q=Memberships%7CLocationId%3D9972" target="_blank" class="btn btn-secondary font-bold px-6 py-3 rounded-lg">View Memberships</a>
+            </div>
+            
+            <nav class="mt-8 mb-8 border-t border-gray-800 pt-8 flex flex-wrap justify-center gap-x-6 sm:gap-x-8 gap-y-4 text-gray-400">
+                <a href="/kids.html" class="hover:text-moonlight-blue transition-colors">Kids Program</a>
+                <a href="/teen.html" class="hover:text-moonlight-blue transition-colors">Teen Program</a>
+                <a href="/sarah/youthpt.html" class="hover:text-moonlight-blue transition-colors">Youth Personal Training</a>
+                <a href="/faq.html" class="hover:text-moonlight-blue transition-colors">FAQ</a>
+                <a href="/" class="hover:text-moonlight-blue transition-colors">Home</a>
+            </nav>
+
+            <p>&copy; 2024 Moonshot CrossFit. All Rights Reserved.</p>
+            <p class="text-sm mt-1">Website by Gemini</p>
+        </div>
+    </footer>
+
+
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+            mobileMenuLinks.forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); }); });
+            
+            // Coach Carousel Logic (Removed as it's replaced by static grid)
+            // Create icons after the DOM is loaded
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

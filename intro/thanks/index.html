@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Confirmed! | Moonshot CrossFit</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Teko for headings, Roboto for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Teko:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- 
+    ============================================================
+    FACEBOOK PIXEL CODE - ACTIVE
+    ============================================================
+    -->
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1676368639293967');
+    fbq('track', 'PageView');
+    
+    // -- THIS IS THE IMPORTANT PART --
+    // This event specifically tracks that a booking was made.
+    fbq('track', 'Schedule'); 
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1676368639293967&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .text-moonshot-blue { color: #B0B9E8; }
+        .bg-moonshot-blue { background-color: #B0B9E8; }
+        .border-moonshot-blue { border-color: #B0B9E8; }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Main Content Section -->
+    <main class="flex-grow flex items-center">
+        <div class="container mx-auto px-6 py-20 text-center">
+            
+            <!-- Checkmark Icon -->
+            <div class="mb-6">
+                <svg class="w-24 h-24 mx-auto text-moonshot-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4">You're All Set!</h1>
+            
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+                Your free intro session has been booked. We've sent a confirmation and a reminder to your email address.
+            </p>
+
+            <div class="max-w-xl mx-auto bg-[#181818] p-8 rounded-lg border border-gray-800">
+                <h2 class="text-3xl font-bold mb-4 text-moonshot-blue">What's Next?</h2>
+                <p class="text-gray-400">
+                    Just show up at your scheduled time. Wear comfortable clothes, but don't worry about bringing workout gear—this is just a casual chat to get to know you and our facility. We can't wait to meet you!
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <a href="https://moonshotcrossfit.com" class="btn-hover inline-block bg-moonshot-blue text-black font-bold py-3 px-8 rounded-md text-lg uppercase tracking-wider transition-transform duration-200 ease-in-out">
+                    Back to Main Site
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2024 Moonshot CrossFit. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

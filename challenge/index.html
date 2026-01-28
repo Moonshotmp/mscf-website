@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonshot CrossFit - 6-Week Transformation Challenge</title>
+    <meta name="description" content="Lose fat, build muscle, and feel like an athlete with Park Ridge's #1 fitness challenge. 100% money-back guarantee. Limited spots available.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1676368639293967');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1676368639293967&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #FFFFFF; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .moonlight-blue { color: #8cb2f5; }
+        .bg-moonlight-blue { background-color: #8cb2f5; }
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)), url('https://moonshotcrossfit.com/images/CompOutside.jpeg');
+            background-size: cover;
+            background-position: center 70%;
+        }
+        .section-title { font-weight: 900; font-size: 2.25rem; text-transform: uppercase; letter-spacing: 1px; }
+        @media (min-width: 768px) { .section-title { font-size: 3rem; } }
+        .btn-cta {
+            transition: all 0.3s ease;
+            background-color: #8cb2f5;
+            color: #000;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 25px rgba(140, 178, 245, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.125rem;
+        }
+        .btn-cta:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(140, 178, 245, 0.6);
+        }
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <header class="bg-black py-4 sticky top-0 z-50 shadow-lg shadow-black/30">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="https://moonshotcrossfit.com" target="_blank">
+                <img src="https://moonshotcrossfit.com/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-12 md:h-16 w-auto">
+            </a>
+            <a href="#book-now" class="btn-cta hidden sm:inline-block text-sm px-6 py-3">Claim My Spot</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section py-20 md:py-28">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-black uppercase font-poppins">
+                <span class="text-yellow-300">Lose Fat, Build Muscle, and Feel Like an Athlete in 6 Weeks</span>
+            </h1>
+            <p class="text-lg md:text-xl mt-6 max-w-3xl mx-auto text-gray-200">Ready to take control of your body and your confidence? Our 6-week transformation challenge is designed to push you, support you, and deliver real results — no matter your starting point.</p>
+            
+            <div class="mt-8 space-y-3 inline-block text-left max-w-md mx-auto">
+                <p class="flex items-center text-lg"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-green-400 flex-shrink-0"></i> Beginner-friendly, expert coaching</p>
+                <p class="flex items-center text-lg"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-green-400 flex-shrink-0"></i> Just $175 with a 100% money-back guarantee</p>
+                <p class="flex items-center text-lg"><i data-lucide="check-circle-2" class="w-6 h-6 mr-3 text-green-400 flex-shrink-0"></i> Only 10 spots available — next challenge starts July 15</p>
+            </div>
+
+            <div class="mt-10">
+                <a href="#book-now" class="btn-cta text-lg sm:text-xl inline-block animate-pulse">
+                    Claim My Spot & Book a Free Intro
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section id="results" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title text-center mb-4 font-poppins">More Than A Gym. It's A Community.</h2>
+            <p class="text-center max-w-3xl mx-auto text-lg text-gray-300 mb-12">You're not just joining a gym, you're joining a supportive group of people who will cheer you on every step of the way.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto mb-16">
+                <div class="col-span-2 md:col-span-1 md:row-span-2 rounded-lg overflow-hidden">
+                    <img src="https://moonshotcrossfit.com/images/mariaclean.JPG" alt="Member performing a clean lift at Moonshot CrossFit" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" loading="lazy">
+                </div>
+                <div class="rounded-lg overflow-hidden">
+                    <img src="https://moonshotcrossfit.com/images/DedeMuscleUp.JPG" alt="Member performing a muscle-up" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" loading="lazy">
+                </div>
+                <!-- UPDATED IMAGE -->
+                <div class="rounded-lg overflow-hidden">
+                    <img src="https://moonshotcrossfit.com/images/mariajill.JPG" alt="Two members celebrating after a workout" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" loading="lazy">
+                </div>
+                 <div class="col-span-2 rounded-lg overflow-hidden">
+                    <img src="https://moonshotcrossfit.com/images/community.jpeg" alt="The Moonshot CrossFit Community" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" loading="lazy">
+                </div>
+            </div>
+
+            <h3 class="text-3xl font-bold text-center mb-10">Here's What Members Are Saying...</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-moonlight-blue shadow-lg">
+                    <div class="flex text-yellow-400 mb-2">★★★★★</div>
+                    <p class="italic text-gray-300 text-lg">“The best community and coaching I've ever experienced. Moonshot has completely changed my perspective on fitness and what I'm capable of.”</p>
+                    <p class="mt-4 font-bold text-right">- Matt S.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-moonlight-blue shadow-lg">
+                    <div class="flex text-yellow-400 mb-2">★★★★★</div>
+                    <p class="italic text-gray-300 text-lg">“Great coaching, great programming, great community. Highly recommend for any fitness level.”</p>
+                    <p class="mt-4 font-bold text-right">- Brian F.</p>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-moonlight-blue shadow-lg">
+                    <div class="flex text-yellow-400 mb-2">★★★★★</div>
+                    <p class="italic text-gray-300 text-lg">“The owners and coaches are amazing and make you feel comfortable no matter your fitness level. The community is so welcoming and supportive!”</p>
+                    <p class="mt-4 font-bold text-right">- Lauren B.</p>
+                </div>
+            </div>
+             <div class="text-center mt-10">
+                <a href="https://www.google.com/search?q=moonshot+crossfit+park+ridge+reviews" target="_blank" class="inline-flex items-center space-x-2 text-moonlight-blue font-semibold hover:underline text-lg">
+                    <span>Read More 5-Star Google Reviews</span>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 bg-gray-900/70">
+         <div class="container mx-auto px-6 text-center">
+            <h2 class="section-title mb-12 font-poppins">How We Guarantee Results</h2>
+            <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-left relative">
+                <div class="relative bg-gray-800 p-8 rounded-lg z-10 border-t-4 border-moonlight-blue">
+                    <div class="absolute -top-5 left-8 bg-moonlight-blue text-black w-10 h-10 rounded-full flex items-center justify-center font-black text-2xl">1</div>
+                    <h3 class="text-2xl font-bold mt-6">Get Your Baseline</h3>
+                    <p class="mt-4 text-gray-300">📊 Kick things off with a quick InBody Scan — a non-invasive, full-body composition analysis that takes under a minute. You'll get a detailed breakdown of your muscle mass, body fat percentage, hydration levels, and how it’s distributed in each limb. This gives you real clarity about where you are now, and a baseline to track your progress as you train.</p>
+                    <p class="mt-4 italic text-white font-semibold">“Forget the scale — see real change.”</p>
+                </div>
+                <div class="relative bg-gray-800 p-8 rounded-lg z-10 border-t-4 border-moonlight-blue">
+                    <div class="absolute -top-5 left-8 bg-moonlight-blue text-black w-10 h-10 rounded-full flex items-center justify-center font-black text-2xl">2</div>
+                    <h3 class="text-2xl font-bold mt-6">Train with Expert Coaching</h3>
+                    <p class="mt-4 text-gray-300">Follow scalable, results-driven workouts supported by our coaches. You're not alone here. We'll guide you through every movement, ensuring you're training safely and effectively to maximize your effort and build your confidence.</p>
+                </div>
+                <div class="relative bg-gray-800 p-8 rounded-lg z-10 border-t-4 border-moonlight-blue">
+                    <div class="absolute -top-5 left-8 bg-moonlight-blue text-black w-10 h-10 rounded-full flex items-center justify-center font-black text-2xl">3</div>
+                    <h3 class="text-2xl font-bold mt-6">Measure Your Results</h3>
+                    <p class="mt-4 text-gray-300">Repeat the InBody Scan at the end of 6 weeks to see exactly what changed— so you know your effort paid off. This isn't about guessing; it's about seeing undeniable proof of your hard work in black and white.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-20 bg-black">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="section-title text-center mb-12 font-poppins">Frequently Asked Questions</h2>
+            <div class="space-y-8">
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">What if I’m totally out of shape or new to CrossFit?</h3>
+                    <p class="text-gray-300 mt-2">No problem at all. Our challenge is beginner-friendly. Every workout can be scaled to your fitness level, and our coaches are experts at helping first-timers feel confident from Day 1.</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">Will I be doing the same workouts as experienced athletes?</h3>
+                    <p class="text-gray-300 mt-2">You’ll train alongside our community, but every workout is tailored to you. We adjust weights, movements, and intensity to meet you where you’re at — and help you progress safely.</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">How much does it cost, and is there a guarantee?</h3>
+                    <p class="text-gray-300 mt-2">The full 6-week challenge is just $175, which includes expert coaching, accountability, InBody scans, and a supportive community. And yes — we offer a 100% satisfaction guarantee. Show up, put in the effort, and if you’re not happy for any reason, we’ll give you your money back. No questions asked.</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">What happens after the 6-week challenge ends?</h3>
+                    <p class="text-gray-300 mt-2">Most challengers choose to stick around because they’ve built momentum, seen results, and love the vibe. We’ll offer you a simple path to continue your progress with us — no pressure, just options.</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">What if I have past injuries or physical limitations?</h3>
+                    <p class="text-gray-300 mt-2">We’ve worked with people recovering from knee surgeries, shoulder issues, back pain, and more. Our coaches will modify movements to work with your body, not against it.</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">How many days a week do I need to show up?</h3>
+                    <p class="text-gray-300 mt-2">We recommend at least 3–4 sessions per week for the best results. Our schedule is flexible, and we’ll help you find a routine that fits your lifestyle.</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">Do I need to follow a strict diet?</h3>
+                    <p class="text-gray-300 mt-2">No crash diets here. You’ll get simple, sustainable nutrition guidance that works with real life — no weighing food or cutting out everything you love. We’ll help you build habits that stick.</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-moonlight-blue">What if I don’t see results?</h3>
+                    <p class="text-gray-300 mt-2">If you show up, follow the plan, and don’t feel stronger, leaner, and more energized — you’ll get 100% of your money back. That’s how confident we are in what we do.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOBILE-FIXED: Final CTA / Book Now Section -->
+    <section id="book-now" class="py-20 bg-gray-900/70">
+        <div class="container mx-auto px-6 text-center max-w-3xl">
+            <!-- Responsive headline -->
+            <h2 class="text-3xl lg:text-4xl font-black uppercase font-poppins mb-4">READY TO TRANSFORM YOUR BODY — AND PROVE TO YOURSELF YOU CAN DO THIS?</h2>
+            <p class="text-center text-lg md:text-xl text-gray-300 mb-8">Let’s make it real. Your first step isn’t just a chat — it’s a commitment to finally doing what you’ve been putting off. No pressure. No BS. Just a clear plan, expert support, and your shot at something better.</p>
+            <!-- Responsive button text -->
+            <a href="https://moonshotcrossfit.com/challenge-thanks/" target="_blank" class="btn-cta text-base md:text-xl animate-pulse inline-block px-4 md:px-8">
+                🚀 YES, I’M IN. BOOK MY FREE INTRO SESSION →
+            </a>
+             <p class="mt-4 text-gray-400 font-bold">Only 10 spots available. Next challenge starts July 15. Don’t wait.</p>
+        </div>
+    </section>
+    
+    <footer class="bg-black pt-20 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="section-title text-left mb-6 text-3xl font-poppins">Where to Find Us</h2>
+                    <p class="text-lg font-semibold">542 Busse Hwy, Park Ridge, IL 60068</p>
+                    <p class="mt-4 text-gray-300">We're located right on Busse Highway, easily accessible from surrounding areas. Look for the Moonshot sign!</p>
+                    <div class="mt-8 space-y-4">
+                        <a href="mailto:info@moonshotcrossfit.com" class="inline-flex items-center space-x-3 group text-white hover:text-moonlight-blue transition-colors">
+                            <i data-lucide="mail" class="w-6 h-6 text-moonlight-blue"></i>
+                            <span>info@moonshotcrossfit.com</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="h-80 w-full rounded-lg overflow-hidden border-2 border-gray-700">
+                    <iframe
+                        title="Google Maps view of Moonshot CrossFit"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2963.858713177685!2d-87.8485296845547!3d42.02320197921109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880fb6592206f151%3A0x6b4840e69217337!2s542%20Busse%20Hwy%2C%20Park%20Ridge%2C%20IL%2060068!5e0!3m2!1sen!2sus!4v1678886543210!5m2!1sen!2sus"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+            <div class="text-center text-gray-400 mt-20 pt-8 border-t border-gray-800">
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="https://www.instagram.com/moonshotcrossfit/" target="_blank" class="text-gray-400 hover:text-moonlight-blue" aria-label="Moonshot CrossFit on Instagram"><i data-lucide="instagram" class="w-7 h-7"></i></a>
+                    <a href="https://www.facebook.com/moonshotcrossfit/" target="_blank" class="text-gray-400 hover:text-moonlight-blue" aria-label="Moonshot CrossFit on Facebook"><i data-lucide="facebook" class="w-7 h-7"></i></a>
+                    <a href="https://www.google.com/search?q=moonshot+crossfit+park+ridge+reviews" target="_blank" class="text-gray-400 hover:text-moonlight-blue" aria-label="Read our Google Reviews"><i data-lucide="message-square" class="w-7 h-7"></i></a>
+                </div>
+                <a href="https://moonshotcrossfit.com" target="_blank" class="text-gray-400 hover:text-moonlight-blue text-sm">← Back to Main Site</a>
+                <p class="text-sm mt-4">&copy; 2024 Moonshot CrossFit. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -20,6 +20,7 @@
     --brand-slate: #2C353E;
     --brand-blue: #8cb2f5;
     --brand-blue-light: #a8c5f7;
+    --brand-accent: #F0EEE9;
 }
 
 /* ========================================
@@ -61,15 +62,15 @@ h1, h2, h3, h4, h5, h6 {
    Brand Color Utilities
    ======================================== */
 .moonlight-blue {
-    color: var(--brand-blue);
+    color: var(--brand-light);
 }
 
 .bg-moonlight-blue {
-    background-color: var(--brand-blue);
+    background-color: var(--brand-light);
 }
 
 .border-moonlight-blue {
-    border-color: var(--brand-blue);
+    border-color: var(--brand-light);
 }
 
 .text-brand-blue { color: var(--brand-blue); }
@@ -138,7 +139,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .schedule-day {
     background-color: var(--brand-card);
-    border-left: 4px solid var(--brand-blue);
+    border-left: 4px solid var(--brand-light);
     display: flex;
     flex-direction: column;
 }
@@ -183,8 +184,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .carousel-btn:hover {
-    background-color: var(--brand-blue);
-    color: black;
+    background-color: var(--brand-light);
+    color: var(--brand-dark);
 }
 
 /* Image Carousel */
@@ -284,7 +285,7 @@ summary::-webkit-details-marker {
     padding: 1.5rem;
     background-color: rgb(17, 24, 39);
     border-radius: 0.5rem;
-    border-left: 4px solid var(--brand-blue);
+    border-left: 4px solid var(--brand-light);
 }
 
 .faq-item h3 {
@@ -302,7 +303,7 @@ summary::-webkit-details-marker {
    Links
    ======================================== */
 .link-arrow {
-    color: var(--brand-blue);
+    color: var(--brand-light);
     font-weight: 600;
     transition: color 0.3s ease;
     text-decoration: none;
@@ -342,7 +343,7 @@ summary::-webkit-details-marker {
 
 .input-field:focus {
     outline: none;
-    border-color: var(--brand-blue);
+    border-color: var(--brand-light);
 }
 
 .input-field::placeholder {
@@ -363,7 +364,7 @@ summary::-webkit-details-marker {
     left: 0;
     right: 0;
     height: 2px;
-    background-color: var(--brand-blue);
+    background-color: var(--brand-light);
 }
 
 /* ========================================

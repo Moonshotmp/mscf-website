@@ -13,14 +13,13 @@ tailwind.config = {
         extend: {
             colors: {
                 brand: {
-                    blue: '#8cb2f5',      // moonlight blue - primary
-                    'blue-light': '#a8c5f7', // hover state
-                    dark: '#000000',      // background black
-                    card: '#111827',      // card/component backgrounds
-                    border: '#374151',    // borders
-                    light: '#FFFFFF',     // primary text
-                    gray: '#9CA3AF',      // secondary text (gray-400)
-                    'gray-light': '#D1D5DB' // lighter gray (gray-300)
+                    dark: '#101921',      // dark blue-black background
+                    light: '#F0EEE9',     // warm cream text
+                    gray: '#B2BFBE',      // muted sage gray
+                    slate: '#2C353E',     // dark slate for cards
+                    // Keep moonlight blue as accent option
+                    blue: '#8cb2f5',
+                    'blue-light': '#a8c5f7'
                 }
             },
             fontFamily: {

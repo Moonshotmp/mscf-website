@@ -14,14 +14,12 @@
    Brand Colors (CSS Custom Properties)
    ======================================== */
 :root {
+    --brand-dark: #101921;
+    --brand-light: #F0EEE9;
+    --brand-gray: #B2BFBE;
+    --brand-slate: #2C353E;
     --brand-blue: #8cb2f5;
     --brand-blue-light: #a8c5f7;
-    --brand-dark: #000000;
-    --brand-card: #111827;
-    --brand-border: #374151;
-    --brand-light: #FFFFFF;
-    --brand-gray: #9CA3AF;
-    --brand-gray-light: #D1D5DB;
 }
 
 /* ========================================
@@ -79,7 +77,7 @@ h1, h2, h3, h4, h5, h6 {
 .text-brand-gray { color: var(--brand-gray); }
 
 .bg-brand-dark { background-color: var(--brand-dark); }
-.bg-brand-card { background-color: var(--brand-card); }
+.bg-brand-slate { background-color: var(--brand-slate); }
 .bg-brand-blue { background-color: var(--brand-blue); }
 
 /* ========================================
@@ -119,14 +117,14 @@ h1, h2, h3, h4, h5, h6 {
    Cards
    ======================================== */
 .card {
-    background-color: var(--brand-card);
-    border: 1px solid var(--brand-border);
+    background-color: var(--brand-slate);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(140, 178, 245, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================

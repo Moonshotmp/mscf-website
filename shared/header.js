@@ -13,25 +13,25 @@
 
 (function() {
     const headerHTML = `
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-white/10" id="navbar">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/95 backdrop-blur-md border-b border-brand-gray/20" id="navbar">
         <div class="container mx-auto px-4 flex justify-between items-center h-20">
             <a href="/" class="flex-shrink-0">
                 <img src="/images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto">
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-6 items-center text-white font-heading">
-                <a href="/#memberships" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Memberships</a>
-                <a href="/pt/" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Personal Training</a>
-                <a href="/#schedule" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Schedule</a>
-                <a href="/kids/" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Kids</a>
-                <a href="/#drop-in" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Drop In</a>
-                <a href="/#contact" class="nav-link hover:text-brand-blue transition-colors text-base uppercase tracking-wide">Contact</a>
+            <nav class="hidden md:flex space-x-6 items-center text-brand-light font-heading">
+                <a href="/#memberships" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Memberships</a>
+                <a href="/pt/" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Personal Training</a>
+                <a href="/#schedule" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Schedule</a>
+                <a href="/kids/" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Kids</a>
+                <a href="/#drop-in" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Drop In</a>
+                <a href="/#contact" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Contact</a>
                 <a href="/intro/" class="btn btn-primary text-sm px-4 py-2 rounded-lg font-body font-bold">Book Free Intro</a>
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none" aria-label="Open mobile menu">
+            <button id="mobile-menu-btn" class="md:hidden text-brand-light focus:outline-none" aria-label="Open mobile menu">
                 <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
@@ -39,14 +39,14 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-sm border-t border-white/10">
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark/95 backdrop-blur-sm border-t border-brand-gray/20">
             <div class="px-4 py-4 space-y-1 text-center">
-                <a href="/#memberships" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Memberships</a>
-                <a href="/pt/" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Personal Training</a>
-                <a href="/#schedule" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Schedule</a>
-                <a href="/kids/" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Kids</a>
-                <a href="/#drop-in" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Drop In</a>
-                <a href="/#contact" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Contact</a>
+                <a href="/#memberships" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Memberships</a>
+                <a href="/pt/" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Personal Training</a>
+                <a href="/#schedule" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Schedule</a>
+                <a href="/kids/" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Kids</a>
+                <a href="/#drop-in" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Drop In</a>
+                <a href="/#contact" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Contact</a>
 
                 <div class="pt-4 space-y-3">
                     <a href="/intro/" class="block w-full btn btn-primary text-center px-4 py-3 rounded-lg">Book Your Free Intro</a>

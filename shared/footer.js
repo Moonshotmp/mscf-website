@@ -30,9 +30,11 @@
             <nav class="py-8 border-t border-brand-gray/20 flex flex-wrap justify-center gap-x-6 sm:gap-x-8 gap-y-4 text-brand-gray">
                 <a href="/pt/" class="hover:text-brand-light transition-colors">Personal Training</a>
                 <a href="/kids/" class="hover:text-brand-light transition-colors">Kids Program</a>
-                                <a href="/sarah/youthpt/" class="hover:text-brand-light transition-colors">Youth PT</a>
+                <a href="/sarah/youthpt/" class="hover:text-brand-light transition-colors">Youth PT</a>
+                <a href="/ecosystem/" class="hover:text-brand-light transition-colors">The Moonshot Ecosystem</a>
                 <a href="/faq/" class="hover:text-brand-light transition-colors">FAQ</a>
-                <a href="https://moonshotmp.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Moonshot Medical and Performance</a>
+                <a href="https://moonshotmp.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Moonshot Medical</a>
+                <a href="https://moonshotmp.com/pt" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Physical Therapy</a>
             </nav>
 
             <!-- Contact Info -->

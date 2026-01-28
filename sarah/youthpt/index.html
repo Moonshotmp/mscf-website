@@ -4,171 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kids & Teens Personal Training in Park Ridge, IL | Moonshot CrossFit</title>
-    
     <meta name="description" content="Unlock your child's athletic potential with 1-on-1 personal training from Coach Sarah at Moonshot CrossFit in Park Ridge, IL. Custom programs for kids & teens focused on strength, speed, and sport-specific performance.">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/shared/tailwind-config.js"></script>
+    <link rel="stylesheet" href="/shared/styles.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Moonshot CrossFit",
       "image": "https://moonshotcrossfit.com/images/moonshotlogo.png",
-      "url": "https://moonshotcrossfit.com/personal-training-youth",
+      "url": "https://moonshotcrossfit.com/sarah/youthpt",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "123 Main St",
+        "streetAddress": "542 Busse Hwy",
         "addressLocality": "Park Ridge",
         "addressRegion": "IL",
         "postalCode": "60068",
         "addressCountry": "US"
       },
-      "description": "Private personal training for youth athletes in Park Ridge, IL. Coach Sarah offers 1-on-1 coaching for kids and teens to develop strength, speed, and confidence.",
-      "hasOffer": {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "1-on-1 Personal Training for Kids & Teens",
-          "description": "Customized 60-minute personal training sessions with Coach Sarah, focusing on age-appropriate strength progression, athletic development, and sport-specific goals. Serving Park Ridge, Niles, Edison Park, and the surrounding Chicago suburbs.",
-           "audience": {
-            "@type": "Audience",
-            "audienceType": "Children",
-            "suggestedMinAge": "6",
-            "suggestedMaxAge": "18"
-          },
-          "areaServed": {
-            "@type": "Place",
-            "name": ["Park Ridge", "Niles", "Edison Park", "Chicago Suburbs"]
-          }
-        }
-      }
+      "description": "Private personal training for youth athletes in Park Ridge, IL. Coach Sarah offers 1-on-1 coaching for kids and teens to develop strength, speed, and confidence."
     }
     </script>
-    
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-        }
-        .section-separator {
-            border-bottom: 1px solid #374151; /* gray-700 */
-        }
-        .accent-color {
-            color: #3b82f6; /* Moonshot Blue */
-        }
-        .btn {
-            display: inline-block;
-            background-color: #3b82f6; /* Moonshot Blue */
-            color: #ffffff;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 1rem 2rem;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        .btn:hover {
-            background-color: #ffffff;
-            color: #000000;
-            transform: translateY(-2px);
-        }
-        .form-container iframe {
-            min-height: 992px;
-        }
         .hero-section {
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://moonshotcrossfit.com/images/kidsPTimage.jpg');
+            background-image: linear-gradient(rgba(16, 25, 33, 0.85), rgba(16, 25, 33, 0.85)), url('/images/kidsPTimage.jpg');
             background-size: cover;
             background-position: center;
-            opacity: 0.2;
-            z-index: 0;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
         }
     </style>
 </head>
-<body class="bg-black text-white">
+<body>
 
-    <header class="py-6 px-4 sm:px-6 lg:px-8">
-        <div class="container mx-auto flex justify-center items-center">
-            <a href="https://moonshotcrossfit.com" title="Moonshot CrossFit Homepage">
-                <img src="https://moonshotcrossfit.com/images/moonshotlogo.png" alt="Moonshot CrossFit Logo" class="h-16 w-auto">
-            </a>
-        </div>
-    </header>
+    <!-- Header (auto-injected) -->
+    <script src="/shared/header.js"></script>
 
     <main>
-        <section class="hero-section text-center py-24 md:py-32 px-4 section-separator">
-            <div class="hero-bg"></div>
-            <div class="hero-content container mx-auto">
-                <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight">
-                    1-on-1 Coaching for <span class="accent-color">Kids & Teens</span>
+        <section class="hero-section text-center py-24 md:py-32 px-4 border-b border-brand-gray/20">
+            <div class="container mx-auto">
+                <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight font-heading">
+                    1-on-1 Coaching for <span class="text-brand-gold">Kids & Teens</span>
                 </h1>
-                <p class="mt-4 text-xl md:text-2xl font-semibold text-gray-200">Private Youth Personal Training in Park Ridge, IL with Coach Sarah</p>
+                <p class="mt-4 text-xl md:text-2xl font-semibold text-brand-gray">Private Youth Personal Training in Park Ridge, IL with Coach Sarah</p>
             </div>
         </section>
 
-        <section class="py-16 md:py-20">
+        <section class="py-16 md:py-20 bg-brand-dark">
             <div class="container mx-auto px-4 max-w-4xl text-center">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Tailored Training for Future Athletes</h2>
-                <p class="mt-4 text-lg text-gray-300">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight font-heading text-brand-light">Tailored Training for Future Athletes</h2>
+                <p class="mt-4 text-lg text-brand-gray">
                     Coach Sarah's 1-on-1 personal training program is designed for kids and teens of all ages—from grade schoolers learning to move well to high school athletes chasing peak performance. Each 60-minute session is built around your child's unique needs, providing personalized attention to help them get stronger, faster, and more confident in a private setting.
                 </p>
-                <div class="mt-8 bg-gray-900 inline-block p-4 rounded-lg">
-                    <p class="text-2xl font-bold accent-color">$75 per 60-Minute Session</p>
+                <div class="mt-8 bg-brand-slate inline-block p-4 rounded-lg">
+                    <p class="text-2xl font-bold text-brand-gold">$75 per 60-Minute Session</p>
                 </div>
             </div>
         </section>
-        
-        <section class="py-16 md:py-20 section-separator">
+
+        <section class="py-16 md:py-20 border-b border-brand-gray/20 bg-brand-slate/50">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-center mb-12">Personalized Coaching for Every Age</h2>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-center mb-12 font-heading text-brand-light">Personalized Coaching for Every Age</h2>
                 <div class="grid md:grid-cols-3 gap-8 text-center">
-                    <div class="bg-gray-900 p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold accent-color">Grade School (6-10)</h3>
-                        <p class="mt-4 text-gray-300">Focus on foundational strength, body awareness, and proper movement patterns. We make fitness fun while instilling high standards for form to reduce injury risk and build lifelong confidence.</p>
+                    <div class="card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-brand-gold font-heading">Grade School (6-10)</h3>
+                        <p class="mt-4 text-brand-gray">Focus on foundational strength, body awareness, and proper movement patterns. We make fitness fun while instilling high standards for form to reduce injury risk and build lifelong confidence.</p>
                     </div>
-                    <div class="bg-gray-900 p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold accent-color">Middle School (11-13)</h3>
-                        <p class="mt-4 text-gray-300">Introduction to compound lifts and the basics of Olympic and powerlifting under close, expert supervision. We develop speed, agility, and strength with progressive, structured programming.</p>
+                    <div class="card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-brand-gold font-heading">Middle School (11-13)</h3>
+                        <p class="mt-4 text-brand-gray">Introduction to compound lifts and the basics of Olympic and powerlifting under close, expert supervision. We develop speed, agility, and strength with progressive, structured programming.</p>
                     </div>
-                    <div class="bg-gray-900 p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold accent-color">High School (14-18)</h3>
-                        <p class="mt-4 text-gray-300">Fully customized, sports-specific training plans. We work on explosiveness, top-end strength, sprint mechanics, and conditioning. Ideal for preseason prep or year-round performance development for the serious athlete.</p>
+                    <div class="card p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold text-brand-gold font-heading">High School (14-18)</h3>
+                        <p class="mt-4 text-brand-gray">Fully customized, sports-specific training plans. We work on explosiveness, top-end strength, sprint mechanics, and conditioning. Ideal for preseason prep or year-round performance development for the serious athlete.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 md:py-20 section-separator">
+        <section class="py-16 md:py-20 border-b border-brand-gray/20 bg-brand-dark">
             <div class="container mx-auto px-4">
                 <div class="grid md:grid-cols-3 gap-12 items-center">
                     <div class="md:col-span-1">
-                        <img src="https://moonshotcrossfit.com/images/sarah1.jpg" alt="Coach Sarah - Youth Personal Trainer in Park Ridge, IL" class="rounded-full mx-auto w-48 h-48 md:w-64 md:h-64 object-cover border-4" style="border-color: #3b82f6;">
+                        <img src="/images/sarah1.jpg" alt="Coach Sarah - Youth Personal Trainer in Park Ridge, IL" class="rounded-full mx-auto w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-brand-gold">
                     </div>
                     <div class="md:col-span-2">
-                        <h2 class="text-3xl font-bold tracking-tight">Expert Guidance Your Child Deserves</h2>
-                        <p class="mt-4 text-lg text-gray-300">
-                           As a mom of three, a certified personal trainer, and an elementary PE teacher with 14 years experience, Coach Sarah has a deep understanding of youth movement. Her passion is helping kids build confidence and a positive relationship with fitness and exercise. She leads our CrossFit Kids Program, creating an environment where every child feels successful.
+                        <h2 class="text-3xl font-bold tracking-tight font-heading text-brand-light">Expert Guidance Your Child Deserves</h2>
+                        <p class="mt-4 text-lg text-brand-gray">
+                           As a mom of three, a certified personal trainer, and an elementary PE teacher with 14 years experience, Coach Sarah has a deep understanding of youth movement. Her passion is helping kids build confidence and a positive relationship with fitness and exercise. She leads our CrossFit Kids Program, creating an environment where every child feels successful.
                         </p>
                         <div class="mt-6">
-                            <h4 class="font-bold text-lg accent-color">Credentials:</h4>
-                            <ul class="list-disc list-inside text-gray-300 mt-2">
+                            <h4 class="font-bold text-lg text-brand-gold">Credentials:</h4>
+                            <ul class="list-disc list-inside text-brand-gray mt-2">
                                 <li>CrossFit L1 Trainer</li>
                                 <li>NASM Certified Personal Trainer</li>
                                 <li>CrossFit Kids Certification</li>
@@ -179,44 +113,34 @@
             </div>
         </section>
 
-        <section class="py-16 md:py-20 section-separator">
+        <section class="py-16 md:py-20 border-b border-brand-gray/20 bg-brand-slate/50">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-center mb-12">See Coach Sarah in Action</h2>
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-center mb-12 font-heading text-brand-light">See Coach Sarah in Action</h2>
                 <div class="grid md:grid-cols-3 gap-8">
-                    <img src="https://moonshotcrossfit.com/sarah/sarahhandstand.JPG" alt="Coach Sarah teaching a youth handstand class" class="rounded-lg object-cover w-full h-80 md:h-96">
-                    <img src="https://moonshotcrossfit.com/sarah/srahclean.jpg" alt="Coach Sarah demonstrating a barbell clean for an athlete" class="rounded-lg object-cover w-full h-80 md:h-96">
-                    <img src="https://moonshotcrossfit.com/sarah/sarahpfp.jpg" alt="Coach Sarah smiling in the gym" class="rounded-lg object-cover w-full h-80 md:h-96">
+                    <img src="/sarah/sarahhandstand.JPG" alt="Coach Sarah teaching a youth handstand class" class="rounded-lg object-cover w-full h-80 md:h-96">
+                    <img src="/sarah/srahclean.jpg" alt="Coach Sarah demonstrating a barbell clean for an athlete" class="rounded-lg object-cover w-full h-80 md:h-96">
+                    <img src="/sarah/sarahpfp.jpg" alt="Coach Sarah smiling in the gym" class="rounded-lg object-cover w-full h-80 md:h-96">
                 </div>
             </div>
         </section>
 
-        <section id="register" class="py-16 md:py-24">
+        <section id="register" class="py-16 md:py-24 bg-brand-dark">
             <div class="container mx-auto px-4 text-center">
-                 <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Interested in 1-on-1 Training with Coach Sarah?</h2>
-                 <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-300">
-                    We'd love to hear from you! To get more information, book a time to meet, or learn about Coach Sarah’s current availability, please reach out to us directly. We serve youth athletes in Park Ridge, Niles, Edison Park, and the surrounding areas.
+                 <h2 class="text-3xl md:text-4xl font-bold tracking-tight font-heading text-brand-light">Interested in 1-on-1 Training with Coach Sarah?</h2>
+                 <p class="mt-4 max-w-3xl mx-auto text-lg text-brand-gray">
+                    We'd love to hear from you! To get more information, book a time to meet, or learn about Coach Sarah's current availability, please reach out to us directly. We serve youth athletes in Park Ridge, Niles, Edison Park, and the surrounding areas.
                  </p>
                  <div class="mt-12">
-                    <a href="mailto:info@moonshotcrossfit.com" class="btn">
+                    <a href="mailto:info@moonshotcrossfit.com" class="btn btn-primary px-8 py-4 rounded-lg text-lg">
                         Email: info@moonshotcrossfit.com
                     </a>
                  </div>
             </div>
-            </section>
+        </section>
     </main>
 
-    <footer class="text-center py-8 section-separator">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://moonshotcrossfit.com" class="text-gray-400 hover:text-white transition">Home</a>
-                <a href="https://moonshotcrossfit.com/kids" class="text-gray-400 hover:text-white transition">Kids Program</a>
-                <a href="https://moonshotcrossfit.com/teen" class="text-gray-400 hover:text-white transition">Teen Program</a>
-            </div>
-            <a href="https://moonshotcrossfit.com" class="text-gray-400 hover:text-white transition">
-                &copy; 2024 Moonshot CrossFit | Strength training for young athletes in the Chicago suburbs.
-            </a>
-        </div>
-    </footer>
+    <!-- Footer (auto-injected) -->
+    <script src="/shared/footer.js"></script>
 
 </body>
 </html>

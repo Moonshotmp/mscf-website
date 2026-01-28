@@ -21,30 +21,11 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 items-center text-white">
-                <a href="/#what-makes-us-different" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">What We Offer</a>
-                <a href="/pt/" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Personal Training</a>
                 <a href="/#memberships" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Memberships</a>
+                <a href="/pt/" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Personal Training</a>
                 <a href="/#schedule" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Schedule</a>
-
-                <!-- Programs Dropdown -->
-                <div class="relative inline-block" id="programs-menu-wrapper">
-                    <button class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider flex items-center focus:outline-none"
-                            id="programs-menu-button" aria-expanded="false" aria-haspopup="true">
-                        Programs
-                        <svg class="ml-1 h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div class="absolute left-0 mt-2 w-48 bg-black border border-white/10 shadow-xl rounded-lg hidden" id="programs-dropdown">
-                        <div class="py-2">
-                            <a href="/kids/" class="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Kids (5-10)</a>
-                            <a href="/teen/" class="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-t border-white/5">Teen Athlete Prep (11-18)</a>
-                            <a href="/challenge/" class="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5 border-t border-white/5">6-Week Challenge</a>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="/faq/" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">FAQ</a>
+                <a href="/kids/" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Kids</a>
+                <a href="/#drop-in" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Drop In</a>
                 <a href="/#contact" class="nav-link hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Contact</a>
                 <a href="/intro/" class="btn btn-primary text-sm px-4 py-2 rounded-lg">Book Free Intro</a>
             </nav>
@@ -60,28 +41,11 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-sm border-t border-white/10">
             <div class="px-4 py-4 space-y-1 text-center">
-                <a href="/#what-makes-us-different" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">What We Offer</a>
-                <a href="/pt/" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Personal Training</a>
                 <a href="/#memberships" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Memberships</a>
-                <a href="/#drop-in" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Drop-Ins</a>
+                <a href="/pt/" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Personal Training</a>
                 <a href="/#schedule" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Schedule</a>
-
-                <!-- Programs Mobile Submenu -->
-                <div>
-                    <button id="mobile-programs-btn" class="w-full flex items-center justify-center py-3 text-white hover:text-brand-blue focus:outline-none">
-                        <span>Programs</span>
-                        <svg class="ml-2 h-4 w-4 transition-transform duration-200" id="mobile-programs-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div id="mobile-programs-submenu" class="hidden bg-white/5 rounded-lg py-2 mt-1">
-                        <a href="/kids/" class="block py-2 text-gray-300 hover:text-white text-sm">Kids Program (5-10)</a>
-                        <a href="/teen/" class="block py-2 text-gray-300 hover:text-white text-sm">Teen Athlete Prep (11-18)</a>
-                        <a href="/challenge/" class="block py-2 text-gray-300 hover:text-white text-sm">6-Week Challenge</a>
-                    </div>
-                </div>
-
-                <a href="/faq/" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">FAQ</a>
+                <a href="/kids/" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Kids</a>
+                <a href="/#drop-in" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Drop In</a>
                 <a href="/#contact" class="mobile-menu-link block py-3 text-white hover:text-brand-blue transition-colors">Contact</a>
 
                 <div class="pt-4 space-y-3">
@@ -129,63 +93,7 @@
             });
         });
 
-        // Mobile submenu toggle
-        const mobileProgramsBtn = document.getElementById('mobile-programs-btn');
-        const mobileProgramsSubmenu = document.getElementById('mobile-programs-submenu');
-        const mobileProgramsArrow = document.getElementById('mobile-programs-arrow');
-
-        if (mobileProgramsBtn && mobileProgramsSubmenu && mobileProgramsArrow) {
-            mobileProgramsBtn.addEventListener('click', () => {
-                mobileProgramsSubmenu.classList.toggle('hidden');
-                mobileProgramsArrow.classList.toggle('rotate-180');
-            });
-        }
-
-        // Desktop dropdown menu
-        const programsWrapper = document.getElementById('programs-menu-wrapper');
-        const programsBtn = document.getElementById('programs-menu-button');
-        const programsDropdown = document.getElementById('programs-dropdown');
-
-        if (programsWrapper && programsBtn && programsDropdown) {
-            let closeTimer = null;
-
-            const openMenu = () => {
-                clearTimeout(closeTimer);
-                programsDropdown.classList.remove('hidden');
-                programsBtn.setAttribute('aria-expanded', 'true');
-                const icon = programsBtn.querySelector('svg');
-                if (icon) icon.classList.add('rotate-180');
-            };
-
-            const closeMenu = () => {
-                closeTimer = setTimeout(() => {
-                    programsDropdown.classList.add('hidden');
-                    programsBtn.setAttribute('aria-expanded', 'false');
-                    const icon = programsBtn.querySelector('svg');
-                    if (icon) icon.classList.remove('rotate-180');
-                }, 150);
-            };
-
-            programsWrapper.addEventListener('mouseenter', openMenu);
-            programsWrapper.addEventListener('mouseleave', closeMenu);
-            programsBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (programsDropdown.classList.contains('hidden')) {
-                    openMenu();
-                } else {
-                    closeMenu();
-                }
-            });
-
-            // Close on click outside
-            document.addEventListener('click', (e) => {
-                if (!programsWrapper.contains(e.target)) {
-                    programsDropdown.classList.add('hidden');
-                }
-            });
-        }
-
-        // Close dropdowns on escape
+        // Close menu on escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 document.querySelectorAll('[id$="-dropdown"]').forEach(el => el.classList.add('hidden'));

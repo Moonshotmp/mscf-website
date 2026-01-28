@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO: Optimized Title -->
     <title>FAQ - Moonshot CrossFit | Answers for Beginners, Drop-ins & More in Park Ridge</title>
-    
-    <!-- SEO: Meta Description for Search Engines -->
     <meta name="description" content="Get answers to all your questions about Moonshot CrossFit near Chicago O'Hare. Find info on getting started, safety for beginners, pricing, class types, drop-in policies, and achieving your fitness goals.">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,51 +12,27 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
-    <!-- SEO: JSON-LD Schema Markup for Rich Results -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
+
     <script type="application/ld+json" id="faq-schema"></script>
     <script type="application/ld+json" id="local-business-schema"></script>
 
     <style>
-        /* Custom styles to match moonshotcrossfit.com */
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #111827; /* Dark gray background */
-            color: #F3F4F6; /* Light gray text */
-        }
-        .header-font {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900; /* Black weight for headers */
-            text-transform: uppercase;
-        }
-        .nav-link {
-            transition: color 0.3s, border-bottom-color 0.3s;
-        }
-        .nav-link:hover {
-            color: #38BDF8; /* Light blue for hover */
-            border-bottom-color: #38BDF8;
-        }
         .faq-item {
-            border-left: 3px solid #374151; /* Gray border */
-            transition: border-left-color 0.3s;
+            border-left: 4px solid var(--brand-gold, #B8986E);
+            transition: all 0.3s ease;
         }
         .faq-item:hover {
-            border-left-color: #38BDF8; /* Light blue border on hover */
-        }
-        .faq-question {
-            cursor: pointer;
+            transform: translateX(4px);
         }
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
         }
         .faq-item.active .faq-answer {
-            max-height: 1000px; /* Increased max-height for testimonials */
+            max-height: 1000px;
             padding-top: 1rem;
         }
         .faq-item.active .arrow {
@@ -69,66 +41,44 @@
         .arrow {
             transition: transform 0.3s;
         }
-        .search-input {
-            background-color: #1F2937;
-            border-color: #4B5563;
-        }
-        .search-input:focus {
-            background-color: #374151;
-            border-color: #38BDF8;
-            box-shadow: none;
-            outline: none;
-        }
-        .btn-primary {
-            background-color: #38BDF8;
-            color: #111827;
-            font-weight: 700;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #7DD3FC;
-            transform: translateY(-2px);
-        }
         .testimonial {
-            border-left: 4px solid #38BDF8;
-            background-color: #1f2937;
+            border-left: 4px solid var(--brand-gold, #B8986E);
+            background-color: rgba(184, 152, 110, 0.1);
         }
-        /* Hide scrollbar but allow scrolling */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        .nav-pill {
+            transition: all 0.3s ease;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+        .nav-pill:hover, .nav-pill.active {
+            background-color: var(--brand-gold, #B8986E);
+            color: var(--brand-dark, #101921);
         }
         #back-to-top {
             transition: opacity 0.3s, transform 0.3s;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
+<body>
     <div id="top"></div>
 
     <!-- Header (auto-injected) -->
     <script src="/shared/header.js"></script>
 
-    <!-- Page Title Section -->
-    <div class="bg-gray-800 py-8">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-3xl md:text-4xl font-black text-white uppercase tracking-wider">Frequently Asked Questions</h1>
+    <!-- Hero Section -->
+    <section class="bg-brand-slate py-16 text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-black text-brand-light uppercase tracking-wider font-heading">Frequently Asked Questions</h1>
+            <p class="mt-4 text-lg text-brand-gray max-w-2xl mx-auto">Everything you need to know about starting your fitness journey at Moonshot CrossFit.</p>
         </div>
-    </div>
+    </section>
 
     <!-- Navigation & Search -->
-    <nav class="bg-gray-800 py-4 sticky top-[104px] md:top-[96px] z-40">
+    <nav class="bg-brand-dark py-6 sticky top-20 z-40 border-b border-brand-gray/20">
         <div class="container mx-auto px-6">
-            <!-- Search Bar -->
             <div class="mb-6">
-                <input type="text" id="searchInput" class="w-full p-3 rounded-lg text-white search-input focus:ring-2 focus:ring-sky-400" placeholder="Search for a question...">
+                <input type="text" id="searchInput" class="w-full p-4 rounded-lg bg-brand-slate text-brand-light border border-brand-gray/30 focus:border-brand-gold focus:outline-none placeholder-brand-gray" placeholder="Search for a question...">
             </div>
-            <!-- Category Links -->
-            <div class="w-full overflow-x-auto no-scrollbar">
-                <div id="nav-links" class="flex space-x-4 md:space-x-6 text-sm md:text-base whitespace-nowrap px-2">
+            <div class="w-full overflow-x-auto hide-scrollbar">
+                <div id="nav-links" class="flex flex-wrap gap-2 justify-center">
                     <!-- Links will be dynamically generated by JS -->
                 </div>
             </div>
@@ -136,21 +86,32 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="container mx-auto p-6 md:p-8">
-        <div id="faq-container" class="space-y-12">
-            <!-- FAQ sections will be dynamically generated by JS -->
-        </div>
-        <div id="no-results" class="text-center py-16 hidden">
-            <h2 class="text-2xl font-bold text-sky-400">No results found</h2>
-            <p class="text-gray-400 mt-2">Try searching for a different keyword.</p>
+    <main class="bg-brand-dark">
+        <div class="container mx-auto px-6 py-12">
+            <div id="faq-container" class="space-y-16 max-w-4xl mx-auto">
+                <!-- FAQ sections will be dynamically generated by JS -->
+            </div>
+            <div id="no-results" class="text-center py-16 hidden">
+                <h2 class="text-2xl font-bold text-brand-gold font-heading">No results found</h2>
+                <p class="text-brand-gray mt-2">Try searching for a different keyword.</p>
+            </div>
         </div>
     </main>
+
+    <!-- CTA Section -->
+    <section class="bg-brand-slate py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-brand-light font-heading mb-4">Still Have Questions?</h2>
+            <p class="text-brand-gray mb-8 max-w-xl mx-auto">Book a free intro session to tour our gym, meet a coach, and get all your questions answered in person.</p>
+            <a href="/intro/" class="btn btn-primary px-8 py-4 rounded-lg text-lg">Book Your Free Intro</a>
+        </div>
+    </section>
 
     <!-- Footer (auto-injected) -->
     <script src="/shared/footer.js"></script>
 
     <!-- Back to Top Button -->
-    <a href="#top" id="back-to-top" class="fixed bottom-5 right-5 bg-sky-500 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none hover:bg-sky-600">
+    <a href="#top" id="back-to-top" class="fixed bottom-5 right-5 bg-brand-gold text-brand-dark p-3 rounded-full shadow-lg opacity-0 pointer-events-none hover:bg-brand-light">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
         </svg>
@@ -159,113 +120,67 @@
     <script>
         const faqData = [
             {
-                category: "🔥 Getting Started",
+                category: "Getting Started",
                 id: "getting-started",
-                image: "https://moonshotcrossfit.com/images/ErikaRingRow.JPG",
                 questions: [
-                    { 
-                        q: "Is CrossFit safe for beginners if I'm out of shape or have no experience?", 
-                        a: "Absolutely. CrossFit is designed to be universally scalable, meaning it's safe and effective for everyone, regardless of their current fitness level. Our expert coaches will teach you the fundamental movements and adjust every workout to match your ability. You'll build a solid foundation at your own pace.",
-                        testimonial: {
-                            quote: "The owners and coaches are amazing and make you feel comfortable no matter your fitness level. The community is so welcoming and supportive!",
-                            author: "Lauren B."
-                        }
+                    {
+                        q: "Is CrossFit safe for beginners if I'm out of shape or have no experience?",
+                        a: "Absolutely. CrossFit is designed to be universally scalable, meaning it's safe and effective for everyone, regardless of their current fitness level. Our expert coaches will teach you the fundamental movements and adjust every workout to match your ability.",
+                        testimonial: { quote: "The owners and coaches are amazing and make you feel comfortable no matter your fitness level. The community is so welcoming and supportive!", author: "Lauren B." }
                     },
-                    { q: "What happens during the free intro session?", a: "Your free intro is a private, 1-on-1 session with a coach. We'll give you a tour of the gym, discuss your health and fitness goals, and explain how our program works. It's a no-pressure conversation to see if we're the right fit for you. There's no workout and no obligation. <a href='https://moonshotcrossfit.com/book-intro/' target='_blank' class='text-sky-400 hover:underline'>Book yours here!</a>" },
-                    { q: "I’m nervous to start. What if I can’t keep up?", a: "It's completely normal to feel nervous! But 'keeping up' isn't the goal—progress is. Everyone in the class, from beginners to veterans, is focused on their own workout. Our coaches ensure you're using the right weights and movements for you, so you'll get a great workout without ever being pushed beyond what you're ready for." }
+                    { q: "What happens during the free intro session?", a: "Your free intro is a private, 1-on-1 session with a coach. We'll give you a tour of the gym, discuss your health and fitness goals, and explain how our program works. It's a no-pressure conversation to see if we're the right fit for you." },
+                    { q: "I'm nervous to start. What if I can't keep up?", a: "It's completely normal to feel nervous! But 'keeping up' isn't the goal—progress is. Everyone in the class is focused on their own workout. Our coaches ensure you're using the right weights and movements for you." }
                 ]
             },
             {
-                category: "🧍 Community & Coaching",
+                category: "Community & Coaching",
                 id: "community-coaching",
-                image: "https://moonshotcrossfit.com/images/community.jpeg",
                 questions: [
-                    { 
-                        q: "What makes the community at Moonshot CrossFit different?", 
-                        a: "Our community is our greatest strength. It's a diverse group of supportive, positive people who celebrate each other's successes. You're not just joining a gym; you're becoming part of a team that holds you accountable and makes fitness fun.",
-                        testimonial: {
-                            quote: "The best community and coaching I've ever experienced. Moonshot has completely changed my perspective on fitness and what I'm capable of.",
-                            author: "Matt S."
-                        }
+                    {
+                        q: "What makes the community at Moonshot CrossFit different?",
+                        a: "Our community is our greatest strength. It's a diverse group of supportive, positive people who celebrate each other's successes. You're not just joining a gym; you're becoming part of a team.",
+                        testimonial: { quote: "The best community and coaching I've ever experienced. Moonshot has completely changed my perspective on fitness.", author: "Matt S." }
                     },
-                     { 
-                        q: "How experienced are the coaches?", 
-                        a: "Our coaches are certified professionals who are passionate about helping you succeed. They provide expert instruction, personalized feedback on your form, and motivation to help you break through plateaus. We prioritize safe, effective movement over everything else.",
-                        testimonial: {
-                            quote: "Great coaching, great programming, great community. Highly recommend for any fitness level.",
-                            author: "Brian F."
-                        }
+                    {
+                        q: "How experienced are the coaches?",
+                        a: "Our coaches are certified professionals who are passionate about helping you succeed. They provide expert instruction, personalized feedback on your form, and motivation to help you break through plateaus.",
+                        testimonial: { quote: "Great coaching, great programming, great community. Highly recommend for any fitness level.", author: "Brian F." }
                     },
-                    { q: "Am I too old to start CrossFit?", a: "Never. We have members in their 40s, 50s, and beyond who are stronger and healthier than ever. Workouts are scaled to your ability and goals, making it a safe and effective program for any age." }
+                    { q: "Am I too old to start CrossFit?", a: "Never. We have members in their 40s, 50s, and beyond who are stronger and healthier than ever. Workouts are scaled to your ability and goals, making it safe and effective for any age." }
                 ]
             },
             {
-                category: "🧭 Fitness Goals & Transformations",
+                category: "Fitness Goals",
                 id: "fitness-goals",
-                image: "https://moonshotcrossfit.com/images/sarahrope.JPG",
                 questions: [
-                    { q: "Will CrossFit help me lose weight and get toned?", a: "Yes. Our program is extremely effective for fat loss and building lean muscle—the combination that creates a 'toned' look. By combining strength training with high-intensity conditioning, you'll turn your body into a fat-burning machine." },
-                    { q: "How long until I see results from CrossFit?", a: "You’ll *feel* better within your first couple of weeks—more energy, better sleep. Most members start seeing visible changes in their body composition and strength within 4-6 weeks of consistent training (3-4 times per week) and sensible nutrition." },
-                    { q: "Can I do CrossFit to lose belly fat?", a: "While you can't spot-reduce fat from one area, CrossFit is fantastic for reducing overall body fat, including from the belly. Our full-body workouts and focus on core strength, combined with good nutrition, are the most effective way to achieve this." }
+                    { q: "Will CrossFit help me lose weight and get toned?", a: "Yes. Our program is extremely effective for fat loss and building lean muscle. By combining strength training with high-intensity conditioning, you'll turn your body into a fat-burning machine." },
+                    { q: "How long until I see results?", a: "You'll feel better within your first couple of weeks—more energy, better sleep. Most members start seeing visible changes in body composition and strength within 4-6 weeks of consistent training." },
+                    { q: "Can I do CrossFit to lose belly fat?", a: "While you can't spot-reduce fat, CrossFit is fantastic for reducing overall body fat. Our full-body workouts and focus on core strength, combined with good nutrition, are the most effective approach." }
                 ]
             },
             {
-                category: "♀️ Toning, Strength & the Female Physique",
-                id: "female-physique",
-                image: "https://moonshotcrossfit.com/images/GirlsFlexing.jpeg",
+                category: "Women's Training",
+                id: "womens-training",
                 questions: [
-                    { q: "Will CrossFit make me look bulky?", a: "No — most women won’t get bulky from CrossFit. Our training builds lean, toned muscle and burns fat, helping you feel stronger and more athletic without adding unwanted size. “Bulk” usually comes from a combination of high-volume training and overeating — not functional fitness." },
-                    { q: "What if I want to tone up but not gain too much muscle?", a: "That’s exactly what CrossFit is designed for. You’ll develop muscle definition and burn fat, not size up. The way your body changes depends largely on your nutrition, especially your calorie intake and macronutrient balance. We have two in-house nutrition coaches who can help you tailor your diet to your goals.<br><br>📩 Want help with your nutrition plan? Email us at <a href='mailto:info@moonshotcrossfit.com' class='text-sky-400 hover:underline'>info@moonshotcrossfit.com</a> and we’ll connect you with one of our coaches." },
-                    { q: "Do women really need to lift weights?", a: "Absolutely. Lifting weights helps you improve strength, metabolism, and body composition — without making you look masculine. It’s one of the most effective ways to get a fit, athletic look. Plus, muscle helps burn more calories at rest and improves long-term health." },
-                    { q: "How can I get lean and toned through CrossFit?", a: "By combining consistent training with smart nutrition. CrossFit workouts build muscle and boost your metabolism, but to really see definition, your food choices matter. That’s why we offer nutrition coaching in-house — to help you manage calories, protein, and carbs in a way that supports your ideal body.<br><br>📧 Reach out at <a href='mailto:info@moonshotcrossfit.com' class='text-sky-400 hover:underline'>info@moonshotcrossfit.com</a> if you’d like to speak with a coach about customizing your plan." }
+                    { q: "Will CrossFit make me look bulky?", a: "No — most women won't get bulky from CrossFit. Our training builds lean, toned muscle and burns fat, helping you feel stronger and more athletic without adding unwanted size." },
+                    { q: "What if I want to tone up but not gain too much muscle?", a: "That's exactly what CrossFit is designed for. You'll develop muscle definition and burn fat. The way your body changes depends largely on your nutrition. We have in-house nutrition coaches who can help." },
+                    { q: "Do women really need to lift weights?", a: "Absolutely. Lifting weights helps improve strength, metabolism, and body composition. It's one of the most effective ways to get a fit, athletic look while improving long-term health." }
                 ]
             },
             {
-                category: "💪 Body Part & Physique Goals",
-                id: "physique-goals",
-                image: "https://moonshotcrossfit.com/images/nikolift.jpeg",
-                questions: [
-                    { q: "Will I get a six-pack doing CrossFit?", a: "Abs are made in the kitchen — but our workouts target your core daily with movements like toes-to-bar, planks, and GHD sit-ups. Combine that with fat loss and you’ll see definition." },
-                    { q: "What CrossFit exercises build bigger arms?", a: "Pull-ups, dips, cleans, jerks, and curls in our accessory work all contribute. We mix functional strength with targeted volume to grow arms." },
-                    { q: "Can CrossFit grow glutes and legs?", a: "Absolutely. Back squats, front squats, deadlifts, lunges, sled work — we hit legs hard and often, with results to match." },
-                    { q: "Does CrossFit build shoulders and traps?", a: "Yes — push presses, snatches, jerks, handstand push-ups, and carries build strong, stable shoulders that look strong too." }
-                ]
-            },
-            {
-                category: "🏃 Cardio, Endurance & Athleticism",
-                id: "cardio-endurance",
-                image: "https://moonshotcrossfit.com/images/ClaireRowing.JPG",
-                questions: [
-                    { q: "Is CrossFit good for improving cardio and endurance?", a: "100%. We combine high-intensity intervals with longer, sustained efforts. This method is scientifically proven to be one of the most effective ways to improve your cardiovascular health, stamina, and overall endurance." },
-                    { q: "Will CrossFit make me a better athlete in my sport?", a: "Absolutely. CrossFit builds a strong foundation across all ten general physical skills, including speed, power, coordination, and agility. We've helped athletes from countless sports become stronger, faster, and more resilient to injury." }
-                ]
-            },
-            {
-                category: "🧬 Training Strategy & Philosophy",
-                id: "training-philosophy",
-                image: "https://moonshotcrossfit.com/images/ropepull.jpeg",
-                questions: [
-                    { q: "What kind of workouts do you do at Moonshot?", a: "We follow <a href='https://www.mayhemnation.com/' target='_blank' class='text-sky-400 hover:underline'>Mayhem Affiliate programming</a>, designed by one of the most respected teams in CrossFit. This means you get constantly varied, functional movements performed at high intensity. Every day is a new challenge designed to build well-rounded fitness in a structured, progressive way." },
-                    { q: "Do you offer Olympic lifting?", a: "Yes. We teach the snatch and the clean & jerk with a strong emphasis on safe technique and proper mechanics. These lifts are incredible for developing power, speed, and coordination." }
-                ]
-            },
-            {
-                category: "🌍 Drop-Ins & Travelers",
+                category: "Drop-Ins & Travelers",
                 id: "drop-ins",
-                image: "https://moonshotcrossfit.com/images/garagepose.JPG",
                 questions: [
-                    { q: "I'm visiting from out of town. Can I drop in for a class?", a: "Yes! We love welcoming visitors. If you're an experienced CrossFitter, you can book a drop-in class directly on our website. We are conveniently located less than 10 minutes from Chicago O'Hare airport." },
-                    { q: "I'm staying in Rosemont for work. How close is your gym?", a: "We are just a few minutes' drive from the Rosemont convention center and hotels, making us the perfect spot to get a great workout in while you're traveling for business." }
+                    { q: "I'm visiting from out of town. Can I drop in?", a: "Yes! We love welcoming visitors. If you're an experienced CrossFitter, you can book a drop-in class directly on our website. We're conveniently located less than 10 minutes from O'Hare airport." },
+                    { q: "I'm staying in Rosemont for work. How close is your gym?", a: "We're just a few minutes' drive from the Rosemont convention center and hotels, making us the perfect spot to get a great workout while traveling for business." }
                 ]
             },
             {
-                category: "🧾 Logistics, Scheduling & Pricing",
-                id: "logistics",
-                image: "https://moonshotcrossfit.com/images/Dips.jpeg",
+                category: "Pricing & Schedule",
+                id: "pricing-schedule",
                 questions: [
-                    // UPDATE: Removed broken link
-                    { q: "What are your class times and how do I see the schedule?", a: "We offer classes in the early morning, midday, and evening to fit any schedule. You can see our full, up-to-the-minute schedule in the footer of this page." },
-                    { q: "How much does a Moonshot CrossFit membership cost?", a: "We have several membership and class pack options. You can see our current rates on our <a href='https://moonshotcrossfit.com/' target='_blank' class='text-sky-400 hover:underline'>main website</a>. The best way to find the right fit is to book a free intro session where a coach can discuss your goals and help you choose the best plan." }
+                    { q: "What are your class times?", a: "We offer classes in the early morning, midday, and evening to fit any schedule. Check our homepage for the full schedule." },
+                    { q: "How much does membership cost?", a: "We have several membership and class pack options. The best way to find the right fit is to book a free intro session where a coach can discuss your goals and help you choose the best plan." }
                 ]
             }
         ];
@@ -277,132 +192,90 @@
             const noResults = document.getElementById('no-results');
             const backToTopButton = document.getElementById('back-to-top');
 
-            // --- SEO: Generate Schema Markup ---
+            // Generate Schema
             function generateSchema() {
-                const allQuestions = faqData.flatMap(section => 
+                const allQuestions = faqData.flatMap(section =>
                     section.questions.map(qa => ({
                         "@type": "Question",
                         "name": qa.q,
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": qa.testimonial ? `${qa.a} Member testimonial: "${qa.testimonial.quote}" - ${qa.testimonial.author}` : qa.a
-                        }
+                        "acceptedAnswer": { "@type": "Answer", "text": qa.a }
                     }))
                 );
-                const faqSchema = {
+                document.getElementById('faq-schema').textContent = JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "FAQPage",
                     "mainEntity": allQuestions
-                };
-                document.getElementById('faq-schema').textContent = JSON.stringify(faqSchema);
-
-                const localBusinessSchema = {
+                });
+                document.getElementById('local-business-schema').textContent = JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "ExerciseGym",
                     "name": "Moonshot CrossFit",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "streetAddress": "542 Busse Hwy",
-                        "addressLocality": "Park Ridge",
-                        "addressRegion": "IL",
-                        "postalCode": "60068",
-                        "addressCountry": "US"
-                    },
-                    "url": "https://moonshotcrossfit.com/",
-                    "logo": "https://moonshotcrossfit.com/images/MoonshotLogo.png",
-                    "openingHoursSpecification": [
-                        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "05:30", "closes": "07:30" },
-                        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:30", "closes": "10:30" },
-                        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Wednesday", "Friday"], "opens": "10:30", "closes": "11:30" },
-                        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Friday"], "opens": "12:00", "closes": "13:00" },
-                        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "16:30", "closes": "19:30" },
-                        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "11:00" },
-                        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "10:30" }
-                    ]
-                };
-                document.getElementById('local-business-schema').textContent = JSON.stringify(localBusinessSchema);
+                    "address": { "@type": "PostalAddress", "streetAddress": "542 Busse Hwy", "addressLocality": "Park Ridge", "addressRegion": "IL", "postalCode": "60068" },
+                    "url": "https://moonshotcrossfit.com/"
+                });
             }
-            
             generateSchema();
-            // --- End Schema Generation ---
 
+            // Build FAQ
             faqData.forEach(section => {
+                // Nav pill
                 const navLink = document.createElement('a');
                 navLink.href = `#${section.id}`;
                 navLink.textContent = section.category;
-                navLink.className = 'nav-link pb-2 border-b-2 border-transparent text-gray-300 hover:text-sky-400 hover:border-sky-400';
+                navLink.className = 'nav-pill px-4 py-2 rounded-full bg-brand-slate text-brand-light text-sm font-semibold';
                 navLinksContainer.appendChild(navLink);
 
+                // Section
                 const sectionEl = document.createElement('section');
                 sectionEl.id = section.id;
-                sectionEl.className = 'faq-section';
-                
-                const headerEl = document.createElement('div');
-                headerEl.className = 'flex flex-col md:flex-row items-start md:items-center gap-8 mb-8';
-                
-                const titleEl = document.createElement('h2');
-                titleEl.className = 'header-font text-3xl md:text-4xl text-white w-full md:w-2/5 flex-shrink-0';
-                titleEl.textContent = section.category;
-                
-                const imgEl = document.createElement('img');
-                imgEl.src = section.image;
-                imgEl.alt = section.category.replace(/[^a-zA-Z\s]/g, "").trim() + ' at Moonshot CrossFit';
-                imgEl.className = 'w-full md:w-3/5 rounded-lg shadow-lg';
-                imgEl.onerror = function() {
-                    this.onerror=null;
-                    this.src='https://placehold.co/800x400/1F2937/F3F4F6?text=Moonshot+CrossFit';
-                };
+                sectionEl.className = 'faq-section scroll-mt-40';
 
-                headerEl.appendChild(titleEl);
-                headerEl.appendChild(imgEl);
-                sectionEl.appendChild(headerEl);
+                const titleEl = document.createElement('h2');
+                titleEl.className = 'text-2xl md:text-3xl font-bold text-brand-light mb-6 font-heading';
+                titleEl.textContent = section.category;
+                sectionEl.appendChild(titleEl);
 
                 const questionsContainer = document.createElement('div');
                 questionsContainer.className = 'space-y-4';
+
                 section.questions.forEach(item => {
                     const faqItem = document.createElement('div');
-                    faqItem.className = 'faq-item bg-gray-800 rounded-lg p-6';
+                    faqItem.className = 'faq-item bg-brand-slate rounded-lg p-6 cursor-pointer';
 
                     let testimonialHTML = '';
                     if (item.testimonial) {
-                        const googleReviewsLink = "https://www.google.com/maps/search/?api=1&query=Moonshot+CrossFit+Park+Ridge";
                         testimonialHTML = `
-                            <blockquote class="testimonial mt-6 p-4 rounded-r-lg">
-                                <p class="italic text-gray-300">"${item.testimonial.quote}"</p>
-                                <cite class="block text-right not-italic font-bold mt-2">
-                                    <a href="${googleReviewsLink}" target="_blank" class="text-sky-400 hover:underline">
-                                        - ${item.testimonial.author} (via Google Reviews)
-                                    </a>
-                                </cite>
+                            <blockquote class="testimonial mt-4 p-4 rounded-r-lg">
+                                <p class="italic text-brand-gray">"${item.testimonial.quote}"</p>
+                                <cite class="block text-right not-italic font-semibold mt-2 text-brand-gold">— ${item.testimonial.author}</cite>
                             </blockquote>
                         `;
                     }
 
                     faqItem.innerHTML = `
                         <div class="faq-question flex justify-between items-center">
-                            <h3 class="text-lg font-bold text-gray-100">${item.q}</h3>
-                            <svg class="arrow w-6 h-6 text-sky-400 flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <h3 class="text-lg font-semibold text-brand-light pr-4">${item.q}</h3>
+                            <svg class="arrow w-5 h-5 text-brand-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </div>
-                        <div class="faq-answer text-gray-300 leading-relaxed">
+                        <div class="faq-answer text-brand-gray leading-relaxed">
                             <p>${item.a}</p>
                             ${testimonialHTML}
                         </div>
                     `;
                     questionsContainer.appendChild(faqItem);
                 });
-                
+
                 sectionEl.appendChild(questionsContainer);
                 faqContainer.appendChild(sectionEl);
             });
 
+            // Toggle FAQ
             faqContainer.addEventListener('click', function(e) {
-                const questionHeader = e.target.closest('.faq-question');
-                if (questionHeader) {
-                    const faqItem = questionHeader.parentElement;
-                    faqItem.classList.toggle('active');
-                }
+                const faqItem = e.target.closest('.faq-item');
+                if (faqItem) faqItem.classList.toggle('active');
             });
 
+            // Search
             searchInput.addEventListener('input', function(e) {
                 const searchTerm = e.target.value.toLowerCase();
                 let resultsFound = false;
@@ -410,9 +283,8 @@
                 document.querySelectorAll('.faq-section').forEach(section => {
                     let sectionVisible = false;
                     section.querySelectorAll('.faq-item').forEach(item => {
-                        const question = item.querySelector('h3').textContent.toLowerCase();
-                        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
-                        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        const text = item.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
                             item.style.display = 'block';
                             sectionVisible = true;
                             resultsFound = true;
@@ -425,6 +297,7 @@
                 noResults.style.display = resultsFound ? 'none' : 'block';
             });
 
+            // Back to top
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 300) {
                     backToTopButton.classList.remove('opacity-0', 'pointer-events-none');
@@ -436,5 +309,3 @@
     </script>
 </body>
 </html>
-
-

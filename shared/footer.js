@@ -34,7 +34,7 @@
                 <a href="/ecosystem/" class="hover:text-brand-light transition-colors">The Moonshot Ecosystem</a>
                 <a href="/faq/" class="hover:text-brand-light transition-colors">FAQ</a>
                 <a href="https://moonshotmp.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Moonshot Medical</a>
-                <a href="https://moonshotmp.com/pt" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Physical Therapy</a>
+                <a href="https://moonshotmp.com/rehab" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Physical Therapy</a>
             </nav>
 
             <!-- Contact Info -->

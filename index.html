@@ -16,7 +16,9 @@
     <link rel="preload" as="image" href="images/MoonshotLogo.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <script src="/shared/tailwind-config.js"></script>
+    <link rel="stylesheet" href="/shared/styles.css">
+
     <!-- Asynchronously load the Google Fonts stylesheet to prevent render-blocking -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"></noscript>
@@ -132,83 +134,11 @@
 }
     </script>
 
-    <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Poppins', sans-serif; background-color: #000000; color: #FFFFFF; }
-        .moonlight-blue { color: #8cb2f5; }
-        .bg-moonlight-blue { background-color: #8cb2f5; }
-        .border-moonlight-blue { border-color: #8cb2f5; }
-        .hero-section { background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/groupoutside.JPG'); background-size: cover; background-position: center; }
-        .section-title { font-weight: 900; font-size: 2.5rem; line-height: 1.2; text-transform: uppercase; letter-spacing: 1px; }
-        @media (min-width: 768px) { .section-title { font-size: 3rem; } }
-        .card { background-color: #111827; border: 1px solid #374151; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(140, 178, 245, 0.2); }
-        .schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
-        .schedule-day { background-color: #111827; border-left: 4px solid #8cb2f5; display: flex; flex-direction: column; }
-        .schedule-day p { flex-grow: 1; }
-        .btn { transition: all 0.3s ease; }
-        .btn-primary { background-color: #8cb2f5; color: #000; }
-        .btn-primary:hover { background-color: #a8c5f7; transform: scale(1.05); }
-        .btn-secondary { background-color: transparent; border: 2px solid #8cb2f5; color: #8cb2f5; }
-        .btn-secondary:hover { background-color: #8cb2f5; color: #000; }
-        
-        /* Generic Carousel Styles */
-        .carousel { position: relative; }
-        .carousel-slide { display: none; animation: fade 0.7s ease-in-out; }
-        @keyframes fade { from {opacity: .4} to {opacity: 1} }
-        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.6); color: white; border-radius: 50%; width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.3s ease; z-index: 10; border: none; }
-        .carousel-btn:hover { background-color: #8cb2f5; color: black; }
-
-        /* Image Carousel */
-        .image-carousel-container { max-width: 900px; margin: auto; }
-        .image-carousel-wrapper { overflow: hidden; border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .image-carousel-slide img { width: 100%; height: 550px; object-fit: cover; background-color: #111827; }
-        .image-carousel-prev-btn { left: -1.5rem; }
-        .image-carousel-next-btn { right: -1.5rem; }
-        @media (max-width: 1024px) { .image-carousel-prev-btn { left: 1rem; } .image-carousel-next-btn { right: 1rem; } }
-
-        /* Testimonial Carousel */
-        .testimonial-carousel-slide { min-height: 200px; }
-
-        /* ===== NEW: Scrollbar Hiding Utility ===== */
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none;  scrollbar-width: none; }
-    </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
-    <header class="absolute top-0 left-0 right-0 z-20 p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#">
-                <img src="images/MoonshotLogo.png" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto" width="80" height="80">
-            </a>
-            <nav class="hidden md:flex space-x-6 items-center text-white">
-                <a href="#what-makes-us-different" class="hover:text-moonlight-blue transition-colors">What We Offer</a>
-                <a href="#personal-training" class="hover:text-moonlight-blue transition-colors">Personal Training</a>
-                <a href="#memberships" class="hover:text-moonlight-blue transition-colors">Memberships</a>
-                <a href="#schedule" class="hover:text-moonlight-blue transition-colors">Schedule</a>
-                <a href="#faq" class="hover:text-moonlight-blue transition-colors">FAQ</a>
-                <a href="#contact" class="hover:text-moonlight-blue transition-colors">Contact</a>
-                <a href="https://moonshotcrossfit.com/intro" target="_blank" class="btn btn-primary text-sm px-4 py-2 rounded-lg">Book Free Intro</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden text-white" aria-label="Open mobile menu">
-                <i data-lucide="menu" class="w-8 h-8"></i>
-            </button>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 backdrop-blur-sm mt-4 rounded-lg p-4">
-            <a href="#what-makes-us-different" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">What We Offer</a>
-            <a href="#personal-training" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Personal Training</a>
-            <a href="#memberships" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Memberships</a>
-            <a href="#drop-in" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Drop-Ins</a>
-            <a href="#schedule" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Schedule</a>
-            <a href="#faq" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">FAQ</a>
-            <a href="#contact" class="mobile-menu-link block py-2 text-center hover:text-moonlight-blue">Contact</a>
-            <a href="https://moonshotcrossfit.com/intro" target="_blank" class="block w-full mt-4 btn btn-primary text-center px-4 py-2 rounded-lg">Book Your Free Intro</a>
-            <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPage/Main?q=Memberships%7CLocationId%3D9972" target="_blank" class="block w-full mt-2 btn btn-secondary text-center px-4 py-2 rounded-lg">Sign Up Now</a>
-        </div>
-    </header>
+    <!-- Header (auto-injected) -->
+    <script src="/shared/header.js"></script>
 
     <!-- Hero Section -->
     <section class="hero-section h-screen min-h-[700px] flex items-center justify-center text-center relative">
@@ -508,42 +438,13 @@
         </div>
     </section>
     
-    <!-- Footer -->
-    <footer class="bg-black py-12">
-        <div class="container mx-auto px-4 text-center text-gray-400">
-            <img src="images/MoonshotLogo.png" loading="lazy" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6" width="80" height="80">
-            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
-                 <a href="https://moonshotcrossfit.com/intro" target="_blank" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">Book Your Free Intro</a>
-                 <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPage/Main?q=Memberships%7CLocationId%3D9972" target="_blank" class="btn btn-secondary font-bold px-6 py-3 rounded-lg">View Memberships</a>
-            </div>
-            
-            <nav class="mt-8 mb-8 border-t border-gray-800 pt-8 flex flex-wrap justify-center gap-x-6 sm:gap-x-8 gap-y-4 text-gray-400">
-                <a href="/pt.html" class="hover:text-moonlight-blue transition-colors">Personal Training</a>
-                <a href="/kids.html" class="hover:text-moonlight-blue transition-colors">Kids Program</a>
-                <a href="/teen.html" class="hover:text-moonlight-blue transition-colors">Teen Program</a>
-                <a href="/sarah/youthpt.html" class="hover:text-moonlight-blue transition-colors">Youth PT</a>
-                <a href="/faq.html" class="hover:text-moonlight-blue transition-colors">FAQ</a>
-            
-                <a href="https://moonshotmp.com" target="_blank" rel="noopener noreferrer" class="hover:text-moonlight-blue transition-colors">Moonshot Medical and Performance</a>
-</nav>
-
-            <p>&copy; 2024 Moonshot CrossFit. All Rights Reserved.</p>
-            <p class="text-sm mt-1">Website by Gemini</p>
-        </div>
-    </footer>
+    <!-- Footer (auto-injected) -->
+    <script src="/shared/footer.js"></script>
 
 
     <script src="https://unpkg.com/lucide@latest" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
-            mobileMenuLinks.forEach(link => { link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); }); });
-            
             // Image Carousel
             let imageSlideIndex = 1;
             showImageSlides(imageSlideIndex);

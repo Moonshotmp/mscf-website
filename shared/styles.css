@@ -1,0 +1,373 @@
+/*
+ * Moonshot CrossFit Global Styles
+ * ================================
+ * Include this file on all pages for consistent styling.
+ *
+ * Usage:
+ *   <link rel="stylesheet" href="/shared/styles.css">
+ *
+ * Also include the Tailwind config before this:
+ *   <script src="/shared/tailwind-config.js"></script>
+ */
+
+/* ========================================
+   Brand Colors (CSS Custom Properties)
+   ======================================== */
+:root {
+    --brand-blue: #8cb2f5;
+    --brand-blue-light: #a8c5f7;
+    --brand-dark: #000000;
+    --brand-card: #111827;
+    --brand-border: #374151;
+    --brand-light: #FFFFFF;
+    --brand-gray: #9CA3AF;
+    --brand-gray-light: #D1D5DB;
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--brand-dark);
+    color: var(--brand-light);
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+.section-title {
+    font-weight: 900;
+    font-size: 2.5rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 3rem;
+    }
+}
+
+/* ========================================
+   Brand Color Utilities
+   ======================================== */
+.moonlight-blue {
+    color: var(--brand-blue);
+}
+
+.bg-moonlight-blue {
+    background-color: var(--brand-blue);
+}
+
+.border-moonlight-blue {
+    border-color: var(--brand-blue);
+}
+
+.text-brand-blue { color: var(--brand-blue); }
+.text-brand-light { color: var(--brand-light); }
+.text-brand-gray { color: var(--brand-gray); }
+
+.bg-brand-dark { background-color: var(--brand-dark); }
+.bg-brand-card { background-color: var(--brand-card); }
+.bg-brand-blue { background-color: var(--brand-blue); }
+
+/* ========================================
+   Buttons
+   ======================================== */
+.btn {
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--brand-blue);
+    color: var(--brand-dark);
+    font-weight: 700;
+}
+
+.btn-primary:hover {
+    background-color: var(--brand-blue-light);
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--brand-blue);
+    color: var(--brand-blue);
+}
+
+.btn-secondary:hover {
+    background-color: var(--brand-blue);
+    color: var(--brand-dark);
+}
+
+/* ========================================
+   Cards
+   ======================================== */
+.card {
+    background-color: var(--brand-card);
+    border: 1px solid var(--brand-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(140, 178, 245, 0.2);
+}
+
+/* ========================================
+   Schedule Grid
+   ======================================== */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.schedule-day {
+    background-color: var(--brand-card);
+    border-left: 4px solid var(--brand-blue);
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-day p {
+    flex-grow: 1;
+}
+
+/* ========================================
+   Carousel Base Styles
+   ======================================== */
+.carousel {
+    position: relative;
+}
+
+.carousel-slide {
+    display: none;
+    animation: fade 0.7s ease-in-out;
+}
+
+@keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+    border: none;
+}
+
+.carousel-btn:hover {
+    background-color: var(--brand-blue);
+    color: black;
+}
+
+/* Image Carousel */
+.image-carousel-container {
+    max-width: 900px;
+    margin: auto;
+}
+
+.image-carousel-wrapper {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.image-carousel-slide img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    background-color: var(--brand-card);
+}
+
+.image-carousel-prev-btn {
+    left: -1.5rem;
+}
+
+.image-carousel-next-btn {
+    right: -1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .image-carousel-prev-btn {
+        left: 1rem;
+    }
+    .image-carousel-next-btn {
+        right: 1rem;
+    }
+}
+
+/* Testimonial Carousel */
+.testimonial-carousel-slide {
+    min-height: 200px;
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+.hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/groupoutside.JPG');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ========================================
+   Scrollbar Hiding Utility
+   ======================================== */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ========================================
+   Accordion Components (Pure CSS)
+   ======================================== */
+details > .accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 0;
+}
+
+details[open] > .accordion-content {
+    grid-template-rows: 1fr;
+    opacity: 1;
+}
+
+.accordion-inner {
+    overflow: hidden;
+}
+
+summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* ========================================
+   FAQ Styles
+   ======================================== */
+.faq-item {
+    padding: 1.5rem;
+    background-color: rgb(17, 24, 39);
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--brand-blue);
+}
+
+.faq-item h3 {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+    color: var(--brand-gray-light);
+}
+
+/* ========================================
+   Links
+   ======================================== */
+.link-arrow {
+    color: var(--brand-blue);
+    font-weight: 600;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.link-arrow:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   Image Treatments
+   ======================================== */
+.img-grayscale {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.img-grayscale:hover,
+.group:hover .img-grayscale {
+    filter: grayscale(0%);
+}
+
+/* ========================================
+   Form Elements
+   ======================================== */
+.input-field {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--brand-light);
+    padding: 0.75rem 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--brand-blue);
+}
+
+.input-field::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   Navigation Active States
+   ======================================== */
+.nav-link {
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--brand-blue);
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}

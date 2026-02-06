@@ -49,6 +49,7 @@
                 <!-- Contact -->
                 <div>
                     <h4 class="text-brand-light font-bold text-sm uppercase tracking-wider mb-3">Contact</h4>
+                    <a href="tel:+18478507360" class="text-brand-gray hover:text-brand-light transition-colors text-sm block mb-1">(847) 850-7360</a>
                     <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gray hover:text-brand-light transition-colors text-sm block">info@moonshotcrossfit.com</a>
                 </div>
 

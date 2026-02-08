@@ -186,4 +186,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://moonshotcrossfit.com/blog/new-to-park-ridge/</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://moonshotcrossfit.com/blog/how-much-does-crossfit-cost/</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://moonshotcrossfit.com/blog/crossfit-for-weight-loss/</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

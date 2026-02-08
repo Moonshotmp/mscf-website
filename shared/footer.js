@@ -35,6 +35,7 @@
                 <a href="/kids/" class="hover:text-brand-light transition-colors">Kids Program</a>
                 <a href="/sarah/youthpt/" class="hover:text-brand-light transition-colors">Youth PT</a>
                 <a href="/ecosystem/" class="hover:text-brand-light transition-colors">The Moonshot Ecosystem</a>
+                <a href="/blog/" class="hover:text-brand-light transition-colors">Blog</a>
                 <a href="/faq/" class="hover:text-brand-light transition-colors">FAQ</a>
                 <a href="https://moonshotmp.com" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Moonshot Medical</a>
                 <a href="https://moonshotmp.com/rehab" target="_blank" rel="noopener noreferrer" class="hover:text-brand-light transition-colors">Physical Therapy</a>

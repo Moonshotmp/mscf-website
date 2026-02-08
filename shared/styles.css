@@ -243,9 +243,14 @@ h1, h2, h3, h4, h5, h6 {
    Hero Section
    ======================================== */
 .hero-section {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/groupoutside.JPG');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/groupoutside.webp');
     background-size: cover;
     background-position: center;
+}
+
+/* Fallback for browsers without WebP support */
+.no-webp .hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/groupoutside-opt.jpg');
 }
 
 /* ========================================

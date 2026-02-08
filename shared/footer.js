@@ -19,7 +19,10 @@
         <div class="container mx-auto px-4">
             <!-- Logo and CTAs -->
             <div class="text-center mb-8">
-                <img src="/images/moonshot crossfit text cloud color.png" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6">
+                <picture>
+                    <source srcset="/images/logo.webp" type="image/webp">
+                    <img src="/images/logo-opt.png" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6" width="400" height="111">
+                </picture>
                 <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
                     <a href="/intro/" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">Book Your Free Intro</a>
                     <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPage/Main?q=Memberships%7CLocationId%3D9972" target="_blank" class="btn btn-secondary font-bold px-6 py-3 rounded-lg">View Memberships</a>
@@ -41,21 +44,21 @@
             <div class="py-8 border-t border-brand-gray/20 grid md:grid-cols-3 gap-8 text-center md:text-left">
                 <!-- Location -->
                 <div>
-                    <h4 class="text-brand-light font-bold text-sm uppercase tracking-wider mb-3">Location</h4>
+                    <h3 class="text-brand-light font-bold text-sm uppercase tracking-wider mb-3">Location</h3>
                     <p class="text-brand-gray text-sm">542 Busse Hwy<br>Park Ridge, IL 60068</p>
                     <p class="text-brand-gray/70 text-xs mt-2">Less than 10 min from O'Hare</p>
                 </div>
 
                 <!-- Contact -->
                 <div>
-                    <h4 class="text-brand-light font-bold text-sm uppercase tracking-wider mb-3">Contact</h4>
+                    <h3 class="text-brand-light font-bold text-sm uppercase tracking-wider mb-3">Contact</h3>
                     <a href="tel:+18478507360" class="text-brand-gray hover:text-brand-light transition-colors text-sm block mb-1">(847) 850-7360</a>
                     <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gray hover:text-brand-light transition-colors text-sm block">info@moonshotcrossfit.com</a>
                 </div>
 
                 <!-- Social -->
                 <div>
-                    <h4 class="text-brand-light font-bold text-sm uppercase tracking-wider mb-3">Follow</h4>
+                    <h3 class="text-brand-light font-bold text-sm uppercase tracking-wider mb-3">Follow</h3>
                     <div class="flex justify-center md:justify-start space-x-4">
                         <a href="https://www.instagram.com/moonshotcrossfit/" target="_blank" class="text-brand-gray hover:text-brand-light transition-colors" aria-label="Instagram">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

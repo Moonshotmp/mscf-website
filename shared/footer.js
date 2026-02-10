@@ -21,7 +21,7 @@
             <div class="text-center mb-8">
                 <picture>
                     <source srcset="/images/logo.webp" type="image/webp">
-                    <img src="/images/logo-opt.png" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6" width="400" height="111">
+                    <img src="/images/logo-opt.webp" alt="Moonshot CrossFit Logo" class="h-16 w-auto mx-auto mb-6" width="400" height="111">
                 </picture>
                 <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
                     <a href="/intro/" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">Book Your Free Intro</a>

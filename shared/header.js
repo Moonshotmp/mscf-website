@@ -18,7 +18,7 @@
             <a href="/" class="flex-shrink-0">
                 <picture>
                     <source srcset="/images/logo.webp" type="image/webp">
-                    <img src="/images/logo-opt.png" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto" width="400" height="111">
+                    <img src="/images/logo-opt.webp" alt="Moonshot CrossFit Logo" class="h-16 md:h-20 w-auto" width="400" height="111">
                 </picture>
             </a>
 

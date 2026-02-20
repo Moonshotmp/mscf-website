@@ -12,30 +12,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
-    .step-number {
-      width: 48px;
-      height: 48px;
-      min-width: 48px;
-      border-radius: 50%;
-      background: var(--brand-gold);
-      color: var(--brand-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-    .tip-card {
-      background: var(--brand-slate);
-      border-radius: 12px;
-      padding: 1.5rem;
-      border: 1px solid rgba(178, 191, 190, 0.15);
-    }
     .review-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.75rem;
+      width: 100%;
+      max-width: 400px;
       background: var(--brand-gold);
       color: var(--brand-dark);
       font-family: 'Oswald', sans-serif;
@@ -43,7 +26,7 @@
       font-size: 1.25rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 1rem 2.5rem;
+      padding: 1.125rem 2rem;
       border-radius: 8px;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -53,12 +36,21 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
-    .icon-circle {
-      width: 56px;
-      height: 56px;
-      min-width: 56px;
+    .tip-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .tip-row + .tip-row {
+      border-top: 1px solid rgba(178, 191, 190, 0.1);
+    }
+    .tip-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
       border-radius: 50%;
-      background: rgba(184, 152, 110, 0.15);
+      background: rgba(184, 152, 110, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -69,140 +61,71 @@
   <script src="/shared/header.js"></script>
 
   <main class="flex-grow pt-20">
+    <section class="py-12 sm:py-16">
+      <div class="max-w-md mx-auto px-5 sm:px-6">
 
-    <!-- Hero -->
-    <section class="bg-brand-dark py-16 sm:py-20">
-      <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-        <h1 class="font-heading text-3xl sm:text-4xl md:text-5xl uppercase tracking-wide mb-4">
-          Thanks for Being Here
-        </h1>
-        <p class="text-brand-gray text-lg sm:text-xl leading-relaxed">
-          Your review helps others find the right gym — and helps us keep building a better community. It only takes a minute.
-        </p>
-      </div>
-    </section>
-
-    <!-- Photo Prompt -->
-    <section class="bg-brand-slate py-14 sm:py-16">
-      <div class="max-w-2xl mx-auto px-4 sm:px-6">
-        <div class="flex items-start gap-5">
-          <div class="icon-circle mt-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-          </div>
-          <div>
-            <h2 class="font-heading text-xl sm:text-2xl uppercase tracking-wide mb-2">
-              Snap a Quick Photo First
-            </h2>
-            <p class="text-brand-gray leading-relaxed">
-              Before you write your review, take a photo of the gym, your workout, or a selfie with your crew. Reviews with photos get significantly more visibility and help people see what we're all about.
-            </p>
-          </div>
+        <!-- Hero + CTA -->
+        <div class="text-center mb-12">
+          <h1 class="font-heading text-3xl sm:text-4xl uppercase tracking-wide mb-3">
+            Thanks for Being Here
+          </h1>
+          <p class="text-brand-gray text-base sm:text-lg leading-relaxed mb-8">
+            Your review helps others find the right gym and helps us keep building a better community.
+          </p>
+          <a href="https://g.page/r/Ce-XQNMtgHBzEBM/review" target="_blank" rel="noopener noreferrer" class="review-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Leave a Google Review
+          </a>
         </div>
-      </div>
-    </section>
 
-    <!-- Tips -->
-    <section class="bg-brand-dark py-14 sm:py-16">
-      <div class="max-w-2xl mx-auto px-4 sm:px-6">
-        <h2 class="font-heading text-2xl sm:text-3xl uppercase tracking-wide mb-8 text-center">
-          Tips for a Great Review
-        </h2>
-        <div class="space-y-4">
-          <div class="tip-card flex items-start gap-4">
-            <div class="icon-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <!-- Divider -->
+        <div class="border-t border-white/10 mb-10"></div>
+
+        <!-- Tips -->
+        <div>
+          <p class="font-heading text-sm uppercase tracking-widest text-brand-gray mb-6">Make it count</p>
+
+          <div class="tip-row">
+            <div class="tip-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
             </div>
             <div>
-              <p class="font-medium text-brand-light mb-1">Mention your coach or favorite class</p>
-              <p class="text-brand-gray text-sm leading-relaxed">Naming a coach or class type helps others know what to expect and helps us recognize our team.</p>
+              <p class="text-brand-light font-medium text-sm">Snap a photo first</p>
+              <p class="text-brand-gray text-sm mt-0.5">A selfie or shot of the gym. Tap the camera icon in Google to attach it.</p>
             </div>
           </div>
-          <div class="tip-card flex items-start gap-4">
-            <div class="icon-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+
+          <div class="tip-row">
+            <div class="tip-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <div>
-              <p class="font-medium text-brand-light mb-1">Share a specific detail</p>
-              <p class="text-brand-gray text-sm leading-relaxed">What made you join? What keeps you coming back? How has it helped you? Specifics help more than generic praise.</p>
+              <p class="text-brand-light font-medium text-sm">Mention your coach or class</p>
+              <p class="text-brand-gray text-sm mt-0.5">Names and specifics help way more than "great gym."</p>
             </div>
           </div>
-          <div class="tip-card flex items-start gap-4">
-            <div class="icon-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+
+          <div class="tip-row">
+            <div class="tip-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
             </div>
             <div>
-              <p class="font-medium text-brand-light mb-1">Don't want to type? Use voice-to-text</p>
-              <p class="text-brand-gray text-sm leading-relaxed">Tap the microphone icon on your keyboard and just talk. It's faster and usually comes out more natural.</p>
-            </div>
-          </div>
-          <div class="tip-card flex items-start gap-4">
-            <div class="icon-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-gold"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            </div>
-            <div>
-              <p class="font-medium text-brand-light mb-1">Attach your photo</p>
-              <p class="text-brand-gray text-sm leading-relaxed">When the Google review opens, tap the camera icon to add the photo you just took. Photos make your review stand out.</p>
+              <p class="text-brand-light font-medium text-sm">Don't want to type? Talk it out</p>
+              <p class="text-brand-gray text-sm mt-0.5">Tap the mic icon on your keyboard. Voice reviews come out great.</p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- How to Add a Photo (Step by Step) -->
-    <section class="bg-brand-slate py-14 sm:py-16">
-      <div class="max-w-2xl mx-auto px-4 sm:px-6">
-        <h2 class="font-heading text-xl sm:text-2xl uppercase tracking-wide mb-8 text-center">
-          How to Attach a Photo to Your Review
-        </h2>
-        <div class="space-y-6">
-          <div class="flex items-start gap-4">
-            <div class="step-number">1</div>
-            <div>
-              <p class="font-medium text-brand-light">Tap the button below to open Google Reviews</p>
-              <p class="text-brand-gray text-sm mt-1">It will open directly in Google Maps or your browser.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="step-number">2</div>
-            <div>
-              <p class="font-medium text-brand-light">Select your star rating</p>
-              <p class="text-brand-gray text-sm mt-1">Tap the stars at the top of the review form.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="step-number">3</div>
-            <div>
-              <p class="font-medium text-brand-light">Tap the camera or photo icon</p>
-              <p class="text-brand-gray text-sm mt-1">You'll see it below the text box. Select the photo you just took.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="step-number">4</div>
-            <div>
-              <p class="font-medium text-brand-light">Write your review and hit Post</p>
-              <p class="text-brand-gray text-sm mt-1">That's it — thank you for taking the time.</p>
-            </div>
-          </div>
+        <!-- Bottom CTA -->
+        <div class="text-center mt-10 pb-4">
+          <a href="https://g.page/r/Ce-XQNMtgHBzEBM/review" target="_blank" rel="noopener noreferrer" class="review-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Leave a Google Review
+          </a>
         </div>
+
       </div>
     </section>
-
-    <!-- CTA -->
-    <section class="bg-brand-dark py-16 sm:py-20">
-      <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-        <h2 class="font-heading text-2xl sm:text-3xl uppercase tracking-wide mb-3">
-          Ready?
-        </h2>
-        <p class="text-brand-gray mb-8">
-          Tap below to open your Google review. We appreciate it.
-        </p>
-        <a href="https://g.page/r/Ce-XQNMtgHBzEBM/review" target="_blank" rel="noopener noreferrer" class="review-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Leave a Google Review
-        </a>
-      </div>
-    </section>
-
   </main>
 
   <script src="/shared/footer.js" defer></script>

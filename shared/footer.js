@@ -32,6 +32,7 @@
             <!-- Navigation Links -->
             <nav class="py-8 border-t border-brand-gray/20 flex flex-wrap justify-center gap-x-6 sm:gap-x-8 gap-y-4 text-brand-gray">
                 <a href="/pt/" class="hover:text-brand-light transition-colors">Personal Training</a>
+                <a href="/hyrox/" class="hover:text-brand-light transition-colors">Hyrox Training</a>
                 <a href="/kids/" class="hover:text-brand-light transition-colors">Kids Program</a>
                 <a href="/sarah/youthpt/" class="hover:text-brand-light transition-colors">Youth PT</a>
                 <a href="/ecosystem/" class="hover:text-brand-light transition-colors">The Moonshot Ecosystem</a>

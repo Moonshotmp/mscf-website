@@ -43,6 +43,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://moonshotcrossfit.com/hyrox/</loc>
+    <lastmod>2026-02-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://moonshotcrossfit.com/faq/</loc>
     <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
@@ -243,6 +249,12 @@
   <url>
     <loc>https://moonshotcrossfit.com/blog/edison-park-fitness/</loc>
     <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://moonshotcrossfit.com/blog/hyrox-training-park-ridge/</loc>
+    <lastmod>2026-02-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -675,7 +675,7 @@ function renderTeamCards() {
 
         ${t.teamImage ? `
           <div class="px-5 py-2 border-t border-gray-800/50">
-            <img src="${t.teamImage}" alt="${escHtml(t.displayName)}" class="w-full rounded-lg max-h-48 object-cover">
+            <img src="${t.teamImage}" alt="${escHtml(t.displayName)}" class="w-full rounded-lg max-h-80 object-cover">
           </div>
         ` : ''}
 

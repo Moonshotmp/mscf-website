@@ -23,7 +23,7 @@ const TEAM_META = {
 
 // -- Default challenges (used if API hasn't set them) ---------------
 const DEFAULT_CHALLENGES = [
-  { week: 1, title: 'Not a Water Bottle', desc: 'Bring anything but a water bottle to class. Most creative vessel wins 3 bonus pts (voted on Instagram).' },
+  { week: 1, title: 'Not a Water Bottle', desc: 'Bring anything but a water bottle to class. Most creative vessel wins 3 bonus pts (voted in the Facebook group).' },
   { week: 2, title: 'TBD', desc: 'Challenge announced Week 2.' },
   { week: 3, title: 'TBD', desc: 'Challenge announced Week 3.' },
 ];
@@ -114,6 +114,10 @@ function calcPoints(scores) {
   if (scores.bikeErgParticipation) pts += 1;
   if (scores.bikeErgWinner) pts += 4;
 
+  // Twins Challenge (2 pts) + Best Twins Winner (5 pts)
+  if (scores.twinsChallenge) pts += 2;
+  if (scores.twinsBestWinner) pts += 5;
+
   return pts;
 }
 
@@ -148,6 +152,7 @@ function calcPointsAvailable(scores) {
   if (!scores?.weeklyChallengeWinner2) available += 3;
   if (!scores?.weeklyChallengeWinner3) available += 3;
   if (!scores?.bikeErgParticipation) available += 1;
+  if (!scores?.twinsChallenge) available += 2;
   return available;
 }
 
@@ -167,6 +172,7 @@ function getMissingActivities(scores) {
   if (!scores?.weeklyChallenge2) missing.push('W2 Challenge (2 pts)');
   if (!scores?.weeklyChallenge3) missing.push('W3 Challenge (2 pts)');
   if (!scores?.bikeErgParticipation) missing.push('Bike Erg (1 pt)');
+  if (!scores?.twinsChallenge) missing.push('Twins Challenge (2 pts)');
   return missing;
 }
 
@@ -318,6 +324,125 @@ async function updateTeamName(teamId, name) {
 }
 
 /**
+ * Upload a team image (base64).
+ */
+async function uploadTeamImage(teamId, imageBase64) {
+  try {
+    await fetch(`${API_URL}/team-image`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${state.pin}`,
+      },
+      body: JSON.stringify({ teamId, image: imageBase64 }),
+    });
+  } catch (err) {
+    console.warn('uploadTeamImage error:', err.message);
+  }
+
+  const team = state.teams.find(t => t.teamId === teamId);
+  if (team) team.teamImage = imageBase64;
+  render();
+}
+
+/**
+ * Update captain's trash talk quote.
+ */
+async function updateCaptainQuote(teamId, quote) {
+  try {
+    await fetch(`${API_URL}/team-quote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${state.pin}`,
+      },
+      body: JSON.stringify({ teamId, captainQuote: quote }),
+    });
+  } catch (err) {
+    console.warn('updateCaptainQuote error:', err.message);
+  }
+
+  const team = state.teams.find(t => t.teamId === teamId);
+  if (team) team.captainQuote = quote;
+  render();
+}
+
+/**
+ * Vote on a captain's quote (thumbs up/down).
+ */
+async function voteOnQuote(teamId, direction) {
+  // Check localStorage for existing vote
+  const voteKey = `mscf-cup-vote-${teamId}`;
+  const existingVote = localStorage.getItem(voteKey);
+  let undo = false;
+
+  if (existingVote === direction) {
+    // Same direction = undo the vote
+    localStorage.removeItem(voteKey);
+    undo = true;
+  } else {
+    // If switching direction, undo the old vote first
+    if (existingVote) {
+      await fetch(`${API_URL}/quote-vote`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ teamId, direction: existingVote, undo: true }),
+      });
+      // Update local state
+      const team = state.teams.find(t => t.teamId === teamId);
+      if (team) {
+        if (existingVote === 'up') team.quoteUpvotes = Math.max(0, (team.quoteUpvotes || 0) - 1);
+        else team.quoteDownvotes = Math.max(0, (team.quoteDownvotes || 0) - 1);
+      }
+    }
+    localStorage.setItem(voteKey, direction);
+  }
+
+  try {
+    await fetch(`${API_URL}/quote-vote`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ teamId, direction, undo }),
+    });
+  } catch (err) {
+    console.warn('voteOnQuote error:', err.message);
+  }
+
+  // Update local state
+  const team = state.teams.find(t => t.teamId === teamId);
+  if (team) {
+    const delta = undo ? -1 : 1;
+    if (direction === 'up') team.quoteUpvotes = Math.max(0, (team.quoteUpvotes || 0) + delta);
+    else team.quoteDownvotes = Math.max(0, (team.quoteDownvotes || 0) + delta);
+  }
+  render();
+}
+
+/**
+ * Compress and resize an image file to base64 (max 400px wide, JPEG 70%).
+ */
+function compressImage(file) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const maxW = 400;
+        const scale = Math.min(1, maxW / img.width);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.7));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
  * Log out and clear auth state.
  */
 function logout() {
@@ -382,8 +507,8 @@ function render() {
 function renderEditBanner() {
   const banner = document.getElementById('edit-banner');
   const body = document.body;
-  if (state.authenticated && team.teamId === state.captainTeamId) {
-    const meta = state.captainTeamId ? getTeamMeta(state.captainTeamId) : null;
+  if (state.authenticated && state.captainTeamId) {
+    const meta = getTeamMeta(state.captainTeamId);
     const label = meta ? `Edit Mode — ${meta.name}` : 'Edit Mode Active';
     banner.querySelector('.edit-label').textContent = label;
     banner.classList.remove('hidden');
@@ -538,6 +663,22 @@ function renderTeamCards() {
           </div>
         </div>
 
+        ${t.captainQuote ? `
+          <div class="px-5 py-2 border-t border-gray-800/50 flex items-center justify-between gap-2">
+            <p class="text-sm italic text-gray-300 flex-1 truncate">"${escHtml(t.captainQuote)}"</p>
+            <div class="flex items-center gap-1 flex-shrink-0">
+              <button class="quote-vote-btn text-xs px-1.5 py-0.5 rounded transition-colors ${localStorage.getItem('mscf-cup-vote-' + t.teamId) === 'up' ? 'bg-green-500/30 text-green-400' : 'text-gray-500 hover:text-green-400'}" data-action="quote-vote" data-team="${t.teamId}" data-direction="up">&#x1F44D; ${t.quoteUpvotes || 0}</button>
+              <button class="quote-vote-btn text-xs px-1.5 py-0.5 rounded transition-colors ${localStorage.getItem('mscf-cup-vote-' + t.teamId) === 'down' ? 'bg-red-500/30 text-red-400' : 'text-gray-500 hover:text-red-400'}" data-action="quote-vote" data-team="${t.teamId}" data-direction="down">&#x1F44E; ${t.quoteDownvotes || 0}</button>
+            </div>
+          </div>
+        ` : ''}
+
+        ${t.teamImage ? `
+          <div class="px-5 py-2 border-t border-gray-800/50">
+            <img src="${t.teamImage}" alt="${escHtml(t.displayName)}" class="w-full rounded-lg max-h-48 object-cover">
+          </div>
+        ` : ''}
+
         <!-- Roster (expandable) -->
         <div class="roster-panel ${expanded ? '' : 'hidden'} border-t border-gray-800">
           ${renderRoster(t)}
@@ -624,6 +765,8 @@ function buildBadges(scores) {
   if (scores.bonusPoints > 0) badges.push(b(`+${scores.bonusPoints} bonus`, 'purple'));
   if (scores.bikeErgParticipation) badges.push(b('Bike Erg', 'red'));
   if (scores.bikeErgWinner) badges.push(b('Bike Erg Winner', 'red'));
+  if (scores.twinsChallenge) badges.push(b('Twins', 'pink'));
+  if (scores.twinsBestWinner) badges.push(b('Best Twins', 'pink'));
 
   return badges.length ? badges.join('') : '<span class="text-gray-600 text-xs">No activity yet</span>';
 }
@@ -659,6 +802,36 @@ function renderEditRoster(team) {
       </div>
     `;
   }
+
+  // Captain quote input
+  const quoteHtml = `
+    <div class="px-4 pt-3 pb-2">
+      <p class="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-2">Team Trash Talk (${60 - (team.captainQuote?.length || 0)} chars left)</p>
+      <div class="flex gap-2">
+        <input type="text" placeholder="Talk your trash..." value="${escHtml(team.captainQuote || '')}"
+          maxlength="60"
+          class="flex-1 bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/30 transition-colors"
+          data-team="${team.teamId}" data-action="quote-input"
+          oninput="this.closest('div').previousElementSibling.textContent = 'Team Trash Talk (' + (60 - this.value.length) + ' chars left)'">
+        <button class="bg-amber-500 hover:bg-amber-400 text-black font-bold px-4 py-2 rounded-lg text-sm font-heading uppercase tracking-wider transition-colors"
+          data-action="submit-quote" data-team="${team.teamId}">Post</button>
+      </div>
+    </div>
+  `;
+
+  // Team image upload
+  const imageHtml = `
+    <div class="px-4 pt-2 pb-3">
+      <p class="text-[10px] uppercase tracking-widest text-cyan-400 font-bold mb-2">Team Photo</p>
+      <div class="flex items-center gap-3">
+        ${team.teamImage ? `<img src="${team.teamImage}" class="w-16 h-16 rounded-lg object-cover flex-shrink-0">` : '<div class="w-16 h-16 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0"><span class="text-gray-600 text-xs">No photo</span></div>'}
+        <label class="cursor-pointer bg-gray-700 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded-lg text-sm transition-colors">
+          ${team.teamImage ? 'Change Photo' : 'Upload Photo'}
+          <input type="file" accept="image/*" class="hidden" data-action="team-image-upload" data-team="${team.teamId}">
+        </label>
+      </div>
+    </div>
+  `;
 
   const rows = team.members.map((m, idx) => {
     const s = m.scores || {};
@@ -735,13 +908,22 @@ function renderEditRoster(team) {
                 ${renderToggle(m.memberId, 'bikeErgWinner', 'Top M/F Winner', s.bikeErgWinner)}
               </div>
             </div>
+
+            <!-- Twins Challenge -->
+            <div class="mt-3">
+              <p class="text-[10px] uppercase tracking-widest text-pink-400 font-bold mb-2">Twins Challenge</p>
+              <div class="grid grid-cols-2 gap-2 text-sm">
+                ${renderToggle(m.memberId, 'twinsChallenge', 'Completed Twins', s.twinsChallenge)}
+                ${renderToggle(m.memberId, 'twinsBestWinner', 'Best Twins Winner', s.twinsBestWinner)}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     `;
   }).join('');
 
-  return `<div>${teamNameHtml}<div class="border-t border-gray-800">${rows}</div></div>`;
+  return `<div>${teamNameHtml}${quoteHtml}${imageHtml}<div class="border-t border-gray-800">${rows}</div></div>`;
 }
 
 /**
@@ -959,6 +1141,24 @@ function initEvents() {
       return;
     }
 
+    // Quote vote
+    const voteBtn = e.target.closest('[data-action="quote-vote"]');
+    if (voteBtn) {
+      voteOnQuote(voteBtn.dataset.team, voteBtn.dataset.direction);
+      return;
+    }
+
+    // Submit quote
+    const submitQuoteBtn = e.target.closest('[data-action="submit-quote"]');
+    if (submitQuoteBtn && state.authenticated) {
+      const teamId = submitQuoteBtn.dataset.team;
+      const input = document.querySelector(`[data-action="quote-input"][data-team="${teamId}"]`);
+      if (input) {
+        updateCaptainQuote(teamId, input.value.trim().slice(0, 60));
+      }
+      return;
+    }
+
     // Submit team name
     const submitNameBtn = e.target.closest('[data-action="submit-team-name"]');
     if (submitNameBtn && state.authenticated) {
@@ -1001,6 +1201,27 @@ function initEvents() {
       if (e.target.value.trim() && state.authenticated) {
         updateTeamName(teamId, e.target.value.trim());
       }
+    }
+  });
+
+  // -- Keyboard: quote input submit on Enter --------------------
+  document.getElementById('team-cards').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.matches('[data-action="quote-input"]')) {
+      e.preventDefault();
+      const teamId = e.target.dataset.team;
+      if (e.target.value.trim() && state.authenticated) {
+        updateCaptainQuote(teamId, e.target.value.trim().slice(0, 60));
+      }
+    }
+  });
+
+  // -- Team image upload ----------------------------------------
+  document.getElementById('team-cards').addEventListener('change', async (e) => {
+    const fileInput = e.target.closest('[data-action="team-image-upload"]');
+    if (fileInput && state.authenticated && fileInput.files[0]) {
+      const teamId = fileInput.dataset.team;
+      const base64 = await compressImage(fileInput.files[0]);
+      uploadTeamImage(teamId, base64);
     }
   });
 

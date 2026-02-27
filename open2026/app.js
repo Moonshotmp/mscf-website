@@ -35,6 +35,7 @@ let state = {
   config: { currentWeek: 1, challenges: DEFAULT_CHALLENGES },
   authenticated: false,
   pin: null,
+  captainTeamId: null,
   expandedTeams: new Set(),
   expandedMembers: new Set(),
   saving: new Set(),
@@ -218,12 +219,15 @@ async function fetchData() {
         challenges: data.config.challenges?.length ? data.config.challenges : DEFAULT_CHALLENGES,
       };
     }
+    // Auto-expand all teams so everyone can see rosters
+    state.teams.forEach(t => state.expandedTeams.add(t.teamId));
     state.lastUpdated = Date.now();
     render();
   } catch (err) {
     console.warn('fetchData failed (API may not be deployed yet):', err.message);
     // If API is not available, use demo data so the page still looks good
     if (!state.teams.length) loadDemoData();
+    state.teams.forEach(t => state.expandedTeams.add(t.teamId));
     state.lastUpdated = Date.now();
     render();
   }
@@ -240,19 +244,14 @@ async function login(pin) {
       body: JSON.stringify({ pin }),
     });
     if (!res.ok) return false;
+    const data = await res.json();
     state.authenticated = true;
     state.pin = pin;
+    state.captainTeamId = data.teamId || null;
     render();
     return true;
   } catch (err) {
     console.warn('login failed:', err.message);
-    // For demo mode: accept any PIN
-    if (API_URL === '__API_URL__') {
-      state.authenticated = true;
-      state.pin = pin;
-      render();
-      return true;
-    }
     return false;
   }
 }
@@ -318,6 +317,7 @@ async function updateTeamName(teamId, name) {
 function logout() {
   state.authenticated = false;
   state.pin = null;
+  state.captainTeamId = null;
   state.expandedMembers.clear();
   render();
 }
@@ -377,6 +377,9 @@ function renderEditBanner() {
   const banner = document.getElementById('edit-banner');
   const body = document.body;
   if (state.authenticated) {
+    const meta = state.captainTeamId ? getTeamMeta(state.captainTeamId) : null;
+    const label = meta ? `Edit Mode — ${meta.name}` : 'Edit Mode Active';
+    banner.querySelector('.edit-label').textContent = label;
     banner.classList.remove('hidden');
     body.classList.add('edit-active');
     body.style.paddingTop = '40px';

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 Moonshot Cup | Moonshot CrossFit</title>
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- OG Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="2026 Moonshot Cup | Live Standings">
+  <meta property="og:description" content="Follow the team competition at Moonshot CrossFit's Open 2026. Who's winning?">
+  <meta property="og:url" content="https://moonshotcrossfit.com/open2026/">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-gold': '#D4A843',
+            'brand-dark': '#1a1a2e',
+            'brand-slate': '#16213e',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700;800;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* -- Base --------------------------------------------------- */
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      margin: 0;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Oswald', sans-serif;
+    }
+
+    /* -- Hero animated gradient --------------------------------- */
+    .hero-gradient {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #1a1a2e 70%, #0f3460 100%);
+      background-size: 300% 300%;
+      animation: heroShift 12s ease-in-out infinite;
+    }
+    @keyframes heroShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* -- Gold glow behind title --------------------------------- */
+    .gold-glow {
+      text-shadow:
+        0 0 20px rgba(212, 168, 67, 0.3),
+        0 0 60px rgba(212, 168, 67, 0.1);
+    }
+
+    /* -- Leaderboard rank cards --------------------------------- */
+    .leader-bar {
+      transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .leader-bar-enter {
+      animation: barGrow 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes barGrow {
+      from { width: 0%; opacity: 0.5; }
+      to   { opacity: 1; }
+    }
+
+    /* -- Fade-in for sections ----------------------------------- */
+    .fade-in {
+      animation: fadeUp 0.6s ease-out both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* -- Challenge card glow border ----------------------------- */
+    .challenge-glow {
+      position: relative;
+      overflow: hidden;
+    }
+    .challenge-glow::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: conic-gradient(from 0deg, #D4A843, #EF4444, #3B82F6, #10B981, #F59E0B, #D4A843);
+      border-radius: inherit;
+      animation: glowSpin 4s linear infinite;
+      z-index: -1;
+    }
+    @keyframes glowSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* -- Toggle switch (bigger touch targets) ------------------- */
+    .toggle-track {
+      width: 52px;
+      height: 28px;
+      border-radius: 14px;
+      background: #374151;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.25s;
+      flex-shrink: 0;
+    }
+    .toggle-track.active { background: #10B981; }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.25s;
+    }
+    .toggle-track.active::after { transform: translateX(24px); }
+
+    /* -- Number stepper (bigger touch targets) ------------------ */
+    .stepper-btn {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .stepper-btn:hover { filter: brightness(1.2); }
+    .stepper-btn:active { transform: scale(0.92); }
+
+    /* -- Rank badges -------------------------------------------- */
+    .rank-badge {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .rank-1 { background: linear-gradient(135deg, #FFD700, #D4A843); color: #000; box-shadow: 0 0 12px rgba(212,168,67,0.4); }
+    .rank-2 { background: linear-gradient(135deg, #C0C0C0, #A0A0A0); color: #000; }
+    .rank-3 { background: linear-gradient(135deg, #CD7F32, #A0622E); color: #000; }
+    .rank-4 { background: #374151; color: #9CA3AF; }
+
+    /* -- Leader card glow (1st place) --------------------------- */
+    .leader-card-1 {
+      border-top: 3px solid #FFD700;
+      box-shadow: 0 0 20px rgba(212,168,67,0.15);
+    }
+
+    /* -- Member accordion --------------------------------------- */
+    .member-accordion {
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      overflow: hidden;
+    }
+    .member-accordion.collapsed { max-height: 0; opacity: 0; }
+    .member-accordion.expanded { max-height: 800px; opacity: 1; }
+
+    /* -- Search highlight flash --------------------------------- */
+    .search-highlight {
+      animation: highlightFlash 1.5s ease-out;
+    }
+    @keyframes highlightFlash {
+      0% { background: rgba(212, 168, 67, 0.3); }
+      100% { background: transparent; }
+    }
+
+    /* -- Modal overlay ------------------------------------------ */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* -- Shake animation for login errors ----------------------- */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%  { transform: translateX(-8px); }
+      40%  { transform: translateX(8px); }
+      60%  { transform: translateX(-6px); }
+      80%  { transform: translateX(6px); }
+    }
+    .shake { animation: shake 0.4s ease-in-out; }
+
+    /* -- Saving indicator pulse --------------------------------- */
+    .saving-pulse {
+      animation: pulse 1s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* -- Edit-mode card highlight ------------------------------- */
+    .edit-active .team-card {
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.3);
+    }
+
+    /* -- Bouncing chevron --------------------------------------- */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+    .bounce-arrow {
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    /* -- Scrollbar styling -------------------------------------- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+  </style>
+</head>
+
+<body class="min-h-screen">
+
+  <!-- ================================================================
+       EDIT MODE BANNER
+       ================================================================ -->
+  <div id="edit-banner" class="hidden fixed top-0 left-0 right-0 z-50 bg-amber-500 text-black text-center py-2 px-4 font-bold text-sm tracking-wide shadow-lg">
+    <span class="font-heading uppercase tracking-widest">Edit Mode Active</span>
+    <button id="logout-btn" class="ml-4 bg-black text-amber-400 px-3 py-1 rounded text-xs font-semibold hover:bg-gray-900 transition-colors">
+      Logout
+    </button>
+  </div>
+
+  <!-- ================================================================
+       HERO SECTION
+       ================================================================ -->
+  <section class="hero-gradient relative overflow-hidden">
+    <!-- Decorative noise / grain overlay -->
+    <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');"></div>
+
+    <div class="relative max-w-5xl mx-auto text-center py-10 md:py-20 lg:py-28 px-4">
+      <!-- Week badge -->
+      <div class="mb-6">
+        <span id="week-badge" class="inline-block bg-brand-gold/20 text-brand-gold border border-brand-gold/40 rounded-full px-5 py-1.5 text-sm font-semibold tracking-wider uppercase font-heading">
+          Week 1 of 3
+        </span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-none tracking-tight">
+        2026 Moonshot Cup
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero-subtitle gold-glow mt-4 text-brand-gold text-xl md:text-2xl font-heading font-bold uppercase tracking-widest">
+        The Open Starts Now
+      </p>
+
+      <!-- Decorative line -->
+      <div class="mt-8 mx-auto w-24 h-1 bg-gradient-to-r from-transparent via-brand-gold to-transparent rounded-full"></div>
+
+      <!-- Scroll-to-standings chevron -->
+      <a href="#standings" class="inline-block mt-6 text-gray-500 hover:text-brand-gold transition-colors bounce-arrow" aria-label="Scroll to standings">
+        <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       LEADERBOARD SECTION
+       ================================================================ -->
+  <section id="standings" class="max-w-4xl mx-auto px-4 pt-8 pb-12 md:py-16 fade-in">
+    <h2 class="font-heading text-3xl md:text-4xl font-bold uppercase text-white text-center mb-10 tracking-wide">
+      Team Standings
+    </h2>
+
+    <!-- Athlete search bar -->
+    <div class="relative max-w-md mx-auto mb-8">
+      <input type="text" id="athlete-search"
+             placeholder="Find an athlete..."
+             class="w-full bg-gray-800/60 border border-gray-700 rounded-full px-5 py-3 pl-11 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-brand-gold/50 focus:ring-1 focus:ring-brand-gold/30 transition-colors">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+    </div>
+
+    <div id="leaderboard" class="space-y-3">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Last updated timestamp -->
+    <p id="last-updated" class="text-center text-gray-500 text-xs mt-6">Loading...</p>
+  </section>
+
+  <!-- ================================================================
+       TEAM CARDS SECTION
+       ================================================================ -->
+  <section id="teams-section" class="max-w-5xl mx-auto px-4 pb-16 fade-in">
+    <div id="team-cards" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- ================================================================
+       WEEKLY CHALLENGE SPOTLIGHT (moved above point system)
+       ================================================================ -->
+  <section class="max-w-3xl mx-auto px-4 pb-16 fade-in">
+    <div class="challenge-glow rounded-2xl">
+      <div class="bg-gray-900 rounded-2xl p-8 md:p-10 text-center">
+        <p class="font-heading text-sm uppercase tracking-widest text-brand-gold mb-3">This Week's Challenge</p>
+        <h3 id="challenge-title" class="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
+          Not a Water Bottle
+        </h3>
+        <p id="challenge-desc" class="text-gray-300 text-base md:text-lg leading-relaxed max-w-xl mx-auto">
+          Bring anything but a water bottle to class. Most creative vessel wins 3 bonus pts (voted on Instagram).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       POINT SYSTEM TABLE
+       ================================================================ -->
+  <section class="max-w-4xl mx-auto px-4 pb-16 fade-in">
+    <h2 class="font-heading text-3xl md:text-4xl font-bold uppercase text-white text-center mb-10 tracking-wide">
+      How to Earn Points
+    </h2>
+    <div class="overflow-x-auto rounded-xl border border-gray-800">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-800/80 text-left">
+            <th class="px-4 py-3 font-heading text-xs uppercase tracking-wider text-gray-400">Category</th>
+            <th class="px-4 py-3 font-heading text-xs uppercase tracking-wider text-gray-400">Activity</th>
+            <th class="px-4 py-3 font-heading text-xs uppercase tracking-wider text-gray-400 text-center">Points</th>
+            <th class="px-4 py-3 font-heading text-xs uppercase tracking-wider text-gray-400 text-center">Cap</th>
+          </tr>
+        </thead>
+        <tbody id="points-table-body" class="divide-y divide-gray-800/50">
+          <!-- Static rows -- no need to render dynamically -->
+          <!-- Open -->
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-blue-500/20 text-blue-400">Open</span></td>
+            <td class="px-4 py-3">Complete workout + submit score</td>
+            <td class="px-4 py-3 text-center font-bold text-white">2 each</td>
+            <td class="px-4 py-3 text-center text-gray-400">6 (3 workouts)</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-blue-500/20 text-blue-400">Open</span></td>
+            <td class="px-4 py-3">Complete Judges Course</td>
+            <td class="px-4 py-3 text-center font-bold text-white">3</td>
+            <td class="px-4 py-3 text-center text-gray-400">Once</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-blue-500/20 text-blue-400">Open</span></td>
+            <td class="px-4 py-3">Judge someone</td>
+            <td class="px-4 py-3 text-center font-bold text-white">1 each</td>
+            <td class="px-4 py-3 text-center text-gray-400">No cap</td>
+          </tr>
+          <!-- Growth -->
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-green-500/20 text-green-400">Growth</span></td>
+            <td class="px-4 py-3">Bring a friend to class</td>
+            <td class="px-4 py-3 text-center font-bold text-white">3 each</td>
+            <td class="px-4 py-3 text-center text-gray-400">No cap</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-green-500/20 text-green-400">Growth</span></td>
+            <td class="px-4 py-3">Friend signs up (5-pack)</td>
+            <td class="px-4 py-3 text-center font-bold text-white">5</td>
+            <td class="px-4 py-3 text-center text-gray-400">Per signup</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-green-500/20 text-green-400">Growth</span></td>
+            <td class="px-4 py-3">Friend signs up (10-pack)</td>
+            <td class="px-4 py-3 text-center font-bold text-white">10</td>
+            <td class="px-4 py-3 text-center text-gray-400">Per signup</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-green-500/20 text-green-400">Growth</span></td>
+            <td class="px-4 py-3">Friend signs up (membership)</td>
+            <td class="px-4 py-3 text-center font-bold text-white">15</td>
+            <td class="px-4 py-3 text-center text-gray-400">Per signup</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-green-500/20 text-green-400">Growth</span></td>
+            <td class="px-4 py-3">Google review w/ photo</td>
+            <td class="px-4 py-3 text-center font-bold text-white">2</td>
+            <td class="px-4 py-3 text-center text-gray-400">Once/person</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-green-500/20 text-green-400">Growth</span></td>
+            <td class="px-4 py-3">Social media post tagging MSCF</td>
+            <td class="px-4 py-3 text-center font-bold text-white">1</td>
+            <td class="px-4 py-3 text-center text-gray-400">2/week (6 max)</td>
+          </tr>
+          <!-- Team -->
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-400">Team</span></td>
+            <td class="px-4 py-3">Create team name by Mar 3</td>
+            <td class="px-4 py-3 text-center font-bold text-white">3</td>
+            <td class="px-4 py-3 text-center text-gray-400">Once/team</td>
+          </tr>
+          <!-- Fun -->
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-yellow-500/20 text-yellow-400">Fun</span></td>
+            <td class="px-4 py-3">Weekly bonus challenge</td>
+            <td class="px-4 py-3 text-center font-bold text-white">2</td>
+            <td class="px-4 py-3 text-center text-gray-400">1/week</td>
+          </tr>
+          <tr class="hover:bg-gray-800/30 transition-colors">
+            <td class="px-4 py-3"><span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-yellow-500/20 text-yellow-400">Fun</span></td>
+            <td class="px-4 py-3">Weekly challenge winner (voted)</td>
+            <td class="px-4 py-3 text-center font-bold text-white">3 bonus</td>
+            <td class="px-4 py-3 text-center text-gray-400">1/week</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="text-center py-10 px-4 border-t border-gray-800/50">
+    <a href="https://moonshotcrossfit.com" class="text-gray-500 hover:text-brand-gold transition-colors text-sm font-semibold tracking-wide uppercase font-heading">
+      Moonshot CrossFit
+    </a>
+    <p class="text-gray-600 text-xs mt-2">Powered by caffeine and competitive spirit</p>
+  </footer>
+
+  <!-- ================================================================
+       LOGIN BUTTON (floating)
+       ================================================================ -->
+  <button id="login-fab" class="fixed bottom-6 right-6 z-40 bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white border border-gray-700 rounded-full px-4 py-2.5 flex items-center gap-2 shadow-lg transition-all text-sm font-semibold">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+    </svg>
+    Captain Login
+  </button>
+
+  <!-- ================================================================
+       LOGIN MODAL
+       ================================================================ -->
+  <div id="login-modal" class="modal-overlay">
+    <div id="login-modal-box" class="relative bg-gray-900 border border-gray-700 rounded-2xl p-8 w-full max-w-sm mx-4 shadow-2xl">
+      <h3 class="font-heading text-xl font-bold text-white mb-1 uppercase tracking-wide">Captain Login</h3>
+      <p class="text-gray-400 text-sm mb-6">Enter your team PIN to manage scores.</p>
+      <form id="login-form" class="space-y-4">
+        <input
+          id="pin-input"
+          type="password"
+          inputmode="text"
+          maxlength="8"
+          placeholder="Enter PIN"
+          class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white text-center text-lg tracking-[0.3em] placeholder:text-gray-500 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors"
+          autocomplete="off"
+        >
+        <p id="login-error" class="text-red-400 text-sm text-center hidden">Invalid PIN</p>
+        <button type="submit" class="w-full bg-brand-gold hover:bg-brand-gold/90 text-black font-bold py-3 rounded-lg transition-colors font-heading uppercase tracking-wider">
+          Unlock
+        </button>
+      </form>
+      <button id="login-close" class="absolute top-3 right-3 text-gray-500 hover:text-white transition-colors p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       APP SCRIPT
+       ================================================================ -->
+  <script src="app.js"></script>
+
+</body>
+</html>

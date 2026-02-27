@@ -15,10 +15,10 @@ const POLL_INTERVAL = 30000;   // 30 seconds
 
 // -- Team metadata (static, matches the 4 captains) ----------------
 const TEAM_META = {
-  kevin: { name: 'Team Kevin', captain: 'Kevin Donnelly', color: '#EF4444', tw: 'red'    },
-  molly: { name: 'Team Molly', captain: 'Molly Mevis',    color: '#3B82F6', tw: 'blue'   },
-  kasia: { name: 'Team Kasia', captain: 'Kasia',          color: '#10B981', tw: 'emerald' },
-  fuji:  { name: 'Team Fuji',  captain: 'Fuji',           color: '#F59E0B', tw: 'amber'  },
+  kevin: { name: 'Team 1', captain: 'Kevin Donnelly', color: '#EF4444', tw: 'red'    },
+  molly: { name: 'Team 2', captain: 'Molly Mevis',    color: '#3B82F6', tw: 'blue'   },
+  kasia: { name: 'Team 3', captain: 'Kasia',          color: '#10B981', tw: 'emerald' },
+  fuji:  { name: 'Team 4', captain: 'Fuji',           color: '#F59E0B', tw: 'amber'  },
 };
 
 // -- Default challenges (used if API hasn't set them) ---------------
@@ -87,9 +87,9 @@ function calcPoints(scores) {
   pts += (scores.friendsBrought || 0) * 3;
 
   // Growth: friend signups
-  pts += (scores.friendSignup5 || 0) * 5;
-  pts += (scores.friendSignup10 || 0) * 10;
-  pts += (scores.friendSignupMembership || 0) * 15;
+  pts += (scores.friendSignup5 || 0) * 4;
+  pts += (scores.friendSignup10 || 0) * 6;
+  pts += (scores.friendSignupMembership || 0) * 9;
 
   // Growth: Google review w/ photo (2 pts, once)
   if (scores.googleReview) pts += 2;
@@ -109,6 +109,10 @@ function calcPoints(scores) {
 
   // Misc bonus
   pts += (scores.bonusPoints || 0);
+
+  // Bike Erg Challenge (1 pt participation, 4 pts winner)
+  if (scores.bikeErgParticipation) pts += 1;
+  if (scores.bikeErgWinner) pts += 4;
 
   return pts;
 }
@@ -143,6 +147,7 @@ function calcPointsAvailable(scores) {
   if (!scores?.weeklyChallengeWinner1) available += 3;
   if (!scores?.weeklyChallengeWinner2) available += 3;
   if (!scores?.weeklyChallengeWinner3) available += 3;
+  if (!scores?.bikeErgParticipation) available += 1;
   return available;
 }
 
@@ -161,6 +166,7 @@ function getMissingActivities(scores) {
   if (!scores?.weeklyChallenge1) missing.push('W1 Challenge (2 pts)');
   if (!scores?.weeklyChallenge2) missing.push('W2 Challenge (2 pts)');
   if (!scores?.weeklyChallenge3) missing.push('W3 Challenge (2 pts)');
+  if (!scores?.bikeErgParticipation) missing.push('Bike Erg (1 pt)');
   return missing;
 }
 
@@ -338,7 +344,7 @@ function loadDemoData() {
   state.members = [
     { memberId: 'kevin-donnelly',   teamId: 'team-kevin', name: 'Kevin Donnelly',   gender: 'M', scores: {} },
     { memberId: 'claire-chappell',  teamId: 'team-kevin', name: 'Claire Chappell',  gender: 'F', scores: {} },
-    { memberId: 'colin-baer',       teamId: 'team-kevin', name: 'Colin Baer',       gender: 'M', scores: {} },
+    { memberId: 'colin-baer',       teamId: 'team-fuji',  name: 'Colin Baer',       gender: 'M', scores: {} },
     { memberId: 'molly-mevis',      teamId: 'team-molly', name: 'Molly Mevis',      gender: 'F', scores: {} },
     { memberId: 'jessica-dorgan',   teamId: 'team-molly', name: 'Jessica Dorgan',   gender: 'F', scores: {} },
     { memberId: 'andrew-sheehan',   teamId: 'team-molly', name: 'Andrew Sheehan',   gender: 'M', scores: {} },
@@ -376,7 +382,7 @@ function render() {
 function renderEditBanner() {
   const banner = document.getElementById('edit-banner');
   const body = document.body;
-  if (state.authenticated) {
+  if (state.authenticated && team.teamId === state.captainTeamId) {
     const meta = state.captainTeamId ? getTeamMeta(state.captainTeamId) : null;
     const label = meta ? `Edit Mode — ${meta.name}` : 'Edit Mode Active';
     banner.querySelector('.edit-label').textContent = label;
@@ -551,7 +557,7 @@ function renderRoster(team) {
     return '<p class="p-5 text-gray-500 text-sm">No members yet.</p>';
   }
 
-  if (state.authenticated) {
+  if (state.authenticated && team.teamId === state.captainTeamId) {
     return renderEditRoster(team);
   }
 
@@ -616,6 +622,8 @@ function buildBadges(scores) {
   if (scores.weeklyChallengeWinner2) badges.push(b('W2 Winner', 'amber'));
   if (scores.weeklyChallengeWinner3) badges.push(b('W3 Winner', 'amber'));
   if (scores.bonusPoints > 0) badges.push(b(`+${scores.bonusPoints} bonus`, 'purple'));
+  if (scores.bikeErgParticipation) badges.push(b('Bike Erg', 'red'));
+  if (scores.bikeErgWinner) badges.push(b('Bike Erg Winner', 'red'));
 
   return badges.length ? badges.join('') : '<span class="text-gray-600 text-xs">No activity yet</span>';
 }
@@ -716,6 +724,15 @@ function renderEditRoster(team) {
               </div>
               <div class="mt-2">
                 ${renderStepper(m.memberId, 'bonusPoints', 'Bonus Points', s.bonusPoints || 0)}
+              </div>
+            </div>
+
+            <!-- Bike Erg Challenge -->
+            <div class="mt-3">
+              <p class="text-[10px] uppercase tracking-widest text-red-400 font-bold mb-2">Bike Erg Challenge</p>
+              <div class="grid grid-cols-2 gap-2 text-sm">
+                ${renderToggle(m.memberId, 'bikeErgParticipation', 'Participated', s.bikeErgParticipation)}
+                ${renderToggle(m.memberId, 'bikeErgWinner', 'Top M/F Winner', s.bikeErgWinner)}
               </div>
             </div>
           </div>

@@ -1,0 +1,11 @@
+# Moonshot CrossFit - robots.txt
+# https://moonshotcrossfit.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://moonshotcrossfit.com/sitemap.xml
+
+# LLM-friendly content
+# See https://moonshotcrossfit.com/llms.txt for AI-optimized site summary

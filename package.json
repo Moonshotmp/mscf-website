@@ -1,0 +1,23 @@
+{
+  "name": "mscf-website",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moonshotmp/mscf-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Moonshotmp/mscf-website/issues"
+  },
+  "homepage": "https://github.com/Moonshotmp/mscf-website#readme",
+  "description": "",
+  "dependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

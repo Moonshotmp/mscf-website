@@ -23,9 +23,9 @@ const TEAM_META = {
 
 // -- Default challenges (used if API hasn't set them) ---------------
 const DEFAULT_CHALLENGES = [
-  { week: 1, title: 'Not a Water Bottle', desc: 'Bring anything but a water bottle to class. Most creative vessel wins 3 bonus pts (voted in the Facebook group).' },
-  { week: 2, title: 'TBD', desc: 'Challenge announced Week 2.' },
-  { week: 3, title: 'TBD', desc: 'Challenge announced Week 3.' },
+  { id: 1, title: 'Not a Water Bottle', desc: 'Bring anything but a water bottle to class. Most creative vessel wins 3 bonus pts (voted in the Facebook group).' },
+  { id: 2, title: 'Walkout Song', desc: 'Pick a walkout song and film yourself entering the gym to it. Post to the Facebook group. Best entrance wins 3 bonus pts.' },
+  { id: 3, title: 'Snack Attack', desc: 'Bring the most creative post-workout snack to share with your team. Post a photo to the Facebook group. Best snack wins 3 bonus pts.' },
 ];
 
 // -- Application state ----------------------------------------------
@@ -97,12 +97,12 @@ function calcPoints(scores) {
   // Growth: Social media (1 pt each, capped at 6)
   pts += Math.min(scores.socialMediaCount || 0, 6) * 1;
 
-  // Fun: Weekly challenges (2 pts each)
+  // Fun: Bonus challenges (2 pts each)
   if (scores.weeklyChallenge1) pts += 2;
   if (scores.weeklyChallenge2) pts += 2;
   if (scores.weeklyChallenge3) pts += 2;
 
-  // Fun: Weekly challenge winners (3 bonus each)
+  // Fun: Bonus challenge winners (3 bonus each)
   if (scores.weeklyChallengeWinner1) pts += 3;
   if (scores.weeklyChallengeWinner2) pts += 3;
   if (scores.weeklyChallengeWinner3) pts += 3;
@@ -168,9 +168,9 @@ function getMissingActivities(scores) {
   if (!scores?.googleReview) missing.push('Google Review (2 pts)');
   const socialUsed = Math.min(scores?.socialMediaCount || 0, 6);
   if (socialUsed < 6) missing.push(`Social posts (${6 - socialUsed} more)`);
-  if (!scores?.weeklyChallenge1) missing.push('W1 Challenge (2 pts)');
-  if (!scores?.weeklyChallenge2) missing.push('W2 Challenge (2 pts)');
-  if (!scores?.weeklyChallenge3) missing.push('W3 Challenge (2 pts)');
+  if (!scores?.weeklyChallenge1) missing.push('Water Bottle Challenge (2 pts)');
+  if (!scores?.weeklyChallenge2) missing.push('Walkout Song (2 pts)');
+  if (!scores?.weeklyChallenge3) missing.push('Snack Attack (2 pts)');
   if (!scores?.bikeErgParticipation) missing.push('Bike Erg (1 pt)');
   if (!scores?.twinsChallenge) missing.push('Twins Challenge (2 pts)');
   return missing;
@@ -756,12 +756,12 @@ function buildBadges(scores) {
   if (scores.friendSignupMembership > 0) badges.push(b(`${scores.friendSignupMembership} membership`, 'green'));
   if (scores.googleReview) badges.push(b('Review', 'green'));
   if (scores.socialMediaCount > 0) badges.push(b(`${scores.socialMediaCount} social`, 'green'));
-  if (scores.weeklyChallenge1) badges.push(b('W1 Challenge', 'yellow'));
-  if (scores.weeklyChallenge2) badges.push(b('W2 Challenge', 'yellow'));
-  if (scores.weeklyChallenge3) badges.push(b('W3 Challenge', 'yellow'));
-  if (scores.weeklyChallengeWinner1) badges.push(b('W1 Winner', 'amber'));
-  if (scores.weeklyChallengeWinner2) badges.push(b('W2 Winner', 'amber'));
-  if (scores.weeklyChallengeWinner3) badges.push(b('W3 Winner', 'amber'));
+  if (scores.weeklyChallenge1) badges.push(b('Water Bottle', 'yellow'));
+  if (scores.weeklyChallenge2) badges.push(b('Walkout Song', 'yellow'));
+  if (scores.weeklyChallenge3) badges.push(b('Snack Attack', 'yellow'));
+  if (scores.weeklyChallengeWinner1) badges.push(b('Water Bottle Winner', 'amber'));
+  if (scores.weeklyChallengeWinner2) badges.push(b('Walkout Song Winner', 'amber'));
+  if (scores.weeklyChallengeWinner3) badges.push(b('Snack Attack Winner', 'amber'));
   if (scores.bonusPoints > 0) badges.push(b(`+${scores.bonusPoints} bonus`, 'purple'));
   if (scores.bikeErgParticipation) badges.push(b('Bike Erg', 'red'));
   if (scores.bikeErgWinner) badges.push(b('Bike Erg Winner', 'red'));
@@ -888,12 +888,12 @@ function renderEditRoster(team) {
             <div>
               <p class="text-[10px] uppercase tracking-widest text-yellow-400 font-bold mb-2">Fun</p>
               <div class="grid grid-cols-2 gap-2 text-sm">
-                ${renderToggle(m.memberId, 'weeklyChallenge1', 'W1 Challenge', s.weeklyChallenge1)}
-                ${renderToggle(m.memberId, 'weeklyChallengeWinner1', 'W1 Winner', s.weeklyChallengeWinner1)}
-                ${renderToggle(m.memberId, 'weeklyChallenge2', 'W2 Challenge', s.weeklyChallenge2)}
-                ${renderToggle(m.memberId, 'weeklyChallengeWinner2', 'W2 Winner', s.weeklyChallengeWinner2)}
-                ${renderToggle(m.memberId, 'weeklyChallenge3', 'W3 Challenge', s.weeklyChallenge3)}
-                ${renderToggle(m.memberId, 'weeklyChallengeWinner3', 'W3 Winner', s.weeklyChallengeWinner3)}
+                ${renderToggle(m.memberId, 'weeklyChallenge1', 'Water Bottle', s.weeklyChallenge1)}
+                ${renderToggle(m.memberId, 'weeklyChallengeWinner1', 'Water Bottle Winner', s.weeklyChallengeWinner1)}
+                ${renderToggle(m.memberId, 'weeklyChallenge2', 'Walkout Song', s.weeklyChallenge2)}
+                ${renderToggle(m.memberId, 'weeklyChallengeWinner2', 'Walkout Song Winner', s.weeklyChallengeWinner2)}
+                ${renderToggle(m.memberId, 'weeklyChallenge3', 'Snack Attack', s.weeklyChallenge3)}
+                ${renderToggle(m.memberId, 'weeklyChallengeWinner3', 'Snack Attack Winner', s.weeklyChallengeWinner3)}
               </div>
               <div class="mt-2">
                 ${renderStepper(m.memberId, 'bonusPoints', 'Bonus Points', s.bonusPoints || 0)}
@@ -980,17 +980,19 @@ function renderSavingState(memberId) {
 }
 
 /**
- * Render the weekly challenge card.
+ * Render all bonus challenges.
  */
 function renderChallenge() {
-  const week = state.config.currentWeek || 1;
-  const challenge = (state.config.challenges || DEFAULT_CHALLENGES).find(c => c.week === week)
-    || DEFAULT_CHALLENGES[0];
+  const challenges = state.config.challenges?.length ? state.config.challenges : DEFAULT_CHALLENGES;
+  const container = document.getElementById('challenges-list');
+  if (!container) return;
 
-  const titleEl = document.getElementById('challenge-title');
-  const descEl = document.getElementById('challenge-desc');
-  if (titleEl) titleEl.textContent = challenge.title;
-  if (descEl) descEl.textContent = challenge.desc || challenge.description || '';
+  container.innerHTML = challenges.map(c => `
+    <div class="bg-gray-800/60 rounded-xl p-6 text-center">
+      <h4 class="font-heading text-xl md:text-2xl font-bold text-white mb-2">${escHtml(c.title)}</h4>
+      <p class="text-gray-300 text-sm md:text-base leading-relaxed">${escHtml(c.desc || c.description || '')}</p>
+    </div>
+  `).join('');
 }
 
 /**

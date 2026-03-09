@@ -118,6 +118,10 @@ function calcPoints(scores) {
   if (scores.twinsChallenge) pts += 2;
   if (scores.twinsBestWinner) pts += 5;
 
+  // Hanging DB Tap Challenge (1 pt participation, 3 pts heaviest M/F)
+  if (scores.hangingDbTapParticipation) pts += 1;
+  if (scores.hangingDbTapWinner) pts += 3;
+
   return pts;
 }
 
@@ -153,6 +157,7 @@ function calcPointsAvailable(scores) {
   if (!scores?.weeklyChallengeWinner3) available += 3;
   if (!scores?.bikeErgParticipation) available += 1;
   if (!scores?.twinsChallenge) available += 2;
+  if (!scores?.hangingDbTapParticipation) available += 1;
   return available;
 }
 
@@ -173,6 +178,7 @@ function getMissingActivities(scores) {
   if (!scores?.weeklyChallenge3) missing.push('Snack Attack (2 pts)');
   if (!scores?.bikeErgParticipation) missing.push('Bike Erg (1 pt)');
   if (!scores?.twinsChallenge) missing.push('Twins Challenge (2 pts)');
+  if (!scores?.hangingDbTapParticipation) missing.push('Hanging DB Tap (1 pt)');
   return missing;
 }
 
@@ -767,6 +773,8 @@ function buildBadges(scores) {
   if (scores.bikeErgWinner) badges.push(b('Bike Erg Winner', 'red'));
   if (scores.twinsChallenge) badges.push(b('Twins', 'pink'));
   if (scores.twinsBestWinner) badges.push(b('Best Twins', 'pink'));
+  if (scores.hangingDbTapParticipation) badges.push(b('DB Tap', 'cyan'));
+  if (scores.hangingDbTapWinner) badges.push(b('DB Tap Winner', 'cyan'));
 
   return badges.length ? badges.join('') : '<span class="text-gray-600 text-xs">No activity yet</span>';
 }
@@ -915,6 +923,15 @@ function renderEditRoster(team) {
               <div class="grid grid-cols-2 gap-2 text-sm">
                 ${renderToggle(m.memberId, 'twinsChallenge', 'Completed Twins', s.twinsChallenge)}
                 ${renderToggle(m.memberId, 'twinsBestWinner', 'Best Twins Winner', s.twinsBestWinner)}
+              </div>
+            </div>
+
+            <!-- Hanging DB Tap Challenge -->
+            <div class="mt-3">
+              <p class="text-[10px] uppercase tracking-widest text-cyan-400 font-bold mb-2">Hanging DB Tap Challenge</p>
+              <div class="grid grid-cols-2 gap-2 text-sm">
+                ${renderToggle(m.memberId, 'hangingDbTapParticipation', 'Attempted', s.hangingDbTapParticipation)}
+                ${renderToggle(m.memberId, 'hangingDbTapWinner', 'Heaviest M/F', s.hangingDbTapWinner)}
               </div>
             </div>
           </div>

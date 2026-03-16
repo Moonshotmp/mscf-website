@@ -13,6 +13,13 @@
 const API_URL = 'https://obp43wwmdk.execute-api.us-east-1.amazonaws.com';
 const POLL_INTERVAL = 30000;   // 30 seconds
 
+// -- Scoreboard lock deadline (8:06 PM CST March 16 2026 = UTC 2026-03-17T02:06:00Z)
+const SCOREBOARD_LOCK_TIME = new Date('2026-03-17T02:06:00Z');
+
+function isScoreboardLocked() {
+  return Date.now() >= SCOREBOARD_LOCK_TIME.getTime();
+}
+
 // -- Team metadata (static, matches the 4 captains) ----------------
 const TEAM_META = {
   kevin: { name: 'Team 1', captain: 'Kevin Donnelly', color: '#EF4444', tw: 'red'    },
@@ -255,6 +262,7 @@ async function fetchData() {
  * Authenticate with a team captain PIN.
  */
 async function login(pin) {
+  if (isScoreboardLocked()) return false;
   try {
     const res = await fetch(`${API_URL}/login`, {
       method: 'POST',
@@ -278,6 +286,7 @@ async function login(pin) {
  * Update a member's scores.
  */
 async function updateScores(memberId, scores) {
+  if (isScoreboardLocked()) return;
   state.saving.add(memberId);
   renderSavingState(memberId);
 
@@ -497,6 +506,7 @@ function loadDemoData() {
  * Master render -- calls all sub-renders.
  */
 function render() {
+  renderLockBanner();
   renderEditBanner();
   renderWeekBadge();
   renderHeroSubtitle();
@@ -505,6 +515,25 @@ function render() {
   renderChallenge();
   renderLoginFab();
   renderLastUpdated();
+}
+
+/**
+ * Show/hide the scoreboard lock banner and force-logout if locked.
+ */
+function renderLockBanner() {
+  const banner = document.getElementById('lock-banner');
+  if (!banner) return;
+  if (isScoreboardLocked()) {
+    banner.classList.remove('hidden');
+    // Force logout if someone was editing
+    if (state.authenticated) {
+      state.authenticated = false;
+      state.pin = null;
+      state.captainTeamId = null;
+    }
+  } else {
+    banner.classList.add('hidden');
+  }
 }
 
 /**
@@ -558,7 +587,7 @@ function renderHeroSubtitle() {
 function renderLoginFab() {
   const fab = document.getElementById('login-fab');
   if (fab) {
-    fab.style.display = state.authenticated ? 'none' : 'flex';
+    fab.style.display = (state.authenticated || isScoreboardLocked()) ? 'none' : 'flex';
   }
 }
 

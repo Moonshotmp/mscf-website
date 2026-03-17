@@ -14,7 +14,7 @@ const API_URL = 'https://obp43wwmdk.execute-api.us-east-1.amazonaws.com';
 const POLL_INTERVAL = 30000;   // 30 seconds
 
 // -- Scoreboard lock deadline (8:06 PM CST March 16 2026 = UTC 2026-03-17T02:06:00Z)
-const SCOREBOARD_LOCK_TIME = new Date('2026-03-17T02:06:00Z');
+const SCOREBOARD_LOCK_TIME = new Date('2026-03-17T00:00:00Z'); // locked immediately
 
 function isScoreboardLocked() {
   return Date.now() >= SCOREBOARD_LOCK_TIME.getTime();

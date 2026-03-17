@@ -20,6 +20,39 @@ function isScoreboardLocked() {
   return Date.now() >= SCOREBOARD_LOCK_TIME.getTime();
 }
 
+// -- Final challenge adjustments (applied client-side after API fetch) --
+const FINAL_CHALLENGE_ADJUSTMENTS = [
+  // Bike Erg Male Tie: Tom & Michael, 30 cals each, split 4 pts (2 each)
+  { id: 'thomas-kashul',    set: { hangingDbTapWinner: true }, addBonus: 2 },
+  { id: 'michael-gontarek', addBonus: 2 },
+  // Bike Erg Female Tie: Molly & Jess, 17 cals each, split 4 pts (2 each)
+  { id: 'molly-mevis',      set: { bikeErgWinner: false }, addBonus: 2 },
+  { id: 'jessica-dorgan',   addBonus: 2 },
+  // DB Tap Female Winner + Walkout Song Winner: Dede (Dolores Lopez)
+  { id: 'dolores-lopez',    set: { hangingDbTapWinner: true, weeklyChallengeWinner2: true } },
+  // Removals
+  { id: 'maria-touzios-prutsos', set: { weeklyChallenge1: false } },
+  { id: 'valentina-ngai',        set: { friendSignup10: 0, weeklyChallenge1: false, weeklyChallenge3: false } },
+];
+
+function applyFinalAdjustments() {
+  if (!state.members.length) return;
+
+  // Snapshot pre-adjustment team totals
+  state.preAdjustmentTotals = {};
+  state.teams.forEach(t => {
+    state.preAdjustmentTotals[t.teamId] = calcTeamTotal(t.teamId);
+  });
+
+  FINAL_CHALLENGE_ADJUSTMENTS.forEach(adj => {
+    const m = state.members.find(x => x.memberId === adj.id);
+    if (!m) return;
+    m.scores = m.scores || {};
+    if (adj.set) Object.assign(m.scores, adj.set);
+    if (adj.addBonus) m.scores.bonusPoints = (m.scores.bonusPoints || 0) + adj.addBonus;
+  });
+}
+
 // -- Team metadata (static, matches the 4 captains) ----------------
 const TEAM_META = {
   kevin: { name: 'Team 1', captain: 'Kevin Donnelly', color: '#EF4444', tw: 'red'    },
@@ -244,6 +277,8 @@ async function fetchData() {
         challenges: data.config.challenges?.length ? data.config.challenges : DEFAULT_CHALLENGES,
       };
     }
+    // Apply final challenge adjustments when scoreboard is locked
+    if (isScoreboardLocked()) applyFinalAdjustments();
     // Auto-expand all teams so everyone can see rosters
     state.teams.forEach(t => state.expandedTeams.add(t.teamId));
     state.lastUpdated = Date.now();
@@ -252,6 +287,7 @@ async function fetchData() {
     console.warn('fetchData failed (API may not be deployed yet):', err.message);
     // If API is not available, use demo data so the page still looks good
     if (!state.teams.length) loadDemoData();
+    if (isScoreboardLocked()) applyFinalAdjustments();
     state.teams.forEach(t => state.expandedTeams.add(t.teamId));
     state.lastUpdated = Date.now();
     render();
@@ -507,6 +543,7 @@ function loadDemoData() {
  */
 function render() {
   renderLockBanner();
+  renderResultsAnnouncement();
   renderEditBanner();
   renderWeekBadge();
   renderHeroSubtitle();
@@ -537,6 +574,15 @@ function renderLockBanner() {
 }
 
 /**
+ * Show/hide the final results announcement.
+ */
+function renderResultsAnnouncement() {
+  const el = document.getElementById('results-announcement');
+  if (!el) return;
+  el.classList.toggle('hidden', !isScoreboardLocked());
+}
+
+/**
  * Show/hide the edit mode banner.
  */
 function renderEditBanner() {
@@ -562,7 +608,7 @@ function renderEditBanner() {
 function renderWeekBadge() {
   const badge = document.getElementById('week-badge');
   if (badge) {
-    badge.textContent = `Week ${state.config.currentWeek} of 3`;
+    badge.textContent = isScoreboardLocked() ? 'Competition Complete' : `Week ${state.config.currentWeek} of 3`;
   }
 }
 
@@ -572,6 +618,10 @@ function renderWeekBadge() {
 function renderHeroSubtitle() {
   const el = document.querySelector('.hero-subtitle');
   if (!el) return;
+  if (isScoreboardLocked()) {
+    el.textContent = 'Final Results Are In';
+    return;
+  }
   const week = state.config.currentWeek || 1;
   const subtitles = {
     1: 'The Open Starts Now',
@@ -604,7 +654,9 @@ function renderLeaderboard() {
     const total = calcTeamTotal(t.teamId);
     const displayName = (t.teamNameEntry && t.teamNameSubmitted) ? t.teamNameEntry : (t.teamName || meta.name);
     const memberCount = state.members.filter(m => m.teamId === t.teamId).length;
-    return { ...t, ...meta, total, displayName, memberCount };
+    const preAdj = state.preAdjustmentTotals?.[t.teamId];
+    const challengeDelta = (preAdj != null) ? total - preAdj : 0;
+    return { ...t, ...meta, total, displayName, memberCount, preAdj, challengeDelta };
   }).sort((a, b) => b.total - a.total);
 
   const leaderPts = teamData[0]?.total || 0;
@@ -642,6 +694,7 @@ function renderLeaderboard() {
         <div class="text-right flex-shrink-0">
           <span class="font-heading text-3xl md:text-4xl font-black" style="color: ${t.color}">${t.total}</span>
           <span class="block text-gray-500 text-[10px] font-semibold uppercase tracking-wider">pts</span>
+          ${t.challengeDelta !== 0 ? `<span class="block text-[10px] font-bold ${t.challengeDelta > 0 ? 'text-green-400' : 'text-red-400'}">${t.challengeDelta > 0 ? '+' : ''}${t.challengeDelta} challenges</span>` : ''}
         </div>
       </div>
     `;

@@ -260,12 +260,60 @@
   </div>
 
   <!-- ================================================================
-       SCOREBOARD LOCKED NOTICE
+       SCOREBOARD LOCKED NOTICE (slim top bar)
        ================================================================ -->
-  <div id="lock-banner" class="hidden bg-gradient-to-r from-amber-600 to-red-600 text-white text-center py-4 px-4 shadow-lg">
-    <p class="font-heading text-lg md:text-xl uppercase tracking-wide font-bold">Scoreboard Locked</p>
-    <p class="text-sm mt-1 text-white/90">The 2026 Moonshot Cup has ended! Challenge winners will be tallied by the captains and added within 1 hour. Final standings coming soon.</p>
+  <div id="lock-banner" class="hidden bg-gradient-to-r from-amber-600 to-red-600 text-white text-center py-2 px-4 shadow-lg">
+    <p class="font-heading text-sm md:text-base uppercase tracking-wide font-bold">Scoreboard Locked — Challenge Results Below</p>
   </div>
+
+  <!-- ================================================================
+       FINAL RESULTS ANNOUNCEMENT (shown when locked)
+       ================================================================ -->
+  <section id="results-announcement" class="hidden max-w-4xl mx-auto px-4 pt-8 pb-4 fade-in">
+    <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-brand-gold/30 p-6 md:p-8 shadow-xl">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold uppercase text-brand-gold text-center mb-2 tracking-wide">
+        Final Challenge Results
+      </h2>
+      <p class="text-gray-400 text-center text-sm mb-6">The dust has settled. The scores have been audited. Here's the drama.</p>
+
+      <div class="space-y-4 text-sm md:text-base">
+        <!-- Bike Erg -->
+        <div class="bg-gray-800/60 rounded-xl p-4">
+          <p class="font-heading text-red-400 text-xs uppercase tracking-widest mb-2">40s Max Cal Bike Erg</p>
+          <p class="text-gray-300"><strong class="text-white">Men:</strong> Tom Kashul &amp; Michael Gontarek tied at <strong class="text-white">30 cals</strong> &mdash; diplomacy wins, 2 pts each.</p>
+          <p class="text-gray-300 mt-1"><strong class="text-white">Women:</strong> Molly Mevis &amp; Jessica Dorgan both hit <strong class="text-white">17 cals</strong> &mdash; the sharing economy continues. 2 pts each.</p>
+        </div>
+
+        <!-- Hanging DB Tap -->
+        <div class="bg-gray-800/60 rounded-xl p-4">
+          <p class="font-heading text-cyan-400 text-xs uppercase tracking-widest mb-2">Hanging DB Tap</p>
+          <p class="text-gray-300"><strong class="text-white">Men:</strong> Tom Kashul held <strong class="text-white">70 lbs</strong> like it owed him money. (+3 pts)</p>
+          <p class="text-gray-300 mt-1"><strong class="text-white">Women:</strong> Dede Lopez hung tough at <strong class="text-white">35 lbs</strong>. (+3 pts)</p>
+        </div>
+
+        <!-- Bonus Challenge Winners -->
+        <div class="bg-gray-800/60 rounded-xl p-4">
+          <p class="font-heading text-yellow-400 text-xs uppercase tracking-widest mb-2">Bonus Challenge Winners</p>
+          <p class="text-gray-300"><strong class="text-white">Not a Water Bottle:</strong> Sarah Donnelly (+3 pts)</p>
+          <p class="text-gray-300 mt-1"><strong class="text-white">Walkout Song:</strong> Dede Lopez (+3 pts)</p>
+          <p class="text-gray-300 mt-1"><strong class="text-white">Snack Attack:</strong> Molly Mevis and her fake bacon. We&rsquo;re still not sure it was real. (+3 pts)</p>
+        </div>
+
+        <!-- Deductions -->
+        <div class="bg-gray-800/60 rounded-xl p-4 border border-red-500/20">
+          <p class="font-heading text-red-400 text-xs uppercase tracking-widest mb-2">Score Adjustments</p>
+          <p class="text-gray-300"><strong class="text-white">Maria T.P.:</strong> Water bottle challenge removed &mdash; it was brought from home. Nice try. (-2 pts)</p>
+          <p class="text-gray-300 mt-1"><strong class="text-white">Val Ngai:</strong> 10-pack credit removed (husband was already a member), water bottle and snack entries removed (not done at the gym). (-10 pts total)</p>
+        </div>
+
+        <!-- Twins Vote -->
+        <div class="bg-gray-800/60 rounded-xl p-4 border border-purple-500/30">
+          <p class="font-heading text-purple-400 text-xs uppercase tracking-widest mb-2">Best Twins &mdash; TO BE DECIDED</p>
+          <p class="text-gray-300">The <strong class="text-white">5 bonus points</strong> for Best Twins are on hold. There&rsquo;s a rules disagreement: does &ldquo;most likes&rdquo; count total across Facebook <em>and</em> Instagram, or just in our members-only Facebook group? We&rsquo;re putting it to a vote in the Facebook group. Stay tuned &mdash; this could shake up the final standings!</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ================================================================
        HERO SECTION

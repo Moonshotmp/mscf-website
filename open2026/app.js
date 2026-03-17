@@ -619,7 +619,7 @@ function renderHeroSubtitle() {
   const el = document.querySelector('.hero-subtitle');
   if (!el) return;
   if (isScoreboardLocked()) {
-    el.textContent = 'Final Results Are In';
+    el.textContent = 'Almost Final \u2014 5 pts Still In Play';
     return;
   }
   const week = state.config.currentWeek || 1;

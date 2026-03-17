@@ -694,7 +694,7 @@ function renderLeaderboard() {
         <div class="text-right flex-shrink-0">
           <span class="font-heading text-3xl md:text-4xl font-black" style="color: ${t.color}">${t.total}</span>
           <span class="block text-gray-500 text-[10px] font-semibold uppercase tracking-wider">pts</span>
-          ${t.challengeDelta !== 0 ? `<span class="block text-[10px] font-bold ${t.challengeDelta > 0 ? 'text-green-400' : 'text-red-400'}">${t.challengeDelta > 0 ? '+' : ''}${t.challengeDelta} challenges</span>` : ''}
+          ${t.challengeDelta !== 0 ? `<span class="block text-[11px] mt-0.5"><span class="text-gray-500">${t.preAdj}</span> <span class="font-bold ${t.challengeDelta > 0 ? 'text-green-400' : 'text-red-400'}">${t.challengeDelta > 0 ? '+' : ''}${t.challengeDelta}</span></span>` : ''}
         </div>
       </div>
     `;

@@ -29,7 +29,7 @@
                 <a href="/#schedule" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Schedule</a>
                 <a href="/kids/" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Kids</a>
                 <a href="/#drop-in" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Drop In</a>
-                <a href="/blog/" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Blog</a>
+                <a href="/hyrox/" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Hyrox</a>
                 <a href="https://moonshotmp.com" target="_blank" rel="noopener" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Medical</a>
                 <a href="/#contact" class="nav-link hover:text-brand-gray transition-colors text-base uppercase tracking-wide">Contact</a>
                 <a href="/intro/" class="btn btn-primary text-sm px-4 py-2 rounded-lg font-body font-bold">Book Free Intro</a>
@@ -51,7 +51,7 @@
                 <a href="/#schedule" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Schedule</a>
                 <a href="/kids/" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Kids</a>
                 <a href="/#drop-in" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Drop In</a>
-                <a href="/blog/" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Blog</a>
+                <a href="/hyrox/" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Hyrox</a>
                 <a href="https://moonshotmp.com" target="_blank" rel="noopener" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Medical</a>
                 <a href="/#contact" class="mobile-menu-link block py-3 text-brand-light hover:text-brand-gray transition-colors">Contact</a>
 

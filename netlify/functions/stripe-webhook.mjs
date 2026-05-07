@@ -105,8 +105,8 @@ export default async (req) => {
 
       case 'customer.subscription.deleted': {
         const sub = stripeEvent.data.object;
-        const { waiver_id } = sub.metadata || {};
-        console.log(`[subscription:canceled] sub=${sub.id} waiver=${waiver_id} customer=${sub.customer} canceled_at=${sub.canceled_at}`);
+        const { waiver_id, founder_claimed } = sub.metadata || {};
+        console.log(`[subscription:canceled] sub=${sub.id} waiver=${waiver_id} customer=${sub.customer} canceled_at=${sub.canceled_at} founder=${founder_claimed}`);
         if (waiver_id) {
           const waiverStore = getStore('fob-waivers');
           const waiver = await waiverStore.get(waiver_id, { type: 'json' });
@@ -116,6 +116,16 @@ export default async (req) => {
               status: 'canceled',
               canceled_at: new Date().toISOString()
             });
+          }
+        }
+        // Restore founder slot if a Founder canceled — keeps the 10-slot pool accurate.
+        if (founder_claimed === 'true') {
+          const founderStore = getStore('fob');
+          const cur = await founderStore.get('founder-count', { type: 'json' });
+          if (cur && cur.remaining < (cur.total || 10)) {
+            cur.remaining = cur.remaining + 1;
+            await founderStore.setJSON('founder-count', cur);
+            console.log(`[founder:restored-on-cancel] sub=${sub.id} waiver=${waiver_id} new_remaining=${cur.remaining}`);
           }
         }
         break;

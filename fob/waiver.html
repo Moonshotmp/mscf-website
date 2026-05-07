@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Waiver & Sign-Up | Moonshot CrossFit Key Fob</title>
+    <link rel="stylesheet" href="/shared/tailwind.css">
+    <link rel="stylesheet" href="/shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
+    <style>
+        .form-input { background: #101921; border: 1px solid rgba(178, 191, 190, 0.2); color: #F0EEE9; padding: 10px 14px; border-radius: 8px; width: 100%; font-family: 'Poppins', sans-serif; }
+        .form-input:focus { outline: none; border-color: #B8986E; }
+        .form-label { font-family: 'Poppins', sans-serif; color: #F0EEE9; font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
+        .checkbox-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px; background: rgba(44, 53, 62, 0.4); border: 1px solid rgba(178, 191, 190, 0.15); border-radius: 8px; margin-bottom: 8px; }
+        .checkbox-row input[type=checkbox] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; accent-color: #B8986E; }
+        .signature-input { font-family: 'Caveat', cursive, sans-serif; font-size: 28px; padding: 16px 20px !important; letter-spacing: 1px; }
+        .waiver-box { max-height: 360px; overflow-y: auto; background: rgba(16, 25, 33, 0.6); border: 1px solid rgba(178, 191, 190, 0.2); border-radius: 8px; padding: 20px; font-size: 13px; line-height: 1.6; color: #B2BFBE; }
+        .waiver-box h4 { color: #F0EEE9; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin: 16px 0 6px; font-size: 14px; }
+        .waiver-box h4:first-child { margin-top: 0; }
+        .waiver-box p { margin-bottom: 10px; }
+        .waiver-box strong { color: #F0EEE9; }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-light">
+
+    <script src="/shared/header.js"></script>
+
+    <main class="max-w-3xl mx-auto px-6 py-12 md:py-16">
+        <a href="/fob/" class="text-brand-gold hover:underline text-sm font-heading uppercase tracking-wide">← Back to Pricing</a>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-brand-light mt-4 mb-2 font-heading uppercase">Waiver & Sign-Up</h1>
+        <p class="text-brand-gray mb-8">Sign the waiver and confirm your details. You'll be taken to secure checkout next.</p>
+
+        <!-- Order summary -->
+        <div id="order-summary" class="bg-brand-slate/40 border border-brand-gold/30 rounded-xl p-6 mb-8">
+            <div class="flex justify-between items-start gap-4 flex-wrap">
+                <div>
+                    <div class="text-brand-gold font-heading uppercase tracking-wider text-sm" id="summary-mode">FOUNDER PRICING</div>
+                    <h2 class="text-xl font-bold text-brand-light font-heading" id="summary-tier">Class + Fob • Solo</h2>
+                    <p class="text-brand-gray text-sm mt-1" id="summary-desc">Annual membership</p>
+                </div>
+                <div class="text-right">
+                    <div class="text-3xl font-bold text-brand-light font-heading" id="summary-price">$500</div>
+                    <div class="text-brand-gray text-sm">/ year</div>
+                </div>
+            </div>
+        </div>
+
+        <form id="waiver-form" class="space-y-6">
+
+            <!-- Primary member -->
+            <div class="bg-brand-slate/30 border border-brand-gray/20 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-4">Member Information</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div><label class="form-label">Full Legal Name *</label><input class="form-input" name="full_name" required></div>
+                    <div><label class="form-label">Date of Birth *</label><input class="form-input" name="dob" type="date" required></div>
+                    <div><label class="form-label">Email *</label><input class="form-input" name="email" type="email" required></div>
+                    <div><label class="form-label">Mobile Phone *</label><input class="form-input" name="phone" type="tel" required></div>
+                    <div class="md:col-span-2"><label class="form-label">Street Address *</label><input class="form-input" name="address" required></div>
+                    <div><label class="form-label">City *</label><input class="form-input" name="city" required></div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div><label class="form-label">State *</label><input class="form-input" name="state" value="IL" required></div>
+                        <div><label class="form-label">Zip *</label><input class="form-input" name="zip" required></div>
+                    </div>
+                    <div><label class="form-label">Existing Wodify Email</label><input class="form-input" name="wodify_email" type="email" placeholder="If different from above"></div>
+                    <div><label class="form-label">Emergency Contact Name *</label><input class="form-input" name="emergency_name" required></div>
+                    <div><label class="form-label">Emergency Contact Phone *</label><input class="form-input" name="emergency_phone" type="tel" required></div>
+                </div>
+            </div>
+
+            <!-- Couple -->
+            <div id="couple-section" class="hidden bg-brand-slate/30 border border-brand-gray/20 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-2">Second Member (Couple)</h3>
+                <p class="text-brand-gray text-sm mb-4">Two adults at the same address. Each person gets their own fob — no sharing.</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div><label class="form-label">Full Legal Name *</label><input class="form-input" name="member2_full_name"></div>
+                    <div><label class="form-label">Date of Birth *</label><input class="form-input" name="member2_dob" type="date"></div>
+                    <div><label class="form-label">Email *</label><input class="form-input" name="member2_email" type="email"></div>
+                    <div><label class="form-label">Mobile Phone *</label><input class="form-input" name="member2_phone" type="tel"></div>
+                    <div><label class="form-label">Existing Wodify Email</label><input class="form-input" name="member2_wodify_email" type="email" placeholder="If applicable"></div>
+                </div>
+            </div>
+
+            <!-- Waiver text -->
+            <div class="bg-brand-slate/30 border border-brand-gray/20 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-2">Liability Waiver, Release & Assumption of Risk</h3>
+                <p class="text-brand-gray text-sm mb-4">Read in full. By signing below you agree to be legally bound.</p>
+
+                <div class="waiver-box mb-4" tabindex="0">
+                    <h4>1. Acknowledgment & Assumption of Risk</h4>
+                    <p>I understand that fitness training, including but not limited to weightlifting, gymnastics movements, high-intensity interval training, conditioning, plyometrics, running, rowing, cycling, and self-directed exercise of any kind ("Activities") at Moonshot CrossFit, located at 542 Busse Hwy, Park Ridge, IL 60068 ("Facility"), involves <strong>inherent and significant risks</strong>, including but not limited to: muscle strains, sprains, tears, fractures, joint dislocations, head injury, heart attack, stroke, heat illness, dehydration, rhabdomyolysis, paralysis, and death. I voluntarily and knowingly assume <strong>full responsibility</strong> for all such risks, whether known or unknown.</p>
+
+                    <h4>2. 24/7 Self-Directed Use</h4>
+                    <p>I understand that 24/7 key fob access provides entry to the Facility outside of coached class hours, when <strong>no coach, trainer, staff member, or other supervisor will be present</strong>. I acknowledge that I am training entirely on my own and that no one will be available to demonstrate movements, correct form, spot lifts, provide medical assistance, or respond to emergencies in real time. I represent that I am physically capable of engaging in unsupervised exercise, that I have either consulted a physician or freely chosen not to do so, and that I assume all risks associated with self-directed training without supervision.</p>
+
+                    <h4>3. Medical Representation</h4>
+                    <p>I represent that I am in good physical condition and have no medical condition (cardiovascular, musculoskeletal, neurological, or otherwise) that would prevent me from engaging in strenuous exercise. If my condition changes, I will notify Moonshot CrossFit and discontinue training as appropriate. I agree to seek immediate medical attention for any injury or illness I experience.</p>
+
+                    <h4>4. Release of Liability</h4>
+                    <p>To the fullest extent permitted by Illinois law, I, on behalf of myself, my heirs, executors, administrators, assigns, and personal representatives, hereby <strong>RELEASE, WAIVE, DISCHARGE, AND COVENANT NOT TO SUE</strong> Moonshot CrossFit, its owners, members, managers, officers, directors, employees, independent contractors, coaches, trainers, agents, affiliates, landlords, and successors (collectively, "Released Parties") from any and all liability, claims, demands, actions, and causes of action whatsoever arising out of or relating to any loss, damage, or injury, including death, that may be sustained by me, or to any property belonging to me, while participating in Activities at or away from the Facility, or while on the premises, <strong>WHETHER CAUSED BY THE NEGLIGENCE OF THE RELEASED PARTIES OR OTHERWISE</strong>, except for conduct that constitutes willful and wanton misconduct under Illinois law.</p>
+
+                    <h4>5. Indemnification</h4>
+                    <p>I agree to <strong>INDEMNIFY AND HOLD HARMLESS</strong> the Released Parties from any loss, liability, damage, or cost, including reasonable attorneys' fees, that they may incur due to my participation in Activities or my presence at the Facility, whether caused by my negligence or otherwise.</p>
+
+                    <h4>6. Fob Use & Security</h4>
+                    <p>I acknowledge and agree to the following non-negotiable rules of fob access:</p>
+                    <p>(a) <strong>One person, one key.</strong> My fob is personal and non-transferable. I will not share my fob, lend it, or allow anyone else to use it.<br>
+                    (b) <strong>No guests during fob hours.</strong> I will not bring any unauthorized person into the Facility, propping the door for others, or otherwise allow anyone to enter using my access.<br>
+                    (c) <strong>Cameras recording 24/7.</strong> I consent to being recorded by surveillance cameras throughout the Facility at all times for security and rule enforcement.<br>
+                    (d) <strong>Self-directed training only.</strong> No coaching, no group instruction, no third-party training is permitted during fob hours.<br>
+                    (e) <strong>Personal training takes priority.</strong> If a coach is conducting a paid PT session and asks me to relocate, I will move immediately.<br>
+                    (f) <strong>Etiquette.</strong> I will wipe down equipment, return weights and equipment to their proper storage, and leave the Facility clean.<br>
+                    (g) <strong>Violation = revocation.</strong> Violation of any of the above results in immediate revocation of fob access with no refund of any prepaid amount.</p>
+
+                    <h4>7. Lost or Stolen Fob</h4>
+                    <p>I will report a lost or stolen fob immediately. A replacement fee of $50 applies to all replacement fobs. I am responsible for any unauthorized access that occurs prior to my report of loss.</p>
+
+                    <h4>8. Photo & Video Release</h4>
+                    <p>I grant Moonshot CrossFit permission to use any photographs, video recordings, or surveillance footage in which I appear for security, marketing, social media, and promotional purposes, without compensation, in perpetuity. I understand that I may revoke marketing/promotional consent in writing at any time, but security/surveillance use will continue regardless.</p>
+
+                    <h4>9. Term, Renewal & Refunds</h4>
+                    <p>My annual term begins on the date my fob is activated, not the date of payment. The annual fee is non-refundable except (a) if Moonshot CrossFit cancels the program prior to my fob activation, in which case I receive a full refund, or (b) at the sole discretion of Moonshot CrossFit. The term does not auto-renew; I will be notified prior to expiration with renewal options.</p>
+
+                    <h4>10. Governing Law & Severability</h4>
+                    <p>This agreement is governed by the laws of the State of Illinois. Any disputes shall be resolved exclusively in the state or federal courts located in Cook County, Illinois. If any provision is found unenforceable, the remaining provisions remain in full force and effect.</p>
+
+                    <h4>11. Entire Agreement</h4>
+                    <p>This document constitutes the entire agreement between me and Moonshot CrossFit regarding 24/7 key fob access. <strong>I have read this document in its entirety, understand it, and sign it freely and voluntarily.</strong> I am of legal age (18 or older) and competent to sign this agreement.</p>
+                </div>
+
+                <!-- Acknowledgment checkboxes -->
+                <div class="space-y-2">
+                    <label class="checkbox-row"><input type="checkbox" name="ack_read" required><span class="text-brand-light text-sm">I have read the entire waiver above and understand its contents.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_risk" required><span class="text-brand-light text-sm">I voluntarily assume all risks of self-directed, unsupervised training at Moonshot CrossFit.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_release" required><span class="text-brand-light text-sm">I release and waive claims against Moonshot CrossFit and the Released Parties as described above.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_rules" required><span class="text-brand-light text-sm">I agree to the fob access rules: no sharing, no guests, cameras on, self-directed only. Violation = revocation, no refund.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_age" required><span class="text-brand-light text-sm">I am 18 years of age or older and competent to sign this agreement.</span></label>
+                </div>
+            </div>
+
+            <!-- Signature -->
+            <div class="bg-brand-slate/30 border border-brand-gray/20 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-4">Digital Signature</h3>
+                <p class="text-brand-gray text-sm mb-4">Type your full legal name exactly as entered above. This typed signature has the same legal effect as a handwritten one under the Illinois Electronic Commerce Security Act.</p>
+                <label class="form-label">Signature *</label>
+                <input class="form-input signature-input" name="signature" required placeholder="Your full legal name">
+                <p class="text-brand-gray/60 text-xs mt-3">Signed on <span id="sign-date"></span> from this device. Your IP address and timestamp will be recorded with this waiver.</p>
+
+                <!-- Couple second signature -->
+                <div id="couple-sig-section" class="hidden mt-6 pt-6 border-t border-brand-gray/20">
+                    <p class="text-brand-light text-sm font-bold mb-2">Second Member Signature *</p>
+                    <p class="text-brand-gray text-sm mb-3">Each member must sign separately. By signing, the second member acknowledges and agrees to the same waiver above.</p>
+                    <input class="form-input signature-input" name="member2_signature" placeholder="Second member's full legal name">
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="text-center pt-4">
+                <button type="submit" id="submit-btn" class="btn btn-primary font-bold px-10 py-4 rounded-lg text-lg">
+                    Continue to Secure Checkout →
+                </button>
+                <p class="text-brand-gray/60 text-xs mt-4">You'll be redirected to Stripe to complete payment securely. We never see your card details.</p>
+                <p id="error-msg" class="text-red-400 text-sm mt-3 hidden"></p>
+            </div>
+        </form>
+    </main>
+
+    <script src="/shared/footer.js" defer></script>
+
+    <script>
+        // ─── Parse incoming params ───────────────────────────────────
+        const params = new URLSearchParams(window.location.search);
+        const tier = params.get('tier');         // 'class-fob' | 'fob-only'
+        const people = params.get('people');     // 'solo' | 'couple'
+        const mode = params.get('mode');         // 'founder' | 'presale'
+
+        const PRICES = {
+            solo: {
+                'class-fob': { founder: 500, presale: 600, regular: 700 },
+                'fob-only': { founder: 1900, presale: 2000, regular: 2200 }
+            },
+            couple: {
+                'class-fob': { founder: 740, presale: 840, regular: 960 },
+                'fob-only': { founder: 3200, presale: 3300, regular: 3600 }
+            }
+        };
+
+        const TIER_LABELS = { 'class-fob': 'Class + Fob', 'fob-only': 'Fob-Only' };
+
+        // Validate
+        if (!tier || !people || !mode || !PRICES[people] || !PRICES[people][tier]) {
+            window.location.href = '/fob/';
+        }
+
+        // Populate summary
+        const price = PRICES[people][tier][mode];
+        document.getElementById('summary-tier').textContent = `${TIER_LABELS[tier]} • ${people === 'couple' ? 'Couple' : 'Solo'}`;
+        document.getElementById('summary-mode').textContent = mode === 'founder' ? '🌟 Founder Pricing' : (mode === 'presale' ? 'Pre-Sale Pricing' : 'Standard Pricing');
+        document.getElementById('summary-price').textContent = '$' + price.toLocaleString();
+        document.getElementById('summary-desc').textContent = mode === 'founder' ? 'Annual — Founder status + $100 off pre-sale' : 'Annual membership';
+
+        // Show couple section
+        if (people === 'couple') {
+            document.getElementById('couple-section').classList.remove('hidden');
+            document.getElementById('couple-sig-section').classList.remove('hidden');
+            // Make couple fields required
+            document.querySelectorAll('#couple-section input, #couple-sig-section input').forEach(i => i.required = true);
+        }
+
+        // Date stamp
+        document.getElementById('sign-date').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        // ─── Submit ──────────────────────────────────────────────────
+        document.getElementById('waiver-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const errEl = document.getElementById('error-msg');
+            errEl.classList.add('hidden');
+            btn.disabled = true;
+            btn.textContent = 'Processing...';
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            // Verify signature matches name
+            if (data.signature.trim().toLowerCase() !== data.full_name.trim().toLowerCase()) {
+                errEl.textContent = 'Your signature must match your full legal name exactly.';
+                errEl.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Continue to Secure Checkout →';
+                return;
+            }
+
+            if (people === 'couple' && data.member2_signature.trim().toLowerCase() !== data.member2_full_name.trim().toLowerCase()) {
+                errEl.textContent = "The second member's signature must match their full legal name exactly.";
+                errEl.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Continue to Secure Checkout →';
+                return;
+            }
+
+            const payload = {
+                tier, people, mode,
+                price_usd: price,
+                member: data,
+                signed_at: new Date().toISOString(),
+                user_agent: navigator.userAgent
+            };
+
+            try {
+                // 1) Save waiver
+                const waiverRes = await fetch('/.netlify/functions/save-waiver', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!waiverRes.ok) throw new Error('Failed to save waiver');
+                const { waiver_id } = await waiverRes.json();
+
+                // 2) Create Stripe Checkout session
+                const checkoutRes = await fetch('/.netlify/functions/create-fob-checkout', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ waiver_id, tier, people, mode })
+                });
+                if (!checkoutRes.ok) {
+                    const err = await checkoutRes.json().catch(() => ({}));
+                    throw new Error(err.error || 'Failed to create checkout session');
+                }
+                const { url } = await checkoutRes.json();
+
+                // 3) Redirect to Stripe Checkout
+                window.location.href = url;
+            } catch (err) {
+                console.error(err);
+                errEl.textContent = err.message || 'Something went wrong. Please try again or contact info@moonshotcrossfit.com.';
+                errEl.classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Continue to Secure Checkout →';
+            }
+        });
+    </script>
+</body>
+</html>

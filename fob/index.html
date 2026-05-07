@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24/7 Key Fob Access | Moonshot CrossFit</title>
+    <meta name="description" content="Train on your own schedule with 24/7 key fob access at Moonshot CrossFit. 130+ hours of gym access weekly. Founders Club: first 10 annual signups save $100.">
+    <link rel="canonical" href="https://moonshotcrossfit.com/fob/">
+    <meta property="og:title" content="24/7 Key Fob Access | Moonshot CrossFit">
+    <meta property="og:description" content="Train on your terms. 130+ hours weekly. Founders Club: first 10 annual signups get $100 off + Founder status.">
+    <meta property="og:image" content="https://moonshotcrossfit.com/images/groupoutside.webp">
+    <meta property="og:url" content="https://moonshotcrossfit.com/fob/">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="/shared/tailwind.css">
+    <link rel="stylesheet" href="/shared/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y74MV32LC2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y74MV32LC2');
+    </script>
+
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(16, 25, 33, 0.85), rgba(16, 25, 33, 0.92)), url('/images/groupoutside.webp') no-repeat center center;
+            background-size: cover;
+        }
+        .pulse-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #B8986E;
+            box-shadow: 0 0 0 0 rgba(184, 152, 110, 0.7);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(184, 152, 110, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(184, 152, 110, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(184, 152, 110, 0); }
+        }
+        .price-strike {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+        .tier-card {
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+        .tier-card:hover {
+            transform: translateY(-4px);
+            border-color: #B8986E;
+            box-shadow: 0 10px 30px rgba(184, 152, 110, 0.15);
+        }
+        .tier-card.selected {
+            border-color: #B8986E;
+            box-shadow: 0 10px 30px rgba(184, 152, 110, 0.25);
+        }
+        .toggle-btn {
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .toggle-btn.active {
+            background-color: #B8986E;
+            color: #101921;
+        }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] .faq-arrow { transform: rotate(180deg); }
+        .faq-arrow { transition: transform 0.2s; }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-light">
+
+    <script src="/shared/header.js"></script>
+
+    <!-- HERO -->
+    <section class="hero-section pt-16 pb-20 md:pt-24 md:pb-28">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div id="founder-banner" class="hidden inline-flex items-center gap-2 bg-brand-gold/15 border border-brand-gold/40 px-4 py-2 rounded-full mb-6">
+                <span class="pulse-dot"></span>
+                <span class="text-brand-gold font-heading text-sm uppercase tracking-wider">
+                    <span id="founder-spots-left">—</span> Founder Spots Left
+                </span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider text-brand-light mb-4 font-heading">
+                24/7 Key Fob Access
+            </h1>
+            <p class="text-xl md:text-2xl text-brand-gold font-heading uppercase tracking-wide mb-6">
+                Train on your schedule. On your terms.
+            </p>
+            <p class="text-lg text-brand-gray max-w-3xl mx-auto mb-8">
+                130+ hours of gym access every week. Come in before work, after the kids are down, between meetings, on the weekend — whenever fits your life.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#pricing" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">View Pricing</a>
+                <a href="#how-it-works" class="btn btn-secondary font-bold px-8 py-4 rounded-lg text-lg">How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- THREE PATHS -->
+    <section id="how-it-works" class="py-16 md:py-24 bg-brand-slate/30">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-light font-heading uppercase">Three Ways to Be a Moonshot Member</h2>
+            <p class="text-center text-brand-gray max-w-2xl mx-auto mb-12">Pick the path that fits your training style. Already a member? You can add fob access on top of your current plan.</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-brand-dark border border-brand-gray/20 rounded-xl p-8">
+                    <div class="text-brand-gold font-heading text-sm uppercase tracking-wider mb-2">Option 1</div>
+                    <h3 class="text-2xl font-bold text-brand-light font-heading mb-4">Class Membership Only</h3>
+                    <p class="text-brand-gray mb-6">Same as today. No change to your current plan. Coach-led classes, programmed workouts, full community access.</p>
+                    <p class="text-brand-light/70 text-sm">Manage your existing class membership through Wodify as usual.</p>
+                </div>
+
+                <div class="bg-brand-dark border-2 border-brand-gold/60 rounded-xl p-8 relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-gold text-brand-dark text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full font-heading">Most Popular</div>
+                    <div class="text-brand-gold font-heading text-sm uppercase tracking-wider mb-2">Option 2</div>
+                    <h3 class="text-2xl font-bold text-brand-light font-heading mb-4">Class + Fob Add-On</h3>
+                    <p class="text-brand-gray mb-6">Keep your classes. Add 24/7 access for those days you can't make it to a class — or want extra training time.</p>
+                    <p class="text-brand-light/70 text-sm">Best of both: coached classes when you can, open gym whenever you can't.</p>
+                </div>
+
+                <div class="bg-brand-dark border border-brand-gray/20 rounded-xl p-8">
+                    <div class="text-brand-gold font-heading text-sm uppercase tracking-wider mb-2">Option 3</div>
+                    <h3 class="text-2xl font-bold text-brand-light font-heading mb-4">Fob-Only Membership</h3>
+                    <p class="text-brand-gray mb-6">Full 24/7 access, no classes. Built for self-directed lifters who want a great facility on their own schedule.</p>
+                    <p class="text-brand-light/70 text-sm">Run your own program. Full equipment access during fob hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHEN YOU CAN TRAIN -->
+    <section class="py-16 md:py-20 bg-brand-dark">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-light font-heading uppercase">When You Can Train</h2>
+            <p class="text-center text-brand-gray mb-12">130+ hours of gym access every week.</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-brand-gold font-heading uppercase tracking-wide mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                        Fob Hours
+                    </h3>
+                    <p class="text-brand-light mb-2">Anytime — except during the windows below.</p>
+                    <p class="text-brand-gray text-sm">Early mornings, mid-day, evenings, weekends. Whenever the floor isn't booked.</p>
+                </div>
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-brand-gold font-heading uppercase tracking-wide mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        Closed Windows
+                    </h3>
+                    <ul class="space-y-2 text-brand-light">
+                        <li class="flex gap-3"><span class="text-brand-gray">•</span><span>During scheduled classes</span></li>
+                        <li class="flex gap-3"><span class="text-brand-gray">•</span><span>12 AM – 3 AM (overnight close)</span></li>
+                        <li class="flex gap-3"><span class="text-brand-gray">•</span><span>Thursdays 10:30 AM – 12 PM (deep clean)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-16 md:py-24 bg-brand-slate/30">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-brand-light font-heading uppercase">Pricing</h2>
+                <p class="text-brand-gray max-w-2xl mx-auto" id="pricing-subhead">First 10 annual sign-ups get an extra <span class="text-brand-gold font-bold">$100 off</span> and <span class="text-brand-gold font-bold">Founder status</span>.</p>
+            </div>
+
+            <!-- Toggles -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+                <div class="bg-brand-dark border border-brand-gray/20 rounded-full p-1 flex">
+                    <button class="toggle-btn active px-6 py-2 rounded-full font-heading uppercase tracking-wide text-sm" data-people="solo">Solo</button>
+                    <button class="toggle-btn px-6 py-2 rounded-full font-heading uppercase tracking-wide text-sm" data-people="couple">Couple</button>
+                </div>
+            </div>
+
+            <!-- Pricing cards -->
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+
+                <!-- Class + Fob -->
+                <div class="tier-card bg-brand-dark border-2 border-brand-gray/20 rounded-xl p-8 cursor-pointer" data-tier="class-fob" onclick="selectTier('class-fob')">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <div class="text-brand-gold font-heading text-sm uppercase tracking-wider">Add-On</div>
+                            <h3 class="text-2xl font-bold text-brand-light font-heading">Class + Fob</h3>
+                            <p class="text-brand-gray text-sm mt-1" data-people-target="solo">For current class members</p>
+                            <p class="text-brand-gray text-sm mt-1 hidden" data-people-target="couple">Two adults, same address</p>
+                        </div>
+                        <span class="bg-brand-gold/15 text-brand-gold text-xs font-bold uppercase font-heading tracking-wider px-3 py-1 rounded-full">Best Value</span>
+                    </div>
+                    <div class="my-6">
+                        <div class="flex items-baseline gap-3">
+                            <span class="text-5xl font-bold text-brand-light font-heading" data-price-display="class-fob">$500</span>
+                            <span class="text-brand-gray">/ year</span>
+                        </div>
+                        <div class="mt-2 text-sm">
+                            <span class="price-strike text-brand-gray" data-strike="class-fob">$700</span>
+                            <span class="text-brand-gold ml-2 font-bold" data-savings="class-fob">Save $200 — Founder pricing</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-brand-gray text-sm mb-6">
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> Keep your existing class membership</li>
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> 24/7 fob access on top</li>
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> Annual paid up front</li>
+                    </ul>
+                    <button class="w-full btn btn-primary font-bold py-3 rounded-lg" onclick="event.stopPropagation(); checkout('class-fob');">Buy Class + Fob</button>
+                </div>
+
+                <!-- Fob-only -->
+                <div class="tier-card bg-brand-dark border-2 border-brand-gray/20 rounded-xl p-8 cursor-pointer" data-tier="fob-only" onclick="selectTier('fob-only')">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <div class="text-brand-gold font-heading text-sm uppercase tracking-wider">Self-Directed</div>
+                            <h3 class="text-2xl font-bold text-brand-light font-heading">Fob-Only</h3>
+                            <p class="text-brand-gray text-sm mt-1" data-people-target="solo">No classes — full 24/7 access</p>
+                            <p class="text-brand-gray text-sm mt-1 hidden" data-people-target="couple">Two adults, same address</p>
+                        </div>
+                    </div>
+                    <div class="my-6">
+                        <div class="flex items-baseline gap-3">
+                            <span class="text-5xl font-bold text-brand-light font-heading" data-price-display="fob-only">$1,900</span>
+                            <span class="text-brand-gray">/ year</span>
+                        </div>
+                        <div class="mt-2 text-sm">
+                            <span class="price-strike text-brand-gray" data-strike="fob-only">$2,200</span>
+                            <span class="text-brand-gold ml-2 font-bold" data-savings="fob-only">Save $300 — Founder pricing</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 text-brand-gray text-sm mb-6">
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> Full 24/7 facility access</li>
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> Run your own program</li>
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> Annual paid up front</li>
+                    </ul>
+                    <button class="w-full btn btn-primary font-bold py-3 rounded-lg" onclick="event.stopPropagation(); checkout('fob-only');">Buy Fob-Only</button>
+                </div>
+            </div>
+
+            <p class="text-center text-brand-gray text-sm mt-8 max-w-2xl mx-auto">
+                <strong class="text-brand-light">Couple</strong> = two adults at the same address with linked Wodify accounts.
+                Currently a member? Already-paid class dues stay on your existing Wodify plan; the fob add-on stacks on top.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOUNDERS BANNER -->
+    <section class="py-12 bg-gradient-to-r from-brand-gold/20 via-brand-gold/10 to-brand-gold/20 border-y border-brand-gold/30">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 mb-3">
+                <svg class="w-6 h-6 text-brand-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <span class="text-brand-gold font-heading uppercase tracking-wider text-sm">Founders Club</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold text-brand-light font-heading uppercase mb-3">First 10 Annual Sign-Ups</h2>
+            <p class="text-brand-gray max-w-2xl mx-auto mb-2">
+                Save an extra <strong class="text-brand-gold">$100</strong> off any annual tier and lock in <strong class="text-brand-gold">Founder status</strong>. First-come, first-served.
+            </p>
+            <p class="text-brand-light/80 text-sm" id="founder-spots-status">Spots remaining: <strong class="text-brand-gold" id="founder-spots-inline">—</strong> of 10</p>
+        </div>
+    </section>
+
+    <!-- SAFETY -->
+    <section class="py-16 md:py-20 bg-brand-dark">
+        <div class="max-w-5xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-light font-heading uppercase">Safety & The Rules of the Road</h2>
+            <p class="text-center text-brand-gray mb-12 max-w-2xl mx-auto">Non-negotiables for everyone with fob access.</p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-lg p-5 flex gap-4">
+                    <span class="text-2xl">🎥</span>
+                    <div><strong class="text-brand-light font-heading uppercase tracking-wide text-sm block mb-1">24/7 Cameras</strong><p class="text-brand-gray text-sm">Recording around the clock for safety and rule enforcement.</p></div>
+                </div>
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-lg p-5 flex gap-4">
+                    <span class="text-2xl">🚪</span>
+                    <div><strong class="text-brand-light font-heading uppercase tracking-wide text-sm block mb-1">One Person, One Key</strong><p class="text-brand-gray text-sm">No sharing, no propping the door, no badging in guests. Bring an unauthorized person and your fob is revoked.</p></div>
+                </div>
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-lg p-5 flex gap-4">
+                    <span class="text-2xl">🏋️</span>
+                    <div><strong class="text-brand-light font-heading uppercase tracking-wide text-sm block mb-1">Self-Directed Only</strong><p class="text-brand-gray text-sm">No coaching during off-hours. Train on your own program.</p></div>
+                </div>
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-lg p-5 flex gap-4">
+                    <span class="text-2xl">🏃</span>
+                    <div><strong class="text-brand-light font-heading uppercase tracking-wide text-sm block mb-1">PT Has Priority</strong><p class="text-brand-gray text-sm">If a coach is running a personal training session and asks you to move, please move.</p></div>
+                </div>
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-lg p-5 flex gap-4">
+                    <span class="text-2xl">🧹</span>
+                    <div><strong class="text-brand-light font-heading uppercase tracking-wide text-sm block mb-1">Same Gym Etiquette</strong><p class="text-brand-gray text-sm">Wipe down. Rack your weights. Leave it better than you found it.</p></div>
+                </div>
+                <div class="bg-brand-slate/50 border border-brand-gray/20 rounded-lg p-5 flex gap-4">
+                    <span class="text-2xl">👨‍👩‍👧</span>
+                    <div><strong class="text-brand-light font-heading uppercase tracking-wide text-sm block mb-1">Couple Memberships</strong><p class="text-brand-gray text-sm">Want a partner on the fob? Couple plans available — same address, linked Wodify accounts.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 md:py-20 bg-brand-slate/30">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-brand-light font-heading uppercase">FAQ</h2>
+            <div class="space-y-4">
+                <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5 group">
+                    <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
+                        <span>I'm already a class member — does my plan change?</span>
+                        <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <p class="text-brand-gray mt-4">No. Class memberships continue exactly as today on Wodify. Buying the fob add-on stacks 24/7 access on top of what you already pay — nothing about your class plan changes.</p>
+                </details>
+                <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5">
+                    <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
+                        <span>What counts as a couple?</span>
+                        <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <p class="text-brand-gray mt-4">Two adults at the same address with linked Wodify accounts. You'll enter both names and emails at checkout. Each person gets their own fob — sharing one fob between two people is not allowed.</p>
+                </details>
+                <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5">
+                    <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
+                        <span>What happens after I pay?</span>
+                        <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <p class="text-brand-gray mt-4">You'll get an emailed receipt and confirmation immediately. Once the fob system is installed, we'll reach out to schedule fob pickup and a quick orientation. Your annual term begins the day your fob is activated, not the day you pay.</p>
+                </details>
+                <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5">
+                    <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
+                        <span>What if I bring someone in or share my fob?</span>
+                        <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <p class="text-brand-gray mt-4">Fob access is revoked. No refund for the remainder of the term. Cameras are on 24/7 specifically to enforce this — it's the only way the program works for everyone.</p>
+                </details>
+                <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5">
+                    <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
+                        <span>What if the program doesn't launch?</span>
+                        <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <p class="text-brand-gray mt-4">Full refund. The Founders pre-pay locks your slot at the lowest price — but if for any reason we don't get the fob system installed, every dollar comes back.</p>
+                </details>
+                <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5">
+                    <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
+                        <span>What's "Founder status" actually?</span>
+                        <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <p class="text-brand-gray mt-4">Permanent recognition as a Founding Member of the Moonshot 24/7 program — name on the wall, first dibs on future capacity decisions, and the founder rate locked for renewal in year two.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-16 md:py-20 bg-brand-dark border-t border-brand-gray/20">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-brand-light font-heading uppercase">Ready to Lock In Your Spot?</h2>
+            <p class="text-brand-gray mb-8 text-lg">Founder slots are first-come, first-served. Once they're gone, they're gone.</p>
+            <a href="#pricing" class="inline-block btn btn-primary font-bold px-10 py-4 rounded-lg text-lg">Choose Your Plan</a>
+            <p class="text-brand-gray/60 text-sm mt-6">Questions? <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gold hover:underline">info@moonshotcrossfit.com</a> or call <a href="tel:+18478507360" class="text-brand-gold hover:underline">(847) 850-7360</a></p>
+        </div>
+    </section>
+
+    <script src="/shared/footer.js" defer></script>
+
+    <script>
+        // ─── Pricing State ────────────────────────────────────────────
+        const PRICES = {
+            // [people][tier] = { founder, presale }
+            solo: {
+                'class-fob': { founder: 500, presale: 600, regular: 700 },
+                'fob-only': { founder: 1900, presale: 2000, regular: 2200 }
+            },
+            couple: {
+                'class-fob': { founder: 740, presale: 840, regular: 960 },
+                'fob-only': { founder: 3200, presale: 3300, regular: 3600 }
+            }
+        };
+
+        let state = {
+            people: 'solo',
+            founderRemaining: null,  // null until fetched
+            mode: 'presale'           // 'founder' | 'presale' | 'regular' (regular = manual flip later)
+        };
+
+        // ─── Fetch Founder Count ──────────────────────────────────────
+        async function loadFounderCount() {
+            try {
+                const r = await fetch('/.netlify/functions/founder-count', { cache: 'no-store' });
+                const data = await r.json();
+                state.founderRemaining = data.remaining;
+                state.mode = data.remaining > 0 ? 'founder' : 'presale';
+                renderFounderUI();
+                renderPricing();
+            } catch (e) {
+                console.error('Failed to load founder count', e);
+                state.founderRemaining = 0;
+                state.mode = 'presale';
+                renderFounderUI();
+                renderPricing();
+            }
+        }
+
+        function renderFounderUI() {
+            const banner = document.getElementById('founder-banner');
+            const heroSpots = document.getElementById('founder-spots-left');
+            const inlineSpots = document.getElementById('founder-spots-inline');
+            const pricingSubhead = document.getElementById('pricing-subhead');
+            const founderStatus = document.getElementById('founder-spots-status');
+
+            if (state.founderRemaining > 0) {
+                banner.classList.remove('hidden');
+                heroSpots.textContent = state.founderRemaining;
+                inlineSpots.textContent = state.founderRemaining;
+            } else {
+                banner.classList.add('hidden');
+                inlineSpots.textContent = '0';
+                pricingSubhead.innerHTML = 'Founder spots are filled. Pre-sale pricing still available — locked in until installation.';
+                founderStatus.innerHTML = '<strong class="text-brand-light">All 10 Founder slots claimed</strong> — pre-sale pricing continues until launch.';
+            }
+        }
+
+        function renderPricing() {
+            const tiers = ['class-fob', 'fob-only'];
+            tiers.forEach(tier => {
+                const prices = PRICES[state.people][tier];
+                const display = document.querySelector(`[data-price-display="${tier}"]`);
+                const strike = document.querySelector(`[data-strike="${tier}"]`);
+                const savings = document.querySelector(`[data-savings="${tier}"]`);
+
+                if (state.mode === 'founder') {
+                    display.textContent = '$' + prices.founder.toLocaleString();
+                    strike.textContent = '$' + prices.regular.toLocaleString();
+                    strike.style.display = '';
+                    savings.textContent = `Save $${prices.regular - prices.founder} — Founder pricing`;
+                    savings.style.display = '';
+                } else if (state.mode === 'presale') {
+                    display.textContent = '$' + prices.presale.toLocaleString();
+                    strike.textContent = '$' + prices.regular.toLocaleString();
+                    strike.style.display = '';
+                    savings.textContent = `Save $${prices.regular - prices.presale} — Pre-sale pricing`;
+                    savings.style.display = '';
+                } else {
+                    display.textContent = '$' + prices.regular.toLocaleString();
+                    strike.style.display = 'none';
+                    savings.style.display = 'none';
+                }
+            });
+
+            document.querySelectorAll('[data-people-target]').forEach(el => {
+                el.classList.toggle('hidden', el.dataset.peopleTarget !== state.people);
+            });
+        }
+
+        // ─── Toggles ──────────────────────────────────────────────────
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.people = btn.dataset.people;
+                renderPricing();
+            });
+        });
+
+        function selectTier(tier) {
+            document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+            document.querySelector(`[data-tier="${tier}"]`).classList.add('selected');
+        }
+
+        function checkout(tier) {
+            const params = new URLSearchParams({
+                tier,
+                people: state.people,
+                mode: state.mode
+            });
+            window.location.href = `/fob/waiver.html?${params.toString()}`;
+        }
+
+        // ─── Boot ─────────────────────────────────────────────────────
+        loadFounderCount();
+    </script>
+</body>
+</html>

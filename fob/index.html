@@ -87,14 +87,8 @@
     <!-- HERO -->
     <section class="hero-section pt-28 pb-20 md:pt-36 md:pb-28">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <div id="test-banner" class="hidden inline-flex items-center gap-2 bg-red-500/15 border border-red-500/50 px-6 py-2.5 rounded-full mb-4">
+            <div id="test-banner" class="hidden inline-flex items-center gap-2 bg-red-500/15 border border-red-500/50 px-6 py-2.5 rounded-full mb-6">
                 <span class="text-red-300 font-heading text-xs md:text-sm uppercase tracking-wider font-bold">⚠ TEST MODE — $1 LIVE CHARGES</span>
-            </div>
-            <div id="founder-banner" class="hidden inline-flex items-center gap-3 bg-brand-gold/15 border border-brand-gold/40 px-7 py-3 rounded-full mb-8">
-                <span class="pulse-dot"></span>
-                <span class="text-brand-gold font-heading text-sm md:text-base uppercase tracking-wider font-semibold">
-                    <span id="founder-spots-left">—</span> Founder Spots Left
-                </span>
             </div>
             <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider text-brand-light mb-4 font-heading">
                 24/7 Key Fob Access
@@ -470,18 +464,13 @@
         }
 
         function renderFounderUI() {
-            const banner = document.getElementById('founder-banner');
-            const heroSpots = document.getElementById('founder-spots-left');
             const inlineSpots = document.getElementById('founder-spots-inline');
             const pricingSubhead = document.getElementById('pricing-subhead');
             const founderStatus = document.getElementById('founder-spots-status');
 
             if (state.founderRemaining > 0) {
-                banner.classList.remove('hidden');
-                heroSpots.textContent = state.founderRemaining;
                 inlineSpots.textContent = state.founderRemaining;
             } else {
-                banner.classList.add('hidden');
                 inlineSpots.textContent = '0';
                 pricingSubhead.innerHTML = 'Founder spots are filled. Pre-sale pricing still available — locked in until installation.';
                 founderStatus.innerHTML = '<strong class="text-brand-light">All 10 Founder slots claimed</strong> — pre-sale pricing continues until launch.';

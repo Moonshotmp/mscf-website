@@ -3,11 +3,9 @@
 
 [functions]
   directory = "netlify/functions"
-  node_bundler = "esbuild"
-
-# Stripe webhook needs the raw, unparsed body for signature verification.
-[functions."stripe-webhook"]
-  included_files = []
+  # zisi (default) preserves Netlify's blob env injection.
+  # esbuild was stripping it in legacy v1 (exports.handler) functions.
+  node_bundler = "zisi"
 
 [[headers]]
   for = "/fob/*"

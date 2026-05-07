@@ -19,6 +19,9 @@
         .checkbox-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px; background: rgba(44, 53, 62, 0.4); border: 1px solid rgba(178, 191, 190, 0.15); border-radius: 8px; margin-bottom: 8px; }
         .checkbox-row input[type=checkbox] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; accent-color: #B8986E; }
         .signature-input { font-family: 'Caveat', cursive, sans-serif; font-size: 28px; padding: 16px 20px !important; letter-spacing: 1px; }
+        .field-error { border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25); }
+        #error-banner { background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; color: #fca5a5; font-weight: 600; }
+        #error-banner strong { color: #fff; }
         .waiver-box { max-height: 360px; overflow-y: auto; background: rgba(16, 25, 33, 0.6); border: 1px solid rgba(178, 191, 190, 0.2); border-radius: 8px; padding: 20px; font-size: 13px; line-height: 1.6; color: #B2BFBE; }
         .waiver-box h4 { color: #F0EEE9; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin: 16px 0 6px; font-size: 14px; }
         .waiver-box h4:first-child { margin-top: 0; }
@@ -35,6 +38,11 @@
 
         <h1 class="text-3xl md:text-4xl font-bold text-brand-light mt-4 mb-2 font-heading uppercase">Waiver & Sign-Up</h1>
         <p class="text-brand-gray mb-8">Sign the waiver and confirm your details. You'll be taken to secure checkout next.</p>
+
+        <!-- Big error banner — scrolls into view, impossible to miss -->
+        <div id="error-banner" class="hidden">
+            <strong>⚠ Heads up —</strong> <span id="error-banner-text"></span>
+        </div>
 
         <!-- Order summary -->
         <div id="order-summary" class="bg-brand-slate/40 border border-brand-gold/30 rounded-xl p-6 mb-8">
@@ -148,7 +156,9 @@
                 <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-4">Digital Signature</h3>
                 <p class="text-brand-gray text-sm mb-4">Type your full legal name exactly as entered above. This typed signature has the same legal effect as a handwritten one under the Illinois Electronic Commerce Security Act.</p>
                 <label class="form-label">Signature *</label>
+                <p class="text-brand-gold text-sm mb-2" id="signature-helper">Type your full legal name from the field above, exactly as you entered it.</p>
                 <input class="form-input signature-input" name="signature" required placeholder="Your full legal name">
+                <p class="text-brand-light/80 text-sm mt-2 hidden" id="signature-match-hint">Must match: <strong id="signature-match-target" class="text-brand-gold"></strong></p>
                 <p class="text-brand-gray/60 text-xs mt-3">Signed on <span id="sign-date"></span> from this device. Your IP address and timestamp will be recorded with this waiver.</p>
 
                 <!-- Couple second signature -->
@@ -249,6 +259,53 @@
         // Date stamp
         document.getElementById('sign-date').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
+        // Live signature helper: when full_name has a value and user starts signing,
+        // show the target name they need to match. Catches mismatches before submit.
+        const fullNameInput = document.querySelector('[name="full_name"]');
+        const signatureInput = document.querySelector('[name="signature"]');
+        const matchHint = document.getElementById('signature-match-hint');
+        const matchTarget = document.getElementById('signature-match-target');
+        function updateSignatureHint() {
+            const fn = (fullNameInput.value || '').trim();
+            const sig = (signatureInput.value || '').trim();
+            if (fn && (signatureInput === document.activeElement || sig)) {
+                matchTarget.textContent = fn;
+                matchHint.classList.remove('hidden');
+                if (sig && sig.toLowerCase() === fn.toLowerCase()) {
+                    matchHint.innerHTML = `<span class="text-green-400">✓ Signature matches your name</span>`;
+                    signatureInput.classList.remove('field-error');
+                } else if (sig) {
+                    matchHint.innerHTML = `<span class="text-red-400">✗ Doesn't match yet — must be: <strong class="text-brand-gold">${fn}</strong></span>`;
+                } else {
+                    matchHint.innerHTML = `Must match: <strong class="text-brand-gold">${fn}</strong>`;
+                }
+            } else {
+                matchHint.classList.add('hidden');
+            }
+        }
+        fullNameInput.addEventListener('input', updateSignatureHint);
+        signatureInput.addEventListener('input', updateSignatureHint);
+        signatureInput.addEventListener('focus', updateSignatureHint);
+
+        // Same for couple member 2
+        if (people === 'couple') {
+            const m2NameInput = document.querySelector('[name="member2_full_name"]');
+            const m2SigInput = document.querySelector('[name="member2_signature"]');
+            if (m2NameInput && m2SigInput) {
+                const updateM2Hint = () => {
+                    const fn = (m2NameInput.value || '').trim();
+                    const sig = (m2SigInput.value || '').trim();
+                    if (fn && sig && sig.toLowerCase() !== fn.toLowerCase()) {
+                        m2SigInput.classList.add('field-error');
+                    } else {
+                        m2SigInput.classList.remove('field-error');
+                    }
+                };
+                m2NameInput.addEventListener('input', updateM2Hint);
+                m2SigInput.addEventListener('input', updateM2Hint);
+            }
+        }
+
         // ─── Submit ──────────────────────────────────────────────────
         document.getElementById('waiver-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -262,19 +319,34 @@
             const data = Object.fromEntries(formData.entries());
 
             // Verify signature matches name
-            if (data.signature.trim().toLowerCase() !== data.full_name.trim().toLowerCase()) {
-                errEl.textContent = 'Your signature must match your full legal name exactly.';
-                errEl.classList.remove('hidden');
+            const showError = (msg, fieldName) => {
+                errEl.classList.add('hidden');
+                document.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+                if (fieldName) {
+                    const field = document.querySelector(`[name="${fieldName}"]`);
+                    if (field) field.classList.add('field-error');
+                }
+                const banner = document.getElementById('error-banner');
+                document.getElementById('error-banner-text').textContent = msg;
+                banner.classList.remove('hidden');
+                banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 btn.disabled = false;
                 btn.textContent = 'Continue to Secure Checkout →';
+            };
+
+            if (data.signature.trim().toLowerCase() !== data.full_name.trim().toLowerCase()) {
+                showError(
+                    `Your signature must match your full legal name exactly. You typed your name as "${data.full_name.trim()}" — please type that same name in the signature box.`,
+                    'signature'
+                );
                 return;
             }
 
             if (people === 'couple' && data.member2_signature.trim().toLowerCase() !== data.member2_full_name.trim().toLowerCase()) {
-                errEl.textContent = "The second member's signature must match their full legal name exactly.";
-                errEl.classList.remove('hidden');
-                btn.disabled = false;
-                btn.textContent = 'Continue to Secure Checkout →';
+                showError(
+                    `The second member's signature must match their full legal name exactly. They entered "${data.member2_full_name.trim()}" — please type that same name in their signature box.`,
+                    'member2_signature'
+                );
                 return;
             }
 

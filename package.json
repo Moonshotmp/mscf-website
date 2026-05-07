@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Moonshotmp/mscf-website#readme",
   "description": "",
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.700.0",
     "@netlify/blobs": "^8.1.0",
     "stripe": "^17.5.0",
     "tailwindcss": "^3.4.19"

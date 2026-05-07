@@ -51,8 +51,11 @@ export default async (req) => {
     return bad('Invalid JSON');
   }
 
-  const { waiver_id, tier, people, mode } = payload;
+  const { waiver_id, tier, people, mode, test_token } = payload;
   if (!waiver_id || !PRICES[people]?.[tier]) return bad('Missing or invalid checkout params');
+
+  // Test mode: requires server-side token match. $1 charge, no founder slot consumed.
+  const isTestMode = test_token && process.env.FOB_TEST_TOKEN && test_token === process.env.FOB_TEST_TOKEN;
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
 
@@ -65,25 +68,30 @@ export default async (req) => {
   let founderClaimed = false;
   const founderStore = getStore(FOUNDER_STORE);
 
-  if (mode === 'founder') {
+  if (!isTestMode && mode === 'founder') {
     const claim = await claimFounderSlot(founderStore);
     if (!claim.claimed) finalMode = 'presale';
     else founderClaimed = true;
   }
 
-  const amount = PRICES[people][tier][finalMode];
+  const amount = isTestMode ? 100 : PRICES[people][tier][finalMode];
   if (!amount) return bad('Pricing lookup failed', 500);
 
-  const productName = `Moonshot 24/7 Key Fob — ${TIER_LABELS[tier]} (${people === 'couple' ? 'Couple' : 'Solo'})`;
-  const productDesc = finalMode === 'founder'
-    ? 'Founders Club — Annual prepay. $100 off pre-sale + Founder status.'
-    : (finalMode === 'presale' ? 'Pre-sale annual prepay.' : 'Annual prepay.');
+  const productName = isTestMode
+    ? `TEST — ${TIER_LABELS[tier]} (${people === 'couple' ? 'Couple' : 'Solo'})`
+    : `Moonshot 24/7 Key Fob — ${TIER_LABELS[tier]} (${people === 'couple' ? 'Couple' : 'Solo'})`;
+  const productDesc = isTestMode
+    ? 'TEST MODE — $1 live-mode smoke test. Refund after verification.'
+    : (finalMode === 'founder'
+        ? 'Founders Club — Annual prepay. $100 off pre-sale + Founder status.'
+        : (finalMode === 'presale' ? 'Pre-sale annual prepay.' : 'Annual prepay.'));
 
   await waiverStore.setJSON(waiver_id, {
     ...waiver,
-    final_mode: finalMode,
+    final_mode: isTestMode ? 'test' : finalMode,
     final_amount_usd: amount / 100,
-    founder_claimed: founderClaimed
+    founder_claimed: founderClaimed,
+    test_mode: isTestMode
   });
 
   try {
@@ -100,14 +108,15 @@ export default async (req) => {
         quantity: 1
       }],
       metadata: {
-        waiver_id, tier, people, mode: finalMode,
+        waiver_id, tier, people, mode: isTestMode ? 'test' : finalMode,
         founder_claimed: String(founderClaimed),
+        test_mode: String(isTestMode),
         member_email: waiver.member.email,
         member_name: waiver.member.full_name
       },
       payment_intent_data: {
         description: `${productName} — ${waiver.member.full_name}`,
-        metadata: { waiver_id, tier, people, mode: finalMode }
+        metadata: { waiver_id, tier, people, mode: isTestMode ? 'test' : finalMode, test_mode: String(isTestMode) }
       },
       success_url: `${SITE_URL}/fob/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${SITE_URL}/fob/cancel.html`,

@@ -178,6 +178,8 @@
         const tier = params.get('tier');         // 'class-fob' | 'fob-only'
         const people = params.get('people');     // 'solo' | 'couple'
         const mode = params.get('mode');         // 'founder' | 'presale'
+        const testToken = params.get('test') || '';
+        const isTestMode = testToken.length > 0;
 
         const PRICES = {
             solo: {
@@ -198,11 +200,15 @@
         }
 
         // Populate summary
-        const price = PRICES[people][tier][mode];
+        const price = isTestMode ? 1 : PRICES[people][tier][mode];
         document.getElementById('summary-tier').textContent = `${TIER_LABELS[tier]} • ${people === 'couple' ? 'Couple' : 'Solo'}`;
-        document.getElementById('summary-mode').textContent = mode === 'founder' ? '🌟 Founder Pricing' : (mode === 'presale' ? 'Pre-Sale Pricing' : 'Standard Pricing');
+        document.getElementById('summary-mode').textContent = isTestMode
+            ? '⚠ TEST MODE — $1 LIVE CHARGE'
+            : (mode === 'founder' ? '🌟 Founder Pricing' : (mode === 'presale' ? 'Pre-Sale Pricing' : 'Standard Pricing'));
         document.getElementById('summary-price').textContent = '$' + price.toLocaleString();
-        document.getElementById('summary-desc').textContent = mode === 'founder' ? 'Annual — Founder status + $100 off pre-sale' : 'Annual membership';
+        document.getElementById('summary-desc').textContent = isTestMode
+            ? 'Smoke-test only. Refund yourself in Stripe Dashboard.'
+            : (mode === 'founder' ? 'Annual — Founder status + $100 off pre-sale' : 'Annual membership');
 
         // Show couple section
         if (people === 'couple') {
@@ -263,10 +269,12 @@
                 const { waiver_id } = await waiverRes.json();
 
                 // 2) Create Stripe Checkout session
+                const checkoutBody = { waiver_id, tier, people, mode };
+                if (isTestMode) checkoutBody.test_token = testToken;
                 const checkoutRes = await fetch('/.netlify/functions/create-fob-checkout', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ waiver_id, tier, people, mode })
+                    body: JSON.stringify(checkoutBody)
                 });
                 if (!checkoutRes.ok) {
                     const err = await checkoutRes.json().catch(() => ({}));

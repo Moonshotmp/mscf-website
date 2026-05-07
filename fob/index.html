@@ -87,7 +87,10 @@
     <!-- HERO -->
     <section class="hero-section pt-28 pb-20 md:pt-36 md:pb-28">
         <div class="max-w-5xl mx-auto px-6 text-center">
-            <div id="founder-banner" class="hidden inline-flex items-center gap-2 bg-brand-gold/15 border border-brand-gold/40 px-5 py-2.5 rounded-full mb-8">
+            <div id="test-banner" class="hidden inline-flex items-center gap-2 bg-red-500/15 border border-red-500/50 px-6 py-2.5 rounded-full mb-4">
+                <span class="text-red-300 font-heading text-xs md:text-sm uppercase tracking-wider font-bold">⚠ TEST MODE — $1 LIVE CHARGES</span>
+            </div>
+            <div id="founder-banner" class="hidden inline-flex items-center gap-3 bg-brand-gold/15 border border-brand-gold/40 px-7 py-3 rounded-full mb-8">
                 <span class="pulse-dot"></span>
                 <span class="text-brand-gold font-heading text-sm md:text-base uppercase tracking-wider font-semibold">
                     <span id="founder-spots-left">—</span> Founder Spots Left
@@ -166,6 +169,57 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Class Schedule -->
+            <div class="mt-6 bg-brand-slate/50 border border-brand-gray/20 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-brand-gold font-heading uppercase tracking-wide mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Class Schedule
+                </h3>
+                <p class="text-brand-gray text-sm mb-5">Class times — fob access is unavailable during these blocks (members in class get the floor).</p>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+                    <div class="bg-brand-dark/60 rounded-lg p-4">
+                        <h4 class="font-heading text-brand-light uppercase tracking-wide text-sm mb-2">Mon / Wed</h4>
+                        <p class="text-brand-blue font-semibold mb-1">CrossFit</p>
+                        <p class="text-brand-gray text-xs">5:30, 6:30, 9:30, 10:30 AM<br>4:30, 5:30, 6:30 PM</p>
+                    </div>
+                    <div class="bg-brand-dark/60 rounded-lg p-4">
+                        <h4 class="font-heading text-brand-light uppercase tracking-wide text-sm mb-2">Tuesday</h4>
+                        <p class="text-brand-blue font-semibold mb-1">CrossFit</p>
+                        <p class="text-brand-gray text-xs mb-2">5:30, 6:30, 9:30 AM<br>4:30, 5:30, 6:30 PM</p>
+                        <p class="text-brand-gold font-semibold mb-1">Hyrox</p>
+                        <p class="text-brand-gray text-xs">10:30 AM</p>
+                    </div>
+                    <div class="bg-brand-dark/60 rounded-lg p-4">
+                        <h4 class="font-heading text-brand-light uppercase tracking-wide text-sm mb-2">Thursday</h4>
+                        <p class="text-brand-blue font-semibold mb-1">CrossFit</p>
+                        <p class="text-brand-gray text-xs mb-2">5:30, 9:30 AM<br>4:30, 5:30 PM</p>
+                        <p class="text-brand-gold font-semibold mb-1">Hyrox</p>
+                        <p class="text-brand-gray text-xs">6:30 PM</p>
+                    </div>
+                    <div class="bg-brand-dark/60 rounded-lg p-4">
+                        <h4 class="font-heading text-brand-light uppercase tracking-wide text-sm mb-2">Friday</h4>
+                        <p class="text-brand-blue font-semibold mb-1">CrossFit</p>
+                        <p class="text-brand-gray text-xs">5:30, 6:30, 9:30, 10:30 AM<br>4:30, 5:30 PM</p>
+                    </div>
+                    <div class="bg-brand-dark/60 rounded-lg p-4">
+                        <h4 class="font-heading text-brand-light uppercase tracking-wide text-sm mb-2">Saturday</h4>
+                        <p class="text-brand-gold font-semibold mb-1">Hyrox</p>
+                        <p class="text-brand-gray text-xs mb-2">7:00 AM</p>
+                        <p class="text-brand-blue font-semibold mb-1">CrossFit</p>
+                        <p class="text-brand-gray text-xs mb-2">8:00, 9:00 AM</p>
+                        <p class="text-brand-blue font-semibold mb-1">Bootcamp</p>
+                        <p class="text-brand-gray text-xs">10:00 AM</p>
+                    </div>
+                    <div class="bg-brand-dark/60 rounded-lg p-4">
+                        <h4 class="font-heading text-brand-light uppercase tracking-wide text-sm mb-2">Sunday</h4>
+                        <p class="text-brand-gray text-xs">No classes</p>
+                    </div>
+                    <div class="bg-brand-dark/60 rounded-lg p-4 sm:col-span-2 lg:col-span-2 flex items-center">
+                        <p class="text-brand-gray text-xs">Schedule may evolve with new programs. Latest schedule always lives at <a href="/#schedule" class="text-brand-gold hover:underline">moonshotcrossfit.com/#schedule</a>.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -192,7 +246,7 @@
                 <div class="tier-card bg-brand-dark border-2 border-brand-gray/20 rounded-xl p-8 cursor-pointer" data-tier="class-fob" onclick="selectTier('class-fob')">
                     <div class="flex items-start justify-between mb-4">
                         <div>
-                            <div class="text-brand-gold font-heading text-sm uppercase tracking-wider">Add-On</div>
+                            <div class="text-brand-gold font-heading text-sm uppercase tracking-wider">Add-On <span class="text-brand-gold/80 normal-case tracking-normal">(For Existing Moonshot Members)</span></div>
                             <h3 class="text-2xl font-bold text-brand-light font-heading">Class + Fob</h3>
                             <p class="text-brand-gray text-sm mt-1" data-people-target="solo">For current class members</p>
                             <p class="text-brand-gray text-sm mt-1 hidden" data-people-target="couple">Two adults, same address</p>
@@ -215,6 +269,9 @@
                         <li class="flex gap-2"><span class="text-brand-gold">✓</span> Annual paid up front</li>
                     </ul>
                     <button class="w-full btn btn-primary font-bold py-3 rounded-lg" onclick="event.stopPropagation(); checkout('class-fob');">Buy Class + Fob</button>
+                    <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPage/Main?q=Memberships%7CLocationId%3D9972" target="_blank" rel="noopener" class="block text-center text-brand-gold hover:underline text-sm mt-3">
+                        To buy a Class Membership at Moonshot →
+                    </a>
                 </div>
 
                 <!-- Fob-only -->
@@ -379,11 +436,20 @@
             }
         };
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const testToken = urlParams.get('test') || '';
+        const isTestMode = testToken.length > 0;
+
         let state = {
             people: 'solo',
             founderRemaining: null,  // null until fetched
-            mode: 'presale'           // 'founder' | 'presale' | 'regular' (regular = manual flip later)
+            mode: 'presale',          // 'founder' | 'presale' | 'regular' (regular = manual flip later)
+            testToken
         };
+
+        if (isTestMode) {
+            document.getElementById('test-banner').classList.remove('hidden');
+        }
 
         // ─── Fetch Founder Count ──────────────────────────────────────
         async function loadFounderCount() {
@@ -475,6 +541,7 @@
                 people: state.people,
                 mode: state.mode
             });
+            if (isTestMode) params.set('test', state.testToken);
             window.location.href = `/fob/waiver.html?${params.toString()}`;
         }
 

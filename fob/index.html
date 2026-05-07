@@ -34,8 +34,28 @@
 
     <style>
         .hero-section {
-            background: linear-gradient(rgba(16, 25, 33, 0.85), rgba(16, 25, 33, 0.92)), url('/images/groupoutside.webp') no-repeat center center;
+            position: relative;
+            background-image: url('/images/groupoutside.webp');
             background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+        }
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(16, 25, 33, 0.55) 0%,
+                rgba(16, 25, 33, 0.55) 35%,
+                rgba(16, 25, 33, 0.80) 75%,
+                rgba(16, 25, 33, 1) 100%
+            );
+            pointer-events: none;
+        }
+        .hero-section > * {
+            position: relative;
+            z-index: 1;
         }
         .pulse-dot {
             display: inline-block;

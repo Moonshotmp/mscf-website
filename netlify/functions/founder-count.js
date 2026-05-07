@@ -32,7 +32,7 @@ exports.handler = async () => {
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Failed to read founder count' })
+      body: JSON.stringify({ error: 'Failed to read founder count', detail: String(err && (err.message || err)), stack: err && err.stack ? err.stack.split('\n').slice(0, 4).join(' | ') : null })
     };
   }
 };

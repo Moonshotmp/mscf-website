@@ -90,6 +90,10 @@
             <div id="test-banner" class="hidden inline-flex items-center gap-2 bg-red-500/15 border border-red-500/50 px-6 py-2.5 rounded-full mb-6">
                 <span class="text-red-300 font-heading text-xs md:text-sm uppercase tracking-wider font-bold">⚠ TEST MODE — $1 LIVE CHARGES</span>
             </div>
+            <p id="founder-text" class="hidden items-center justify-center gap-2 text-brand-gold font-heading uppercase tracking-widest text-sm md:text-base font-bold mb-5">
+                <span class="pulse-dot"></span>
+                <span><span id="founder-spots-left">—</span> Founder Spots Left</span>
+            </p>
             <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider text-brand-light mb-4 font-heading">
                 24/7 Key Fob Access
             </h1>
@@ -464,13 +468,20 @@
         }
 
         function renderFounderUI() {
+            const heroText = document.getElementById('founder-text');
+            const heroSpots = document.getElementById('founder-spots-left');
             const inlineSpots = document.getElementById('founder-spots-inline');
             const pricingSubhead = document.getElementById('pricing-subhead');
             const founderStatus = document.getElementById('founder-spots-status');
 
             if (state.founderRemaining > 0) {
+                heroText.classList.remove('hidden');
+                heroText.classList.add('inline-flex');
+                heroSpots.textContent = state.founderRemaining;
                 inlineSpots.textContent = state.founderRemaining;
             } else {
+                heroText.classList.add('hidden');
+                heroText.classList.remove('inline-flex');
                 inlineSpots.textContent = '0';
                 pricingSubhead.innerHTML = 'Founder spots are filled. Pre-sale pricing still available — locked in until installation.';
                 founderStatus.innerHTML = '<strong class="text-brand-light">All 10 Founder slots claimed</strong> — pre-sale pricing continues until launch.';

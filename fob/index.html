@@ -33,29 +33,11 @@
     </script>
 
     <style>
-        .hero-section {
-            position: relative;
-            background-image: url('/images/groupoutside.webp');
+        .hero-image-card {
+            background-image: linear-gradient(rgba(16, 25, 33, 0.55), rgba(16, 25, 33, 0.75)), url('/images/groupoutside.webp');
             background-size: cover;
-            background-position: center 30%;
+            background-position: center 35%;
             background-repeat: no-repeat;
-        }
-        .hero-section::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                180deg,
-                rgba(16, 25, 33, 0.55) 0%,
-                rgba(16, 25, 33, 0.55) 35%,
-                rgba(16, 25, 33, 0.80) 75%,
-                rgba(16, 25, 33, 1) 100%
-            );
-            pointer-events: none;
-        }
-        .hero-section > * {
-            position: relative;
-            z-index: 1;
         }
         .pulse-dot {
             display: inline-block;
@@ -105,27 +87,29 @@
     <script src="/shared/header.js"></script>
 
     <!-- HERO -->
-    <section class="hero-section pt-32 pb-32 md:pt-40 md:pb-40 min-h-[80vh]">
-        <div class="max-w-5xl mx-auto px-6 text-center w-full">
-            <div id="test-banner" class="hidden inline-flex items-center gap-2 bg-red-500/15 border border-red-500/50 px-6 py-2.5 rounded-full mb-6">
-                <span class="text-red-300 font-heading text-xs md:text-sm uppercase tracking-wider font-bold">⚠ TEST MODE — $1 LIVE CHARGES</span>
-            </div>
-            <p id="founder-text" class="hidden items-center justify-center gap-2 text-brand-gold font-heading uppercase tracking-widest text-sm md:text-base font-bold mb-5">
-                <span class="pulse-dot"></span>
-                <span><span id="founder-spots-left">—</span> Founder Spots Left</span>
-            </p>
-            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider text-brand-light mb-4 font-heading">
-                24/7 Key Fob Access
-            </h1>
-            <p class="text-xl md:text-2xl text-brand-gold font-heading uppercase tracking-wide mb-6">
-                Train on your schedule. On your terms.
-            </p>
-            <p class="text-lg text-brand-gray max-w-3xl mx-auto mb-8">
-                130+ hours of gym access every week. Come in before work, after the kids are down, between meetings, on the weekend — whenever fits your life.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#pricing" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">View Pricing</a>
-                <a href="#how-it-works" class="btn btn-secondary font-bold px-8 py-4 rounded-lg text-lg">How It Works</a>
+    <section class="bg-brand-dark px-4 sm:px-6 pt-10 pb-10 md:pt-16 md:pb-16">
+        <div class="hero-image-card relative max-w-7xl mx-auto rounded-2xl overflow-hidden">
+            <div class="relative px-6 py-20 md:py-32 text-center">
+                <div id="test-banner" class="hidden inline-flex items-center gap-2 bg-red-500/15 border border-red-500/50 px-6 py-2.5 rounded-full mb-6">
+                    <span class="text-red-300 font-heading text-xs md:text-sm uppercase tracking-wider font-bold">⚠ TEST MODE — $1 LIVE CHARGES</span>
+                </div>
+                <p id="founder-text" class="hidden items-center justify-center gap-2 text-brand-gold font-heading uppercase tracking-widest text-sm md:text-base font-bold mb-5">
+                    <span class="pulse-dot"></span>
+                    <span><span id="founder-spots-left">—</span> Founder Spots Left</span>
+                </p>
+                <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider text-brand-light mb-4 font-heading">
+                    24/7 Key Fob Access
+                </h1>
+                <p class="text-xl md:text-2xl text-brand-gold font-heading uppercase tracking-wide mb-6">
+                    Train on your schedule. On your terms.
+                </p>
+                <p class="text-lg text-brand-gray max-w-3xl mx-auto mb-8">
+                    130+ hours of gym access every week. Come in before work, after the kids are down, between meetings, on the weekend — whenever fits your life.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#pricing" class="btn btn-primary font-bold px-8 py-4 rounded-lg text-lg">View Pricing</a>
+                    <a href="#how-it-works" class="btn btn-secondary font-bold px-8 py-4 rounded-lg text-lg">How It Works</a>
+                </div>
             </div>
         </div>
     </section>

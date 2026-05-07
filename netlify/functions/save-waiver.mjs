@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 
 const VALID_TIERS = ['class-fob', 'fob-only'];
 const VALID_PEOPLE = ['solo', 'couple'];
+const VALID_INTERVALS = ['monthly', 'annual'];
 const VALID_MODES = ['founder', 'presale', 'regular'];
 
 const REQUIRED_MEMBER_FIELDS = [
@@ -32,10 +33,14 @@ export default async (req) => {
     return bad('Invalid JSON');
   }
 
-  const { tier, people, mode, price_usd, member, signed_at, user_agent } = payload;
+  const { tier, people, interval, mode, price_usd, member, signed_at, user_agent } = payload;
 
-  if (!VALID_TIERS.includes(tier) || !VALID_PEOPLE.includes(people) || !VALID_MODES.includes(mode)) {
-    return bad('Invalid tier/people/mode');
+  if (!VALID_TIERS.includes(tier)
+      || !VALID_PEOPLE.includes(people)
+      || !VALID_INTERVALS.includes(interval)
+      || !VALID_MODES.includes(mode)
+      || (interval === 'monthly' && mode === 'founder')) {
+    return bad('Invalid tier/people/interval/mode');
   }
   if (!member || typeof member !== 'object') return bad('Missing member info');
 
@@ -66,7 +71,7 @@ export default async (req) => {
 
   const record = {
     waiver_id,
-    tier, people, mode, price_usd,
+    tier, people, interval, mode, price_usd,
     member,
     signed_at: signed_at || new Date().toISOString(),
     user_agent: user_agent || null,

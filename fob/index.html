@@ -239,6 +239,10 @@
                     <button class="toggle-btn active px-6 py-2 rounded-full font-heading uppercase tracking-wide text-sm" data-people="solo">Solo</button>
                     <button class="toggle-btn px-6 py-2 rounded-full font-heading uppercase tracking-wide text-sm" data-people="couple">Couple</button>
                 </div>
+                <div class="bg-brand-dark border border-brand-gray/20 rounded-full p-1 flex">
+                    <button class="toggle-btn active px-6 py-2 rounded-full font-heading uppercase tracking-wide text-sm" data-interval="annual">Annual</button>
+                    <button class="toggle-btn px-6 py-2 rounded-full font-heading uppercase tracking-wide text-sm" data-interval="monthly">Monthly</button>
+                </div>
             </div>
 
             <!-- Pricing cards -->
@@ -258,7 +262,7 @@
                     <div class="my-6">
                         <div class="flex items-baseline gap-3">
                             <span class="text-5xl font-bold text-brand-light font-heading" data-price-display="class-fob">$500</span>
-                            <span class="text-brand-gray">/ year</span>
+                            <span class="text-brand-gray" data-interval-label="class-fob">/ year</span>
                         </div>
                         <div class="mt-2 text-sm">
                             <span class="price-strike text-brand-gray" data-strike="class-fob">$700</span>
@@ -268,7 +272,7 @@
                     <ul class="space-y-2 text-brand-gray text-sm mb-6">
                         <li class="flex gap-2"><span class="text-brand-gold">✓</span> Keep your existing class membership</li>
                         <li class="flex gap-2"><span class="text-brand-gold">✓</span> 24/7 fob access on top</li>
-                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> Annual paid up front</li>
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> <span data-billing="class-fob">Auto-renews yearly</span></li>
                     </ul>
                     <button class="w-full btn btn-primary font-bold py-3 rounded-lg" onclick="event.stopPropagation(); checkout('class-fob');">Buy Class + Fob</button>
                     <a href="https://moonshotcrossfit.wodify.com/OnlineSalesPage/Main?q=Memberships%7CLocationId%3D9972" target="_blank" rel="noopener" class="block text-center text-brand-gold hover:underline text-sm mt-3">
@@ -289,7 +293,7 @@
                     <div class="my-6">
                         <div class="flex items-baseline gap-3">
                             <span class="text-5xl font-bold text-brand-light font-heading" data-price-display="fob-only">$1,900</span>
-                            <span class="text-brand-gray">/ year</span>
+                            <span class="text-brand-gray" data-interval-label="fob-only">/ year</span>
                         </div>
                         <div class="mt-2 text-sm">
                             <span class="price-strike text-brand-gray" data-strike="fob-only">$2,200</span>
@@ -299,7 +303,7 @@
                     <ul class="space-y-2 text-brand-gray text-sm mb-6">
                         <li class="flex gap-2"><span class="text-brand-gold">✓</span> Full 24/7 facility access</li>
                         <li class="flex gap-2"><span class="text-brand-gold">✓</span> Run your own program</li>
-                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> Annual paid up front</li>
+                        <li class="flex gap-2"><span class="text-brand-gold">✓</span> <span data-billing="fob-only">Auto-renews yearly</span></li>
                     </ul>
                     <button class="w-full btn btn-primary font-bold py-3 rounded-lg" onclick="event.stopPropagation(); checkout('fob-only');">Buy Fob-Only</button>
                 </div>
@@ -385,7 +389,14 @@
                         <span>What happens after I pay?</span>
                         <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </summary>
-                    <p class="text-brand-gray mt-4">You'll get an emailed receipt and confirmation immediately. Once the fob system is installed, we'll reach out to schedule fob pickup and a quick orientation. Your annual term begins the day your fob is activated, not the day you pay.</p>
+                    <p class="text-brand-gray mt-4">You'll get an emailed receipt and confirmation immediately. Once the fob system is installed, we'll reach out to schedule fob pickup and a quick orientation.</p>
+                </details>
+                <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5">
+                    <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
+                        <span>Does my membership auto-renew?</span>
+                        <svg class="faq-arrow w-5 h-5 text-brand-gold flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <p class="text-brand-gray mt-4">Yes. Annual plans bill once now and renew yearly at the same rate (Founders keep their Founder rate forever). Monthly plans bill the same date each month. Card stays on file securely with Stripe — we never see it. Cancel anytime by emailing <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gold hover:underline">info@moonshotcrossfit.com</a> before your next billing date.</p>
                 </details>
                 <details class="bg-brand-dark border border-brand-gray/20 rounded-lg p-5">
                     <summary class="flex justify-between items-center font-heading text-brand-light text-lg">
@@ -426,15 +437,27 @@
 
     <script>
         // ─── Pricing State ────────────────────────────────────────────
+        // Founder discount applies to ANNUAL only (per FB post: "first 10 annual sign-ups").
         const PRICES = {
-            // [people][tier] = { founder, presale }
             solo: {
-                'class-fob': { founder: 500, presale: 600, regular: 700 },
-                'fob-only': { founder: 1900, presale: 2000, regular: 2200 }
+                'class-fob': {
+                    monthly: { presale: 55, regular: 65 },
+                    annual:  { founder: 500, presale: 600, regular: 700 }
+                },
+                'fob-only': {
+                    monthly: { presale: 185, regular: 205 },
+                    annual:  { founder: 1900, presale: 2000, regular: 2200 }
+                }
             },
             couple: {
-                'class-fob': { founder: 740, presale: 840, regular: 960 },
-                'fob-only': { founder: 3200, presale: 3300, regular: 3600 }
+                'class-fob': {
+                    monthly: { presale: 80, regular: 90 },
+                    annual:  { founder: 740, presale: 840, regular: 960 }
+                },
+                'fob-only': {
+                    monthly: { presale: 305, regular: 335 },
+                    annual:  { founder: 3200, presale: 3300, regular: 3600 }
+                }
             }
         };
 
@@ -444,8 +467,9 @@
 
         let state = {
             people: 'solo',
-            founderRemaining: null,  // null until fetched
-            mode: 'presale',          // 'founder' | 'presale' | 'regular' (regular = manual flip later)
+            interval: 'annual',       // 'monthly' | 'annual'
+            founderRemaining: null,
+            pricingMode: 'presale',   // 'founder' | 'presale' | 'regular'
             testToken
         };
 
@@ -459,15 +483,24 @@
                 const r = await fetch('/.netlify/functions/founder-count', { cache: 'no-store' });
                 const data = await r.json();
                 state.founderRemaining = data.remaining;
-                state.mode = data.remaining > 0 ? 'founder' : 'presale';
+                recomputePricingMode();
                 renderFounderUI();
                 renderPricing();
             } catch (e) {
                 console.error('Failed to load founder count', e);
                 state.founderRemaining = 0;
-                state.mode = 'presale';
+                recomputePricingMode();
                 renderFounderUI();
                 renderPricing();
+            }
+        }
+
+        function recomputePricingMode() {
+            // Founder applies only to annual + slots remaining.
+            if (state.interval === 'annual' && state.founderRemaining > 0) {
+                state.pricingMode = 'founder';
+            } else {
+                state.pricingMode = 'presale';
             }
         }
 
@@ -494,19 +527,28 @@
 
         function renderPricing() {
             const tiers = ['class-fob', 'fob-only'];
+            const isAnnual = state.interval === 'annual';
+            const intervalLabelText = isAnnual ? '/ year' : '/ month';
+            const billingText = isAnnual ? 'Auto-renews yearly' : 'Auto-renews monthly · cancel anytime';
+
             tiers.forEach(tier => {
-                const prices = PRICES[state.people][tier];
+                const prices = PRICES[state.people][tier][state.interval];
                 const display = document.querySelector(`[data-price-display="${tier}"]`);
                 const strike = document.querySelector(`[data-strike="${tier}"]`);
                 const savings = document.querySelector(`[data-savings="${tier}"]`);
+                const intervalLabel = document.querySelector(`[data-interval-label="${tier}"]`);
+                const billing = document.querySelector(`[data-billing="${tier}"]`);
 
-                if (state.mode === 'founder') {
+                intervalLabel.textContent = intervalLabelText;
+                billing.textContent = billingText;
+
+                if (state.pricingMode === 'founder' && isAnnual) {
                     display.textContent = '$' + prices.founder.toLocaleString();
                     strike.textContent = '$' + prices.regular.toLocaleString();
                     strike.style.display = '';
                     savings.textContent = `Save $${prices.regular - prices.founder} — Founder pricing`;
                     savings.style.display = '';
-                } else if (state.mode === 'presale') {
+                } else if (state.pricingMode === 'presale') {
                     display.textContent = '$' + prices.presale.toLocaleString();
                     strike.textContent = '$' + prices.regular.toLocaleString();
                     strike.style.display = '';
@@ -527,9 +569,16 @@
         // ─── Toggles ──────────────────────────────────────────────────
         document.querySelectorAll('.toggle-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                state.people = btn.dataset.people;
+                if (btn.dataset.people) {
+                    document.querySelectorAll('.toggle-btn[data-people]').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.people = btn.dataset.people;
+                } else if (btn.dataset.interval) {
+                    document.querySelectorAll('.toggle-btn[data-interval]').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.interval = btn.dataset.interval;
+                    recomputePricingMode();
+                }
                 renderPricing();
             });
         });
@@ -543,7 +592,8 @@
             const params = new URLSearchParams({
                 tier,
                 people: state.people,
-                mode: state.mode
+                interval: state.interval,
+                mode: state.pricingMode
             });
             if (isTestMode) params.set('test', state.testToken);
             window.location.href = `/fob/waiver.html?${params.toString()}`;

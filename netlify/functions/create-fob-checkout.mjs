@@ -3,14 +3,27 @@ import { getStore } from '@netlify/blobs';
 
 const SITE_URL = process.env.URL || 'https://moonshotcrossfit.com';
 
+// Cents. Founder applies to annual only.
 const PRICES = {
   solo: {
-    'class-fob': { founder: 50000, presale: 60000, regular: 70000 },
-    'fob-only': { founder: 190000, presale: 200000, regular: 220000 }
+    'class-fob': {
+      monthly: { presale: 5500,  regular: 6500 },
+      annual:  { founder: 50000, presale: 60000, regular: 70000 }
+    },
+    'fob-only': {
+      monthly: { presale: 18500,  regular: 20500 },
+      annual:  { founder: 190000, presale: 200000, regular: 220000 }
+    }
   },
   couple: {
-    'class-fob': { founder: 74000, presale: 84000, regular: 96000 },
-    'fob-only': { founder: 320000, presale: 330000, regular: 360000 }
+    'class-fob': {
+      monthly: { presale: 8000,  regular: 9000 },
+      annual:  { founder: 74000, presale: 84000, regular: 96000 }
+    },
+    'fob-only': {
+      monthly: { presale: 30500,  regular: 33500 },
+      annual:  { founder: 320000, presale: 330000, regular: 360000 }
+    }
   }
 };
 
@@ -51,10 +64,15 @@ export default async (req) => {
     return bad('Invalid JSON');
   }
 
-  const { waiver_id, tier, people, mode, test_token } = payload;
-  if (!waiver_id || !PRICES[people]?.[tier]) return bad('Missing or invalid checkout params');
+  const { waiver_id, tier, people, interval, mode, test_token } = payload;
+  if (!waiver_id
+      || !['monthly','annual'].includes(interval)
+      || !PRICES[people]?.[tier]?.[interval]
+      || (interval === 'monthly' && mode === 'founder')) {
+    return bad('Missing or invalid checkout params');
+  }
 
-  // Test mode: requires server-side token match. $1 charge, no founder slot consumed.
+  // Test mode: token-gated. $1 subscription matching the chosen interval.
   const isTestMode = test_token && process.env.FOB_TEST_TOKEN && test_token === process.env.FOB_TEST_TOKEN;
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
@@ -68,27 +86,35 @@ export default async (req) => {
   let founderClaimed = false;
   const founderStore = getStore(FOUNDER_STORE);
 
-  if (!isTestMode && mode === 'founder') {
+  // Founder only on annual + slot available, never in test mode.
+  if (!isTestMode && interval === 'annual' && mode === 'founder') {
     const claim = await claimFounderSlot(founderStore);
     if (!claim.claimed) finalMode = 'presale';
     else founderClaimed = true;
   }
 
-  const amount = isTestMode ? 100 : PRICES[people][tier][finalMode];
+  const amount = isTestMode ? 100 : PRICES[people][tier][interval][finalMode];
   if (!amount) return bad('Pricing lookup failed', 500);
 
+  const stripeInterval = interval === 'annual' ? 'year' : 'month';
+  const intervalLabel = interval === 'annual' ? 'Annual' : 'Monthly';
+
   const productName = isTestMode
-    ? `TEST — ${TIER_LABELS[tier]} (${people === 'couple' ? 'Couple' : 'Solo'})`
-    : `Moonshot 24/7 Key Fob — ${TIER_LABELS[tier]} (${people === 'couple' ? 'Couple' : 'Solo'})`;
+    ? `TEST — ${TIER_LABELS[tier]} (${people === 'couple' ? 'Couple' : 'Solo'}, ${intervalLabel})`
+    : `Moonshot 24/7 Key Fob — ${TIER_LABELS[tier]} (${people === 'couple' ? 'Couple' : 'Solo'}, ${intervalLabel})`;
+
   const productDesc = isTestMode
-    ? 'TEST MODE — $1 live-mode smoke test. Refund after verification.'
+    ? `TEST MODE — $1/${stripeInterval} smoke test. Cancel + refund after verification.`
     : (finalMode === 'founder'
-        ? 'Founders Club — Annual prepay. $100 off pre-sale + Founder status.'
-        : (finalMode === 'presale' ? 'Pre-sale annual prepay.' : 'Annual prepay.'));
+        ? `Founders Club — auto-renews yearly at the Founder rate.`
+        : (interval === 'annual'
+            ? `Auto-renews yearly. Cancel anytime.`
+            : `Auto-renews monthly. Cancel anytime.`));
 
   await waiverStore.setJSON(waiver_id, {
     ...waiver,
     final_mode: isTestMode ? 'test' : finalMode,
+    final_interval: interval,
     final_amount_usd: amount / 100,
     founder_claimed: founderClaimed,
     test_mode: isTestMode
@@ -96,27 +122,34 @@ export default async (req) => {
 
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: 'payment',
+      mode: 'subscription',
       payment_method_types: ['card'],
       customer_email: waiver.member.email,
       line_items: [{
         price_data: {
           currency: 'usd',
           product_data: { name: productName, description: productDesc },
-          unit_amount: amount
+          unit_amount: amount,
+          recurring: { interval: stripeInterval }
         },
         quantity: 1
       }],
       metadata: {
-        waiver_id, tier, people, mode: isTestMode ? 'test' : finalMode,
+        waiver_id, tier, people, interval,
+        mode: isTestMode ? 'test' : finalMode,
         founder_claimed: String(founderClaimed),
         test_mode: String(isTestMode),
         member_email: waiver.member.email,
         member_name: waiver.member.full_name
       },
-      payment_intent_data: {
+      subscription_data: {
         description: `${productName} — ${waiver.member.full_name}`,
-        metadata: { waiver_id, tier, people, mode: isTestMode ? 'test' : finalMode, test_mode: String(isTestMode) }
+        metadata: {
+          waiver_id, tier, people, interval,
+          mode: isTestMode ? 'test' : finalMode,
+          founder_claimed: String(founderClaimed),
+          test_mode: String(isTestMode)
+        }
       },
       success_url: `${SITE_URL}/fob/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${SITE_URL}/fob/cancel.html`,

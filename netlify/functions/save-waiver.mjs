@@ -1,5 +1,5 @@
-const { getStore } = require('@netlify/blobs');
-const crypto = require('crypto');
+import { getStore } from '@netlify/blobs';
+import crypto from 'node:crypto';
 
 const VALID_TIERS = ['class-fob', 'fob-only'];
 const VALID_PEOPLE = ['solo', 'couple'];
@@ -15,59 +15,51 @@ const REQUIRED_MEMBER_FIELDS = [
 const REQUIRED_ACK = ['ack_read', 'ack_risk', 'ack_release', 'ack_rules', 'ack_age'];
 const REQUIRED_COUPLE_FIELDS = ['member2_full_name', 'member2_dob', 'member2_email', 'member2_phone', 'member2_signature'];
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method not allowed' };
-  }
+function bad(msg, status = 400) {
+  return new Response(JSON.stringify({ error: msg }), {
+    status,
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
+
+export default async (req) => {
+  if (req.method !== 'POST') return bad('Method not allowed', 405);
 
   let payload;
   try {
-    payload = JSON.parse(event.body || '{}');
+    payload = await req.json();
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON' }) };
+    return bad('Invalid JSON');
   }
 
   const { tier, people, mode, price_usd, member, signed_at, user_agent } = payload;
 
   if (!VALID_TIERS.includes(tier) || !VALID_PEOPLE.includes(people) || !VALID_MODES.includes(mode)) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid tier/people/mode' }) };
+    return bad('Invalid tier/people/mode');
   }
-
-  if (!member || typeof member !== 'object') {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Missing member info' }) };
-  }
+  if (!member || typeof member !== 'object') return bad('Missing member info');
 
   for (const f of REQUIRED_MEMBER_FIELDS) {
-    if (!member[f] || String(member[f]).trim() === '') {
-      return { statusCode: 400, body: JSON.stringify({ error: `Missing required field: ${f}` }) };
-    }
+    if (!member[f] || String(member[f]).trim() === '') return bad(`Missing required field: ${f}`);
   }
-
   for (const a of REQUIRED_ACK) {
-    if (!member[a]) {
-      return { statusCode: 400, body: JSON.stringify({ error: `Missing acknowledgment: ${a}` }) };
-    }
+    if (!member[a]) return bad(`Missing acknowledgment: ${a}`);
   }
-
   if (member.signature.trim().toLowerCase() !== member.full_name.trim().toLowerCase()) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Signature must match full legal name' }) };
+    return bad('Signature must match full legal name');
   }
-
   if (people === 'couple') {
     for (const f of REQUIRED_COUPLE_FIELDS) {
-      if (!member[f] || String(member[f]).trim() === '') {
-        return { statusCode: 400, body: JSON.stringify({ error: `Missing required couple field: ${f}` }) };
-      }
+      if (!member[f] || String(member[f]).trim() === '') return bad(`Missing required couple field: ${f}`);
     }
     if (member.member2_signature.trim().toLowerCase() !== member.member2_full_name.trim().toLowerCase()) {
-      return { statusCode: 400, body: JSON.stringify({ error: "Second member's signature must match their full legal name" }) };
+      return bad("Second member's signature must match their full legal name");
     }
   }
 
-  // Capture network metadata
-  const ip = event.headers['x-nf-client-connection-ip']
-    || event.headers['client-ip']
-    || (event.headers['x-forwarded-for'] || '').split(',')[0].trim()
+  const ip = req.headers.get('x-nf-client-connection-ip')
+    || req.headers.get('client-ip')
+    || (req.headers.get('x-forwarded-for') || '').split(',')[0].trim()
     || 'unknown';
 
   const waiver_id = crypto.randomUUID();
@@ -89,13 +81,13 @@ exports.handler = async (event) => {
     const store = getStore('fob-waivers');
     await store.setJSON(waiver_id, record);
     console.log(`[waiver:saved] id=${waiver_id} tier=${tier} people=${people} mode=${mode} email=${member.email}`);
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ waiver_id })
-    };
+    return new Response(JSON.stringify({ waiver_id }), {
+      headers: { 'Content-Type': 'application/json' }
+    });
   } catch (err) {
     console.error('save-waiver error', err);
-    return { statusCode: 500, body: JSON.stringify({ error: 'Failed to save waiver' }) };
+    return bad('Failed to save waiver', 500);
   }
 };
+
+export const config = { path: '/.netlify/functions/save-waiver' };

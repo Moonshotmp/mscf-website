@@ -1,37 +1,30 @@
-const Stripe = require('stripe');
-const { getStore } = require('@netlify/blobs');
+import Stripe from 'stripe';
+import { getStore } from '@netlify/blobs';
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method not allowed' };
+export default async (req) => {
+  if (req.method !== 'POST') {
+    return new Response('Method not allowed', { status: 405 });
   }
 
-  const sig = event.headers['stripe-signature'];
+  const sig = req.headers.get('stripe-signature');
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-  if (!webhookSecret) {
-    console.error('STRIPE_WEBHOOK_SECRET env var missing');
-    return { statusCode: 500, body: 'Webhook not configured' };
-  }
-  if (!process.env.STRIPE_SECRET_KEY) {
-    console.error('STRIPE_SECRET_KEY env var missing');
-    return { statusCode: 500, body: 'Webhook not configured' };
+  if (!webhookSecret || !process.env.STRIPE_SECRET_KEY) {
+    console.error('Stripe env vars missing');
+    return new Response('Webhook not configured', { status: 500 });
   }
 
-  const stripe = Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
+
+  // Stripe needs the raw, unparsed body.
+  const rawBody = await req.text();
 
   let stripeEvent;
   try {
-    // event.body is the raw body when Netlify sets `external_node_modules` correctly,
-    // but for webhook signature verification we need the *raw* body. Netlify provides
-    // it as a string for non-base64 requests.
-    const rawBody = event.isBase64Encoded
-      ? Buffer.from(event.body, 'base64')
-      : event.body;
     stripeEvent = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err) {
     console.error('Webhook signature verification failed:', err.message);
-    return { statusCode: 400, body: `Webhook Error: ${err.message}` };
+    return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
 
   try {
@@ -64,12 +57,10 @@ exports.handler = async (event) => {
         };
         await waiverStore.setJSON(waiver_id, updated);
 
-        // Audit log indexed by date for easy retrieval
         const ordersStore = getStore('fob-orders');
         await ordersStore.setJSON(session.id, {
           session_id: session.id,
-          waiver_id,
-          tier, people, mode,
+          waiver_id, tier, people, mode,
           founder: founder_claimed === 'true',
           amount_cents: session.amount_total,
           email: session.customer_details?.email || waiver.member.email,
@@ -82,7 +73,6 @@ exports.handler = async (event) => {
       }
 
       case 'checkout.session.expired': {
-        // Session expired without payment. If a founder slot was claimed, restore it.
         const session = stripeEvent.data.object;
         const { waiver_id, founder_claimed } = session.metadata || {};
         if (founder_claimed === 'true') {
@@ -98,13 +88,17 @@ exports.handler = async (event) => {
       }
 
       default:
-        // Ignore other event types
         break;
     }
 
-    return { statusCode: 200, body: JSON.stringify({ received: true }) };
+    return new Response(JSON.stringify({ received: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
   } catch (err) {
     console.error('Webhook handler error:', err);
-    return { statusCode: 500, body: 'Webhook handler failed' };
+    return new Response('Webhook handler failed', { status: 500 });
   }
 };
+
+export const config = { path: '/.netlify/functions/stripe-webhook' };

@@ -3,9 +3,7 @@
 
 [functions]
   directory = "netlify/functions"
-  # zisi (default) preserves Netlify's blob env injection.
-  # esbuild was stripping it in legacy v1 (exports.handler) functions.
-  node_bundler = "zisi"
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/fob/*"

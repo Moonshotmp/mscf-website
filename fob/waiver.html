@@ -48,12 +48,12 @@
         <div id="order-summary" class="bg-brand-slate/40 border border-brand-gold/30 rounded-xl p-6 mb-8">
             <div class="flex justify-between items-start gap-4 flex-wrap">
                 <div>
-                    <div class="text-brand-gold font-heading uppercase tracking-wider text-sm" id="summary-mode">FOUNDER PRICING</div>
+                    <div class="text-brand-gold font-heading uppercase tracking-wider text-sm" id="summary-mode">STANDARD PRICING</div>
                     <h2 class="text-xl font-bold text-brand-light font-heading" id="summary-tier">Class + Fob • Solo</h2>
                     <p class="text-brand-gray text-sm mt-1" id="summary-desc">Annual membership</p>
                 </div>
                 <div class="text-right">
-                    <div class="text-3xl font-bold text-brand-light font-heading" id="summary-price">$500</div>
+                    <div class="text-3xl font-bold text-brand-light font-heading" id="summary-price">$700</div>
                     <div class="text-brand-gray text-sm" id="summary-interval">/ year</div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                     <p>I grant Moonshot CrossFit permission to use any photographs, video recordings, or surveillance footage in which I appear for security, marketing, social media, and promotional purposes, without compensation, in perpetuity. I understand that I may revoke marketing/promotional consent in writing at any time, but security/surveillance use will continue regardless.</p>
 
                     <h4>9. Term, Renewal, Cancellation & Refunds</h4>
-                    <p>My membership term begins on the date my fob is activated, not the date of payment. <strong>This is an auto-renewing subscription:</strong> annual plans renew yearly and monthly plans renew monthly at the same rate I selected at signup (Founder rates remain locked at the Founder rate for the life of the subscription), charged automatically to the payment method on file. I may cancel at any time by emailing <strong>info@moonshotcrossfit.com</strong> before my next billing date; cancellation stops future charges but does not entitle me to a refund of amounts already paid. Already-paid periods are non-refundable except (a) if Moonshot CrossFit cancels the program prior to my fob activation, in which case I receive a full refund, or (b) at the sole discretion of Moonshot CrossFit. My payment method is securely stored by Stripe; Moonshot CrossFit never sees or stores raw card details.</p>
+                    <p>My membership term begins on the date my fob is activated, not the date of payment. <strong>This is an auto-renewing subscription:</strong> annual plans renew yearly and monthly plans renew monthly at the same rate I selected at signup, charged automatically to the payment method on file. I may cancel at any time by emailing <strong>info@moonshotcrossfit.com</strong> before my next billing date; cancellation stops future charges but does not entitle me to a refund of amounts already paid. Already-paid periods are non-refundable except (a) if Moonshot CrossFit cancels the program prior to my fob activation, in which case I receive a full refund, or (b) at the sole discretion of Moonshot CrossFit. My payment method is securely stored by Stripe; Moonshot CrossFit never sees or stores raw card details.</p>
 
                     <h4>10. Governing Law & Severability</h4>
                     <p>This agreement is governed by the laws of the State of Illinois. Any disputes shall be resolved exclusively in the state or federal courts located in Cook County, Illinois. If any provision is found unenforceable, the remaining provisions remain in full force and effect.</p>
@@ -188,61 +188,44 @@
         const tier = params.get('tier');           // 'class-fob' | 'fob-only'
         const people = params.get('people');       // 'solo' | 'couple'
         const interval = params.get('interval');   // 'monthly' | 'annual'
-        const mode = params.get('mode');           // 'founder' | 'presale' | 'regular'
         const testToken = params.get('test') || '';
         const isTestMode = testToken.length > 0;
 
+        // Standard pricing only. Founder/pre-sale tiers retired 2026-05-31.
         const PRICES = {
             solo: {
-                'class-fob': {
-                    monthly: { presale: 55, regular: 65 },
-                    annual:  { founder: 500, presale: 600, regular: 700 }
-                },
-                'fob-only': {
-                    monthly: { presale: 185, regular: 205 },
-                    annual:  { founder: 1900, presale: 2000, regular: 2200 }
-                }
+                'class-fob': { monthly: 65,  annual: 700 },
+                'fob-only':  { monthly: 205, annual: 2200 }
             },
             couple: {
-                'class-fob': {
-                    monthly: { presale: 80, regular: 90 },
-                    annual:  { founder: 740, presale: 840, regular: 960 }
-                },
-                'fob-only': {
-                    monthly: { presale: 305, regular: 335 },
-                    annual:  { founder: 3200, presale: 3300, regular: 3600 }
-                }
+                'class-fob': { monthly: 90,  annual: 960 },
+                'fob-only':  { monthly: 335, annual: 3600 }
             }
         };
 
         const TIER_LABELS = { 'class-fob': 'Class + Fob', 'fob-only': 'Fob-Only' };
 
         // Validate
-        if (!tier || !people || !interval || !mode
-            || !PRICES[people]?.[tier]?.[interval]
-            || (interval === 'monthly' && mode === 'founder')) {
+        if (!tier || !people || !interval || !PRICES[people]?.[tier]?.[interval]) {
             window.location.href = '/fob/';
         }
 
-        // Founder doesn't apply to monthly; collapse to presale.
-        const effectiveMode = (interval === 'monthly' && mode === 'founder') ? 'presale' : mode;
-        const fullPrice = PRICES[people][tier][interval][effectiveMode];
+        const effectiveMode = 'regular';
+        const fullPrice = PRICES[people][tier][interval];
         const displayPrice = isTestMode ? 1 : fullPrice;
         const intervalLabel = interval === 'annual' ? '/ year' : '/ month';
 
         document.getElementById('summary-tier').textContent = `${TIER_LABELS[tier]} • ${people === 'couple' ? 'Couple' : 'Solo'} • ${interval === 'annual' ? 'Annual' : 'Monthly'}`;
         document.getElementById('summary-mode').textContent = isTestMode
             ? '⚠ TEST MODE — $1 LIVE CHARGE'
-            : (effectiveMode === 'founder' ? '🌟 Founder Pricing' : (effectiveMode === 'presale' ? 'Pre-Sale Pricing' : 'Standard Pricing'));
+            : 'Standard Pricing';
         document.getElementById('summary-price').textContent = '$' + displayPrice.toLocaleString();
         // Append interval to the price line via a data attribute hack: just keep the existing label structure
         const summaryDescEl = document.getElementById('summary-desc');
         if (isTestMode) {
             summaryDescEl.textContent = 'Smoke-test only. Refund yourself in Stripe Dashboard.';
         } else if (interval === 'annual') {
-            summaryDescEl.textContent = effectiveMode === 'founder'
-                ? 'Billed once now, auto-renews yearly at Founder rate.'
-                : 'Billed once now, auto-renews yearly. Cancel anytime.';
+            summaryDescEl.textContent = 'Billed once now, auto-renews yearly. Cancel anytime.';
         } else {
             summaryDescEl.textContent = 'Billed monthly. Cancel anytime.';
         }

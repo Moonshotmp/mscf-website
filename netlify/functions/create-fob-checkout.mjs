@@ -3,50 +3,25 @@ import { getStore } from '@netlify/blobs';
 
 const SITE_URL = process.env.URL || 'https://moonshotcrossfit.com';
 
-// Cents. Founder applies to annual only.
+// Cents. Standard pricing only — founder/pre-sale tiers retired 2026-05-31.
 const PRICES = {
   solo: {
-    'class-fob': {
-      monthly: { presale: 5500,  regular: 6500 },
-      annual:  { founder: 50000, presale: 60000, regular: 70000 }
-    },
-    'fob-only': {
-      monthly: { presale: 18500,  regular: 20500 },
-      annual:  { founder: 190000, presale: 200000, regular: 220000 }
-    }
+    'class-fob': { monthly: 6500,  annual: 70000 },
+    'fob-only':  { monthly: 20500, annual: 220000 }
   },
   couple: {
-    'class-fob': {
-      monthly: { presale: 8000,  regular: 9000 },
-      annual:  { founder: 74000, presale: 84000, regular: 96000 }
-    },
-    'fob-only': {
-      monthly: { presale: 30500,  regular: 33500 },
-      annual:  { founder: 320000, presale: 330000, regular: 360000 }
-    }
+    'class-fob': { monthly: 9000,  annual: 96000 },
+    'fob-only':  { monthly: 33500, annual: 360000 }
   }
 };
 
 const TIER_LABELS = { 'class-fob': 'Class + Fob', 'fob-only': 'Fob-Only' };
-
-const FOUNDER_STORE = 'fob';
-const FOUNDER_KEY = 'founder-count';
-const TOTAL_FOUNDER_SLOTS = 10;
 
 function bad(msg, status = 400) {
   return new Response(JSON.stringify({ error: msg }), {
     status,
     headers: { 'Content-Type': 'application/json' }
   });
-}
-
-async function claimFounderSlot(store) {
-  let state = await store.get(FOUNDER_KEY, { type: 'json' });
-  if (!state) state = { remaining: TOTAL_FOUNDER_SLOTS, total: TOTAL_FOUNDER_SLOTS };
-  if (state.remaining <= 0) return { claimed: false, remaining: 0 };
-  state.remaining = state.remaining - 1;
-  await store.setJSON(FOUNDER_KEY, state);
-  return { claimed: true, remaining: state.remaining };
 }
 
 export default async (req) => {
@@ -64,11 +39,10 @@ export default async (req) => {
     return bad('Invalid JSON');
   }
 
-  const { waiver_id, tier, people, interval, mode, test_token } = payload;
+  const { waiver_id, tier, people, interval, test_token } = payload;
   if (!waiver_id
       || !['monthly','annual'].includes(interval)
-      || !PRICES[people]?.[tier]?.[interval]
-      || (interval === 'monthly' && mode === 'founder')) {
+      || !PRICES[people]?.[tier]?.[interval]) {
     return bad('Missing or invalid checkout params');
   }
 
@@ -82,18 +56,10 @@ export default async (req) => {
   if (!waiver) return bad('Waiver not found — please complete the waiver form');
   if (waiver.status === 'paid') return bad('This waiver has already been used for a paid membership');
 
-  let finalMode = mode;
-  let founderClaimed = false;
-  const founderStore = getStore(FOUNDER_STORE);
+  // Standard pricing for all live signups.
+  const finalMode = 'regular';
 
-  // Founder only on annual + slot available, never in test mode.
-  if (!isTestMode && interval === 'annual' && mode === 'founder') {
-    const claim = await claimFounderSlot(founderStore);
-    if (!claim.claimed) finalMode = 'presale';
-    else founderClaimed = true;
-  }
-
-  const amount = isTestMode ? 100 : PRICES[people][tier][interval][finalMode];
+  const amount = isTestMode ? 100 : PRICES[people][tier][interval];
   if (!amount) return bad('Pricing lookup failed', 500);
 
   const stripeInterval = interval === 'annual' ? 'year' : 'month';
@@ -105,18 +71,16 @@ export default async (req) => {
 
   const productDesc = isTestMode
     ? `TEST MODE — $1/${stripeInterval} smoke test. Cancel + refund after verification.`
-    : (finalMode === 'founder'
-        ? `Founders Club — auto-renews yearly at the Founder rate.`
-        : (interval === 'annual'
-            ? `Auto-renews yearly. Cancel anytime.`
-            : `Auto-renews monthly. Cancel anytime.`));
+    : (interval === 'annual'
+        ? `Auto-renews yearly. Cancel anytime.`
+        : `Auto-renews monthly. Cancel anytime.`);
 
   await waiverStore.setJSON(waiver_id, {
     ...waiver,
     final_mode: isTestMode ? 'test' : finalMode,
     final_interval: interval,
     final_amount_usd: amount / 100,
-    founder_claimed: founderClaimed,
+    founder_claimed: false,
     test_mode: isTestMode
   });
 
@@ -137,7 +101,7 @@ export default async (req) => {
       metadata: {
         waiver_id, tier, people, interval,
         mode: isTestMode ? 'test' : finalMode,
-        founder_claimed: String(founderClaimed),
+        founder_claimed: 'false',
         test_mode: String(isTestMode),
         member_email: waiver.member.email,
         member_name: waiver.member.full_name
@@ -147,7 +111,7 @@ export default async (req) => {
         metadata: {
           waiver_id, tier, people, interval,
           mode: isTestMode ? 'test' : finalMode,
-          founder_claimed: String(founderClaimed),
+          founder_claimed: 'false',
           test_mode: String(isTestMode)
         }
       },
@@ -158,20 +122,13 @@ export default async (req) => {
       allow_promotion_codes: false
     });
 
-    console.log(`[checkout:created] waiver=${waiver_id} session=${session.id} amount=${amount} mode=${finalMode} founder_claimed=${founderClaimed}`);
+    console.log(`[checkout:created] waiver=${waiver_id} session=${session.id} amount=${amount} mode=${finalMode}`);
 
     return new Response(JSON.stringify({ url: session.url, session_id: session.id, final_mode: finalMode }), {
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (err) {
     console.error('Stripe session create failed', err);
-    if (founderClaimed) {
-      const cur = await founderStore.get(FOUNDER_KEY, { type: 'json' });
-      if (cur && cur.remaining < TOTAL_FOUNDER_SLOTS) {
-        cur.remaining = cur.remaining + 1;
-        await founderStore.setJSON(FOUNDER_KEY, cur);
-      }
-    }
     return bad('Could not create checkout session. Please try again.', 500);
   }
 };

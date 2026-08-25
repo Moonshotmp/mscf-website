@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>You're Registered | HYROX Race Simulation | Moonshot CrossFit</title>
+    <link rel="stylesheet" href="/shared/tailwind.css">
+    <link rel="stylesheet" href="/shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y74MV32LC2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y74MV32LC2');
+    </script>
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1676368639293967');
+    fbq('track', 'PageView');
+    </script>
+    <style>
+        .card:hover { transform: none; box-shadow: none; }
+        .cert-code { font-family: Menlo, Consolas, monospace; letter-spacing: 0.12em; font-size: 1.15rem; }
+        .spinner { display: inline-block; width: 1.25rem; height: 1.25rem; border: 2px solid rgba(184,152,110,0.3); border-top-color: #B8986E; border-radius: 9999px; animation: spin 0.7s linear infinite; vertical-align: middle; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-light">
+    <script src="/shared/header.js"></script>
+
+    <main class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+        <div id="loading" class="text-center py-20"><span class="spinner"></span><p class="text-brand-gray mt-4">Confirming your registration…</p></div>
+
+        <div id="error" class="hidden text-center py-16">
+            <h1 class="text-3xl font-bold font-heading uppercase mb-3">We couldn't load your order</h1>
+            <p class="text-brand-gray mb-6" id="error-msg"></p>
+            <p class="text-brand-gray text-sm">If your card was charged, you're registered. Your confirmation email has every detail. Questions: <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gold hover:underline">info@moonshotcrossfit.com</a></p>
+        </div>
+
+        <div id="content" class="hidden">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-brand-gold/20 border-2 border-brand-gold rounded-full mb-6">
+                    <svg class="w-10 h-10 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h1 id="headline" class="text-4xl md:text-5xl font-bold font-heading uppercase mb-3">You're In.</h1>
+                <p id="subhead" class="text-xl text-brand-gold font-heading uppercase tracking-wider mb-2"></p>
+                <p id="lede" class="text-brand-gray max-w-xl mx-auto"></p>
+            </div>
+
+            <div class="card rounded-xl p-6 md:p-8 mb-6">
+                <h2 class="text-lg font-bold font-heading uppercase tracking-wider text-brand-light mb-4">Race details</h2>
+                <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
+                    <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Date</dt><dd class="text-brand-light font-semibold">Saturday, October 3, 2026</dd></div>
+                    <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Your heat</dt><dd id="heat" class="text-brand-light font-semibold text-xl font-heading"></dd></div>
+                    <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Team</dt><dd id="team" class="text-brand-light font-semibold"></dd></div>
+                    <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Where</dt><dd class="text-brand-light">Moonshot CrossFit<br><span class="text-brand-gray">542 Busse Hwy, Park Ridge, IL 60068</span></dd></div>
+                </dl>
+                <p class="text-brand-gray text-xs mt-5">Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. Arrive by 7:30 regardless of heat.</p>
+                <a id="cal-link" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-brand-gold hover:underline text-sm font-semibold">+ Add to Google Calendar</a>
+            </div>
+
+            <div id="packages" class="card rounded-xl p-6 md:p-8 mb-6">
+                <h2 class="text-lg font-bold font-heading uppercase tracking-wider text-brand-light mb-4">Packages</h2>
+                <div id="package-lines" class="space-y-3 text-sm"></div>
+            </div>
+
+            <div id="certs-wrap" class="hidden card rounded-xl p-6 md:p-8 mb-6" style="border-color: rgba(184,152,110,0.5);">
+                <h2 class="text-lg font-bold font-heading uppercase tracking-wider text-brand-light mb-1">Moonshot Medical certificates</h2>
+                <p class="text-brand-gray text-sm mb-5">Book any date through December 31, 2026. Your code is attached to the booking automatically; there's nothing to pay at the clinic.</p>
+                <div id="certs" class="space-y-4"></div>
+            </div>
+
+            <div id="certs-pending" class="hidden card rounded-xl p-6 mb-6 text-sm text-brand-gray"><span class="spinner" style="width:1rem;height:1rem;"></span> <span class="ml-2">Issuing your clinic certificates… they'll appear here in a moment and in your confirmation email.</span></div>
+
+            <div id="partner-box" class="hidden bg-brand-slate/60 border border-brand-gold/40 rounded-xl p-6 md:p-8 mb-6">
+                <h2 class="text-lg font-bold font-heading uppercase tracking-wider text-brand-light mb-2">Partner next step</h2>
+                <p class="text-brand-gray text-sm mb-4">We emailed <strong id="partner-name" class="text-brand-light"></strong> a link to confirm their contact info, sign the race waiver, and add any extras for themselves. If it doesn't land, send them this link directly:</p>
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input id="partner-link" class="flex-grow bg-brand-dark border border-brand-gray/30 rounded-lg px-3 py-2 text-xs text-brand-gray" readonly>
+                    <button id="copy-link" type="button" class="btn btn-secondary px-5 py-2 rounded-lg text-sm font-semibold whitespace-nowrap">Copy link</button>
+                </div>
+            </div>
+
+            <div class="card rounded-xl p-6 md:p-8 mb-8">
+                <h2 class="text-lg font-bold font-heading uppercase tracking-wider text-brand-light mb-4">What happens next</h2>
+                <ol class="space-y-4 text-sm">
+                    <li class="flex gap-4"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">1</span><div><strong class="text-brand-light">Confirmation email.</strong><p class="text-brand-gray mt-1">Everything on this page, plus a Stripe receipt, is on its way to your inbox.</p></div></li>
+                    <li id="next-partner" class="flex gap-4"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">2</span><div><strong class="text-brand-light">Your partner signs their waiver.</strong><p class="text-brand-gray mt-1">Two minutes via their link. Both waivers must be on file before race day.</p></div></li>
+                    <li id="next-certs" class="flex gap-4 hidden"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">3</span><div><strong class="text-brand-light">Book your clinic appointments.</strong><p class="text-brand-gray mt-1">Use the booking links above. A blood draw is best fasted in the morning; the clinic sends prep instructions when you book.</p></div></li>
+                    <li class="flex gap-4"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">✓</span><div><strong class="text-brand-light">Race day: arrive by 7:30 AM.</strong><p class="text-brand-gray mt-1">Check in, hear the briefing, warm up with the group, and go.</p></div></li>
+                </ol>
+            </div>
+
+            <p class="text-center text-brand-gray text-sm">Questions? <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gold hover:underline">info@moonshotcrossfit.com</a> · <a href="tel:+18478507360" class="text-brand-gold hover:underline">(847) 850-7360</a></p>
+            <p class="text-center mt-8"><a href="/hyrox/" class="text-brand-gold hover:underline font-heading uppercase tracking-wide text-sm">← Train for it: HYROX classes at Moonshot</a></p>
+        </div>
+    </main>
+
+    <script src="/shared/footer.js" defer></script>
+    <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const fmt = (c) => '$' + (c / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      const sessionId = new URLSearchParams(location.search).get('session_id');
+      if (!sessionId) return fail('Missing order reference.');
+
+      function fail(msg) { $('loading').classList.add('hidden'); $('error').classList.remove('hidden'); $('error-msg').textContent = msg; }
+
+      function pkg(a, labels) {
+        const parts = [];
+        if (a.addons.shirt) parts.push(`T-shirt (${a.shirt_size || '?'})`);
+        if (a.addons.baseline) parts.push(labels.baseline);
+        if (a.addons.dexa) parts.push(labels.dexa);
+        if (a.addons.labs) parts.push(labels.labs);
+        return parts.length ? parts.join(' · ') : 'Race entry';
+      }
+
+      function calLink(heat) {
+        const start = new Date(heat.start_iso), end = new Date(start.getTime() + 90 * 60000);
+        const f = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+        const q = new URLSearchParams({ action: 'TEMPLATE', text: `HYROX Race Simulation — Heat ${heat.label}`, dates: `${f(start)}/${f(end)}`, location: 'Moonshot CrossFit, 542 Busse Hwy, Park Ridge, IL 60068', details: 'Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. https://moonshotcrossfit.com/hyrox/simulation/' });
+        return 'https://calendar.google.com/calendar/render?' + q.toString();
+      }
+
+      let tracked = false;
+      function render(d) {
+        const t = d.team, labels = d.config.addon_labels;
+        const isPartner = d.kind === 'hyrox_partner_addons';
+        $('loading').classList.add('hidden'); $('content').classList.remove('hidden');
+        if (d.payment_status !== 'paid') { $('headline').textContent = 'Payment pending'; $('lede').textContent = 'Your payment has not completed yet. If you closed checkout early, head back and try again.'; }
+        else if (isPartner) { $('headline').textContent = 'Add-ons confirmed.'; $('subhead').textContent = `Heat ${t.heat?.label} · Saturday, Oct 3`; $('lede').textContent = `You're all set, ${esc(t.partner.name.split(' ')[0])}. Your extras are locked in and your confirmation email is on its way.`; }
+        else { $('subhead').textContent = `Heat ${t.heat?.label} · Saturday, Oct 3`; $('lede').textContent = `Your team is registered${t.test_mode ? ' (TEST MODE)' : ''}. Save this page or watch for the confirmation email.`; }
+
+        $('heat').textContent = t.heat?.label || '';
+        $('team').textContent = `${t.registrant.name} + ${t.partner.name}`;
+        $('cal-link').href = t.heat ? calLink(t.heat) : '#';
+
+        const lines = isPartner ? [t.partner] : [t.registrant, t.partner];
+        $('package-lines').innerHTML = lines.map(a => `<div class="flex justify-between gap-4 border-b border-brand-gray/10 pb-3"><span class="text-brand-light font-semibold">${esc(a.name)}</span><span class="text-brand-gray text-right">${esc(pkg(a, labels))}</span></div>`).join('') + (d.amount_total ? `<div class="flex justify-between pt-1"><span class="text-brand-gray">Charged</span><span class="text-brand-light font-semibold">${fmt(d.amount_total)}</span></div>` : '');
+
+        const wantsCerts = lines.some(a => a.addons.dexa || a.addons.labs || a.addons.baseline);
+        if (d.certificates_ready && t.certificates.length) {
+          $('certs-wrap').classList.remove('hidden'); $('certs-pending').classList.add('hidden'); $('next-certs').classList.remove('hidden');
+          $('certs').innerHTML = t.certificates.map(c => `<div class="bg-brand-dark rounded-lg p-4 border border-brand-gray/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3"><div><div class="text-brand-light font-semibold">${esc(c.label)}</div><div class="text-brand-gray text-xs">${esc(c.name)}</div><div class="cert-code text-brand-gold mt-1">${esc(c.code)}</div></div><a href="${esc(c.book_url)}" target="_blank" rel="noopener" class="btn btn-primary px-5 py-2.5 rounded-lg text-sm font-bold whitespace-nowrap text-center">Book appointment</a></div>`).join('');
+        } else if (wantsCerts && d.payment_status === 'paid') {
+          $('certs-pending').classList.remove('hidden'); $('next-certs').classList.remove('hidden');
+        }
+
+        if (!isPartner && d.partner_link) {
+          $('partner-box').classList.remove('hidden');
+          $('partner-name').textContent = t.partner.name;
+          $('partner-link').value = d.partner_link;
+        }
+        if (isPartner) $('next-partner').classList.add('hidden');
+
+        if (!tracked && d.payment_status === 'paid' && !t.test_mode) {
+          tracked = true;
+          try { fbq('track', 'Purchase', { value: (d.amount_total || 0) / 100, currency: 'USD' }); } catch (_) {}
+          try { gtag('event', 'purchase', { transaction_id: sessionId, value: (d.amount_total || 0) / 100, currency: 'USD' }); } catch (_) {}
+        }
+      }
+
+      $('copy-link').addEventListener('click', async () => {
+        const v = $('partner-link').value;
+        try { await navigator.clipboard.writeText(v); $('copy-link').textContent = 'Copied ✓'; } catch { $('partner-link').select(); }
+        setTimeout(() => { $('copy-link').textContent = 'Copy link'; }, 2000);
+      });
+
+      let attempts = 0;
+      async function load() {
+        attempts++;
+        try {
+          const res = await fetch('/.netlify/functions/hyrox-order?session_id=' + encodeURIComponent(sessionId), { cache: 'no-store' });
+          const d = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(d.error || 'Could not load order');
+          // Certificates come from the webhook; the partner link only needs the team id + token which the webhook doesn't gate.
+          d.certificates_ready = d.webhook_processed;
+          render(d);
+          if (!d.webhook_processed && attempts < 8) setTimeout(load, 1500);
+        } catch (err) {
+          if (attempts < 3) return setTimeout(load, 1500);
+          fail(err.message);
+        }
+      }
+      load();
+    })();
+    </script>
+</body>
+</html>

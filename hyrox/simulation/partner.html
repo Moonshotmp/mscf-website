@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Confirm Your Spot | HYROX Race Simulation | Moonshot CrossFit</title>
+    <link rel="stylesheet" href="/shared/tailwind.css">
+    <link rel="stylesheet" href="/shared/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y74MV32LC2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y74MV32LC2');
+    </script>
+    <style>
+        .card:hover { transform: none; box-shadow: none; }
+        .field { width: 100%; background: #101921; border: 1px solid rgba(178,191,190,0.35); color: #F0EEE9; border-radius: 0.5rem; padding: 0.75rem 0.9rem; font-size: 1rem; }
+        .field:focus { outline: none; border-color: var(--brand-gold); box-shadow: 0 0 0 3px rgba(184,152,110,0.25); }
+        select.field { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B8986E' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.4rem; }
+        select.field option { background: #101921; color: #F0EEE9; }
+        .field-label { display: block; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-gray); margin-bottom: 0.35rem; font-family: 'Oswald', sans-serif; }
+        .toggle { position: relative; display: inline-flex; width: 3.25rem; height: 1.85rem; border-radius: 9999px; background: rgba(178,191,190,0.25); border: 1px solid rgba(178,191,190,0.3); cursor: pointer; transition: background 0.15s; flex-shrink: 0; }
+        .toggle::after { content: ''; position: absolute; left: 0.2rem; top: 50%; transform: translateY(-50%); width: 1.35rem; height: 1.35rem; border-radius: 9999px; background: #F0EEE9; transition: left 0.15s; }
+        .toggle[aria-checked="true"] { background: var(--brand-gold); border-color: var(--brand-gold); }
+        .toggle[aria-checked="true"]::after { left: calc(100% - 1.55rem); background: #101921; }
+        .toggle:focus-visible { outline: 3px solid rgba(184,152,110,0.5); outline-offset: 2px; }
+        .checkbox-row { display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; }
+        .checkbox-row input { margin-top: 0.3rem; width: 1.1rem; height: 1.1rem; accent-color: #B8986E; flex-shrink: 0; }
+        .waiver-scroll { max-height: 12rem; overflow-y: auto; font-size: 0.85rem; line-height: 1.55; color: var(--brand-gray); padding-right: 0.5rem; }
+        .waiver-scroll h4 { color: var(--brand-light); font-size: 0.9rem; margin: 0.9rem 0 0.25rem; }
+        .waiver-scroll p { margin-bottom: 0.5rem; }
+        .price-strike { text-decoration: line-through; color: rgba(178,191,190,0.6); }
+        .spinner { display: inline-block; width: 1rem; height: 1rem; border: 2px solid rgba(16,25,33,0.3); border-top-color: #101921; border-radius: 9999px; animation: spin 0.7s linear infinite; vertical-align: -2px; margin-right: 0.5rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-light">
+    <script src="/shared/header.js"></script>
+
+    <main class="max-w-3xl mx-auto px-6 py-14 md:py-20">
+        <div id="loading" class="text-center py-20 text-brand-gray">Loading your registration…</div>
+        <div id="error" class="hidden text-center py-16">
+            <h1 class="text-3xl font-bold font-heading uppercase mb-3">This link isn't working</h1>
+            <p class="text-brand-gray mb-6" id="error-msg"></p>
+            <p class="text-brand-gray text-sm">Ask your partner to resend the link from their confirmation email, or contact <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gold hover:underline">info@moonshotcrossfit.com</a>.</p>
+        </div>
+
+        <div id="content" class="hidden">
+            <div class="text-center mb-10">
+                <p class="text-brand-gold font-semibold uppercase tracking-widest text-sm mb-3 font-heading">HYROX Race Simulation · Saturday, October 3</p>
+                <h1 class="text-4xl md:text-5xl font-bold font-heading uppercase mb-3"><span id="reg-first"></span> registered you.</h1>
+                <p class="text-brand-gray max-w-xl mx-auto">You're racing Doubles with <strong id="reg-name" class="text-brand-light"></strong> in <strong id="heat" class="text-brand-light"></strong>. Confirm your details and sign the waiver below. Two minutes.</p>
+            </div>
+
+            <div id="already" class="hidden bg-brand-slate/60 border border-brand-gold/40 rounded-xl p-5 mb-6 text-sm text-brand-gray">✓ You've already confirmed and signed. You can update your contact info or add extras below.</div>
+            <div id="canceled" class="hidden bg-brand-slate/60 border border-brand-gray/30 rounded-xl p-5 mb-6 text-sm text-brand-gray">Checkout was canceled. Your confirmation and waiver are still saved; you can try the add-ons again below.</div>
+
+            <form id="partner-form" class="space-y-6" novalidate>
+                <div class="card rounded-xl p-6 md:p-8">
+                    <h2 class="text-lg font-bold font-heading uppercase tracking-wider mb-4">Your contact info</h2>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="sm:col-span-2"><label class="field-label" for="name">Full name</label><input class="field" id="name" autocomplete="name" required></div>
+                        <div><label class="field-label" for="email">Email</label><input class="field" id="email" type="email" autocomplete="email" required></div>
+                        <div><label class="field-label" for="phone">Mobile phone</label><input class="field" id="phone" type="tel" autocomplete="tel" required></div>
+                        <div><label class="field-label" for="emergency_name">Emergency contact name</label><input class="field" id="emergency_name" required></div>
+                        <div><label class="field-label" for="emergency_phone">Emergency contact phone</label><input class="field" id="emergency_phone" type="tel" required></div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl p-6 md:p-8">
+                    <h2 class="text-lg font-bold font-heading uppercase tracking-wider mb-1">Your package</h2>
+                    <p class="text-brand-gray text-sm mb-5">Anything <span id="reg-first-2"></span> already bought for you is checked off. Add more at the event rate; you pay only for what you add.</p>
+                    <div id="owned" class="space-y-2 mb-5 text-sm"></div>
+                    <div id="addon-rows" class="divide-y divide-brand-gray/10"></div>
+                    <div id="shirt-size-wrap" class="hidden mt-4"><label class="field-label" for="shirt_size">T-shirt size</label><select class="field" id="shirt_size" style="max-width: 12rem;"></select></div>
+                    <div class="flex justify-between items-baseline border-t border-brand-gray/25 pt-4 mt-5">
+                        <span class="font-heading uppercase tracking-wider text-brand-gray">Add-ons total</span>
+                        <span id="total" class="text-2xl font-bold font-heading">$0</span>
+                    </div>
+                    <p id="savings" class="text-brand-gold text-xs mt-1 hidden"></p>
+                </div>
+
+                <div id="waiver-card" class="card rounded-xl p-6 md:p-8">
+                    <h2 class="text-lg font-bold font-heading uppercase tracking-wider mb-4">Waiver &amp; signature</h2>
+                    <div class="bg-brand-dark rounded-lg p-5 border border-brand-gray/15 mb-5">
+                        <h4 class="text-brand-light font-heading font-bold uppercase tracking-wider text-sm mb-2">Event Participation Waiver, Release &amp; Assumption of Risk</h4>
+                        <div class="waiver-scroll">
+                            <h4>1. Acknowledgment &amp; Assumption of Risk</h4>
+                            <p>I understand that participating in the Moonshot HYROX Race Simulation ("Event") at Moonshot CrossFit, 542 Busse Hwy, Park Ridge, IL ("Facility") involves strenuous physical exertion including running, sled pushing and pulling, rowing, SkiErg, burpee broad jumps, weighted carries and lunges, and wall balls, and carries inherent risks of injury including, without limitation, muscle strains, sprains, fractures, cardiovascular events, heat illness, and, in rare cases, permanent disability or death. I voluntarily assume all such risks, known and unknown.</p>
+                            <h4>2. Medical Fitness</h4>
+                            <p>I represent that I am in good physical condition, have no medical condition that would prevent safe participation, and have consulted a physician if I had any doubt. I will stop and notify a coach immediately if I feel unwell. I authorize Event staff to obtain emergency medical treatment on my behalf at my expense.</p>
+                            <h4>3. Rules &amp; Coaching</h4>
+                            <p>I agree to follow all Event rules, movement standards, lane assignments, and coach instructions, and to use equipment only as directed. Coaches may modify or stop my participation at their discretion for safety.</p>
+                            <h4>4. Release of Liability</h4>
+                            <p>To the fullest extent permitted by Illinois law, I, on behalf of myself, my heirs, executors, administrators, assigns, and personal representatives, hereby RELEASE, WAIVE, DISCHARGE, AND COVENANT NOT TO SUE Moonshot CrossFit, its owners, members, managers, officers, directors, employees, independent contractors, coaches, volunteers, agents, affiliates, landlords, and successors (collectively, "Released Parties") from any and all liability, claims, demands, actions, and causes of action whatsoever arising out of or relating to any loss, damage, or injury, including death, that may be sustained by me, or to any property belonging to me, while participating in the Event or while on the premises, WHETHER CAUSED BY THE NEGLIGENCE OF THE RELEASED PARTIES OR OTHERWISE, except for conduct that constitutes willful and wanton misconduct under Illinois law.</p>
+                            <h4>5. Indemnification</h4>
+                            <p>I agree to INDEMNIFY AND HOLD HARMLESS the Released Parties from any loss, liability, damage, or cost, including reasonable attorneys' fees, that they may incur due to my participation in the Event, whether caused by my negligence or otherwise.</p>
+                            <h4>6. Photo &amp; Video Release</h4>
+                            <p>I grant Moonshot CrossFit the right to photograph and record me during the Event and to use my image, likeness, and results in promotional materials without compensation.</p>
+                            <h4>7. Registration Terms</h4>
+                            <p>Race entries and add-ons are non-refundable but transferable to another athlete through registration close. Clinic certificates are provided by Moonshot Medical + Performance, a separate medical practice, and are subject to its intake and consent process; they are valid through December 31, 2026. Heat times may be adjusted for safety or scheduling; we will notify you by email.</p>
+                            <h4>8. Governing Law</h4>
+                            <p>This agreement is governed by the laws of the State of Illinois. If any portion is held invalid, the remainder shall continue in full force and effect. I have read this document, understand it, and sign it voluntarily.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-5">
+                        <label class="checkbox-row"><input type="checkbox" id="ack_read"><span class="text-brand-light text-sm">I have read and understand the full waiver above.</span></label>
+                        <label class="checkbox-row"><input type="checkbox" id="ack_risk"><span class="text-brand-light text-sm">I voluntarily assume all risks of participating in the Event.</span></label>
+                        <label class="checkbox-row"><input type="checkbox" id="ack_release"><span class="text-brand-light text-sm">I release and waive claims against Moonshot CrossFit and the Released Parties as described above.</span></label>
+                        <label class="checkbox-row"><input type="checkbox" id="ack_rules"><span class="text-brand-light text-sm">I will follow Event rules, movement standards, and coach instructions.</span></label>
+                        <label class="checkbox-row"><input type="checkbox" id="ack_age"><span class="text-brand-light text-sm">I am at least 18 years old and this information is accurate.</span></label>
+                    </div>
+                    <label class="field-label" for="signature">Type your full name to sign</label>
+                    <input class="field" id="signature" placeholder="Must match your full name above" autocomplete="off" style="font-family: 'Oswald', sans-serif; font-size: 1.15rem;">
+                </div>
+
+                <div id="form-error" class="hidden bg-red-900/40 border border-red-500/60 text-red-100 text-sm rounded-lg px-4 py-3" role="alert"></div>
+                <button type="submit" id="submit-btn" class="btn btn-primary w-full font-bold py-4 rounded-lg uppercase tracking-wider text-base">Confirm &amp; Sign</button>
+                <p class="text-brand-gray text-xs text-center">If you add extras, you'll be taken to a secure Stripe checkout after signing.</p>
+            </form>
+
+            <div id="done" class="hidden text-center py-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-brand-gold/20 border-2 border-brand-gold rounded-full mb-6"><svg class="w-10 h-10 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                <h2 class="text-3xl font-bold font-heading uppercase mb-2">You're confirmed.</h2>
+                <p class="text-brand-gray">See you Saturday, October 3. Doors open 7:30 AM, briefing 7:45, warm-up 8:00. Arrive by 7:30 regardless of heat.</p>
+            </div>
+        </div>
+    </main>
+    <script src="/shared/footer.js" defer></script>
+    <script src="/hyrox/simulation/partner.js" defer></script>
+</body>
+</html>

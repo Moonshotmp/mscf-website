@@ -3,6 +3,7 @@ module.exports = {
   content: [
     './**/*.html',
     './shared/**/*.js',
+    './hyrox/**/*.js',
   ],
   theme: {
     extend: {

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYROX Race Simulation — Oct 3, 2026 | Moonshot CrossFit, Park Ridge</title>
+    <meta name="description" content="Race a full HYROX simulation in Park Ridge, IL on Saturday, October 3, 2026. Doubles format, 8 x 1km runs + 8 stations, timed heats. $25 per athlete. Add a DEXA scan or blood panel from Moonshot Medical and see what race day did.">
+    <link rel="canonical" href="https://moonshotcrossfit.com/hyrox/simulation/">
+    <meta property="og:title" content="HYROX Race Simulation — October 3 | Moonshot CrossFit">
+    <meta property="og:description" content="Full HYROX-style race simulation in Park Ridge. Doubles format, timed heats, $25 per athlete. Add a DEXA scan or blood panel and turn race day into data.">
+    <meta property="og:image" content="https://moonshotcrossfit.com/images/hyrox-team-wall.webp">
+    <meta property="og:url" content="https://moonshotcrossfit.com/hyrox/simulation/">
+    <meta property="og:type" content="website">
+
+    <link rel="stylesheet" href="/shared/tailwind.css">
+    <link rel="stylesheet" href="/shared/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap"></noscript>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y74MV32LC2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Y74MV32LC2');
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1676368639293967');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1676368639293967&ev=PageView&noscript=1"/></noscript>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SportsEvent",
+        "name": "Moonshot HYROX Race Simulation",
+        "description": "Full HYROX-style race simulation: 8 x 1km runs and 8 workout stations, Doubles format, timed heats. Optional DEXA scan and blood panel add-ons from Moonshot Medical + Performance.",
+        "startDate": "2026-10-03T07:30:00-05:00",
+        "endDate": "2026-10-03T13:00:00-05:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "image": "https://moonshotcrossfit.com/images/hyrox-team-wall.webp",
+        "url": "https://moonshotcrossfit.com/hyrox/simulation/",
+        "location": {
+            "@type": "Place",
+            "name": "Moonshot CrossFit",
+            "address": { "@type": "PostalAddress", "streetAddress": "542 Busse Hwy", "addressLocality": "Park Ridge", "addressRegion": "IL", "postalCode": "60068", "addressCountry": "US" }
+        },
+        "organizer": { "@type": "Organization", "name": "Moonshot CrossFit", "url": "https://moonshotcrossfit.com/" },
+        "offers": {
+            "@type": "Offer", "name": "Race entry (per athlete)", "price": "25", "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock", "url": "https://moonshotcrossfit.com/hyrox/simulation/#register", "validFrom": "2026-08-25"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://moonshotcrossfit.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Hyrox Training", "item": "https://moonshotcrossfit.com/hyrox/"},
+            {"@type": "ListItem", "position": 3, "name": "Race Simulation", "item": "https://moonshotcrossfit.com/hyrox/simulation/"}
+        ]
+    }
+    </script>
+
+    <style>
+        .hero-section {
+            background-image: linear-gradient(rgba(16, 25, 33, 0.62), rgba(16, 25, 33, 0.92)), url('/images/hyrox-team-wall.webp');
+            background-size: cover;
+            background-position: center 30%;
+        }
+        .station-card { transition: transform 0.2s ease, border-color 0.2s ease; }
+        .station-card:hover { transform: translateY(-4px); border-color: var(--brand-gold); }
+        .card:hover { transform: none; box-shadow: none; }
+
+        /* Registration form controls */
+        .field { width: 100%; background: #101921; border: 1px solid rgba(178,191,190,0.35); color: #F0EEE9; border-radius: 0.5rem; padding: 0.75rem 0.9rem; font-size: 1rem; }
+        .field:focus { outline: none; border-color: var(--brand-gold); box-shadow: 0 0 0 3px rgba(184,152,110,0.25); }
+        .field::placeholder { color: rgba(178,191,190,0.55); }
+        select.field { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B8986E' stroke-width='2' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.4rem; }
+        select.field option { background: #101921; color: #F0EEE9; }
+        .field-label { display: block; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brand-gray); margin-bottom: 0.35rem; font-family: 'Oswald', sans-serif; }
+
+        .heat-card { border: 2px solid rgba(178,191,190,0.2); background: #101921; border-radius: 0.75rem; padding: 0.9rem 0.5rem; text-align: center; cursor: pointer; transition: border-color 0.15s, transform 0.15s; }
+        .heat-card:hover { border-color: rgba(184,152,110,0.6); }
+        .heat-card.selected { border-color: var(--brand-gold); background: rgba(184,152,110,0.12); transform: translateY(-2px); }
+        .heat-card.full { opacity: 0.4; cursor: not-allowed; }
+        .heat-card.full:hover { border-color: rgba(178,191,190,0.2); }
+
+        .toggle { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 3.25rem; height: 1.85rem; border-radius: 9999px; background: rgba(178,191,190,0.25); border: 1px solid rgba(178,191,190,0.3); cursor: pointer; transition: background 0.15s; flex-shrink: 0; }
+        .toggle::after { content: ''; position: absolute; left: 0.2rem; top: 50%; transform: translateY(-50%); width: 1.35rem; height: 1.35rem; border-radius: 9999px; background: #F0EEE9; transition: left 0.15s; }
+        .toggle[aria-checked="true"] { background: var(--brand-gold); border-color: var(--brand-gold); }
+        .toggle[aria-checked="true"]::after { left: calc(100% - 1.55rem); background: #101921; }
+        .toggle:focus-visible { outline: 3px solid rgba(184,152,110,0.5); outline-offset: 2px; }
+
+        .checkbox-row { display: flex; gap: 0.75rem; align-items: flex-start; cursor: pointer; }
+        .checkbox-row input { margin-top: 0.3rem; width: 1.1rem; height: 1.1rem; accent-color: #B8986E; flex-shrink: 0; }
+
+        .role-chip { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 9999px; border: 1px solid rgba(184,152,110,0.5); color: var(--brand-gold); }
+
+        .waiver-scroll { max-height: 14rem; overflow-y: auto; font-size: 0.85rem; line-height: 1.55; color: var(--brand-gray); padding-right: 0.5rem; }
+        .waiver-scroll h4 { color: var(--brand-light); font-size: 0.9rem; margin: 0.9rem 0 0.25rem; }
+        .waiver-scroll p { margin-bottom: 0.5rem; }
+
+        @media (min-width: 1024px) { .summary-sticky { position: sticky; top: 6rem; } }
+        .price-strike { text-decoration: line-through; color: rgba(178,191,190,0.6); }
+        details summary { list-style: none; }
+        details summary::-webkit-details-marker { display: none; }
+        .spinner { display: inline-block; width: 1rem; height: 1rem; border: 2px solid rgba(16,25,33,0.3); border-top-color: #101921; border-radius: 9999px; animation: spin 0.7s linear infinite; vertical-align: -2px; margin-right: 0.5rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <!-- Header (auto-injected) -->
+    <script src="/shared/header.js"></script>
+
+    <!-- Hero -->
+    <section class="hero-section relative min-h-[88vh] flex items-center justify-center text-center">
+        <div class="container mx-auto px-4 py-20">
+            <p class="text-brand-gold font-semibold text-base md:text-lg uppercase tracking-widest mb-4 font-heading">Saturday, October 3, 2026 · Park Ridge, IL</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-brand-light uppercase tracking-tight leading-none mb-5 font-heading">
+                HYROX Race<br>Simulation
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-300 max-w-3xl mx-auto mb-3">
+                Full race-day conditions. 8 × 1km runs, 8 stations, timed heats. Doubles format.
+            </p>
+            <p class="text-base md:text-lg text-brand-gray max-w-2xl mx-auto mb-10">
+                <span class="text-brand-light font-semibold">$25 per athlete.</span> Moonshot members 60% off. Add a DEXA scan or blood panel from Moonshot Medical and turn race day into data.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#register" class="btn btn-primary font-bold py-4 px-10 rounded-lg text-lg uppercase tracking-wider shadow-lg">Register Your Team</a>
+                <a href="#what-to-expect" class="btn btn-secondary font-bold py-4 px-10 rounded-lg text-lg uppercase tracking-wider shadow-lg">How It Works</a>
+            </div>
+            <p class="mt-8 text-sm text-brand-gray"><span id="hero-spots" class="text-brand-gold font-semibold">Heat sizes are limited.</span> Register early to lock your start time.</p>
+        </div>
+    </section>
+
+    <!-- Event snapshot -->
+    <section class="bg-brand-gold text-brand-dark">
+        <div class="container mx-auto px-4 py-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div><div class="text-xs uppercase tracking-widest font-heading opacity-70">Date</div><div class="text-lg md:text-xl font-bold font-heading uppercase">Sat, Oct 3</div></div>
+            <div><div class="text-xs uppercase tracking-widest font-heading opacity-70">First Heat</div><div class="text-lg md:text-xl font-bold font-heading uppercase">8:10 AM</div></div>
+            <div><div class="text-xs uppercase tracking-widest font-heading opacity-70">Format</div><div class="text-lg md:text-xl font-bold font-heading uppercase">Doubles</div></div>
+            <div><div class="text-xs uppercase tracking-widest font-heading opacity-70">Entry</div><div class="text-lg md:text-xl font-bold font-heading uppercase">$25 / Athlete</div></div>
+        </div>
+    </section>
+
+    <!-- What to expect -->
+    <section id="what-to-expect" class="py-20 md:py-28 bg-brand-slate">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-brand-gold font-semibold uppercase tracking-widest text-sm mb-3 font-heading">What to expect</p>
+                    <h2 class="text-3xl md:text-5xl font-bold text-brand-light mb-5 font-heading uppercase">A real race. <span class="text-brand-gold">Without the travel.</span></h2>
+                    <p class="text-brand-gray mb-4 leading-relaxed">
+                        This is a full HYROX-style race simulation built to replicate race-day conditions: timed heats, a running course, all eight stations at division weight, and an athlete briefing before you go. Whether you are training for Chicago (February 11, 2027), benchmarking your fitness, or lining up for your first HYROX ever, this is the closest you can get without a wristband.
+                    </p>
+                    <p class="text-brand-gray mb-6 leading-relaxed">
+                        You race as a <strong class="text-brand-light">Doubles team</strong>: two athletes, one clock. You run every 1km together and split the work at each station however you want. Every team races at the HYROX Mixed Doubles weight standard, so any two athletes can pair up.
+                    </p>
+                    <ul class="space-y-3 text-brand-gray">
+                        <li class="flex gap-3"><span class="text-brand-gold font-bold">✓</span> Coaches running lanes, counting reps, and keeping the clock</li>
+                        <li class="flex gap-3"><span class="text-brand-gold font-bold">✓</span> Official times posted after the event</li>
+                        <li class="flex gap-3"><span class="text-brand-gold font-bold">✓</span> All equipment on-site: SkiErgs, rowers, sleds, sandbags, wall balls, carry handles</li>
+                        <li class="flex gap-3"><span class="text-brand-gold font-bold">✓</span> Open to members and non-members. All fitness levels; every station is scalable</li>
+                    </ul>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="/images/hyrox-skierg-group.webp" alt="Athletes on the SkiErg during a HYROX race" class="rounded-lg shadow-2xl w-full h-56 md:h-72 object-cover" loading="lazy">
+                    <img src="/images/hyrox-rowing-2.webp" alt="Athlete rowing at HYROX" class="rounded-lg shadow-2xl w-full h-56 md:h-72 object-cover mt-8" loading="lazy">
+                    <img src="/images/hyrox-farmers-carry.webp" alt="Farmers carry at HYROX" class="rounded-lg shadow-2xl w-full h-56 md:h-72 object-cover" loading="lazy">
+                    <img src="/images/hyrox-team-post-race.webp" alt="Moonshot CrossFit team after a HYROX race" class="rounded-lg shadow-2xl w-full h-56 md:h-72 object-cover mt-8" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The course -->
+    <section id="course" class="py-20 md:py-24 bg-brand-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <p class="text-brand-gold font-semibold uppercase tracking-widest text-sm mb-3 font-heading">The course</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-brand-light mb-3 font-heading uppercase">8 runs. 8 stations. One clock.</h2>
+                <p class="text-brand-gray max-w-2xl mx-auto">Athletes complete a 1km run before each of the eight workout stations, in official HYROX order. Weighted stations use the Mixed Doubles division weight.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mx-auto">
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">01</div><h3 class="text-base font-bold text-brand-light font-heading">SkiErg</h3><p class="text-brand-gray text-sm mt-1">1,000m</p></div>
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">02</div><h3 class="text-base font-bold text-brand-light font-heading">Sled Push</h3><p class="text-brand-gray text-sm mt-1">50m · division weight</p></div>
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">03</div><h3 class="text-base font-bold text-brand-light font-heading">Sled Pull</h3><p class="text-brand-gray text-sm mt-1">50m · division weight</p></div>
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">04</div><h3 class="text-base font-bold text-brand-light font-heading">Burpee Broad Jumps</h3><p class="text-brand-gray text-sm mt-1">80m</p></div>
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">05</div><h3 class="text-base font-bold text-brand-light font-heading">Row</h3><p class="text-brand-gray text-sm mt-1">1,000m</p></div>
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">06</div><h3 class="text-base font-bold text-brand-light font-heading">Farmers Carry</h3><p class="text-brand-gray text-sm mt-1">200m · division weight</p></div>
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">07</div><h3 class="text-base font-bold text-brand-light font-heading">Sandbag Lunges</h3><p class="text-brand-gray text-sm mt-1">100m · division weight</p></div>
+                <div class="station-card bg-brand-slate p-5 rounded-lg text-center border border-transparent"><div class="text-3xl font-black text-brand-gold mb-2 font-heading">08</div><h3 class="text-base font-bold text-brand-light font-heading">Wall Balls</h3><p class="text-brand-gray text-sm mt-1">100 reps</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Race day schedule -->
+    <section id="schedule" class="py-20 md:py-24 bg-brand-slate">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+                <div>
+                    <p class="text-brand-gold font-semibold uppercase tracking-widest text-sm mb-3 font-heading">Race day</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-light mb-6 font-heading uppercase">Schedule</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-baseline gap-4"><span class="text-brand-gold font-bold font-heading text-xl w-24 flex-shrink-0">7:30 AM</span><span class="text-brand-light">Doors open · check-in</span></li>
+                        <li class="flex items-baseline gap-4"><span class="text-brand-gold font-bold font-heading text-xl w-24 flex-shrink-0">7:45 AM</span><span class="text-brand-light">Athlete briefing</span></li>
+                        <li class="flex items-baseline gap-4"><span class="text-brand-gold font-bold font-heading text-xl w-24 flex-shrink-0">8:00 AM</span><span class="text-brand-light">Group warm-up &amp; final prep</span></li>
+                        <li class="flex items-baseline gap-4"><span class="text-brand-gold font-bold font-heading text-xl w-24 flex-shrink-0">8:10 AM</span><span class="text-brand-light">First heat begins · heats every 30 minutes</span></li>
+                    </ul>
+                    <p class="text-brand-gray text-sm mt-6 leading-relaxed">Arrive by 7:30 regardless of your heat so you can check in and hear the briefing. Plan on roughly 60 to 90 minutes on the course.</p>
+                    <p class="text-brand-gray text-sm mt-3"><strong class="text-brand-light">Location:</strong> Moonshot CrossFit · 542 Busse Hwy, Park Ridge, IL 60068 · <a href="https://maps.google.com/?q=542+Busse+Hwy,+Park+Ridge,+IL+60068" target="_blank" rel="noopener" class="text-brand-gold hover:underline">Directions</a></p>
+                </div>
+                <div class="bg-brand-dark rounded-xl p-6 md:p-8 border border-brand-gray/10">
+                    <h3 class="text-xl font-bold text-brand-light mb-1 font-heading uppercase">Heat times</h3>
+                    <p class="text-brand-gray text-sm mb-5">Pick your start time when you register. Spots shown live.</p>
+                    <div id="heat-preview" class="grid grid-cols-3 gap-3 text-center">
+                        <div class="heat-card"><div class="font-heading font-bold text-brand-light text-lg">8:10</div><div class="text-xs text-brand-gray">AM</div></div>
+                        <div class="heat-card"><div class="font-heading font-bold text-brand-light text-lg">8:40</div><div class="text-xs text-brand-gray">AM</div></div>
+                        <div class="heat-card"><div class="font-heading font-bold text-brand-light text-lg">9:10</div><div class="text-xs text-brand-gray">AM</div></div>
+                        <div class="heat-card"><div class="font-heading font-bold text-brand-light text-lg">9:40</div><div class="text-xs text-brand-gray">AM</div></div>
+                        <div class="heat-card"><div class="font-heading font-bold text-brand-light text-lg">10:10</div><div class="text-xs text-brand-gray">AM</div></div>
+                        <div class="heat-card"><div class="font-heading font-bold text-brand-light text-lg">10:40</div><div class="text-xs text-brand-gray">AM</div></div>
+                    </div>
+                    <a href="#register" class="btn btn-primary w-full text-center font-bold py-3 rounded-lg mt-6 uppercase tracking-wider">Pick My Heat</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Race + Data (Moonshot Medical bridge) -->
+    <section id="race-plus-data" class="py-20 md:py-28 bg-brand-dark">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <p class="text-brand-gold font-semibold uppercase tracking-widest text-sm mb-3 font-heading">Race + Data</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-brand-light mb-4 font-heading uppercase">Turn race day <span class="text-brand-gold">into data.</span></h2>
+                <p class="text-brand-gray leading-relaxed">
+                    Moonshot CrossFit shares a building with <a href="https://moonshotmp.com" target="_blank" rel="noopener" class="text-brand-gold hover:underline font-semibold">Moonshot Medical + Performance</a>, our affiliated clinic. Add a DEXA body composition scan or a comprehensive blood panel to your registration at the event rate, <strong class="text-brand-light">$25 off regular clinic pricing</strong>, and book it for any date through December 31. Scan before the race for a baseline, or after to measure what your training block built.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="card rounded-xl p-7 flex flex-col">
+                    <div class="text-brand-gold text-xs font-heading uppercase tracking-widest mb-2">Add-on</div>
+                    <h3 class="text-xl font-bold text-brand-light font-heading mb-2">DEXA Body Composition Scan</h3>
+                    <p class="text-brand-gray text-sm leading-relaxed flex-grow">Gold-standard lean mass, fat mass, visceral fat, and bone density, region by region. 10 minutes on the table, full report the same day.</p>
+                    <div class="mt-5 flex items-baseline gap-2"><span class="text-3xl font-bold text-brand-light font-heading" data-price="dexa">$124</span><span class="price-strike text-sm" data-regular="dexa">$149</span><span class="text-xs text-brand-gray">event rate</span></div>
+                </div>
+                <div class="card rounded-xl p-7 flex flex-col">
+                    <div class="text-brand-gold text-xs font-heading uppercase tracking-widest mb-2">Add-on</div>
+                    <h3 class="text-xl font-bold text-brand-light font-heading mb-2">Comprehensive Blood Panel</h3>
+                    <p class="text-brand-gray text-sm leading-relaxed flex-grow">Hormones, metabolic and lipid markers, thyroid, inflammation, vitamins and minerals. Drawn at the clinic, reviewed by a provider, results in your portal.</p>
+                    <div class="mt-5 flex items-baseline gap-2"><span class="text-3xl font-bold text-brand-light font-heading" data-price="labs">$260</span><span class="price-strike text-sm" data-regular="labs">$285</span><span class="text-xs text-brand-gray">event rate</span></div>
+                </div>
+                <div class="card rounded-xl p-7 flex flex-col border-brand-gold" style="border-color: rgba(184,152,110,0.6);">
+                    <div class="text-brand-gold text-xs font-heading uppercase tracking-widest mb-2">Best value · both</div>
+                    <h3 class="text-xl font-bold text-brand-light font-heading mb-2">Performance Baseline</h3>
+                    <p class="text-brand-gray text-sm leading-relaxed flex-grow">DEXA scan + comprehensive blood panel in one visit. The complete picture of what your body is made of and how it is running. Applied automatically when you add both.</p>
+                    <div class="mt-5 flex items-baseline gap-2"><span class="text-3xl font-bold text-brand-light font-heading" data-price="baseline">$380</span><span class="price-strike text-sm" data-regular="baseline">$405</span><span class="text-xs text-brand-gray">event rate</span></div>
+                </div>
+            </div>
+            <p class="text-center text-brand-gray text-sm mt-8 max-w-2xl mx-auto">Add-ons are sold as clinic certificates with your registration. After checkout you get a code and a direct booking link for each one. Clinical services are provided by Moonshot Medical + Performance, a separate medical practice.</p>
+        </div>
+    </section>
+
+    <!-- Who should participate -->
+    <section class="py-20 md:py-24 bg-brand-slate">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-light mb-2 font-heading uppercase">Who is this for?</h2>
+                <p class="text-brand-gray max-w-2xl mx-auto">If any of these sound like you, this event is for you.</p>
+            </div>
+            <div class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="bg-brand-dark p-7 rounded-lg"><h3 class="text-lg font-bold text-brand-light mb-2 font-heading">Training for a race</h3><p class="text-brand-gray text-sm">HYROX Chicago is February 11, 2027. Get a full dress rehearsal: pacing, transitions, and the wall-ball finish when your legs are gone.</p></div>
+                <div class="bg-brand-dark p-7 rounded-lg"><h3 class="text-lg font-bold text-brand-light mb-2 font-heading">Benchmarking fitness</h3><p class="text-brand-gray text-sm">One standardized test, one time on the board. Pair it with a DEXA or blood panel and you have real before-and-after data.</p></div>
+                <div class="bg-brand-dark p-7 rounded-lg"><h3 class="text-lg font-bold text-brand-light mb-2 font-heading">First-timers</h3><p class="text-brand-gray text-sm">Never done HYROX? Doubles is the perfect entry. Split the work with a partner, and our coaches scale every station to your level.</p></div>
+                <div class="bg-brand-dark p-7 rounded-lg"><h3 class="text-lg font-bold text-brand-light mb-2 font-heading">Just want a challenge</h3><p class="text-brand-gray text-sm">An incredible Saturday morning with a great community. Come push your limits and see what you are capable of.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ REGISTRATION ═══════════════════════ -->
+    <section id="register" class="py-20 md:py-28 bg-brand-dark scroll-mt-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <p class="text-brand-gold font-semibold uppercase tracking-widest text-sm mb-3 font-heading">Register</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-brand-light mb-3 font-heading uppercase">Build your race day</h2>
+                <p class="text-brand-gray max-w-2xl mx-auto">Pick a heat, add your partner, choose your add-ons for each of you, and check out once. Your partner gets their own email to confirm their details and sign the waiver.</p>
+            </div>
+
+            <div id="reg-closed" class="hidden max-w-2xl mx-auto bg-brand-slate border border-brand-gold/40 rounded-xl p-8 text-center">
+                <h3 class="text-2xl font-bold text-brand-light font-heading uppercase mb-2">Registration is closed</h3>
+                <p class="text-brand-gray">Online registration closed Friday, October 2. Email <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gold hover:underline">info@moonshotcrossfit.com</a> to ask about race-day availability.</p>
+            </div>
+
+            <div id="canceled-banner" class="hidden max-w-4xl mx-auto mb-6 bg-brand-slate border border-brand-gray/30 rounded-lg px-5 py-3 text-sm text-brand-gray">Checkout was canceled. Your heat spot was released; your form below is restored so you can try again.</div>
+
+            <form id="reg-form" class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto" novalidate>
+                <div class="lg:col-span-2 space-y-8">
+
+                    <!-- Step 1: Heat -->
+                    <div class="card rounded-xl p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-1"><span class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-heading font-bold flex items-center justify-center">1</span><h3 class="text-xl font-bold text-brand-light font-heading uppercase">Pick your heat</h3></div>
+                        <p class="text-brand-gray text-sm mb-5 ml-11">Saturday, October 3. Doubles teams start every 30 minutes.</p>
+                        <div id="heat-grid" class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+                            <div class="col-span-full text-brand-gray text-sm">Loading heat availability…</div>
+                        </div>
+                        <input type="hidden" name="heat_id" id="heat_id">
+                    </div>
+
+                    <!-- Step 2: Athletes -->
+                    <div class="card rounded-xl p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-1"><span class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-heading font-bold flex items-center justify-center">2</span><h3 class="text-xl font-bold text-brand-light font-heading uppercase">Your team</h3></div>
+                        <p class="text-brand-gray text-sm mb-6 ml-11">Doubles only. Every team races at HYROX Mixed Doubles weights, so any two athletes can pair up.</p>
+
+                        <div class="mb-8">
+                            <div class="flex items-center gap-3 mb-4"><span class="role-chip">Athlete 1</span><span class="text-brand-light font-semibold">You</span><span class="text-brand-gray text-xs">(registering and paying)</span></div>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="sm:col-span-2"><label class="field-label" for="r_name">Full name</label><input class="field" id="r_name" name="r_name" autocomplete="name" placeholder="First Last" required></div>
+                                <div><label class="field-label" for="r_email">Email</label><input class="field" id="r_email" name="r_email" type="email" autocomplete="email" placeholder="you@email.com" required></div>
+                                <div><label class="field-label" for="r_phone">Mobile phone</label><input class="field" id="r_phone" name="r_phone" type="tel" autocomplete="tel" placeholder="(847) 555-0100" required></div>
+                                <div><label class="field-label" for="r_emergency_name">Emergency contact name</label><input class="field" id="r_emergency_name" name="r_emergency_name" placeholder="Name" required></div>
+                                <div><label class="field-label" for="r_emergency_phone">Emergency contact phone</label><input class="field" id="r_emergency_phone" name="r_emergency_phone" type="tel" placeholder="(847) 555-0100" required></div>
+                            </div>
+                            <label class="checkbox-row mt-4"><input type="checkbox" id="r_member" name="r_member"><span class="text-brand-gray text-sm">I'm a Moonshot CrossFit member <span class="text-brand-gold">(60% off race entry with the member code)</span></span></label>
+                        </div>
+
+                        <div class="border-t border-brand-gray/15 pt-8">
+                            <div class="flex items-center gap-3 mb-4"><span class="role-chip">Athlete 2</span><span class="text-brand-light font-semibold">Your partner</span></div>
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div class="sm:col-span-2"><label class="field-label" for="p_name">Partner's full name</label><input class="field" id="p_name" name="p_name" placeholder="First Last" required></div>
+                                <div><label class="field-label" for="p_email">Partner's email</label><input class="field" id="p_email" name="p_email" type="email" placeholder="partner@email.com" required></div>
+                                <div><label class="field-label" for="p_phone">Partner's mobile phone</label><input class="field" id="p_phone" name="p_phone" type="tel" placeholder="(847) 555-0100" required></div>
+                            </div>
+                            <label class="checkbox-row mt-4"><input type="checkbox" id="p_member" name="p_member"><span class="text-brand-gray text-sm">My partner is a Moonshot CrossFit member</span></label>
+                            <p class="text-brand-gray text-xs mt-4 leading-relaxed">We'll email your partner a link to confirm their contact info, sign the race waiver, and add anything you didn't buy for them. They must sign before race day.</p>
+                        </div>
+
+                        <div id="member-code-wrap" class="hidden mt-6 bg-brand-dark rounded-lg p-4 border border-brand-gold/30">
+                            <label class="field-label" for="member_code">Moonshot member code</label>
+                            <input class="field" id="member_code" name="member_code" placeholder="Enter code" autocomplete="off" style="max-width: 16rem;">
+                            <p class="text-brand-gray text-xs mt-2">Applies the member rate to each athlete marked as a member. Members: find the code in the gym or ask a coach.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Package builder -->
+                    <div class="card rounded-xl p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-1"><span class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-heading font-bold flex items-center justify-center">3</span><h3 class="text-xl font-bold text-brand-light font-heading uppercase">Build your package</h3></div>
+                        <p class="text-brand-gray text-sm mb-6 ml-11">Race entry is included for both athletes. Toggle add-ons for each of you. Nothing is required.</p>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left" id="addon-table">
+                                <thead>
+                                    <tr class="text-xs font-heading uppercase tracking-widest text-brand-gray border-b border-brand-gray/15">
+                                        <th class="py-3 pr-3 font-medium">Add-on</th>
+                                        <th class="py-3 px-3 font-medium text-center w-28"><span id="col-r-name">You</span></th>
+                                        <th class="py-3 pl-3 font-medium text-center w-28"><span id="col-p-name">Partner</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-brand-gray/10">
+                                    <tr>
+                                        <td class="py-4 pr-3">
+                                            <div class="font-semibold text-brand-light">Event T-Shirt</div>
+                                            <div class="text-brand-gray text-sm">Race Simulation 2026 tee. <span class="text-brand-light" data-price="shirt">$25</span></div>
+                                            <div class="flex flex-wrap gap-3 mt-2">
+                                                <select class="field hidden text-sm" id="r_shirt_size" name="r_shirt_size" style="width: auto; padding: 0.4rem 2.2rem 0.4rem 0.7rem;" aria-label="Your shirt size"><option value="">Your size</option></select>
+                                                <select class="field hidden text-sm" id="p_shirt_size" name="p_shirt_size" style="width: auto; padding: 0.4rem 2.2rem 0.4rem 0.7rem;" aria-label="Partner's shirt size"><option value="">Partner's size</option></select>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-3 text-center"><button type="button" class="toggle" role="switch" aria-checked="false" data-role="registrant" data-addon="shirt" aria-label="T-shirt for you"></button></td>
+                                        <td class="py-4 pl-3 text-center"><button type="button" class="toggle" role="switch" aria-checked="false" data-role="partner" data-addon="shirt" aria-label="T-shirt for partner"></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-4 pr-3">
+                                            <div class="font-semibold text-brand-light">DEXA Body Composition Scan</div>
+                                            <div class="text-brand-gray text-sm">Moonshot Medical certificate. <span class="text-brand-light" data-price="dexa">$124</span> <span class="price-strike" data-regular="dexa">$149</span></div>
+                                        </td>
+                                        <td class="py-4 px-3 text-center"><button type="button" class="toggle" role="switch" aria-checked="false" data-role="registrant" data-addon="dexa" aria-label="DEXA scan for you"></button></td>
+                                        <td class="py-4 pl-3 text-center"><button type="button" class="toggle" role="switch" aria-checked="false" data-role="partner" data-addon="dexa" aria-label="DEXA scan for partner"></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-4 pr-3">
+                                            <div class="font-semibold text-brand-light">Comprehensive Blood Panel</div>
+                                            <div class="text-brand-gray text-sm">Moonshot Medical certificate. <span class="text-brand-light" data-price="labs">$260</span> <span class="price-strike" data-regular="labs">$285</span></div>
+                                            <div class="text-brand-gold text-xs mt-1">Add both DEXA + Blood Panel for the same athlete and the Performance Baseline rate (<span data-price="baseline">$380</span>) applies automatically.</div>
+                                        </td>
+                                        <td class="py-4 px-3 text-center"><button type="button" class="toggle" role="switch" aria-checked="false" data-role="registrant" data-addon="labs" aria-label="Blood panel for you"></button></td>
+                                        <td class="py-4 pl-3 text-center"><button type="button" class="toggle" role="switch" aria-checked="false" data-role="partner" data-addon="labs" aria-label="Blood panel for partner"></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-brand-gray text-xs mt-5 leading-relaxed">Not sure what your partner wants? Leave their add-ons off. Their confirmation email includes a link to add any of these for themselves at the same event rate, right up until registration closes.</p>
+                    </div>
+
+                    <!-- Step 4: Waiver -->
+                    <div class="card rounded-xl p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-1"><span class="w-8 h-8 rounded-full bg-brand-gold text-brand-dark font-heading font-bold flex items-center justify-center">4</span><h3 class="text-xl font-bold text-brand-light font-heading uppercase">Waiver &amp; signature</h3></div>
+                        <p class="text-brand-gray text-sm mb-5 ml-11">You sign for yourself now. Your partner signs their own via the link we email them.</p>
+
+                        <div class="bg-brand-dark rounded-lg p-5 border border-brand-gray/15 mb-5">
+                            <h4 class="text-brand-light font-heading font-bold uppercase tracking-wider text-sm mb-2">Event Participation Waiver, Release &amp; Assumption of Risk</h4>
+                            <div class="waiver-scroll">
+                                <h4>1. Acknowledgment &amp; Assumption of Risk</h4>
+                                <p>I understand that participating in the Moonshot HYROX Race Simulation ("Event") at Moonshot CrossFit, 542 Busse Hwy, Park Ridge, IL ("Facility") involves strenuous physical exertion including running, sled pushing and pulling, rowing, SkiErg, burpee broad jumps, weighted carries and lunges, and wall balls, and carries inherent risks of injury including, without limitation, muscle strains, sprains, fractures, cardiovascular events, heat illness, and, in rare cases, permanent disability or death. I voluntarily assume all such risks, known and unknown.</p>
+                                <h4>2. Medical Fitness</h4>
+                                <p>I represent that I am in good physical condition, have no medical condition that would prevent safe participation, and have consulted a physician if I had any doubt. I will stop and notify a coach immediately if I feel unwell. I authorize Event staff to obtain emergency medical treatment on my behalf at my expense.</p>
+                                <h4>3. Rules &amp; Coaching</h4>
+                                <p>I agree to follow all Event rules, movement standards, lane assignments, and coach instructions, and to use equipment only as directed. Coaches may modify or stop my participation at their discretion for safety.</p>
+                                <h4>4. Release of Liability</h4>
+                                <p>To the fullest extent permitted by Illinois law, I, on behalf of myself, my heirs, executors, administrators, assigns, and personal representatives, hereby RELEASE, WAIVE, DISCHARGE, AND COVENANT NOT TO SUE Moonshot CrossFit, its owners, members, managers, officers, directors, employees, independent contractors, coaches, volunteers, agents, affiliates, landlords, and successors (collectively, "Released Parties") from any and all liability, claims, demands, actions, and causes of action whatsoever arising out of or relating to any loss, damage, or injury, including death, that may be sustained by me, or to any property belonging to me, while participating in the Event or while on the premises, WHETHER CAUSED BY THE NEGLIGENCE OF THE RELEASED PARTIES OR OTHERWISE, except for conduct that constitutes willful and wanton misconduct under Illinois law.</p>
+                                <h4>5. Indemnification</h4>
+                                <p>I agree to INDEMNIFY AND HOLD HARMLESS the Released Parties from any loss, liability, damage, or cost, including reasonable attorneys' fees, that they may incur due to my participation in the Event, whether caused by my negligence or otherwise.</p>
+                                <h4>6. Photo &amp; Video Release</h4>
+                                <p>I grant Moonshot CrossFit the right to photograph and record me during the Event and to use my image, likeness, and results in promotional materials without compensation.</p>
+                                <h4>7. Registration Terms</h4>
+                                <p>Race entries and add-ons are non-refundable but transferable to another athlete through registration close. Clinic certificates are provided by Moonshot Medical + Performance, a separate medical practice, and are subject to its intake and consent process; they are valid through December 31, 2026. Heat times may be adjusted for safety or scheduling; we will notify you by email.</p>
+                                <h4>8. Governing Law</h4>
+                                <p>This agreement is governed by the laws of the State of Illinois. If any portion is held invalid, the remainder shall continue in full force and effect. I have read this document, understand it, and sign it voluntarily.</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-5">
+                            <label class="checkbox-row"><input type="checkbox" name="ack_read" required><span class="text-brand-light text-sm">I have read and understand the full waiver above.</span></label>
+                            <label class="checkbox-row"><input type="checkbox" name="ack_risk" required><span class="text-brand-light text-sm">I voluntarily assume all risks of participating in the Event.</span></label>
+                            <label class="checkbox-row"><input type="checkbox" name="ack_release" required><span class="text-brand-light text-sm">I release and waive claims against Moonshot CrossFit and the Released Parties as described above.</span></label>
+                            <label class="checkbox-row"><input type="checkbox" name="ack_rules" required><span class="text-brand-light text-sm">I will follow Event rules, movement standards, and coach instructions.</span></label>
+                            <label class="checkbox-row"><input type="checkbox" name="ack_age" required><span class="text-brand-light text-sm">I am at least 18 years old and this information is accurate.</span></label>
+                        </div>
+                        <div>
+                            <label class="field-label" for="signature">Type your full name to sign</label>
+                            <input class="field" id="signature" name="signature" placeholder="Must match your full name above" autocomplete="off" required style="font-family: 'Oswald', sans-serif; font-size: 1.15rem; letter-spacing: 0.02em;">
+                            <p id="sig-hint" class="text-xs mt-2 text-brand-gray"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order summary -->
+                <aside class="lg:col-span-1">
+                    <div class="summary-sticky card rounded-xl p-6 md:p-7">
+                        <h3 class="text-xl font-bold text-brand-light font-heading uppercase mb-1">Your order</h3>
+                        <p id="summary-heat" class="text-brand-gold text-sm font-semibold mb-4">Pick a heat to start</p>
+                        <div id="summary-lines" class="divide-y divide-brand-gray/10 text-sm"></div>
+                        <div class="flex justify-between items-baseline border-t border-brand-gray/25 pt-4 mt-4">
+                            <span class="font-heading uppercase tracking-wider text-brand-gray">Total</span>
+                            <span id="summary-total" class="text-3xl font-bold text-brand-light font-heading">$50</span>
+                        </div>
+                        <p id="summary-savings" class="text-brand-gold text-xs mt-1 hidden"></p>
+                        <div id="form-error" class="hidden mt-4 bg-red-900/40 border border-red-500/60 text-red-100 text-sm rounded-lg px-4 py-3" role="alert"></div>
+                        <button type="submit" id="submit-btn" class="btn btn-primary w-full font-bold py-4 rounded-lg mt-5 uppercase tracking-wider text-base">Continue to Secure Checkout</button>
+                        <p class="text-brand-gray text-xs mt-3 text-center">Card payment via Stripe. Your heat is held for 30 minutes while you check out.</p>
+                        <div class="mt-5 pt-5 border-t border-brand-gray/15 text-xs text-brand-gray space-y-2">
+                            <p><strong class="text-brand-light">Included with entry:</strong> timed heat, coached lanes, official results.</p>
+                            <p><strong class="text-brand-light">After checkout:</strong> confirmation email, partner invite, and a code + booking link for every clinic add-on.</p>
+                        </div>
+                    </div>
+                </aside>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-20 md:py-24 bg-brand-slate">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-light mb-10 font-heading text-center uppercase">Race Simulation FAQ</h2>
+            <div class="space-y-4">
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">Do I need a partner?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">Yes. This event is Doubles only: two athletes run every 1km together and split each station however you like. If you want to race but don't have a partner, email <a href="mailto:info@moonshotcrossfit.com" class="text-brand-gold hover:underline">info@moonshotcrossfit.com</a> and we'll try to match you up.</p></details>
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">What weights are used?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">Every team races at the official HYROX Mixed Doubles weight standard for sleds, carries, lunges, and wall balls. One standard keeps the floor consistent across every heat and means any two athletes can pair up: men, women, or mixed. Coaches can scale a station if needed; scaled results are noted on the board.</p></details>
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">How does the member discount work?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">Moonshot CrossFit members get 60% off race entry ($10 instead of $25). Check the member box for each athlete who is a member and enter the member code from the gym. The discount applies to race entry only; add-ons are already at event pricing.</p></details>
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">How do the DEXA and blood panel add-ons work?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">They're certificates for Moonshot Medical + Performance, the clinic that shares our building. After checkout you get a certificate code and a direct booking link for each one. Pick any appointment date through December 31, 2026. Your code is attached to the booking automatically, so there's nothing to pay at the clinic. A blood draw is best done fasted in the morning; the clinic will send prep instructions when you book.</p></details>
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">Can my partner buy their own add-ons?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">Yes. Your partner's confirmation email includes a personal link where they confirm their info, sign the waiver, and can add a T-shirt, DEXA scan, or blood panel for themselves at the same event rate, right up until registration closes.</p></details>
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">What should I bring?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">Running shoes you can push a sled in, water, and something to eat after. Chalk, timing, and all equipment are provided. Arrive by 7:30 AM for check-in and the briefing regardless of your heat time.</p></details>
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">What's the refund policy?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">Entries and add-ons are non-refundable but fully transferable to another athlete through registration close (October 2). Email us with the new athlete's name and we'll swap them in.</p></details>
+                <details class="bg-brand-dark p-6 rounded-lg group"><summary class="cursor-pointer flex justify-between items-center gap-4"><h3 class="text-lg font-bold text-brand-light font-heading">I'm not a member. Can I still race?</h3><span class="text-brand-gold text-2xl group-open:rotate-45 transition-transform">+</span></summary><p class="text-brand-gray leading-relaxed mt-3">Absolutely. The event is open to everyone. If you like the way we run things, <a href="/hyrox/" class="text-brand-gold hover:underline">our HYROX classes</a> run three times a week and are included in every membership.</p></details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 md:py-28 bg-brand-gold">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-5xl font-black text-brand-dark mb-4 font-heading uppercase">Lock in your heat</h2>
+            <p class="text-brand-dark/80 max-w-2xl mx-auto mb-8">Saturday, October 3. Heat sizes are limited so every team gets a clean lane and an honest clock. Grab your partner and register.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#register" class="btn bg-brand-dark text-brand-light hover:bg-brand-slate font-bold py-4 px-10 rounded-lg text-lg uppercase tracking-wider shadow-lg">Register Your Team</a>
+                <a href="mailto:info@moonshotcrossfit.com?subject=HYROX%20Race%20Simulation" class="btn bg-white text-brand-dark hover:bg-gray-100 font-bold py-4 px-10 rounded-lg text-lg uppercase tracking-wider shadow-lg">Ask a Question</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (auto-injected) -->
+    <script src="/shared/footer.js" defer></script>
+    <script src="/hyrox/simulation/app.js" defer></script>
+</body>
+</html>

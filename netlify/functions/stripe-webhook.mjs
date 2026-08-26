@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { getStore } from '@netlify/blobs';
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
+import { handleHyroxCheckoutCompleted, handleHyroxCheckoutExpired } from './_shared/hyrox.mjs';
 
 const TIER_LABELS = { 'class-fob': 'Class + Fob', 'fob-only': 'Fob-Only' };
 
@@ -214,6 +215,10 @@ export default async (req) => {
     switch (stripeEvent.type) {
       case 'checkout.session.completed': {
         const session = stripeEvent.data.object;
+        if (String(session.metadata?.kind || '').startsWith('hyrox')) {
+          await handleHyroxCheckoutCompleted(session);
+          break;
+        }
         const { waiver_id, tier, people, interval, mode, founder_claimed } = session.metadata || {};
 
         if (!waiver_id) {
@@ -263,6 +268,10 @@ export default async (req) => {
 
       case 'checkout.session.expired': {
         const session = stripeEvent.data.object;
+        if (String(session.metadata?.kind || '').startsWith('hyrox')) {
+          await handleHyroxCheckoutExpired(session);
+          break;
+        }
         const { waiver_id, founder_claimed } = session.metadata || {};
         if (founder_claimed === 'true') {
           const founderStore = getStore('fob');

@@ -366,7 +366,7 @@ function calendarLink(heat) {
   return `https://calendar.google.com/calendar/render?${q.toString()}`;
 }
 
-export async function emailRegistrantConfirmation(team) {
+export async function emailRegistrantConfirmation(team, { to } = {}) {
   const r = team.athletes.registrant, p = team.athletes.partner;
   const heat = heatById(team.heat_id);
   const certs = (team.certificates || []).filter(c => c.role === 'registrant');
@@ -424,10 +424,10 @@ Moonshot CrossFit
     <p style="color:#666;font-size:14px;">Questions? Reply to this email or call ${esc(EVENT.contact_phone)}.</p>
     <p>See you on the floor,<br><strong>Moonshot CrossFit</strong></p>`);
 
-  return sendEmail({ to: r.email, subject, text, html });
+  return sendEmail({ to: to || r.email, subject, text, html });
 }
 
-export async function emailPartnerInvite(team) {
+export async function emailPartnerInvite(team, { to } = {}) {
   const r = team.athletes.registrant, p = team.athletes.partner;
   const heat = heatById(team.heat_id);
   const certs = (team.certificates || []).filter(c => c.role === 'partner');
@@ -474,7 +474,7 @@ Moonshot CrossFit
     <p style="color:#666;font-size:14px;">Questions? Reply to this email or call ${esc(EVENT.contact_phone)}.</p>
     <p><strong>Moonshot CrossFit</strong></p>`);
 
-  return sendEmail({ to: p.email, subject, text, html });
+  return sendEmail({ to: to || p.email, subject, text, html });
 }
 
 export async function emailPartnerAddonReceipt(team, certs) {
@@ -498,7 +498,7 @@ Moonshot CrossFit
   return sendEmail({ to: p.email, subject, text, html });
 }
 
-export async function emailTeamNotification(team, { kind, sessionId, amountCents }) {
+export async function emailTeamNotification(team, { kind, sessionId, amountCents, to } = {}) {
   const r = team.athletes.registrant, p = team.athletes.partner;
   const heat = heatById(team.heat_id);
   const isTest = !!team.test_mode;
@@ -567,7 +567,7 @@ ${totals.certLedger.length ? `<details><summary style="cursor:pointer;color:#B89
 <p style="font-size:12px;color:#888;margin-top:18px;">Roster CSV: <code>${esc(SITE_URL)}/.netlify/functions/hyrox-roster?key=&lt;HYROX_ADMIN_KEY&gt;</code></p>
 </body></html>`;
 
-  return sendEmail({ to: TEAM_TO, subject, text, html });
+  return sendEmail({ to: to || TEAM_TO, subject, text, html });
 }
 
 // ─── Webhook handlers (called from stripe-webhook.mjs) ──────────────────────

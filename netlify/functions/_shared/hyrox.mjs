@@ -87,8 +87,10 @@ export const ADDON_LABELS = {
 export const HOLD_MINUTES = 35;
 
 // ─── Stores ─────────────────────────────────────────────────────────────────
-export const teamsStore = () => getStore('hyrox-teams');
-export const ordersStore = () => getStore('hyrox-orders');   // partner add-on purchases, keyed by Stripe session id
+// Strong consistency: heat capacity is computed from list() in a different function
+// instance than the one that wrote the team; Blobs' default (eventual) can lag ~60s.
+export const teamsStore = () => getStore({ name: 'hyrox-teams', consistency: 'strong' });
+export const ordersStore = () => getStore({ name: 'hyrox-orders', consistency: 'strong' });   // partner add-on purchases, keyed by Stripe session id
 
 export function json(body, status = 200, extra = {}) {
   return new Response(JSON.stringify(body), {

@@ -36,15 +36,25 @@ export const EVENT = {
   contact_phone: '(847) 850-7360'
 };
 
-// Doubles heats. `capacity` = teams per heat. Staggered 30 min apart.
-// Adjust capacity to match lane/equipment count on the floor.
+// Doubles heats: a new heat every 10 minutes, TWO teams per heat (Tom, 8/25).
+// `capacity` = teams per heat. Times are Central (UTC-5 in October).
 export const HEATS = [
-  { id: 'h1', label: '8:10 AM',  start_iso: '2026-10-03T13:10:00.000Z', capacity: 6 },
-  { id: 'h2', label: '8:40 AM',  start_iso: '2026-10-03T13:40:00.000Z', capacity: 6 },
-  { id: 'h3', label: '9:10 AM',  start_iso: '2026-10-03T14:10:00.000Z', capacity: 6 },
-  { id: 'h4', label: '9:40 AM',  start_iso: '2026-10-03T14:40:00.000Z', capacity: 6 },
-  { id: 'h5', label: '10:10 AM', start_iso: '2026-10-03T15:10:00.000Z', capacity: 6 },
-  { id: 'h6', label: '10:40 AM', start_iso: '2026-10-03T15:40:00.000Z', capacity: 6 }
+  { id: 'h01', label: '8:10 AM',   start_iso: '2026-10-03T13:10:00.000Z', capacity: 2 },
+  { id: 'h02', label: '8:20 AM',   start_iso: '2026-10-03T13:20:00.000Z', capacity: 2 },
+  { id: 'h03', label: '8:30 AM',   start_iso: '2026-10-03T13:30:00.000Z', capacity: 2 },
+  { id: 'h04', label: '8:40 AM',   start_iso: '2026-10-03T13:40:00.000Z', capacity: 2 },
+  { id: 'h05', label: '8:50 AM',   start_iso: '2026-10-03T13:50:00.000Z', capacity: 2 },
+  { id: 'h06', label: '9:00 AM',   start_iso: '2026-10-03T14:00:00.000Z', capacity: 2 },
+  { id: 'h07', label: '9:10 AM',   start_iso: '2026-10-03T14:10:00.000Z', capacity: 2 },
+  { id: 'h08', label: '9:20 AM',   start_iso: '2026-10-03T14:20:00.000Z', capacity: 2 },
+  { id: 'h09', label: '9:30 AM',   start_iso: '2026-10-03T14:30:00.000Z', capacity: 2 },
+  { id: 'h10', label: '9:40 AM',   start_iso: '2026-10-03T14:40:00.000Z', capacity: 2 },
+  { id: 'h11', label: '9:50 AM',   start_iso: '2026-10-03T14:50:00.000Z', capacity: 2 },
+  { id: 'h12', label: '10:00 AM',  start_iso: '2026-10-03T15:00:00.000Z', capacity: 2 },
+  { id: 'h13', label: '10:10 AM',  start_iso: '2026-10-03T15:10:00.000Z', capacity: 2 },
+  { id: 'h14', label: '10:20 AM',  start_iso: '2026-10-03T15:20:00.000Z', capacity: 2 },
+  { id: 'h15', label: '10:30 AM',  start_iso: '2026-10-03T15:30:00.000Z', capacity: 2 },
+  { id: 'h16', label: '10:40 AM',  start_iso: '2026-10-03T15:40:00.000Z', capacity: 2 }
 ];
 
 // ─── Pricing (cents) ────────────────────────────────────────────────────────

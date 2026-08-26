@@ -10,7 +10,7 @@
 
   const FALLBACK = {
     open: true,
-    heats: [['h1', '8:10 AM'], ['h2', '8:40 AM'], ['h3', '9:10 AM'], ['h4', '9:40 AM'], ['h5', '10:10 AM'], ['h6', '10:40 AM']].map(([id, label]) => ({ id, label, capacity: 6, remaining: null })),
+    heats: Array.from({ length: 16 }, (_, i) => { const m = 8 * 60 + 10 + i * 10; return { id: 'h' + String(i + 1).padStart(2, '0'), label: `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} AM`, capacity: 2, remaining: null }; }),
     prices: { race_athlete: 2500, race_member_athlete: 1000, shirt: 2500, dexa: 12400, labs: 26000, baseline: 38000 },
     regular_prices: { dexa: 14900, labs: 28500, baseline: 40500 },
     shirt_sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL']

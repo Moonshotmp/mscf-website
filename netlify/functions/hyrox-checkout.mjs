@@ -23,7 +23,7 @@ function parseAthlete(raw, role) {
     shirt_size = clean(raw.shirt_size, 5).toUpperCase();
     if (!SHIRT_SIZES.includes(shirt_size)) return { error: `Pick a T-shirt size for ${name.split(' ')[0]}` };
   }
-  const a = { name, email, phone, member: !!raw.member, addons: { shirt: addons.shirt, dexa: addons.dexa || addons.baseline, labs: addons.labs || addons.baseline }, shirt_size };
+  const a = { name, email, phone, member: !!raw.member, addons: { shirt: addons.shirt, dexa: addons.dexa || addons.baseline, labs: addons.labs || addons.baseline, nutrition: addons.nutrition }, shirt_size };
   if (role === 'registrant') {
     a.emergency_name = clean(raw.emergency_name, 80);
     a.emergency_phone = clean(raw.emergency_phone, 40);

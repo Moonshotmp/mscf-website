@@ -61,15 +61,18 @@ export const HEATS = [
 // Race entry is per athlete (MJ's doc: $25/athlete, members 60% off with code).
 // Clinic add-ons are sold as CERTIFICATES at $25 under the clinic's regular price
 // (regular clinic prices on prod 2026-08-25: DEXA $149, Comprehensive Blood Panel $285, Performance Baseline $405).
+// Nutrition add-on is Sarah's one-time Jumpstart consult ($225 regular) at the $30-off event rate ($195),
+// sold as a certificate and redeemed with Sarah via the clinic booker (Tom, 8/31 Sarah call).
 export const PRICES = {
   race_athlete:        2500,
   race_member_athlete: 1000,
   shirt:               2500,
   dexa:               12400,
   labs:               26000,
-  baseline:           38000   // DEXA + Blood Panel for the same athlete (auto-applied)
+  baseline:           38000,  // DEXA + Blood Panel for the same athlete (auto-applied)
+  nutrition:          19500   // Nutrition Jumpstart consult, $30 off the $225 regular rate
 };
-export const REGULAR_PRICES = { dexa: 14900, labs: 28500, baseline: 40500 };
+export const REGULAR_PRICES = { dexa: 14900, labs: 28500, baseline: 40500, nutrition: 22500 };
 
 export const MEMBER_CODE = process.env.HYROX_MEMBER_CODE || 'MoonRox60';
 export const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
@@ -81,16 +84,18 @@ export const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
 export const CLINIC_NAME = 'Moonshot Medical + Performance';
 export const CLINIC_BOOK_BASE = process.env.HYROX_CLINIC_BOOK_BASE || 'https://moonshot.moonshotclinic.com/book';
 export const BOOK_SLUGS = {
-  dexa:     process.env.HYROX_BOOK_SLUG_DEXA     || 'hyrox-dexa',
-  labs:     process.env.HYROX_BOOK_SLUG_LABS     || 'hyrox-labs',
-  baseline: process.env.HYROX_BOOK_SLUG_BASELINE || 'hyrox-baseline'
+  dexa:      process.env.HYROX_BOOK_SLUG_DEXA      || 'hyrox-dexa',
+  labs:      process.env.HYROX_BOOK_SLUG_LABS      || 'hyrox-labs',
+  baseline:  process.env.HYROX_BOOK_SLUG_BASELINE  || 'hyrox-baseline',
+  nutrition: process.env.HYROX_BOOK_SLUG_NUTRITION || 'hyrox-nutrition'
 };
 
 export const ADDON_LABELS = {
   shirt: 'Event T-Shirt',
   dexa: 'DEXA Body Composition Scan',
   labs: 'Comprehensive Blood Panel',
-  baseline: 'Performance Baseline (DEXA + Blood Panel)'
+  baseline: 'Performance Baseline (DEXA + Blood Panel)',
+  nutrition: 'Nutrition Jumpstart Session with Sarah'
 };
 
 // How long an unpaid registration holds its heat slot (Stripe Checkout min expiry is 30 min).
@@ -162,8 +167,8 @@ export function bookingLink(type, code) {
 
 // Normalizes an athlete's add-on selection; DEXA + labs for the same athlete collapse to `baseline`.
 export function normalizeAddons(a = {}) {
-  const shirt = !!a.shirt, dexa = !!a.dexa, labs = !!a.labs;
-  return { shirt, dexa: dexa && !labs, labs: labs && !dexa, baseline: dexa && labs };
+  const shirt = !!a.shirt, dexa = !!a.dexa, labs = !!a.labs, nutrition = !!a.nutrition;
+  return { shirt, dexa: dexa && !labs, labs: labs && !dexa, baseline: dexa && labs, nutrition };
 }
 
 // Builds priced line items for one athlete. `includeRace` false for partner add-on purchases.
@@ -183,6 +188,7 @@ export function athleteLineItems(athlete, role, { includeRace = true, memberCode
   if (ad.baseline) items.push({ key: 'baseline', role, label: `${ADDON_LABELS.baseline} Certificate — ${who}`, amount: PRICES.baseline });
   else if (ad.dexa) items.push({ key: 'dexa', role, label: `${ADDON_LABELS.dexa} Certificate — ${who}`, amount: PRICES.dexa });
   else if (ad.labs) items.push({ key: 'labs', role, label: `${ADDON_LABELS.labs} Certificate — ${who}`, amount: PRICES.labs });
+  if (ad.nutrition) items.push({ key: 'nutrition', role, label: `${ADDON_LABELS.nutrition} Certificate — ${who}`, amount: PRICES.nutrition });
   return items;
 }
 
@@ -278,7 +284,10 @@ export function publicTeamView(team, { forRole = 'registrant' } = {}) {
 export function issueCertificates(team, role, addons, sessionId) {
   const a = team.athletes[role];
   const ad = normalizeAddons(addons);
-  const types = ad.baseline ? ['baseline'] : [ad.dexa && 'dexa', ad.labs && 'labs'].filter(Boolean);
+  const types = [
+    ...(ad.baseline ? ['baseline'] : [ad.dexa && 'dexa', ad.labs && 'labs']),
+    ad.nutrition && 'nutrition'
+  ].filter(Boolean);
   team.certificates = team.certificates || [];
   for (const type of types) {
     // Idempotent per (role, type)
@@ -351,6 +360,7 @@ function addonsSummary(a) {
   if (ad.baseline) parts.push(ADDON_LABELS.baseline);
   if (ad.dexa) parts.push(ADDON_LABELS.dexa);
   if (ad.labs) parts.push(ADDON_LABELS.labs);
+  if (ad.nutrition) parts.push(ADDON_LABELS.nutrition);
   return parts.length ? parts.join(', ') : 'Race entry only';
 }
 

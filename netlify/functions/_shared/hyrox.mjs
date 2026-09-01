@@ -27,6 +27,13 @@ export const EVENT = {
   doors_open: '7:30 AM',
   briefing: '7:45 AM',
   warmup: '8:00 AM',
+  // Per-division race-morning schedule. Singles run the first hour (Tom, 9/1),
+  // so their doors/briefing are earlier; the legacy doors_open/briefing/warmup
+  // above are the Doubles times and stay for any copy that predates divisions.
+  schedule: {
+    singles: { doors: '6:30 AM', briefing: '6:45 AM', first_heat: '7:00 AM' },
+    doubles: { doors: '7:30 AM', briefing: '7:45 AM', warmup: '8:00 AM', first_heat: '8:10 AM' }
+  },
   // Registration + partner add-on purchases close at end of day Oct 2 (Central).
   registration_closes_iso: '2026-10-03T04:59:59.000Z',
   registration_closes_label: 'Friday, October 2 at 11:59 PM',
@@ -36,25 +43,32 @@ export const EVENT = {
   contact_phone: '(847) 850-7360'
 };
 
-// Doubles heats: a new heat every 10 minutes, TWO teams per heat (Tom, 8/25).
-// `capacity` = teams per heat. Times are Central (UTC-5 in October).
+// Heats: a new heat every 10 minutes, TWO entries per heat (one entry = one
+// lane: a Singles athlete or a Doubles team). Times are Central (UTC-5 in Oct).
+// Singles run the first hour, 7:00–7:50 (Tom, 9/1); Doubles from 8:10 as before.
 export const HEATS = [
-  { id: 'h01', label: '8:10 AM',   start_iso: '2026-10-03T13:10:00.000Z', capacity: 2 },
-  { id: 'h02', label: '8:20 AM',   start_iso: '2026-10-03T13:20:00.000Z', capacity: 2 },
-  { id: 'h03', label: '8:30 AM',   start_iso: '2026-10-03T13:30:00.000Z', capacity: 2 },
-  { id: 'h04', label: '8:40 AM',   start_iso: '2026-10-03T13:40:00.000Z', capacity: 2 },
-  { id: 'h05', label: '8:50 AM',   start_iso: '2026-10-03T13:50:00.000Z', capacity: 2 },
-  { id: 'h06', label: '9:00 AM',   start_iso: '2026-10-03T14:00:00.000Z', capacity: 2 },
-  { id: 'h07', label: '9:10 AM',   start_iso: '2026-10-03T14:10:00.000Z', capacity: 2 },
-  { id: 'h08', label: '9:20 AM',   start_iso: '2026-10-03T14:20:00.000Z', capacity: 2 },
-  { id: 'h09', label: '9:30 AM',   start_iso: '2026-10-03T14:30:00.000Z', capacity: 2 },
-  { id: 'h10', label: '9:40 AM',   start_iso: '2026-10-03T14:40:00.000Z', capacity: 2 },
-  { id: 'h11', label: '9:50 AM',   start_iso: '2026-10-03T14:50:00.000Z', capacity: 2 },
-  { id: 'h12', label: '10:00 AM',  start_iso: '2026-10-03T15:00:00.000Z', capacity: 2 },
-  { id: 'h13', label: '10:10 AM',  start_iso: '2026-10-03T15:10:00.000Z', capacity: 2 },
-  { id: 'h14', label: '10:20 AM',  start_iso: '2026-10-03T15:20:00.000Z', capacity: 2 },
-  { id: 'h15', label: '10:30 AM',  start_iso: '2026-10-03T15:30:00.000Z', capacity: 2 },
-  { id: 'h16', label: '10:40 AM',  start_iso: '2026-10-03T15:40:00.000Z', capacity: 2 }
+  { id: 's01', label: '7:00 AM',   start_iso: '2026-10-03T12:00:00.000Z', capacity: 2, division: 'singles' },
+  { id: 's02', label: '7:10 AM',   start_iso: '2026-10-03T12:10:00.000Z', capacity: 2, division: 'singles' },
+  { id: 's03', label: '7:20 AM',   start_iso: '2026-10-03T12:20:00.000Z', capacity: 2, division: 'singles' },
+  { id: 's04', label: '7:30 AM',   start_iso: '2026-10-03T12:30:00.000Z', capacity: 2, division: 'singles' },
+  { id: 's05', label: '7:40 AM',   start_iso: '2026-10-03T12:40:00.000Z', capacity: 2, division: 'singles' },
+  { id: 's06', label: '7:50 AM',   start_iso: '2026-10-03T12:50:00.000Z', capacity: 2, division: 'singles' },
+  { id: 'h01', label: '8:10 AM',   start_iso: '2026-10-03T13:10:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h02', label: '8:20 AM',   start_iso: '2026-10-03T13:20:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h03', label: '8:30 AM',   start_iso: '2026-10-03T13:30:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h04', label: '8:40 AM',   start_iso: '2026-10-03T13:40:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h05', label: '8:50 AM',   start_iso: '2026-10-03T13:50:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h06', label: '9:00 AM',   start_iso: '2026-10-03T14:00:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h07', label: '9:10 AM',   start_iso: '2026-10-03T14:10:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h08', label: '9:20 AM',   start_iso: '2026-10-03T14:20:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h09', label: '9:30 AM',   start_iso: '2026-10-03T14:30:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h10', label: '9:40 AM',   start_iso: '2026-10-03T14:40:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h11', label: '9:50 AM',   start_iso: '2026-10-03T14:50:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h12', label: '10:00 AM',  start_iso: '2026-10-03T15:00:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h13', label: '10:10 AM',  start_iso: '2026-10-03T15:10:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h14', label: '10:20 AM',  start_iso: '2026-10-03T15:20:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h15', label: '10:30 AM',  start_iso: '2026-10-03T15:30:00.000Z', capacity: 2, division: 'doubles' },
+  { id: 'h16', label: '10:40 AM',  start_iso: '2026-10-03T15:40:00.000Z', capacity: 2, division: 'doubles' }
 ];
 
 // ─── Pricing (cents) ────────────────────────────────────────────────────────
@@ -123,6 +137,23 @@ export const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(s || '
 export const firstName = (name) => clean(name).split(' ')[0] || 'there';
 
 export function heatById(id) { return HEATS.find(h => h.id === id) || null; }
+
+// Division helpers. Teams created before divisions existed have no `division`
+// field and always had a partner → treat them as doubles.
+export const DIVISION_LABELS = { singles: 'Singles', doubles: 'Doubles' };
+export function teamDivision(team) { return team?.division === 'singles' ? 'singles' : 'doubles'; }
+export function isSingles(team) { return teamDivision(team) === 'singles'; }
+
+// "doors 6:30 AM, athlete briefing 6:45 AM" / adds group warm-up when the division has one.
+export function scheduleLine(division) {
+  const s = EVENT.schedule[division] || EVENT.schedule.doubles;
+  return `doors ${s.doors}, athlete briefing ${s.briefing}${s.warmup ? `, group warm-up ${s.warmup}` : ''}`;
+}
+export function divisionCopy(division) {
+  return division === 'singles'
+    ? 'Singles (full course solo, HYROX Open weights)'
+    : 'Doubles (all teams race at HYROX Mixed Doubles weights)';
+}
 
 export function registrationOpen() {
   return Date.now() < Date.parse(EVENT.registration_closes_iso);
@@ -226,7 +257,7 @@ export async function heatAvailability(teams) {
   const now = Date.now();
   return HEATS.map(h => {
     const taken = all.filter(t => t.heat_id === h.id && teamHoldsSlot(t, now)).length;
-    return { id: h.id, label: h.label, start_iso: h.start_iso, capacity: h.capacity, taken, remaining: Math.max(0, h.capacity - taken) };
+    return { id: h.id, label: h.label, start_iso: h.start_iso, capacity: h.capacity, division: h.division, taken, remaining: Math.max(0, h.capacity - taken) };
   });
 }
 
@@ -248,7 +279,8 @@ export async function publicConfig() {
 export function publicTeamView(team, { forRole = 'registrant' } = {}) {
   const heat = heatById(team.heat_id);
   const ath = (r) => {
-    const a = team.athletes[r] || {};
+    const a = team.athletes[r];
+    if (!a) return null;
     return {
       role: r,
       name: a.name, email: a.email, phone: a.phone,
@@ -264,7 +296,8 @@ export function publicTeamView(team, { forRole = 'registrant' } = {}) {
   return {
     team_id: team.team_id,
     status: team.status,
-    heat: heat ? { id: heat.id, label: heat.label, start_iso: heat.start_iso } : null,
+    division: teamDivision(team),
+    heat: heat ? { id: heat.id, label: heat.label, start_iso: heat.start_iso, division: heat.division } : null,
     registrant: ath('registrant'),
     partner: ath('partner'),
     certificates: certs,
@@ -358,20 +391,23 @@ function calendarLink(heat) {
   const start = new Date(heat.start_iso);
   const end = new Date(start.getTime() + 90 * 60000);
   const f = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+  const s = EVENT.schedule[heat.division] || EVENT.schedule.doubles;
   const q = new URLSearchParams({
     action: 'TEMPLATE', text: `${EVENT.name} — Heat ${heat.label}`,
     dates: `${f(start)}/${f(end)}`, location: `${EVENT.location_name}, ${EVENT.address}`,
-    details: `Doors ${EVENT.doors_open} · Briefing ${EVENT.briefing} · Warm-up ${EVENT.warmup}. ${PAGE_URL}`
+    details: `Doors ${s.doors} · Briefing ${s.briefing}${s.warmup ? ` · Warm-up ${s.warmup}` : ''}. ${PAGE_URL}`
   });
   return `https://calendar.google.com/calendar/render?${q.toString()}`;
 }
 
 export async function emailRegistrantConfirmation(team, { to } = {}) {
+  const singles = isSingles(team);
   const r = team.athletes.registrant, p = team.athletes.partner;
   const heat = heatById(team.heat_id);
   const certs = (team.certificates || []).filter(c => c.role === 'registrant');
-  const partnerCerts = (team.certificates || []).filter(c => c.role === 'partner');
-  const plink = partnerLink(team.team_id);
+  const partnerCerts = singles ? [] : (team.certificates || []).filter(c => c.role === 'partner');
+  const plink = singles ? null : partnerLink(team.team_id);
+  const sched = scheduleLine(teamDivision(team));
   const subject = `${team.test_mode ? '[TEST] ' : ''}You're registered — ${EVENT.name}, Heat ${heat?.label}`;
 
   const text = `Hi ${firstName(r.name)},
@@ -380,18 +416,17 @@ You're in. Here are your race details:
 
 Event: ${EVENT.name}
 Date: ${EVENT.date_label}
-Heat: ${heat?.label} (doors ${EVENT.doors_open}, athlete briefing ${EVENT.briefing}, group warm-up ${EVENT.warmup})
+Heat: ${heat?.label} (${sched})
 Where: ${EVENT.location_name}, ${EVENT.address}
-Team: ${r.name} + ${p.name}
-Division: Doubles (all teams race at HYROX Mixed Doubles weights)
+${singles ? `Athlete: ${r.name}` : `Team: ${r.name} + ${p.name}`}
+Division: ${divisionCopy(teamDivision(team))}
 
 Your package: ${addonsSummary(r)}
-${p.name}'s package: ${addonsSummary(p)}
-${certBlockText(certs)}${partnerCerts.length ? `\n${p.name}'s certificates were emailed to ${p.email}.\n` : ''}
+${singles ? '' : `${p.name}'s package: ${addonsSummary(p)}\n`}${certBlockText(certs)}${partnerCerts.length ? `\n${p.name}'s certificates were emailed to ${p.email}.\n` : ''}${singles ? '' : `
 PARTNER NEXT STEP
 We emailed ${p.name} at ${p.email} to confirm their info and sign the race waiver. If it doesn't arrive, send them this link:
 ${plink}
-
+`}
 Add to calendar: ${calendarLink(heat)}
 
 Questions? Reply to this email or call ${EVENT.contact_phone}.
@@ -400,26 +435,30 @@ See you on the floor,
 Moonshot CrossFit
 `;
 
+  const schedHtml = (() => {
+    const s = EVENT.schedule[teamDivision(team)] || EVENT.schedule.doubles;
+    return `Doors ${esc(s.doors)} · Briefing ${esc(s.briefing)}${s.warmup ? ` · Warm-up ${esc(s.warmup)}` : ''}`;
+  })();
   const html = wrap("You're registered", `
     <p>Hi ${esc(firstName(r.name))},</p>
     <p>You're in. Here are your race details:</p>
     <table style="width:100%;border-collapse:collapse;font-size:15px;">
       <tr><td style="padding:6px 0;color:#666;width:120px;">Event</td><td style="padding:6px 0;"><strong>${esc(EVENT.name)}</strong></td></tr>
       <tr><td style="padding:6px 0;color:#666;">Date</td><td style="padding:6px 0;">${esc(EVENT.date_label)}</td></tr>
-      <tr><td style="padding:6px 0;color:#666;">Heat</td><td style="padding:6px 0;"><strong style="font-size:18px;">${esc(heat?.label || '')}</strong><br><span style="color:#666;font-size:13px;">Doors ${esc(EVENT.doors_open)} · Briefing ${esc(EVENT.briefing)} · Warm-up ${esc(EVENT.warmup)}</span></td></tr>
+      <tr><td style="padding:6px 0;color:#666;">Heat</td><td style="padding:6px 0;"><strong style="font-size:18px;">${esc(heat?.label || '')}</strong><br><span style="color:#666;font-size:13px;">${schedHtml}</span></td></tr>
       <tr><td style="padding:6px 0;color:#666;">Where</td><td style="padding:6px 0;">${esc(EVENT.location_name)}<br>${esc(EVENT.address)}</td></tr>
-      <tr><td style="padding:6px 0;color:#666;">Team</td><td style="padding:6px 0;">${esc(r.name)} + ${esc(p.name)}</td></tr>
-      <tr><td style="padding:6px 0;color:#666;">Division</td><td style="padding:6px 0;">Doubles · HYROX Mixed Doubles weights</td></tr>
+      <tr><td style="padding:6px 0;color:#666;">${singles ? 'Athlete' : 'Team'}</td><td style="padding:6px 0;">${singles ? esc(r.name) : `${esc(r.name)} + ${esc(p.name)}`}</td></tr>
+      <tr><td style="padding:6px 0;color:#666;">Division</td><td style="padding:6px 0;">${singles ? 'Singles · full course solo · HYROX Open weights' : 'Doubles · HYROX Mixed Doubles weights'}</td></tr>
       <tr><td style="padding:6px 0;color:#666;">Your package</td><td style="padding:6px 0;">${esc(addonsSummary(r))}</td></tr>
-      <tr><td style="padding:6px 0;color:#666;">${esc(firstName(p.name))}'s package</td><td style="padding:6px 0;">${esc(addonsSummary(p))}</td></tr>
+      ${singles ? '' : `<tr><td style="padding:6px 0;color:#666;">${esc(firstName(p.name))}'s package</td><td style="padding:6px 0;">${esc(addonsSummary(p))}</td></tr>`}
     </table>
     ${certBlockHtml(certs)}
     ${partnerCerts.length ? `<p style="color:#555;font-size:14px;">${esc(p.name)}'s certificate${partnerCerts.length > 1 ? 's were' : ' was'} emailed to ${esc(p.email)}.</p>` : ''}
-    <div style="background:#101921;color:#F0EEE9;border-radius:10px;padding:16px 18px;margin:18px 0;">
+    ${singles ? '' : `<div style="background:#101921;color:#F0EEE9;border-radius:10px;padding:16px 18px;margin:18px 0;">
       <div style="font-weight:700;color:#B8986E;text-transform:uppercase;letter-spacing:1px;font-size:12px;">Partner next step</div>
       <p style="margin:6px 0 10px;font-size:14px;">We emailed <strong>${esc(p.name)}</strong> at ${esc(p.email)} to confirm their info and sign the race waiver. If it doesn't arrive, send them this link:</p>
       <div style="font-size:12px;word-break:break-all;"><a href="${plink}" style="color:#B8986E;">${plink}</a></div>
-    </div>
+    </div>`}
     <p>${btn(calendarLink(heat), 'Add to Google Calendar')}</p>
     <p style="color:#666;font-size:14px;">Questions? Reply to this email or call ${esc(EVENT.contact_phone)}.</p>
     <p>See you on the floor,<br><strong>Moonshot CrossFit</strong></p>`);
@@ -428,6 +467,7 @@ Moonshot CrossFit
 }
 
 export async function emailPartnerInvite(team, { to } = {}) {
+  if (isSingles(team)) { console.log(`[hyrox:email:skipped] partner invite for singles team=${team.team_id}`); return false; }
   const r = team.athletes.registrant, p = team.athletes.partner;
   const heat = heatById(team.heat_id);
   const certs = (team.certificates || []).filter(c => c.role === 'partner');
@@ -499,10 +539,12 @@ Moonshot CrossFit
 }
 
 export async function emailTeamNotification(team, { kind, sessionId, amountCents, to } = {}) {
+  const singles = isSingles(team);
   const r = team.athletes.registrant, p = team.athletes.partner;
   const heat = heatById(team.heat_id);
   const isTest = !!team.test_mode;
-  const subject = `${isTest ? '[TEST] ' : ''}HYROX Sim: ${kind === 'partner' ? `${p.name} added extras` : `${r.name} + ${p.name} registered`} — Heat ${heat?.label} — ${fmt(amountCents)}`;
+  const who = singles ? `${r.name} registered (Singles)` : `${r.name} + ${p.name} registered`;
+  const subject = `${isTest ? '[TEST] ' : ''}HYROX Sim: ${kind === 'partner' ? `${p.name} added extras` : who} — Heat ${heat?.label} — ${fmt(amountCents)}`;
 
   let totals = null;
   try {
@@ -514,24 +556,24 @@ export async function emailTeamNotification(team, { kind, sessionId, amountCents
       teams: paid.length,
       revenue: paid.reduce((s, t) => s + (t.amount_cents || 0) + (t.partner_orders || []).reduce((x, o) => x + (o.amount_cents || 0), 0), 0),
       heats: avail,
-      shirts: paid.flatMap(t => ['registrant', 'partner'].map(role => t.athletes[role])).filter(a => normalizeAddons(a.addons).shirt).length,
+      shirts: paid.flatMap(t => ['registrant', 'partner'].map(role => t.athletes[role]).filter(Boolean)).filter(a => normalizeAddons(a.addons).shirt).length,
       certs: certs.length,
       certLedger: certs
     };
   } catch (e) { console.error('[hyrox:totals:failed]', e?.message); }
 
   const certLines = (team.certificates || []).map(c => `  ${c.code}  ${ADDON_LABELS[c.type]}  ${c.name} <${c.email}>`).join('\n');
-  const text = `${isTest ? '⚠ TEST MODE — refund in Stripe.\n\n' : ''}${kind === 'partner' ? 'Partner add-on purchase' : 'New Doubles team registration'} — ${EVENT.name}
+  const text = `${isTest ? '⚠ TEST MODE — refund in Stripe.\n\n' : ''}${kind === 'partner' ? 'Partner add-on purchase' : `New ${DIVISION_LABELS[teamDivision(team)]} registration`} — ${EVENT.name}
 
-Heat: ${heat?.label}
+Heat: ${heat?.label}${singles ? ' (Singles)' : ''}
 Registrant: ${r.name} <${r.email}> ${r.phone}${r.member ? ' (member)' : ''}
   Emergency: ${r.emergency_name || '?'} ${r.emergency_phone || ''}
   Package: ${addonsSummary(r)}
   Waiver: ${r.waiver?.signed_at ? 'signed ' + r.waiver.signed_at : 'NOT signed'}
-Partner: ${p.name} <${p.email}> ${p.phone}${p.member ? ' (member)' : ''}
+${singles ? '' : `Partner: ${p.name} <${p.email}> ${p.phone}${p.member ? ' (member)' : ''}
   Package: ${addonsSummary(p)}
   Waiver: ${p.waiver?.signed_at ? 'signed ' + p.waiver.signed_at : 'pending (invite emailed)'}
-
+`}
 Charged: ${fmt(amountCents)}
 Stripe session: https://dashboard.stripe.com/payments?query=${sessionId}
 Team ID: ${team.team_id}
@@ -548,11 +590,11 @@ Roster CSV: ${SITE_URL}/.netlify/functions/hyrox-roster?key=<HYROX_ADMIN_KEY>
 
   const html = `<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.55;color:#101921;max-width:680px;margin:0 auto;padding:20px;">
 ${isTest ? '<div style="background:#fee2e2;border:2px solid #ef4444;border-radius:8px;padding:12px 16px;margin-bottom:20px;color:#991b1b;font-weight:600;">⚠ TEST MODE — refund this charge in Stripe Dashboard.</div>' : ''}
-<h1 style="font-size:20px;margin:0 0 4px;">${kind === 'partner' ? 'Partner add-on purchase' : 'New Doubles team'} · Heat ${esc(heat?.label || '')}</h1>
+<h1 style="font-size:20px;margin:0 0 4px;">${kind === 'partner' ? 'Partner add-on purchase' : `New ${DIVISION_LABELS[teamDivision(team)]} entry`} · Heat ${esc(heat?.label || '')}</h1>
 <p style="color:#666;margin:0 0 18px;">${esc(EVENT.name)} · charged <strong>${fmt(amountCents)}</strong></p>
 <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:18px;">
 <tr><td style="padding:6px 0;color:#666;width:110px;vertical-align:top;">Registrant</td><td style="padding:6px 0;"><strong>${esc(r.name)}</strong> &lt;${esc(r.email)}&gt; · ${esc(r.phone)}${r.member ? ' · <em>member</em>' : ''}<br><span style="color:#666;">Emergency: ${esc(r.emergency_name || '?')} ${esc(r.emergency_phone || '')}</span><br>${esc(addonsSummary(r))}<br><span style="color:${r.waiver?.signed_at ? '#166534' : '#991b1b'};">Waiver ${r.waiver?.signed_at ? 'signed' : 'NOT signed'}</span></td></tr>
-<tr><td style="padding:6px 0;color:#666;vertical-align:top;">Partner</td><td style="padding:6px 0;"><strong>${esc(p.name)}</strong> &lt;${esc(p.email)}&gt; · ${esc(p.phone)}${p.member ? ' · <em>member</em>' : ''}<br>${esc(addonsSummary(p))}<br><span style="color:${p.waiver?.signed_at ? '#166534' : '#b45309'};">Waiver ${p.waiver?.signed_at ? 'signed' : 'pending (invite emailed)'}</span></td></tr>
+${singles ? '' : `<tr><td style="padding:6px 0;color:#666;vertical-align:top;">Partner</td><td style="padding:6px 0;"><strong>${esc(p.name)}</strong> &lt;${esc(p.email)}&gt; · ${esc(p.phone)}${p.member ? ' · <em>member</em>' : ''}<br>${esc(addonsSummary(p))}<br><span style="color:${p.waiver?.signed_at ? '#166534' : '#b45309'};">Waiver ${p.waiver?.signed_at ? 'signed' : 'pending (invite emailed)'}</span></td></tr>`}
 <tr><td style="padding:6px 0;color:#666;">Stripe</td><td style="padding:6px 0;"><a href="https://dashboard.stripe.com/payments?query=${esc(sessionId)}" style="color:#B8986E;">${esc(sessionId)}</a></td></tr>
 <tr><td style="padding:6px 0;color:#666;">Team ID</td><td style="padding:6px 0;"><code>${esc(team.team_id)}</code></td></tr>
 </table>
@@ -584,11 +626,11 @@ export async function handleHyroxCheckoutCompleted(session) {
     team.stripe = { session_id: session.id, payment_intent: session.payment_intent || null, customer: session.customer || null, amount_total: session.amount_total };
     team.billing_details = session.customer_details || null;
     issueCertificates(team, 'registrant', team.athletes.registrant.addons, session.id);
-    issueCertificates(team, 'partner', team.athletes.partner.addons, session.id);
+    if (team.athletes.partner) issueCertificates(team, 'partner', team.athletes.partner.addons, session.id);
     await store.setJSON(team.team_id, team);
-    console.log(`[hyrox:paid] team=${team.team_id} heat=${team.heat_id} amount=${session.amount_total} certs=${(team.certificates || []).length}`);
+    console.log(`[hyrox:paid] team=${team.team_id} division=${teamDivision(team)} heat=${team.heat_id} amount=${session.amount_total} certs=${(team.certificates || []).length}`);
     await emailRegistrantConfirmation(team);
-    await emailPartnerInvite(team);
+    if (team.athletes.partner) await emailPartnerInvite(team);
     await emailTeamNotification(team, { kind: 'register', sessionId: session.id, amountCents: session.amount_total });
     return;
   }
@@ -598,6 +640,7 @@ export async function handleHyroxCheckoutCompleted(session) {
     const order = await orders.get(session.id, { type: 'json' });
     if (!order) { console.error(`[hyrox:webhook] partner order not found session=${session.id}`); return; }
     if (order.status === 'paid') { console.log(`[hyrox:webhook] duplicate partner session=${session.id}`); return; }
+    if (!team.athletes.partner) { console.error(`[hyrox:webhook] partner order on singles team=${team.team_id} session=${session.id}`); return; }
     const p = team.athletes.partner;
     const cur = normalizeAddons(p.addons);
     const add = normalizeAddons(order.addons);

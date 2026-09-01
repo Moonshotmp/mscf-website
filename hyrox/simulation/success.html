@@ -59,10 +59,10 @@
                 <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">
                     <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Date</dt><dd class="text-brand-light font-semibold">Saturday, October 3, 2026</dd></div>
                     <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Your heat</dt><dd id="heat" class="text-brand-light font-semibold text-xl font-heading"></dd></div>
-                    <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Team</dt><dd id="team" class="text-brand-light font-semibold"></dd></div>
+                    <div><dt id="team-label" class="text-brand-gray text-xs uppercase tracking-wider font-heading">Team</dt><dd id="team" class="text-brand-light font-semibold"></dd></div>
                     <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Where</dt><dd class="text-brand-light">Moonshot CrossFit<br><span class="text-brand-gray">542 Busse Hwy, Park Ridge, IL 60068</span></dd></div>
                 </dl>
-                <p class="text-brand-gray text-xs mt-5">Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. Arrive by 7:30 regardless of heat.</p>
+                <p id="sched-line" class="text-brand-gray text-xs mt-5">Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. Arrive by 7:30 regardless of heat.</p>
                 <a id="cal-link" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-brand-gold hover:underline text-sm font-semibold">+ Add to Google Calendar</a>
             </div>
 
@@ -123,10 +123,16 @@
         return parts.length ? parts.join(' · ') : 'Race entry';
       }
 
-      function calLink(heat) {
+      function schedText(division) {
+        return division === 'singles'
+          ? 'Doors 6:30 AM · Briefing 6:45 AM. Arrive by 6:30 regardless of heat.'
+          : 'Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. Arrive by 7:30 regardless of heat.';
+      }
+
+      function calLink(heat, division) {
         const start = new Date(heat.start_iso), end = new Date(start.getTime() + 90 * 60000);
         const f = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
-        const q = new URLSearchParams({ action: 'TEMPLATE', text: `HYROX Race Simulation — Heat ${heat.label}`, dates: `${f(start)}/${f(end)}`, location: 'Moonshot CrossFit, 542 Busse Hwy, Park Ridge, IL 60068', details: 'Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. https://moonshotcrossfit.com/hyrox/simulation/' });
+        const q = new URLSearchParams({ action: 'TEMPLATE', text: `HYROX Race Simulation — Heat ${heat.label}`, dates: `${f(start)}/${f(end)}`, location: 'Moonshot CrossFit, 542 Busse Hwy, Park Ridge, IL 60068', details: schedText(division) + ' https://moonshotcrossfit.com/hyrox/simulation/' });
         return 'https://calendar.google.com/calendar/render?' + q.toString();
       }
 
@@ -134,16 +140,19 @@
       function render(d) {
         const t = d.team, labels = d.config.addon_labels;
         const isPartner = d.kind === 'hyrox_partner_addons';
+        const singles = t.division === 'singles';
         $('loading').classList.add('hidden'); $('content').classList.remove('hidden');
         if (d.payment_status !== 'paid') { $('headline').textContent = 'Payment pending'; $('lede').textContent = 'Your payment has not completed yet. If you closed checkout early, head back and try again.'; }
         else if (isPartner) { $('headline').textContent = 'Add-ons confirmed.'; $('subhead').textContent = `Heat ${t.heat?.label} · Saturday, Oct 3`; $('lede').textContent = `You're all set, ${esc(t.partner.name.split(' ')[0])}. Your extras are locked in and your confirmation email is on its way.`; }
-        else { $('subhead').textContent = `Heat ${t.heat?.label} · Saturday, Oct 3`; $('lede').textContent = `Your team is registered${t.test_mode ? ' (TEST MODE)' : ''}. Save this page or watch for the confirmation email.`; }
+        else { $('subhead').textContent = `Heat ${t.heat?.label} · ${singles ? 'Singles · ' : ''}Saturday, Oct 3`; $('lede').textContent = `${singles ? "You're registered" : 'Your team is registered'}${t.test_mode ? ' (TEST MODE)' : ''}. Save this page or watch for the confirmation email.`; }
 
-        $('heat').textContent = t.heat?.label || '';
-        $('team').textContent = `${t.registrant.name} + ${t.partner.name}`;
-        $('cal-link').href = t.heat ? calLink(t.heat) : '#';
+        $('heat').textContent = (t.heat?.label || '') + (singles ? ' (Singles)' : '');
+        $('team-label').textContent = singles ? 'Athlete' : 'Team';
+        $('team').textContent = singles ? t.registrant.name : `${t.registrant.name} + ${t.partner.name}`;
+        $('sched-line').textContent = schedText(t.division);
+        $('cal-link').href = t.heat ? calLink(t.heat, t.division) : '#';
 
-        const lines = isPartner ? [t.partner] : [t.registrant, t.partner];
+        const lines = (isPartner ? [t.partner] : [t.registrant, t.partner]).filter(Boolean);
         $('package-lines').innerHTML = lines.map(a => `<div class="flex justify-between gap-4 border-b border-brand-gray/10 pb-3"><span class="text-brand-light font-semibold">${esc(a.name)}</span><span class="text-brand-gray text-right">${esc(pkg(a, labels))}</span></div>`).join('') + (d.amount_total ? `<div class="flex justify-between pt-1"><span class="text-brand-gray">Charged</span><span class="text-brand-light font-semibold">${fmt(d.amount_total)}</span></div>` : '');
 
         const wantsCerts = lines.some(a => a.addons.dexa || a.addons.labs || a.addons.baseline);
@@ -159,7 +168,7 @@
           $('partner-name').textContent = t.partner.name;
           $('partner-link').value = d.partner_link;
         }
-        if (isPartner) $('next-partner').classList.add('hidden');
+        if (isPartner || singles) $('next-partner').classList.add('hidden');
 
         if (!tracked && d.payment_status === 'paid' && !t.test_mode) {
           tracked = true;

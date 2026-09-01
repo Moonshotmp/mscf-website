@@ -21,11 +21,12 @@ export default async (req) => {
   for (const t of teams) {
     const heat = heatById(t.heat_id);
     const certsFor = (role) => (t.certificates || []).filter(c => c.role === role).map(c => `${c.code} (${ADDON_LABELS[c.type]})`).join('; ');
-    for (const role of ['registrant', 'partner']) {
+    const roles = t.athletes.partner ? ['registrant', 'partner'] : ['registrant'];
+    for (const role of roles) {
       const a = t.athletes[role];
       const ad = normalizeAddons(a.addons);
       rows.push({
-        heat: heat?.label || t.heat_id, team_id: t.team_id, status: t.status, role,
+        heat: heat?.label || t.heat_id, division: heat?.division || t.division || 'doubles', team_id: t.team_id, status: t.status, role,
         name: a.name, email: a.email, phone: a.phone, member: a.member ? 'Y' : '',
         emergency_contact: a.emergency_name ? `${a.emergency_name} ${a.emergency_phone || ''}` : '',
         shirt: ad.shirt ? (a.shirt_size || '?') : '',

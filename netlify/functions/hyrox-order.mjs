@@ -1,6 +1,6 @@
 // GET /.netlify/functions/hyrox-order?session_id=cs_...   → success page (registrant or partner purchase)
 // GET /.netlify/functions/hyrox-order?team=<id>&t=<token> → partner page (HMAC-signed link)
-import { teamsStore, ordersStore, publicConfig, publicTeamView, verifyTeamToken, stripeClient, json, bad } from './_shared/hyrox.mjs';
+import { teamsStore, ordersStore, publicConfig, publicTeamView, verifyTeamToken, partnerLink, stripeClient, json, bad } from './_shared/hyrox.mjs';
 
 export default async (req) => {
   if (req.method !== 'GET') return bad('Method not allowed', 405);
@@ -27,7 +27,9 @@ export default async (req) => {
         webhook_processed: forRole === 'partner' ? order?.status === 'paid' : team.status === 'paid',
         amount_total: session.amount_total,
         team: publicTeamView(team, { forRole }),
-        partner_link: forRole === 'registrant' ? `${url.origin}/hyrox/simulation/partner.html?team=${team.team_id}&t=${token || ''}` : null,
+        // Signed server-side: the success URL only carries the (unguessable) Stripe
+        // session id, so the registrant is entitled to their partner's invite link.
+        partner_link: forRole === 'registrant' && team.athletes.partner ? partnerLink(team.team_id) : null,
         config: await publicConfig()
       });
     }
@@ -36,6 +38,7 @@ export default async (req) => {
       if (!verifyTeamToken(teamId, token)) return bad('This link is not valid', 403);
       const team = await teamsStore().get(teamId, { type: 'json' });
       if (!team) return bad('Team not found', 404);
+      if (!team.athletes.partner) return bad('This registration has no partner', 404);
       if (team.status !== 'paid') return bad('This registration is not complete yet', 409);
       return json({ team: publicTeamView(team, { forRole: 'partner' }), config: await publicConfig() });
     }

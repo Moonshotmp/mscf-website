@@ -10,7 +10,10 @@
 
   const FALLBACK = {
     open: true,
-    heats: Array.from({ length: 16 }, (_, i) => { const m = 8 * 60 + 10 + i * 10; return { id: 'h' + String(i + 1).padStart(2, '0'), label: `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} AM`, capacity: 2, remaining: null }; }),
+    heats: [
+      ...Array.from({ length: 6 }, (_, i) => { const m = 7 * 60 + i * 10; return { id: 's' + String(i + 1).padStart(2, '0'), label: `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} AM`, capacity: 2, division: 'singles', remaining: null }; }),
+      ...Array.from({ length: 16 }, (_, i) => { const m = 8 * 60 + 10 + i * 10; return { id: 'h' + String(i + 1).padStart(2, '0'), label: `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} AM`, capacity: 2, division: 'doubles', remaining: null }; })
+    ],
     prices: { race_athlete: 2500, race_member_athlete: 1000, shirt: 2500, dexa: 12400, labs: 26000, baseline: 38000 },
     regular_prices: { dexa: 14900, labs: 28500, baseline: 40500 },
     shirt_sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL']
@@ -21,6 +24,14 @@
     heat_id: null,
     addons: { registrant: { shirt: false, dexa: false, labs: false }, partner: { shirt: false, dexa: false, labs: false } }
   };
+
+  const DIVISION_META = {
+    singles: { label: 'Singles', window: '7:00–7:50 AM', note: 'You race the full course solo. Doors 6:30, briefing 6:45.', unit: 'athlete' },
+    doubles: { label: 'Doubles', window: '8:10–10:40 AM', note: 'Two athletes, one clock. Doors 7:30, briefing 7:45.', unit: 'team' }
+  };
+  function heatDivision(id) { const h = cfg.heats.find(x => x.id === id); return (h && h.division) || 'doubles'; }
+  function selectedDivision() { return state.heat_id ? heatDivision(state.heat_id) : null; }
+  function isSingles() { return selectedDivision() === 'singles'; }
 
   const fmt = (c) => '$' + (c / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
   const firstName = (s) => (s || '').trim().split(/\s+/)[0] || '';
@@ -36,15 +47,18 @@
     }
     applyPrices();
     renderHeats();
+    applyDivisionUI();
     renderShirtSizes();
     if (cfg.open === false) {
       $('reg-closed').classList.remove('hidden');
       form.classList.add('hidden');
     }
-    const openHeats = (cfg.heats || []).filter(h => h.remaining === null || h.remaining > 0).length;
-    const totalRemaining = (cfg.heats || []).reduce((s, h) => s + (h.remaining ?? 0), 0);
     if (cfg.heats && cfg.heats[0].remaining !== null) {
-      $('hero-spots').textContent = totalRemaining > 0 ? `${totalRemaining} team spot${totalRemaining === 1 ? '' : 's'} left across ${openHeats} heat${openHeats === 1 ? '' : 's'}.` : 'All heats are full.';
+      const left = (div) => (cfg.heats || []).filter(h => (h.division || 'doubles') === div).reduce((s, h) => s + (h.remaining ?? 0), 0);
+      const s = left('singles'), d = left('doubles');
+      $('hero-spots').textContent = (s + d) > 0
+        ? `${s} singles spot${s === 1 ? '' : 's'} and ${d} doubles team spot${d === 1 ? '' : 's'} left.`
+        : 'All heats are full.';
     }
     renderSummary();
   }
@@ -63,33 +77,64 @@
     });
   }
 
-  // ── Heats ─────────────────────────────────────────────────────────────────
+  // ── Heats (grouped by division: Singles 7:00 hour, then Doubles) ──────────
   function renderHeats() {
     const grid = $('heat-grid');
     grid.innerHTML = '';
-    cfg.heats.forEach(h => {
-      const full = h.remaining !== null && h.remaining <= 0;
-      const el = document.createElement('button');
-      el.type = 'button';
-      el.className = 'heat-card' + (full ? ' full' : '') + (state.heat_id === h.id ? ' selected' : '');
-      el.setAttribute('role', 'radio');
-      el.setAttribute('aria-checked', String(state.heat_id === h.id));
-      el.disabled = full;
-      const [time, ampm] = h.label.split(' ');
-      el.innerHTML = `<div class="font-heading font-bold text-brand-light text-xl leading-none">${time}</div><div class="text-xs text-brand-gray mt-0.5">${ampm}</div><div class="text-[11px] mt-2 ${full ? 'text-red-300' : h.remaining !== null && h.remaining <= 2 ? 'text-brand-gold' : 'text-brand-gray'}">${full ? 'Full' : h.remaining === null ? 'Open' : `${h.remaining} left`}</div>`;
-      el.addEventListener('click', () => { if (full) return; state.heat_id = h.id; $('heat_id').value = h.id; renderHeats(); renderSummary(); clearError(); });
-      grid.appendChild(el);
+    ['singles', 'doubles'].forEach(div => {
+      const heats = cfg.heats.filter(h => (h.division || 'doubles') === div);
+      if (!heats.length) return;
+      const meta = DIVISION_META[div];
+      const header = document.createElement('div');
+      header.className = 'col-span-full flex items-baseline gap-3 mt-2 first:mt-0';
+      header.innerHTML = `<span class="font-heading font-bold uppercase tracking-wider text-brand-gold">${meta.label}</span><span class="text-brand-gray text-xs">${meta.window} · ${meta.note}</span>`;
+      grid.appendChild(header);
+      heats.forEach(h => {
+        const full = h.remaining !== null && h.remaining <= 0;
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'heat-card' + (full ? ' full' : '') + (state.heat_id === h.id ? ' selected' : '');
+        el.setAttribute('role', 'radio');
+        el.setAttribute('aria-checked', String(state.heat_id === h.id));
+        el.disabled = full;
+        const [time, ampm] = h.label.split(' ');
+        el.innerHTML = `<div class="font-heading font-bold text-brand-light text-xl leading-none">${time}</div><div class="text-xs text-brand-gray mt-0.5">${ampm}</div><div class="text-[11px] mt-2 ${full ? 'text-red-300' : h.remaining !== null && h.remaining <= 2 ? 'text-brand-gold' : 'text-brand-gray'}">${full ? 'Full' : h.remaining === null ? 'Open' : `${h.remaining} left`}</div>`;
+        el.addEventListener('click', () => { if (full) return; state.heat_id = h.id; $('heat_id').value = h.id; renderHeats(); applyDivisionUI(); renderSummary(); clearError(); });
+        grid.appendChild(el);
+      });
     });
 
     // Preview grid in the schedule section mirrors availability
     const preview = $('heat-preview');
     if (preview) {
-      preview.innerHTML = cfg.heats.map(h => {
-        const full = h.remaining !== null && h.remaining <= 0;
-        const [time, ampm] = h.label.split(' ');
-        return `<div class="heat-card ${full ? 'full' : ''}" style="cursor:default"><div class="font-heading font-bold text-brand-light text-lg">${time}</div><div class="text-xs text-brand-gray">${ampm}${h.remaining !== null ? ` · ${full ? 'full' : h.remaining + ' left'}` : ''}</div></div>`;
+      preview.innerHTML = ['singles', 'doubles'].map(div => {
+        const heats = cfg.heats.filter(h => (h.division || 'doubles') === div);
+        if (!heats.length) return '';
+        return `<div class="col-span-full text-left font-heading font-bold uppercase tracking-wider text-brand-gold text-sm mt-2 first:mt-0">${DIVISION_META[div].label} <span class="text-brand-gray font-normal normal-case">· ${DIVISION_META[div].window}</span></div>` + heats.map(h => {
+          const full = h.remaining !== null && h.remaining <= 0;
+          const [time, ampm] = h.label.split(' ');
+          return `<div class="heat-card ${full ? 'full' : ''}" style="cursor:default"><div class="font-heading font-bold text-brand-light text-lg">${time}</div><div class="text-xs text-brand-gray">${ampm}${h.remaining !== null ? ` · ${full ? 'full' : h.remaining + ' left'}` : ''}</div></div>`;
+        }).join('');
       }).join('');
     }
+  }
+
+  // ── Division UI: singles hides everything partner-shaped ──────────────────
+  function applyDivisionUI() {
+    const singles = isSingles();
+    form.classList.toggle('singles-mode', singles);
+    document.querySelectorAll('.partner-only').forEach(el => el.classList.toggle('hidden', singles));
+    if (singles) {
+      // Clear partner add-ons so a doubles→singles switch never charges for a ghost partner.
+      state.addons.partner = { shirt: false, dexa: false, labs: false };
+      document.querySelectorAll('.toggle[data-role="partner"]').forEach(b => b.setAttribute('aria-checked', 'false'));
+      $('p_shirt_size').classList.add('hidden');
+      $('p_member').checked = false;
+      syncMemberCode();
+    }
+    $('team-copy-doubles').classList.toggle('hidden', singles);
+    $('team-copy-singles').classList.toggle('hidden', !singles);
+    $('team-heading').textContent = singles ? 'About you' : 'Your team';
   }
 
   // ── Add-on toggles ────────────────────────────────────────────────────────
@@ -146,8 +191,8 @@
 
   function renderSummary() {
     const heat = cfg.heats.find(h => h.id === state.heat_id);
-    $('summary-heat').textContent = heat ? `Saturday, Oct 3 · Heat ${heat.label}` : 'Pick a heat to start';
-    const lines = [...athleteLines('registrant'), ...athleteLines('partner')];
+    $('summary-heat').textContent = heat ? `Saturday, Oct 3 · Heat ${heat.label} · ${DIVISION_META[heat.division || 'doubles'].label}` : 'Pick a heat to start';
+    const lines = isSingles() ? athleteLines('registrant') : [...athleteLines('registrant'), ...athleteLines('partner')];
     const total = lines.reduce((s, l) => s + l.amount, 0);
     const savings = lines.reduce((s, l) => s + (l.regular ? l.regular - l.amount : 0), 0);
     $('summary-lines').innerHTML = lines.map(l => `<div class="flex justify-between gap-3 py-2"><span class="text-brand-gray">${escapeHtml(l.label)}</span><span class="text-brand-light whitespace-nowrap">${fmt(l.amount)}</span></div>`).join('');
@@ -174,7 +219,7 @@
     return {
       heat_id: state.heat_id,
       registrant: { name: v('r_name'), email: v('r_email'), phone: v('r_phone'), emergency_name: v('r_emergency_name'), emergency_phone: v('r_emergency_phone'), member: $('r_member').checked, addons: state.addons.registrant, shirt_size: v('r_shirt_size') },
-      partner: { name: v('p_name'), email: v('p_email'), phone: v('p_phone'), member: $('p_member').checked, addons: state.addons.partner, shirt_size: v('p_shirt_size') },
+      partner: isSingles() ? null : { name: v('p_name'), email: v('p_email'), phone: v('p_phone'), member: $('p_member').checked, addons: state.addons.partner, shirt_size: v('p_shirt_size') },
       member_code: v('member_code'),
       waiver: { ack_read: form.ack_read.checked, ack_risk: form.ack_risk.checked, ack_release: form.ack_release.checked, ack_rules: form.ack_rules.checked, ack_age: form.ack_age.checked, signature: v('signature') },
       test_token: new URLSearchParams(location.search).get('test_token') || undefined
@@ -190,13 +235,15 @@
     if (!digits(p.registrant.phone)) return ['Enter your mobile phone number.', $('r_phone')];
     if (p.registrant.emergency_name.length < 2) return ['Add an emergency contact name.', $('r_emergency_name')];
     if (!digits(p.registrant.emergency_phone)) return ['Add an emergency contact phone.', $('r_emergency_phone')];
-    if (p.partner.name.split(/\s+/).length < 2) return ["Enter your partner's full name.", $('p_name')];
-    if (!isEmail(p.partner.email)) return ["Enter a valid email for your partner.", $('p_email')];
-    if (p.partner.email.toLowerCase() === p.registrant.email.toLowerCase()) return ['Your partner needs their own email address so they can sign their waiver.', $('p_email')];
-    if (!digits(p.partner.phone)) return ["Enter your partner's mobile phone.", $('p_phone')];
-    if ((p.registrant.member || p.partner.member) && !p.member_code) return ['Enter the Moonshot member code (or uncheck the member box).', $('member_code')];
+    if (p.partner) {
+      if (p.partner.name.split(/\s+/).length < 2) return ["Enter your partner's full name.", $('p_name')];
+      if (!isEmail(p.partner.email)) return ["Enter a valid email for your partner.", $('p_email')];
+      if (p.partner.email.toLowerCase() === p.registrant.email.toLowerCase()) return ['Your partner needs their own email address so they can sign their waiver.', $('p_email')];
+      if (!digits(p.partner.phone)) return ["Enter your partner's mobile phone.", $('p_phone')];
+    }
+    if ((p.registrant.member || p.partner?.member) && !p.member_code) return ['Enter the Moonshot member code (or uncheck the member box).', $('member_code')];
     if (p.registrant.addons.shirt && !p.registrant.shirt_size) return ['Pick your T-shirt size.', $('r_shirt_size')];
-    if (p.partner.addons.shirt && !p.partner.shirt_size) return ["Pick your partner's T-shirt size.", $('p_shirt_size')];
+    if (p.partner && p.partner.addons.shirt && !p.partner.shirt_size) return ["Pick your partner's T-shirt size.", $('p_shirt_size')];
     const w = p.waiver;
     if (!(w.ack_read && w.ack_risk && w.ack_release && w.ack_rules && w.ack_age)) return ['Check every waiver acknowledgment.', form.ack_read];
     if (w.signature.toLowerCase() !== p.registrant.name.toLowerCase()) return ['Your signature must match your full name exactly.', $('signature')];
@@ -254,7 +301,7 @@
       document.querySelectorAll('.toggle[data-addon]').forEach(btn => btn.setAttribute('aria-checked', String(!!state.addons[btn.dataset.role][btn.dataset.addon])));
       $('r_shirt_size').classList.toggle('hidden', !state.addons.registrant.shirt);
       $('p_shirt_size').classList.toggle('hidden', !state.addons.partner.shirt);
-      updateNames(); syncMemberCode();
+      updateNames(); syncMemberCode(); applyDivisionUI();
     } catch (_) {}
   }
 

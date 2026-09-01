@@ -21,6 +21,7 @@ export default async (req) => {
   const store = teamsStore();
   const team = await store.get(team_id, { type: 'json' });
   if (!team) return bad('Team not found', 404);
+  if (!team.athletes.partner) return bad('This registration has no partner', 404);
   if (team.status !== 'paid') return bad('This registration is not complete yet', 409);
 
   const p = team.athletes.partner;

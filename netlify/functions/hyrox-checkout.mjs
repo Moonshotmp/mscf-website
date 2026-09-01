@@ -1,6 +1,8 @@
 // POST /.netlify/functions/hyrox-checkout
-// Creates the Doubles team record (pending_payment, holds the heat slot for HOLD_MINUTES)
+// Creates the team record (pending_payment, holds the heat slot for HOLD_MINUTES)
 // and a single Stripe Checkout session for race entries + every selected add-on.
+// Division comes from the chosen heat: singles heats (7:00 hour) take one athlete
+// and no partner; doubles heats (8:10 on) require the partner block.
 import crypto from 'node:crypto';
 import {
   SITE_URL, EVENT, HEATS, MEMBER_CODE, SHIRT_SIZES, HOLD_MINUTES,
@@ -43,15 +45,20 @@ export default async (req) => {
 
   const heat = heatById(body.heat_id);
   if (!heat) return bad('Pick a heat time');
+  const division = heat.division;
+  const singles = division === 'singles';
 
   const r = parseAthlete(body.registrant, 'registrant');
   if (r.error) return bad(r.error);
-  const p = parseAthlete(body.partner, 'partner');
-  if (p.error) return bad(p.error);
-  if (r.athlete.email === p.athlete.email) return bad("Your partner needs their own email address (they'll get their own waiver + confirmation)");
+  let p = { athlete: null };
+  if (!singles) {
+    p = parseAthlete(body.partner, 'partner');
+    if (p.error) return bad(p.error);
+    if (r.athlete.email === p.athlete.email) return bad("Your partner needs their own email address (they'll get their own waiver + confirmation)");
+  }
 
   // Member code: only required if someone is flagged as a member. Wrong code = hard stop, never a silent full charge.
-  const anyMember = r.athlete.member || p.athlete.member;
+  const anyMember = r.athlete.member || !!p.athlete?.member;
   const code = clean(body.member_code, 40);
   const memberCodeValid = anyMember && code.toLowerCase() === MEMBER_CODE.toLowerCase();
   if (anyMember && !memberCodeValid) return bad(code ? 'That member code is not valid. Check the code or uncheck the member box.' : 'Enter the Moonshot member code to apply the member rate.');
@@ -71,7 +78,7 @@ export default async (req) => {
 
   const items = [
     ...athleteLineItems(r.athlete, 'registrant', { includeRace: true, memberCodeValid }),
-    ...athleteLineItems(p.athlete, 'partner', { includeRace: true, memberCodeValid })
+    ...(singles ? [] : athleteLineItems(p.athlete, 'partner', { includeRace: true, memberCodeValid }))
   ];
   const amount = isTestMode ? 100 : sumItems(items);
 
@@ -80,12 +87,11 @@ export default async (req) => {
   const now = new Date().toISOString();
   r.athlete.waiver = { signed_at: now, signature, ip, user_agent: clean(req.headers.get('user-agent'), 300), acks: REQUIRED_ACK };
   r.athlete.confirmed_at = now;
-  p.athlete.waiver = null;
-  p.athlete.confirmed_at = null;
+  if (p.athlete) { p.athlete.waiver = null; p.athlete.confirmed_at = null; }
 
   const team = {
     team_id, created_at: now, status: 'pending_payment',
-    event_date: EVENT.date_iso, heat_id: heat.id,
+    event_date: EVENT.date_iso, heat_id: heat.id, division,
     athletes: { registrant: r.athlete, partner: p.athlete },
     member_code_valid: memberCodeValid,
     line_items: items, amount_cents: amount,
@@ -97,8 +103,10 @@ export default async (req) => {
   await store.setJSON(team_id, team);
 
   const stripe = stripeClient();
-  const desc = `${EVENT.name} · Heat ${heat.label} · ${r.athlete.name} + ${p.athlete.name}`;
-  const metadata = { kind: 'hyrox_register', team_id, heat_id: heat.id, test_mode: String(isTestMode), registrant_email: r.athlete.email, partner_email: p.athlete.email, description: desc };
+  const desc = singles
+    ? `${EVENT.name} · Heat ${heat.label} · ${r.athlete.name} (Singles)`
+    : `${EVENT.name} · Heat ${heat.label} · ${r.athlete.name} + ${p.athlete.name}`;
+  const metadata = { kind: 'hyrox_register', team_id, heat_id: heat.id, division, test_mode: String(isTestMode), registrant_email: r.athlete.email, partner_email: p.athlete?.email || '', description: desc };
 
   try {
     const session = await stripe.checkout.sessions.create({

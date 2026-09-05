@@ -51,9 +51,10 @@ export default async (req) => {
   const buy = {
     shirt: want.shirt && !cur.shirt,
     dexa: (want.dexa || want.baseline) && !(cur.dexa || cur.baseline),
-    labs: (want.labs || want.baseline) && !(cur.labs || cur.baseline)
+    labs: (want.labs || want.baseline) && !(cur.labs || cur.baseline),
+    nutrition: want.nutrition && !cur.nutrition
   };
-  if (!buy.shirt && !buy.dexa && !buy.labs) {
+  if (!buy.shirt && !buy.dexa && !buy.labs && !buy.nutrition) {
     return json({ ok: true, checkout: false, message: 'Confirmed. See you on race day.' });
   }
   if (!registrationOpen()) return bad(`Add-on purchases closed ${EVENT.registration_closes_label}. Your confirmation was saved.`, 410);

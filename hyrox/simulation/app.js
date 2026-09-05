@@ -14,15 +14,15 @@
       ...Array.from({ length: 6 }, (_, i) => { const m = 7 * 60 + i * 10; return { id: 's' + String(i + 1).padStart(2, '0'), label: `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} AM`, capacity: 2, division: 'singles', remaining: null }; }),
       ...Array.from({ length: 16 }, (_, i) => { const m = 8 * 60 + 10 + i * 10; return { id: 'h' + String(i + 1).padStart(2, '0'), label: `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')} AM`, capacity: 2, division: 'doubles', remaining: null }; })
     ],
-    prices: { race_athlete: 2500, race_member_athlete: 1000, shirt: 2500, dexa: 12400, labs: 26000, baseline: 38000 },
-    regular_prices: { dexa: 14900, labs: 28500, baseline: 40500 },
+    prices: { race_athlete: 2500, race_member_athlete: 1000, shirt: 2500, dexa: 12400, labs: 26000, baseline: 38000, nutrition: 19500 },
+    regular_prices: { dexa: 14900, labs: 28500, baseline: 40500, nutrition: 22500 },
     shirt_sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL']
   };
   let cfg = FALLBACK;
 
   const state = {
     heat_id: null,
-    addons: { registrant: { shirt: false, dexa: false, labs: false }, partner: { shirt: false, dexa: false, labs: false } }
+    addons: { registrant: { shirt: false, dexa: false, labs: false, nutrition: false }, partner: { shirt: false, dexa: false, labs: false, nutrition: false } }
   };
 
   const DIVISION_META = {
@@ -126,7 +126,7 @@
     document.querySelectorAll('.partner-only').forEach(el => el.classList.toggle('hidden', singles));
     if (singles) {
       // Clear partner add-ons so a doubles→singles switch never charges for a ghost partner.
-      state.addons.partner = { shirt: false, dexa: false, labs: false };
+      state.addons.partner = { shirt: false, dexa: false, labs: false, nutrition: false };
       document.querySelectorAll('.toggle[data-role="partner"]').forEach(b => b.setAttribute('aria-checked', 'false'));
       $('p_shirt_size').classList.add('hidden');
       $('p_member').checked = false;
@@ -186,6 +186,7 @@
     if (a.dexa && a.labs) lines.push({ label: `Performance Baseline (DEXA + labs) — ${name}`, amount: P.baseline, regular: cfg.regular_prices.baseline });
     else if (a.dexa) lines.push({ label: `DEXA scan — ${name}`, amount: P.dexa, regular: cfg.regular_prices.dexa });
     else if (a.labs) lines.push({ label: `Blood panel — ${name}`, amount: P.labs, regular: cfg.regular_prices.labs });
+    if (a.nutrition) lines.push({ label: `Nutrition Jumpstart with Sarah — ${name}`, amount: P.nutrition, regular: cfg.regular_prices.nutrition });
     return lines;
   }
 

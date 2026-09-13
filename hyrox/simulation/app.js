@@ -53,6 +53,14 @@
       $('reg-closed').classList.remove('hidden');
       form.classList.add('hidden');
     }
+    if (cfg.shirts_open === false) {
+      // Print run is locked: hide the T-shirt row and drop any selection.
+      const row = document.querySelector('.toggle[data-addon="shirt"]')?.closest('tr');
+      if (row) row.classList.add('hidden');
+      state.addons.registrant.shirt = false;
+      state.addons.partner.shirt = false;
+      renderSummary();
+    }
     if (cfg.heats && cfg.heats[0].remaining !== null) {
       const left = (div) => (cfg.heats || []).filter(h => (h.division || 'doubles') === div).reduce((s, h) => s + (h.remaining ?? 0), 0);
       const s = left('singles'), d = left('doubles');

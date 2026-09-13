@@ -14,6 +14,10 @@
 (function() {
     const headerHTML = `
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-brand-gray/20" id="navbar">
+        <!-- Promo bar: HYROX Race Simulation (auto-hides after Oct 3, 2026 and on the registration page itself) -->
+        <a href="/hyrox/simulation/" id="promo-bar" class="block bg-brand-gold text-brand-dark text-center font-heading uppercase tracking-wide text-xs sm:text-sm px-4 py-2 hover:bg-brand-light transition-colors">
+            <span class="font-bold">HYROX Race Simulation</span> &middot; Sat, Oct 3 <span class="hidden sm:inline">&middot; Doubles &amp; Singles</span> &middot; Members $10 &middot; <span class="underline">Register now</span>
+        </a>
         <div class="container mx-auto px-4 flex justify-between items-center h-20">
             <a href="/" class="flex-shrink-0">
                 <picture>
@@ -65,8 +69,8 @@
         </div>
     </header>
 
-    <!-- Spacer to prevent content from hiding under fixed header -->
-    <div class="h-20"></div>
+    <!-- Spacer to prevent content from hiding under fixed header (height synced to the header in JS) -->
+    <div id="header-spacer" class="h-20"></div>
     `;
 
     // Inject header
@@ -77,8 +81,24 @@
         document.body.insertAdjacentHTML('afterbegin', headerHTML);
     }
 
+    // Promo bar lifecycle: gone after race day, and not shown on the page it links to.
+    const promoBar = document.getElementById('promo-bar');
+    if (promoBar && (location.pathname.startsWith('/hyrox/simulation') || Date.now() > Date.parse('2026-10-04T05:00:00Z'))) {
+        promoBar.remove();
+    }
+
+    // Keep the spacer the same height as the fixed header (promo bar may wrap on narrow screens).
+    function syncHeaderSpacer() {
+        const navbar = document.getElementById('navbar');
+        const spacer = document.getElementById('header-spacer');
+        if (navbar && spacer) spacer.style.height = navbar.offsetHeight + 'px';
+    }
+    window.addEventListener('resize', syncHeaderSpacer);
+    window.addEventListener('load', syncHeaderSpacer);
+
     // Initialize header interactions after DOM is ready
     function initHeaderInteractions() {
+        syncHeaderSpacer();
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');

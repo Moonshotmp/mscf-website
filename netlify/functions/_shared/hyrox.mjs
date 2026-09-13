@@ -37,6 +37,9 @@ export const EVENT = {
   // Registration + partner add-on purchases close at end of day Oct 2 (Central).
   registration_closes_iso: '2026-10-03T04:59:59.000Z',
   registration_closes_label: 'Friday, October 2 at 11:59 PM',
+  // T-shirt orders close earlier so the print run can ship before race day (Tom, 9/13).
+  shirt_orders_close_iso: '2026-09-27T04:59:59.000Z',
+  shirt_orders_close_label: 'Saturday, September 26',
   // Clinic certificates issued for this event are honored through this date.
   certificate_expires_label: 'December 31, 2026',
   contact_email: 'info@moonshotcrossfit.com',
@@ -159,6 +162,10 @@ export function registrationOpen() {
   return Date.now() < Date.parse(EVENT.registration_closes_iso);
 }
 
+export function shirtOrdersOpen() {
+  return Date.now() < Date.parse(EVENT.shirt_orders_close_iso);
+}
+
 function linkSecret() {
   const s = process.env.HYROX_LINK_SECRET || process.env.STRIPE_WEBHOOK_SECRET;
   if (!s) throw new Error('HYROX_LINK_SECRET (or STRIPE_WEBHOOK_SECRET) missing');
@@ -266,6 +273,7 @@ export async function publicConfig() {
   return {
     event: EVENT,
     open: registrationOpen(),
+    shirts_open: shirtOrdersOpen(),
     heats: await heatAvailability(),
     prices: PRICES,
     regular_prices: REGULAR_PRICES,
@@ -488,7 +496,7 @@ ONE THING TO DO NOW
 Confirm your contact info and sign the race waiver (2 minutes):
 ${plink}
 ${hasAllAddons ? '' : `
-Want more from race day? On that same page you can add an event T-shirt, a DEXA body composition scan, or a comprehensive blood panel from ${CLINIC_NAME} (same building) at the event rate: $25 off regular clinic pricing. Available through ${EVENT.registration_closes_label}.
+Want more from race day? On that same page you can add an event T-shirt, a DEXA body composition scan, or a comprehensive blood panel from ${CLINIC_NAME} (same building) at the event rate: $25 off regular clinic pricing. Clinic add-ons are available through ${EVENT.registration_closes_label}; T-shirt orders close ${EVENT.shirt_orders_close_label}.
 `}
 Questions? Reply to this email or call ${EVENT.contact_phone}.
 
@@ -510,7 +518,7 @@ Moonshot CrossFit
       <p style="margin:6px 0 10px;font-size:14px;">Confirm your contact info and sign the race waiver (2 minutes).</p>
       ${btn(plink, 'Confirm + sign waiver')}
     </div>
-    ${hasAllAddons ? '' : `<p style="color:#444;font-size:14px;">Want more from race day? On that same page you can add an event T-shirt, a DEXA body composition scan, or a comprehensive blood panel from <strong>${esc(CLINIC_NAME)}</strong> (same building) at the event rate: <strong>$25 off</strong> regular clinic pricing. Available through ${esc(EVENT.registration_closes_label)}.</p>`}
+    ${hasAllAddons ? '' : `<p style="color:#444;font-size:14px;">Want more from race day? On that same page you can add an event T-shirt, a DEXA body composition scan, or a comprehensive blood panel from <strong>${esc(CLINIC_NAME)}</strong> (same building) at the event rate: <strong>$25 off</strong> regular clinic pricing. Clinic add-ons are available through ${esc(EVENT.registration_closes_label)}; T-shirt orders close ${esc(EVENT.shirt_orders_close_label)}.</p>`}
     <p style="color:#666;font-size:14px;">Questions? Reply to this email or call ${esc(EVENT.contact_phone)}.</p>
     <p><strong>Moonshot CrossFit</strong></p>`);
 

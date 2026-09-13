@@ -44,7 +44,7 @@
 
     const hasDexa = owned.dexa || owned.baseline, hasLabs = owned.labs || owned.baseline;
     const rows = [
-      !owned.shirt && { key: 'shirt', title: L.shirt, sub: 'Race Simulation 2026 tee.', price: cfg.prices.shirt },
+      !owned.shirt && cfg.shirts_open !== false && { key: 'shirt', title: L.shirt, sub: `Race Simulation 2026 tee. Orders close ${cfg.event?.shirt_orders_close_label || 'September 26'}.`, price: cfg.prices.shirt },
       !hasDexa && { key: 'dexa', title: L.dexa, sub: `${cfg.clinic_name} certificate. Book any date through Dec 31.`, price: cfg.prices.dexa, regular: cfg.regular_prices.dexa },
       !hasLabs && { key: 'labs', title: L.labs, sub: `${cfg.clinic_name} certificate. Book any date through Dec 31.`, price: cfg.prices.labs, regular: cfg.regular_prices.labs }
     ].filter(Boolean);

@@ -7,7 +7,7 @@ import crypto from 'node:crypto';
 import {
   SITE_URL, EVENT, HEATS, MEMBER_CODE, SHIRT_SIZES, HOLD_MINUTES,
   teamsStore, heatAvailability, registrationOpen, heatById,
-  athleteLineItems, sumItems, toStripeLineItems, normalizeAddons,
+  athleteLineItems, sumItems, toStripeLineItems, normalizeAddons, shirtOrdersOpen,
   stripeClient, signTeam, json, bad, clean, isEmail
 } from './_shared/hyrox.mjs';
 
@@ -22,6 +22,7 @@ function parseAthlete(raw, role) {
   const addons = normalizeAddons(raw.addons);
   let shirt_size = null;
   if (addons.shirt) {
+    if (!shirtOrdersOpen()) return { error: `T-shirt orders closed ${EVENT.shirt_orders_close_label}. Remove the T-shirt for ${name.split(' ')[0]} to continue.` };
     shirt_size = clean(raw.shirt_size, 5).toUpperCase();
     if (!SHIRT_SIZES.includes(shirt_size)) return { error: `Pick a T-shirt size for ${name.split(' ')[0]}` };
   }

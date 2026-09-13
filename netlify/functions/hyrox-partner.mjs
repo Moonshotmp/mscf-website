@@ -4,7 +4,7 @@
 import {
   SITE_URL, EVENT, SHIRT_SIZES, HOLD_MINUTES,
   teamsStore, ordersStore, registrationOpen, heatById, verifyTeamToken, signTeam,
-  athleteLineItems, sumItems, toStripeLineItems, normalizeAddons,
+  athleteLineItems, sumItems, toStripeLineItems, normalizeAddons, shirtOrdersOpen,
   stripeClient, json, bad, clean, isEmail
 } from './_shared/hyrox.mjs';
 
@@ -60,6 +60,7 @@ export default async (req) => {
 
   let shirt_size = null;
   if (buy.shirt) {
+    if (!shirtOrdersOpen()) return bad(`T-shirt orders closed ${EVENT.shirt_orders_close_label}. Remove the T-shirt to continue.`);
     shirt_size = clean(body.shirt_size, 5).toUpperCase();
     if (!SHIRT_SIZES.includes(shirt_size)) return bad('Pick a T-shirt size');
   }

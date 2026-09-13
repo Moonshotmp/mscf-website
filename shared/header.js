@@ -16,7 +16,7 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-md border-b border-brand-gray/20" id="navbar">
         <!-- Promo bar: HYROX Race Simulation (auto-hides after Oct 3, 2026 and on the registration page itself) -->
         <a href="/hyrox/simulation/" id="promo-bar" class="block bg-brand-gold text-brand-dark text-center font-heading uppercase tracking-wide text-xs sm:text-sm px-4 py-2 hover:bg-brand-light transition-colors">
-            <span class="font-bold">HYROX Race Simulation</span> &middot; Sat, Oct 3 &middot; Doubles &amp; Singles &middot; Members $10 &middot; <span class="underline">Register now</span>
+            <span class="font-bold">HYROX Race Simulation</span> &middot; Sat, Oct 3 <span class="hidden sm:inline">&middot; Doubles &amp; Singles</span> &middot; Members $10 &middot; <span class="underline">Register now</span>
         </a>
         <div class="container mx-auto px-4 flex justify-between items-center h-20">
             <a href="/" class="flex-shrink-0">

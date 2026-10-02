@@ -62,7 +62,7 @@
                     <div><dt id="team-label" class="text-brand-gray text-xs uppercase tracking-wider font-heading">Team</dt><dd id="team" class="text-brand-light font-semibold"></dd></div>
                     <div><dt class="text-brand-gray text-xs uppercase tracking-wider font-heading">Where</dt><dd class="text-brand-light">Moonshot CrossFit<br><span class="text-brand-gray">542 Busse Hwy, Park Ridge, IL 60068</span></dd></div>
                 </dl>
-                <p id="sched-line" class="text-brand-gray text-xs mt-5">Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. Arrive by 7:30 regardless of heat.</p>
+                <p id="sched-line" class="text-brand-gray text-xs mt-5">Doors 6:30 AM. Arrive 45 minutes before your heat (20 minutes at the minimum).</p>
                 <a id="cal-link" href="#" target="_blank" rel="noopener" class="inline-block mt-4 text-brand-gold hover:underline text-sm font-semibold">+ Add to Google Calendar</a>
             </div>
 
@@ -94,7 +94,7 @@
                     <li class="flex gap-4"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">1</span><div><strong class="text-brand-light">Confirmation email.</strong><p class="text-brand-gray mt-1">Everything on this page, plus a Stripe receipt, is on its way to your inbox.</p></div></li>
                     <li id="next-partner" class="flex gap-4"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">2</span><div><strong class="text-brand-light">Your partner signs their waiver.</strong><p class="text-brand-gray mt-1">Two minutes via their link. Both waivers must be on file before race day.</p></div></li>
                     <li id="next-certs" class="flex gap-4 hidden"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">3</span><div><strong class="text-brand-light">Book your clinic appointments.</strong><p class="text-brand-gray mt-1">Use the booking links above. A blood draw is best fasted in the morning; the clinic sends prep instructions when you book.</p></div></li>
-                    <li class="flex gap-4"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">✓</span><div><strong class="text-brand-light">Race day: arrive by 7:30 AM.</strong><p class="text-brand-gray mt-1">Check in, hear the briefing, warm up with the group, and go.</p></div></li>
+                    <li class="flex gap-4"><span class="flex-shrink-0 w-7 h-7 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold font-bold flex items-center justify-center font-heading text-sm">✓</span><div><strong class="text-brand-light">Race day: arrive 45 minutes before your heat.</strong><p class="text-brand-gray mt-1">Check in, hear a quick briefing, warm up in the designated area, and go. Heats run on schedule; late arrivals move to the next open heat.</p></div></li>
                 </ol>
             </div>
 
@@ -125,8 +125,8 @@
 
       function schedText(division) {
         return division === 'singles'
-          ? 'Doors 6:30 AM · Briefing 6:45 AM. Arrive by 6:30 regardless of heat.'
-          : 'Doors 7:30 AM · Briefing 7:45 AM · Warm-up 8:00 AM. Arrive by 7:30 regardless of heat.';
+          ? 'Doors 6:30 AM. Arrive 45 minutes before your heat (20 minutes at the minimum).'
+          : 'Doors 6:30 AM. Arrive 45 minutes before your heat (20 minutes at the minimum).';
       }
 
       function calLink(heat, division) {

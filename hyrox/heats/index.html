@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>HYROX Race Simulation — Heat Board | Moonshot CrossFit</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap">
+<style>
+  :root{
+    --bg:#101921; --bg2:#172330; --card:#1c2a39; --line:#2a3b4e;
+    --cream:#F0EEE9; --muted:#9fb0c2; --gold:#B8986E; --gold2:#d9b985;
+    --men:#5aa7ff; --women:#ff7aa8; --mixed:#b78cff; --pro:#ffb347; --live:#3ddc84;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--cream);font-family:'Poppins',sans-serif;min-height:100%}
+  body{padding:24px clamp(16px,2.5vw,40px) 40px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px;border-bottom:1px solid var(--line);padding-bottom:16px}
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand img{height:52px;width:auto}
+  h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,52px);letter-spacing:.04em;text-transform:uppercase;line-height:1}
+  h1 small{display:block;font-size:.42em;font-weight:500;color:var(--gold);letter-spacing:.18em;margin-top:6px}
+  .clock{font-family:'Oswald',sans-serif;font-size:clamp(26px,3.2vw,48px);font-weight:600;color:var(--gold2);letter-spacing:.05em;text-align:right}
+  .clock small{display:block;font-size:.36em;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:16px}
+  .heat{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;position:relative}
+  .heat.live{border-color:var(--live);box-shadow:0 0 0 2px rgba(61,220,132,.35),0 0 32px rgba(61,220,132,.25)}
+  .heat.next{border-color:var(--gold)}
+  .heat.done{opacity:.45}
+  .heat-head{display:flex;align-items:baseline;justify-content:space-between;padding:12px 16px 8px;background:var(--bg2);border-bottom:1px solid var(--line)}
+  .time{font-family:'Oswald',sans-serif;font-size:clamp(30px,3vw,44px);font-weight:700;letter-spacing:.03em;line-height:1}
+  .div{font-family:'Oswald',sans-serif;font-size:clamp(14px,1.3vw,19px);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .status{position:absolute;top:10px;right:16px;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+  .live .status{background:var(--live);color:#06251a}
+  .next .status{background:var(--gold);color:#1a1206}
+  .heat-head{position:relative}
+  .live .heat-head .div,.next .heat-head .div{visibility:hidden}
+  .entry{display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+  .entry:last-child{border-bottom:none}
+  .names{font-family:'Oswald',sans-serif;font-size:clamp(20px,1.9vw,28px);font-weight:500;line-height:1.2}
+  .names .amp{color:var(--gold);font-weight:400;margin:0 .35em}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .tag{font-family:'Oswald',sans-serif;font-size:clamp(12px,1.05vw,15px);font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:7px;border:1px solid transparent;background:transparent;color:var(--cream);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+  .tag:active{transform:scale(.96)}
+  .tag.open{border-color:var(--muted);color:var(--muted)}
+  .tag.pro{background:var(--pro);color:#2b1a00;border-color:var(--pro)}
+  .tag.men{background:rgba(90,167,255,.16);color:var(--men);border-color:var(--men)}
+  .tag.women{background:rgba(255,122,168,.16);color:var(--women);border-color:var(--women)}
+  .tag.mixed{background:rgba(183,140,255,.16);color:var(--mixed);border-color:var(--mixed)}
+  .empty{padding:14px 16px;color:var(--muted);font-style:italic}
+  footer{margin-top:20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px}
+  footer b{color:var(--cream);font-weight:600}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  @media (max-width:640px){
+    header{flex-direction:column;align-items:flex-start}
+    .clock{text-align:left}
+    .entry{grid-template-columns:1fr}
+    .tags{justify-content:flex-start}
+  }
+  @media (min-width:1600px){ body{padding:32px 48px} .grid{gap:20px} }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <img src="/images/logo-opt.webp" alt="Moonshot CrossFit">
+    <h1>HYROX Race Simulation <small>Saturday Oct 3, 2026 · Heat Board</small></h1>
+  </div>
+  <div class="clock"><span id="clock">--:--</span><small id="clock-sub">Park Ridge</small></div>
+</header>
+
+<main class="grid" id="board"></main>
+
+<footer>
+  <div class="legend">
+    <span><i class="dot" style="background:var(--live)"></i> On course</span>
+    <span><i class="dot" style="background:var(--gold)"></i> Up next</span>
+    <span><i class="dot" style="background:var(--pro)"></i> Pro</span>
+    <span><i class="dot" style="background:var(--men)"></i> Men</span>
+    <span><i class="dot" style="background:var(--women)"></i> Women</span>
+    <span><i class="dot" style="background:var(--mixed)"></i> Mixed</span>
+  </div>
+  <div><b id="count"></b> · Tap a tag to change Pro / Open or Men / Women / Mixed</div>
+</footer>
+
+<script>
+// Heat board data. Source: paid roster pulled 2026-10-02 evening.
+// div: 'open' | 'pro'   cat: 'men' | 'women' | 'mixed'
+// Registration never asked for Pro/Open or gender, so these start as best guesses
+// and can be changed by tapping a tag on the screen (saved in this browser).
+const HEATS = [
+  { time: '7:00 AM',  division: 'Singles', entries: [
+    { names: ['Ana Monterroso-Carey'], div: 'open', cat: 'women' },
+    { names: ['Ryan Heany'],           div: 'open', cat: 'men' },
+  ]},
+  { time: '7:20 AM',  division: 'Singles', entries: [
+    { names: ['David Miller'],         div: 'open', cat: 'men' },
+  ]},
+  { time: '7:30 AM',  division: 'Singles', entries: [
+    { names: ['Joe Kashul'],           div: 'open', cat: 'men' },
+    { names: ['Richard Tessell'],      div: 'open', cat: 'men' },
+  ]},
+  { time: '8:10 AM',  division: 'Doubles', entries: [
+    { names: ['Maria Prutsos', 'Kasia Jimenez'],     div: 'open', cat: 'women' },
+    { names: ['John Podgorny', 'Diana Podgorny'],    div: 'open', cat: 'mixed' },
+  ]},
+  { time: '8:20 AM',  division: 'Doubles', entries: [
+    { names: ['Tom Kashul', 'Edwin Garcia'],         div: 'open', cat: 'men' },
+    { names: ['Molly Mevis', 'Natalie Klein'],       div: 'open', cat: 'women' },
+  ]},
+  { time: '8:30 AM',  division: 'Doubles', entries: [
+    { names: ['Skarlet Walls', 'Nancy Evans'],       div: 'open', cat: 'women' },
+    { names: ['Anthony Johnson', 'Ian Rodriguez'],   div: 'open', cat: 'men' },
+  ]},
+  { time: '8:40 AM',  division: 'Doubles', entries: [
+    { names: ['Katie Russ', 'Amanda Westwood Dolezal'], div: 'open', cat: 'women' },
+    { names: ['Rachele Mitchell', 'Laura McGinnis'],    div: 'open', cat: 'women' },
+  ]},
+  { time: '9:00 AM',  division: 'Doubles', entries: [
+    { names: ['Mo Namik', 'Eva Torres'],             div: 'open', cat: 'mixed' },
+  ]},
+  { time: '9:10 AM',  division: 'Doubles', entries: [
+    { names: ['Cesar Pereira', 'Charlie Anderson'],  div: 'open', cat: 'men' },
+  ]},
+];
+
+const RACE_DATE = '2026-10-03';
+const HEAT_MINUTES = 10;          // a heat is "on course" for this long after its start
+const STORE_KEY = 'hyrox-heat-board-2026';
+const DIV_CYCLE = ['open', 'pro'];
+const CAT_CYCLE = ['men', 'women', 'mixed'];
+const DIV_LABEL = { open: 'Open', pro: 'Pro' };
+const CAT_LABEL = { men: 'Men', women: 'Women', mixed: 'Mixed' };
+
+function key(h, i){ return h.time + '|' + i; }
+function loadOverrides(){ try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch { return {}; } }
+function saveOverrides(o){ try { localStorage.setItem(STORE_KEY, JSON.stringify(o)); } catch {} }
+const overrides = loadOverrides();
+HEATS.forEach(h => h.entries.forEach((e, i) => { const o = overrides[key(h, i)]; if (o) Object.assign(e, o); }));
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function heatStart(h){
+  const [t, ampm] = h.time.split(' ');
+  let [hh, mm] = t.split(':').map(Number);
+  if (ampm === 'PM' && hh !== 12) hh += 12;
+  if (ampm === 'AM' && hh === 12) hh = 0;
+  // Chicago is CDT (UTC-5) on race day
+  return new Date(`${RACE_DATE}T${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:00-05:00`);
+}
+
+function render(){
+  const now = new Date();
+  const board = document.getElementById('board');
+  let liveIdx = -1, nextIdx = -1;
+  HEATS.forEach((h, i) => {
+    const s = heatStart(h).getTime();
+    if (now >= s && now < s + HEAT_MINUTES*60000) liveIdx = i;
+    if (nextIdx === -1 && now < s) nextIdx = i;
+  });
+  board.innerHTML = HEATS.map((h, hi) => {
+    const s = heatStart(h).getTime();
+    const cls = hi === liveIdx ? 'live' : hi === nextIdx ? 'next' : (now >= s + HEAT_MINUTES*60000 && now.toISOString().slice(0,10) === RACE_DATE) ? 'done' : '';
+    const status = cls === 'live' ? '<span class="status">On course</span>' : cls === 'next' ? '<span class="status">Up next</span>' : '';
+    const rows = h.entries.length ? h.entries.map((e, i) => `
+      <div class="entry">
+        <div class="names">${e.names.map(esc).join('<span class="amp">&amp;</span>')}</div>
+        <div class="tags">
+          <button class="tag ${e.div}" data-h="${hi}" data-i="${i}" data-k="div">${DIV_LABEL[e.div]}</button>
+          <button class="tag ${e.cat}" data-h="${hi}" data-i="${i}" data-k="cat">${CAT_LABEL[e.cat]}</button>
+        </div>
+      </div>`).join('') : '<div class="empty">Open heat</div>';
+    return `<section class="heat ${cls}">
+      <div class="heat-head"><div class="time">${esc(h.time)}</div><div class="div">${esc(h.division)}</div>${status}</div>
+      ${rows}
+    </section>`;
+  }).join('');
+  const athletes = HEATS.reduce((n, h) => n + h.entries.reduce((m, e) => m + e.names.length, 0), 0);
+  const entries = HEATS.reduce((n, h) => n + h.entries.length, 0);
+  document.getElementById('count').textContent = `${athletes} athletes · ${entries} entries · ${HEATS.length} heats`;
+}
+
+document.getElementById('board').addEventListener('click', ev => {
+  const b = ev.target.closest('.tag'); if (!b) return;
+  const h = HEATS[+b.dataset.h], e = h.entries[+b.dataset.i], k = b.dataset.k;
+  const cycle = k === 'div' ? DIV_CYCLE : CAT_CYCLE;
+  e[k] = cycle[(cycle.indexOf(e[k]) + 1) % cycle.length];
+  overrides[key(h, +b.dataset.i)] = { div: e.div, cat: e.cat };
+  saveOverrides(overrides);
+  render();
+});
+
+function tick(){
+  const now = new Date();
+  document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago' });
+  render();
+}
+tick();
+setInterval(tick, 15000);
+</script>
+</body>
+</html>

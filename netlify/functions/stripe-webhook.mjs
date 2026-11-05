@@ -1,45 +1,7 @@
 import Stripe from 'stripe';
 import { getStore } from '@netlify/blobs';
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import { handleHyroxCheckoutCompleted, handleHyroxCheckoutExpired } from './_shared/hyrox.mjs';
-
-const TIER_LABELS = { 'class-fob': 'Class + Fob', 'fob-only': 'Fob-Only' };
-
-// Netlify reserves AWS_* env names, so we use SES_* for the SES IAM creds.
-const sesClient = (process.env.SES_ACCESS_KEY_ID && process.env.SES_SECRET_ACCESS_KEY)
-  ? new SESClient({
-      region: process.env.SES_REGION || 'us-east-1',
-      credentials: {
-        accessKeyId: process.env.SES_ACCESS_KEY_ID,
-        secretAccessKey: process.env.SES_SECRET_ACCESS_KEY
-      }
-    })
-  : null;
-
-async function notifyTeam({ from, to, subject, text, html }) {
-  if (!sesClient) {
-    console.log('[email:skipped] SES not configured (need SES_ACCESS_KEY_ID + SES_SECRET_ACCESS_KEY)');
-    return;
-  }
-  try {
-    const cmd = new SendEmailCommand({
-      Source: from,
-      Destination: { ToAddresses: to },
-      ReplyToAddresses: ['info@moonshotcrossfit.com'],
-      Message: {
-        Subject: { Data: subject, Charset: 'UTF-8' },
-        Body: {
-          Text: { Data: text, Charset: 'UTF-8' },
-          Html: { Data: html, Charset: 'UTF-8' }
-        }
-      }
-    });
-    const result = await sesClient.send(cmd);
-    console.log(`[email:sent] messageId=${result.MessageId} to=${to.join(',')}`);
-  } catch (err) {
-    console.error('[email:exception]', err.name || '?', err.message || err);
-  }
-}
+import { TIER_LABELS, FOB_NOTIFY_FROM, FOB_NOTIFY_TO, fmtPrice, notifyTeam } from './_shared/fob-email.mjs';
 
 async function buildOrdersSummary() {
   // Reads all fob-orders, computes running totals + per-plan breakdown.
@@ -69,10 +31,6 @@ async function buildOrdersSummary() {
     console.error('[summary:failed]', err);
     return null;
   }
-}
-
-function fmtPrice(cents) {
-  return '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 async function notifyNewSignup(order, waiver) {
@@ -177,8 +135,8 @@ Waiver: <code>${order.waiver_id}</code>
 </body></html>`;
 
   await notifyTeam({
-    from: process.env.FOB_NOTIFY_FROM || 'Moonshot CrossFit <noreply@updates.moonshotclinic.com>',
-    to: ['info@moonshotcrossfit.com', 'tom@moonshotmp.com'],
+    from: FOB_NOTIFY_FROM,
+    to: FOB_NOTIFY_TO,
     subject,
     text,
     html

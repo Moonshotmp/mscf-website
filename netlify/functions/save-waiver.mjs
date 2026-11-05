@@ -1,10 +1,12 @@
 import { getStore } from '@netlify/blobs';
 import crypto from 'node:crypto';
+import { notifyCashSignup } from './_shared/fob-email.mjs';
 
 const VALID_TIERS = ['class-fob', 'fob-only'];
 const VALID_PEOPLE = ['solo', 'couple'];
 const VALID_INTERVALS = ['monthly', 'annual'];
 const VALID_MODES = ['founder', 'presale', 'regular'];
+const VALID_PAYMENTS = ['card', 'cash'];
 
 const REQUIRED_MEMBER_FIELDS = [
   'full_name', 'dob', 'email', 'phone',
@@ -34,6 +36,7 @@ export default async (req) => {
   }
 
   const { tier, people, interval, mode, price_usd, member, signed_at, user_agent, waiver_version, ack_timestamps, agreement_text } = payload;
+  const payment = payload.payment || 'card';
 
   if (!VALID_TIERS.includes(tier)
       || !VALID_PEOPLE.includes(people)
@@ -42,6 +45,7 @@ export default async (req) => {
       || (interval === 'monthly' && mode === 'founder')) {
     return bad('Invalid tier/people/interval/mode');
   }
+  if (!VALID_PAYMENTS.includes(payment)) return bad('Invalid payment method');
   if (!member || typeof member !== 'object') return bad('Missing member info');
 
   for (const f of REQUIRED_MEMBER_FIELDS) {
@@ -72,6 +76,7 @@ export default async (req) => {
   const record = {
     waiver_id,
     tier, people, interval, mode, price_usd,
+    payment,
     member,
     signed_at: signed_at || new Date().toISOString(),
     user_agent: user_agent || null,
@@ -82,7 +87,9 @@ export default async (req) => {
       ? crypto.createHash('sha256').update(agreement_text).digest('hex')
       : null,
     ip,
-    status: 'pending_payment',
+    // card: Stripe webhook flips to 'paid'. cash: stays 'pending_cash' until the team collects; the
+    // notify email below is the collection reminder.
+    status: payment === 'cash' ? 'pending_cash' : 'pending_payment',
     stripe_session_id: null,
     paid_at: null,
     received_at: new Date().toISOString()
@@ -91,7 +98,8 @@ export default async (req) => {
   try {
     const store = getStore('fob-waivers');
     await store.setJSON(waiver_id, record);
-    console.log(`[waiver:saved] id=${waiver_id} tier=${tier} people=${people} mode=${mode} email=${member.email}`);
+    console.log(`[waiver:saved] id=${waiver_id} tier=${tier} people=${people} mode=${mode} payment=${payment} email=${member.email}`);
+    if (payment === 'cash') await notifyCashSignup(record);
     return new Response(JSON.stringify({ waiver_id }), {
       headers: { 'Content-Type': 'application/json' }
     });

@@ -17,7 +17,7 @@
         .form-input:focus { outline: none; border-color: #B8986E; }
         .form-label { font-family: 'Poppins', sans-serif; color: #F0EEE9; font-weight: 600; font-size: 14px; display: block; margin-bottom: 6px; }
         .checkbox-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px; background: rgba(44, 53, 62, 0.4); border: 1px solid rgba(178, 191, 190, 0.15); border-radius: 8px; margin-bottom: 8px; }
-        .checkbox-row input[type=checkbox] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; accent-color: #B8986E; }
+        .checkbox-row input[type=checkbox], .checkbox-row input[type=radio] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; accent-color: #B8986E; }
         .signature-input { font-family: 'Caveat', cursive, sans-serif; font-size: 28px; padding: 16px 20px !important; letter-spacing: 1px; }
         .field-error { border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25); }
         #error-banner { background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; color: #fca5a5; font-weight: 600; }
@@ -169,7 +169,7 @@
                     <p><strong>Minor exclusion.</strong> I will not bring any minor into the Facility during fob hours (see §6(i)). I do not authorize use of any minor's likeness under this paragraph; any incidental capture of a minor in marketing materials requires the parent or legal guardian's separate written consent.</p>
 
                     <h4>9. Term, Activation, Renewal, Cancellation &amp; Refunds</h4>
-                    <p>My membership term begins on the date my fob is first activated by Moonshot CrossFit's access-control system, not the date of payment. <strong>This is an auto-renewing subscription:</strong> annual plans renew yearly and monthly plans renew monthly at the rate I selected at signup, charged automatically to the payment method on file, until cancelled. No single prepaid period exceeds twelve (12) months, and this Agreement does not bind me to any term longer than thirty-six (36) months.</p>
+                    <p>My membership term begins on the date my fob is first activated by Moonshot CrossFit's access-control system, not the date of payment. <strong>This is an auto-renewing subscription:</strong> annual plans renew yearly and monthly plans renew monthly at the rate I selected at signup, charged automatically to the payment method on file, until cancelled. <strong>Cash members</strong> are not billed automatically: each renewal payment is due in cash to Moonshot CrossFit on or before the renewal date, and fob access is suspended until it is received. No single prepaid period exceeds twelve (12) months, and this Agreement does not bind me to any term longer than thirty-six (36) months.</p>
                     <p><strong>Cancellation.</strong> I may cancel at any time by emailing <strong>info@moonshotcrossfit.com</strong> before my next billing date. Cancellation stops future charges but, outside the refund triggers below, does not entitle me to a refund of amounts already paid.</p>
                     <p><strong>Refund triggers (815 ILCS 645).</strong> In addition to the Three-Day Right of Cancellation at the top of this Agreement, I am entitled to cancel and receive a pro-rata refund of the unused portion of my current prepaid period upon: (a) my <strong>death</strong> (my estate may submit notice); (b) my <strong>permanent disability</strong> that prevents me from using the Facility for at least six (6) months, supported by physician documentation; or (c) my <strong>permanent relocation more than 25 miles</strong> from the Facility, supported by documentation.</p>
                     <p><strong>Facility closure.</strong> If Moonshot CrossFit cancels the 24/7 fob program before my fob is activated, I receive a full refund. If Moonshot CrossFit discontinues the program after activation, I receive a refund of the unused portion of my current prepaid period.</p>
@@ -218,12 +218,21 @@
                 </div>
             </div>
 
+            <!-- Payment method -->
+            <div class="bg-brand-slate/30 border border-brand-gray/20 rounded-xl p-6">
+                <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-4">How You'll Pay</h3>
+                <div class="space-y-2">
+                    <label class="checkbox-row"><input type="radio" name="payment" value="card" checked><span class="text-brand-light text-sm"><strong>Card</strong> — secure Stripe checkout next, auto-renews. You're done in one step.</span></label>
+                    <label class="checkbox-row"><input type="radio" name="payment" value="cash"><span class="text-brand-light text-sm"><strong>Cash</strong> — hand <span id="cash-amount"></span> cash to a coach. Your fob is activated once it's received. No auto-renew: each renewal is due in cash on or before the renewal date.</span></label>
+                </div>
+            </div>
+
             <!-- Submit -->
             <div class="text-center pt-4">
                 <button type="submit" id="submit-btn" class="btn btn-primary font-bold px-10 py-4 rounded-lg text-lg">
                     Continue to Secure Checkout →
                 </button>
-                <p class="text-brand-gray/60 text-xs mt-4">You'll be redirected to Stripe to complete payment securely. We never see your card details.</p>
+                <p class="text-brand-gray/60 text-xs mt-4" id="submit-note">You'll be redirected to Stripe to complete payment securely. We never see your card details.</p>
                 <p id="error-msg" class="text-red-400 text-sm mt-3 hidden"></p>
             </div>
         </form>
@@ -349,6 +358,17 @@
         });
         document.getElementById('print-agreement').addEventListener('click', () => window.print());
 
+        // ─── Payment method (card → Stripe, cash → sign only, team collects) ──
+        document.getElementById('cash-amount').textContent = '$' + displayPrice.toLocaleString() + ' ' + intervalLabel;
+        const paymentChoice = () => document.querySelector('input[name="payment"]:checked')?.value || 'card';
+        const submitLabel = () => paymentChoice() === 'cash' ? 'Sign Agreement →' : 'Continue to Secure Checkout →';
+        document.querySelectorAll('input[name="payment"]').forEach(r => r.addEventListener('change', () => {
+            document.getElementById('submit-btn').textContent = submitLabel();
+            document.getElementById('submit-note').textContent = paymentChoice() === 'cash'
+                ? 'No card needed. We\'ll record your signed agreement and a coach will collect cash from you.'
+                : "You'll be redirected to Stripe to complete payment securely. We never see your card details.";
+        }));
+
         // ─── Submit ──────────────────────────────────────────────────
         document.getElementById('waiver-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -374,7 +394,7 @@
                 banner.classList.remove('hidden');
                 banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 btn.disabled = false;
-                btn.textContent = 'Continue to Secure Checkout →';
+                btn.textContent = submitLabel();
             };
 
             if (data.signature.trim().toLowerCase() !== data.full_name.trim().toLowerCase()) {
@@ -393,8 +413,11 @@
                 return;
             }
 
+            const payment = paymentChoice();
+            delete data.payment; // not a member field
             const payload = {
                 tier, people, interval, mode: effectiveMode,
+                payment,
                 price_usd: fullPrice,
                 member: data,
                 signed_at: new Date().toISOString(),
@@ -413,6 +436,13 @@
                 });
                 if (!waiverRes.ok) throw new Error('Failed to save waiver');
                 const { waiver_id } = await waiverRes.json();
+
+                // Cash: signed and recorded, no Stripe. The team gets the collection email.
+                if (payment === 'cash') {
+                    const q = new URLSearchParams({ paid: 'cash', amount: String(displayPrice), interval, waiver_id });
+                    window.location.href = `/fob/success.html?${q.toString()}`;
+                    return;
+                }
 
                 // 2) Create Stripe Checkout session
                 const checkoutBody = { waiver_id, tier, people, interval, mode: effectiveMode };
@@ -435,7 +465,7 @@
                 errEl.textContent = err.message || 'Something went wrong. Please try again or contact info@moonshotcrossfit.com.';
                 errEl.classList.remove('hidden');
                 btn.disabled = false;
-                btn.textContent = 'Continue to Secure Checkout →';
+                btn.textContent = submitLabel();
             }
         });
     </script>

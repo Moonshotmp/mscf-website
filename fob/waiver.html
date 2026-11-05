@@ -27,6 +27,12 @@
         .waiver-box h4:first-child { margin-top: 0; }
         .waiver-box p { margin-bottom: 10px; }
         .waiver-box strong { color: #F0EEE9; }
+        @media print {
+            body { background: #fff !important; color: #000 !important; }
+            header, footer, nav, #submit-btn, #print-agreement, .btn { display: none !important; }
+            .waiver-box { max-height: none !important; overflow: visible !important; background: #fff !important; color: #000 !important; border: none !important; font-size: 11pt; }
+            .waiver-box h4, .waiver-box strong { color: #000 !important; }
+        }
     </style>
 </head>
 <body class="bg-brand-dark text-brand-light">
@@ -94,67 +100,110 @@
                 </div>
             </div>
 
-            <!-- Waiver text -->
+            <!-- Waiver text — v2 agreement (2026-11-05). Source: Desktop/Businesses/Moonshot CrossFit/moonshot-fob-waiver-v2.md -->
             <div class="bg-brand-slate/30 border border-brand-gray/20 rounded-xl p-6">
-                <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-2">Liability Waiver, Release & Assumption of Risk</h3>
-                <p class="text-brand-gray text-sm mb-4">Read in full. By signing below you agree to be legally bound.</p>
+                <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                    <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider">Membership Agreement, Liability Waiver, Release &amp; Assumption of Risk</h3>
+                    <button type="button" id="print-agreement" class="text-brand-gold text-sm underline hover:text-brand-light whitespace-nowrap">Print / save a copy</button>
+                </div>
+                <p class="text-brand-gray text-sm mb-4">Read in full. By signing below you agree to be legally bound. Each person who receives a fob must sign; one signed Agreement corresponds to one issued fob.</p>
 
-                <div class="waiver-box mb-4" tabindex="0">
-                    <h4>1. Acknowledgment & Assumption of Risk</h4>
-                    <p>I understand that fitness training, including but not limited to weightlifting, gymnastics movements, high-intensity interval training, conditioning, plyometrics, running, rowing, cycling, and self-directed exercise of any kind ("Activities") at Moonshot CrossFit, located at 542 Busse Hwy, Park Ridge, IL 60068 ("Facility"), involves <strong>inherent and significant risks</strong>, including but not limited to: muscle strains, sprains, tears, fractures, joint dislocations, head injury, heart attack, stroke, heat illness, dehydration, rhabdomyolysis, paralysis, and death. I voluntarily and knowingly assume <strong>full responsibility</strong> for all such risks, whether known or unknown.</p>
+                <div class="waiver-box mb-4" tabindex="0" id="agreement-text">
+                    <h4>Three-Day Right of Cancellation (815 ILCS 645/6)</h4>
+                    <p><strong>YOU, THE BUYER, MAY CANCEL THIS AGREEMENT AT ANY TIME PRIOR TO MIDNIGHT OF THE THIRD BUSINESS DAY AFTER THE DATE YOU SIGN THIS AGREEMENT. SEE THE NOTICE OF CANCELLATION AT THE END OF THIS AGREEMENT FOR AN EXPLANATION OF THIS RIGHT.</strong></p>
+                    <p>To cancel, deliver written notice to Moonshot CrossFit at 542 Busse Hwy, Park Ridge, IL 60068, or by email to <strong>info@moonshotcrossfit.com</strong>. Upon timely cancellation, you will receive a full refund within ten (10) business days.</p>
+
+                    <h4>1. Acknowledgment &amp; Assumption of Risk — Including the Risks of Unsupervised Training</h4>
+                    <p>I understand that fitness training at Moonshot CrossFit, located at 542 Busse Hwy, Park Ridge, IL 60068, including the interior premises, the parking lot, sidewalks adjacent to the premises, and any common areas under Moonshot CrossFit's control (collectively, the <strong>"Facility"</strong>), involves <strong>inherent and significant risks</strong>, including risks arising from the <strong>negligence of the Released Parties</strong>. I voluntarily, knowingly, and expressly assume <strong>full responsibility</strong> for all such risks, whether known or unknown.</p>
+                    <p>The activities I may engage in include weightlifting, Olympic-style barbell movements (snatch, clean and jerk, deadlift, squat, press), gymnastics movements (pull-ups, muscle-ups, ring movements, handstand work, rope climbs), plyometrics (box jumps, broad jumps), high-intensity interval training, conditioning, running, rowing, cycling, and any other self-directed exercise (collectively, <strong>"Activities"</strong>).</p>
+                    <p>The risks I assume include, without limitation:<br>
+                    • <strong>Physiological injury</strong> — muscle strains, sprains, tears, fractures, joint dislocations, head injury, concussion, dental injury, eye injury, heart attack, sudden cardiac arrest, stroke, heat illness, dehydration, rhabdomyolysis, paralysis, and <strong>death</strong>;<br>
+                    • <strong>Movement-specific catastrophic injury</strong> — dropped or rebounding barbells (including bar-on-neck, bar-on-chest, and bar-on-foot), failed lifts, missed reps, falls from pull-up rigs, gymnastics rings, ropes, and boxes;<br>
+                    • <strong>Equipment failure</strong> — including but not limited to barbells, collars, racks, rigs, plyo boxes, resistance bands, ropes, rings, pulleys, flooring, and HVAC equipment;<br>
+                    • <strong>Premises conditions</strong> — slip, trip, or fall on chalk, sweat, water, ice, snow, uneven surfaces, parking-lot conditions, or inadequate lighting;<br>
+                    • <strong>Emergency-response risks specific to unsupervised hours</strong> — delayed or absent emergency response; absence of a coach, trainer, staff member, or other supervisor available to demonstrate movements, correct form, spot lifts, perform CPR, retrieve or operate the AED, or call 911 on my behalf; injury or death occurring without witnesses; lone-training emergencies;<br>
+                    • <strong>Acts of third parties</strong> — including criminal acts such as assault, battery, sexual assault, robbery, theft, and unauthorized entry by persons admitted in violation of Facility rules, as well as the negligent or reckless acts of other members training simultaneously;<br>
+                    • <strong>Facility-system risks</strong> — power outage, HVAC failure causing extreme temperature exposure, access-control failure, and ingress/egress conditions during late-night and early-morning hours.</p>
+                    <p>I acknowledge that <strong>no person is on duty at the Facility during fob hours</strong> to retrieve the AED, perform CPR, summon medical assistance, intervene in a third-party criminal act, or otherwise respond to emergencies in real time. I agree to carry a charged mobile telephone capable of calling 911 while training during fob hours.</p>
+                    <p><strong>Moonshot CrossFit is not responsible for loss, damage, or theft of my personal property, including items in lockers, items left at the Facility, and vehicles or items in vehicles in the parking lot.</strong></p>
 
                     <h4>2. 24/7 Self-Directed Use</h4>
-                    <p>I understand that 24/7 key fob access provides entry to the Facility outside of coached class hours, when <strong>no coach, trainer, staff member, or other supervisor will be present</strong>. I acknowledge that I am training entirely on my own and that no one will be available to demonstrate movements, correct form, spot lifts, provide medical assistance, or respond to emergencies in real time. I represent that I am physically capable of engaging in unsupervised exercise, that I have either consulted a physician or freely chosen not to do so, and that I assume all risks associated with self-directed training without supervision.</p>
+                    <p>I understand that 24/7 key fob access provides entry to the Facility outside of coached class hours, when <strong>no coach, trainer, staff member, or other supervisor will be present</strong>. I acknowledge that I am training entirely on my own. I represent that I am physically capable of engaging in unsupervised exercise, that I have either consulted a physician or freely chosen not to do so (subject to §3 below), and that I assume all risks associated with self-directed training without supervision.</p>
 
-                    <h4>3. Medical Representation</h4>
-                    <p>I represent that I am in good physical condition and have no medical condition (cardiovascular, musculoskeletal, neurological, or otherwise) that would prevent me from engaging in strenuous exercise. If my condition changes, I will notify Moonshot CrossFit and discontinue training as appropriate. I agree to seek immediate medical attention for any injury or illness I experience.</p>
+                    <h4>3. Medical Representation &amp; Physical Activity Readiness</h4>
+                    <p>I represent that I am in good physical condition and have no medical condition (cardiovascular, musculoskeletal, neurological, or otherwise) that would prevent me from engaging in strenuous, unsupervised exercise. Specifically, I represent that as of today: (1) no doctor has told me that I have a heart condition or high blood pressure; (2) I do not feel pain in my chest at rest, during my daily activities, or when I do physical activity; (3) I do not lose balance because of dizziness and I have not lost consciousness in the last 12 months; (4) I have not been diagnosed with another chronic medical condition (other than heart disease or high blood pressure) that makes exercise unsafe for me; (5) I am not taking prescribed medication for a chronic medical condition, or my physician has cleared me to exercise while taking it; (6) I do not currently have, and have not had within the past 12 months, a bone, joint, or soft-tissue problem that could be made worse by becoming more physically active; and (7) no doctor has ever said that I should only do medically supervised physical activity.</p>
+                    <p><strong>If I cannot truthfully make every representation above, I will not sign this Agreement until I have obtained written physician clearance for unsupervised exercise and provided it to Moonshot CrossFit.</strong> If my condition changes, I will notify Moonshot CrossFit and discontinue training as appropriate. I agree to seek immediate medical attention for any injury or illness I experience.</p>
 
                     <h4>4. Release of Liability</h4>
-                    <p>To the fullest extent permitted by Illinois law, I, on behalf of myself, my heirs, executors, administrators, assigns, and personal representatives, hereby <strong>RELEASE, WAIVE, DISCHARGE, AND COVENANT NOT TO SUE</strong> Moonshot CrossFit, its owners, members, managers, officers, directors, employees, independent contractors, coaches, trainers, agents, affiliates, landlords, and successors (collectively, "Released Parties") from any and all liability, claims, demands, actions, and causes of action whatsoever arising out of or relating to any loss, damage, or injury, including death, that may be sustained by me, or to any property belonging to me, while participating in Activities at or away from the Facility, or while on the premises, <strong>WHETHER CAUSED BY THE NEGLIGENCE OF THE RELEASED PARTIES OR OTHERWISE</strong>, except for conduct that constitutes willful and wanton misconduct under Illinois law.</p>
+                    <p>To the fullest extent permitted by Illinois law, I, on behalf of myself, my heirs, executors, administrators, assigns, and personal representatives, hereby <strong>RELEASE, WAIVE, DISCHARGE, AND COVENANT NOT TO SUE</strong> Moonshot CrossFit, its owners, members, managers, officers, directors, employees, independent contractors, coaches, and trainers (collectively, <strong>"Released Parties"</strong>) from any and all liability, claims, demands, actions, and causes of action whatsoever arising out of or relating to any loss, damage, or injury, including death, that may be sustained by me, or to any property belonging to me, while participating in Activities at or away from the Facility, or while on the Facility premises, including the risks enumerated in §1 above, <strong>WHETHER CAUSED BY THE ORDINARY NEGLIGENCE, GROSS NEGLIGENCE (TO THE FULLEST EXTENT PERMITTED BY ILLINOIS LAW), OR STRICT LIABILITY OF THE RELEASED PARTIES</strong>, except for conduct that constitutes willful and wanton misconduct under Illinois law.</p>
+                    <p><strong>I SPECIFICALLY ACKNOWLEDGE that this release includes claims based on the negligence of the Released Parties, including but not limited to negligent maintenance of the Facility or equipment, negligent design or layout of the Facility, negligent equipment selection or inspection, negligent failure to warn, negligent failure to supervise (acknowledging that supervision is not provided during fob hours), negligent emergency response or failure to respond, and negligent hiring, training, or retention of staff.</strong></p>
 
-                    <h4>5. Indemnification</h4>
-                    <p>I agree to <strong>INDEMNIFY AND HOLD HARMLESS</strong> the Released Parties from any loss, liability, damage, or cost, including reasonable attorneys' fees, that they may incur due to my participation in Activities or my presence at the Facility, whether caused by my negligence or otherwise.</p>
+                    <h4>5. Indemnification (Limited)</h4>
+                    <p>I agree to <strong>INDEMNIFY, DEFEND, AND HOLD HARMLESS</strong> the Released Parties from any third-party claim, loss, liability, damage, or cost (including reasonable attorneys' fees) arising out of: (a) my own acts or omissions at the Facility or while engaged in Activities; (b) my breach of this Agreement or any posted Facility rule; (c) the acts or omissions of any guest, invitee, or person I admit or allow to access the Facility (whether by sharing my fob, propping a door, or otherwise); or (d) damage to Facility equipment caused by my misuse or abuse.</p>
+                    <p><strong>This indemnity does not extend to claims arising from the Released Parties' own negligent or willful conduct.</strong></p>
 
-                    <h4>6. Fob Use & Security</h4>
+                    <h4>6. Fob Use &amp; Facility Rules</h4>
                     <p>I acknowledge and agree to the following non-negotiable rules of fob access:</p>
                     <p>(a) <strong>One person, one key.</strong> My fob is personal and non-transferable. I will not share my fob, lend it, or allow anyone else to use it.<br>
-                    (b) <strong>No guests during fob hours.</strong> I will not bring any unauthorized person into the Facility, propping the door for others, or otherwise allow anyone to enter using my access.<br>
-                    (c) <strong>Cameras recording 24/7.</strong> I consent to being recorded by surveillance cameras throughout the Facility at all times for security and rule enforcement.<br>
-                    (d) <strong>Self-directed training only.</strong> No coaching, no group instruction, no third-party training is permitted during fob hours.<br>
+                    (b) <strong>No guests during fob hours.</strong> I will not bring any unauthorized person into the Facility, prop the door for others, or otherwise allow anyone to enter using my access. <strong>Door propping is grounds for immediate revocation of fob access without refund and may give rise to indemnification under §5.</strong><br>
+                    (c) <strong>Video-only surveillance recording 24/7.</strong> I consent to being recorded by <strong>video-only</strong> surveillance cameras throughout the Facility at all times for security and rule enforcement. <strong>Cameras do not record audio.</strong> Notice of video surveillance is posted at the Facility entrance. Restrooms and any private changing area are not subject to video surveillance.<br>
+                    (d) <strong>Self-directed training only.</strong> No coaching, group instruction, or third-party training is permitted during fob hours.<br>
                     (e) <strong>Personal training takes priority.</strong> If a coach is conducting a paid PT session and asks me to relocate, I will move immediately.<br>
                     (f) <strong>Etiquette.</strong> I will wipe down equipment, return weights and equipment to their proper storage, and leave the Facility clean.<br>
-                    (g) <strong>Violation = revocation.</strong> Violation of any of the above results in immediate revocation of fob access with no refund of any prepaid amount.</p>
+                    (g) <strong>No firearms, alcohol, or controlled substances on the premises</strong> (in compliance with the Illinois Firearm Concealed Carry Act and all applicable law). No-firearm signage is posted at the entrance.<br>
+                    (h) <strong>No biometric data collection at this time.</strong> Moonshot CrossFit does not currently collect, store, or use biometric identifiers (fingerprint, faceprint, voiceprint, hand or iris geometry) as defined under the Illinois Biometric Information Privacy Act, 740 ILCS 14. If Moonshot CrossFit adopts any biometric access control or surveillance technology in the future, members will be required to execute a separate BIPA-compliant written consent, with a published retention and destruction policy, before such system is enabled for them.<br>
+                    (i) <strong>No minors during fob hours.</strong> I will not bring any person under the age of 18 into the Facility during fob hours.<br>
+                    (j) <strong>Conduct.</strong> I will not engage in harassment, threats, discrimination, or other conduct that endangers or intimidates other members.<br>
+                    (k) <strong>Equipment damage.</strong> I am responsible for damage to Facility equipment caused by my misuse or abuse. Normal wear is not chargeable to me.<br>
+                    (l) <strong>Emergency procedures.</strong> I acknowledge that the AED location and emergency procedures are posted at the Facility, and that I will be shown the AED location before my fob is activated.<br>
+                    (m) <strong>No duty to monitor.</strong> Moonshot CrossFit has no duty to monitor surveillance cameras in real time or to dispatch help. The presence of cameras and other safety equipment does not create a special relationship or affirmative duty to rescue.<br>
+                    (n) <strong>Violation = revocation.</strong> Violation of any of the above results in immediate revocation of fob access with no refund of any prepaid amount, except as required by §9 and applicable Illinois law.</p>
 
                     <h4>7. Lost or Stolen Fob</h4>
-                    <p>I will report a lost or stolen fob immediately. A replacement fee of $50 applies to all replacement fobs. I am responsible for any unauthorized access that occurs prior to my report of loss.</p>
+                    <p>I will report a lost or stolen fob immediately by text to <strong>(847) 850-7360</strong> or by email to <strong>info@moonshotcrossfit.com</strong>. Moonshot CrossFit will deactivate the fob within one (1) business hour during business hours, or within eight (8) hours after hours. A replacement fee of <strong>$50</strong> applies and will be charged to the payment method on file. I am responsible for any unauthorized access that occurs before my report of loss and during the deactivation window above.</p>
 
-                    <h4>8. Photo & Video Release</h4>
-                    <p>I grant Moonshot CrossFit permission to use any photographs, video recordings, or surveillance footage in which I appear for security, marketing, social media, and promotional purposes, without compensation, in perpetuity. I understand that I may revoke marketing/promotional consent in writing at any time, but security/surveillance use will continue regardless.</p>
+                    <h4>8. Photo, Video &amp; Surveillance Release</h4>
+                    <p>This release is given pursuant to and in compliance with the Illinois Right of Publicity Act, 765 ILCS 1075.</p>
+                    <p><strong>(8A) Security and surveillance — not revocable.</strong> I grant Moonshot CrossFit and its successors a non-exclusive, royalty-free license to capture, retain, and use surveillance footage in which I appear for security, rule enforcement, incident investigation, insurance claims, and law-enforcement response. Retention is 30 to 90 days under normal operations, extending as needed for documented incidents. This consent is not revocable while I remain a member.</p>
+                    <p><strong>(8B) Marketing and promotional — revocable.</strong> I separately grant Moonshot CrossFit a non-exclusive, royalty-free license to use photographs, video, or surveillance footage in which I appear for marketing, social media, web, email, print, and in-Facility promotional purposes, for the duration of my membership and a reasonable archival period not to exceed five (5) years thereafter. I may revoke this marketing consent by written notice to <strong>info@moonshotcrossfit.com</strong>. Moonshot CrossFit will acknowledge the revocation within seven (7) days and discontinue new uses within thirty (30) days, but cannot recall materials already distributed in print or by third parties outside its control.</p>
+                    <p><strong>Minor exclusion.</strong> I will not bring any minor into the Facility during fob hours (see §6(i)). I do not authorize use of any minor's likeness under this paragraph; any incidental capture of a minor in marketing materials requires the parent or legal guardian's separate written consent.</p>
 
-                    <h4>9. Term, Renewal, Cancellation & Refunds</h4>
-                    <p>My membership term begins on the date my fob is activated, not the date of payment. <strong>This is an auto-renewing subscription:</strong> annual plans renew yearly and monthly plans renew monthly at the same rate I selected at signup, charged automatically to the payment method on file. I may cancel at any time by emailing <strong>info@moonshotcrossfit.com</strong> before my next billing date; cancellation stops future charges but does not entitle me to a refund of amounts already paid. Already-paid periods are non-refundable except (a) if Moonshot CrossFit cancels the program prior to my fob activation, in which case I receive a full refund, or (b) at the sole discretion of Moonshot CrossFit. My payment method is securely stored by Stripe; Moonshot CrossFit never sees or stores raw card details.</p>
+                    <h4>9. Term, Activation, Renewal, Cancellation &amp; Refunds</h4>
+                    <p>My membership term begins on the date my fob is first activated by Moonshot CrossFit's access-control system, not the date of payment. <strong>This is an auto-renewing subscription:</strong> annual plans renew yearly and monthly plans renew monthly at the rate I selected at signup, charged automatically to the payment method on file, until cancelled. No single prepaid period exceeds twelve (12) months, and this Agreement does not bind me to any term longer than thirty-six (36) months.</p>
+                    <p><strong>Cancellation.</strong> I may cancel at any time by emailing <strong>info@moonshotcrossfit.com</strong> before my next billing date. Cancellation stops future charges but, outside the refund triggers below, does not entitle me to a refund of amounts already paid.</p>
+                    <p><strong>Refund triggers (815 ILCS 645).</strong> In addition to the Three-Day Right of Cancellation at the top of this Agreement, I am entitled to cancel and receive a pro-rata refund of the unused portion of my current prepaid period upon: (a) my <strong>death</strong> (my estate may submit notice); (b) my <strong>permanent disability</strong> that prevents me from using the Facility for at least six (6) months, supported by physician documentation; or (c) my <strong>permanent relocation more than 25 miles</strong> from the Facility, supported by documentation.</p>
+                    <p><strong>Facility closure.</strong> If Moonshot CrossFit cancels the 24/7 fob program before my fob is activated, I receive a full refund. If Moonshot CrossFit discontinues the program after activation, I receive a refund of the unused portion of my current prepaid period.</p>
+                    <p>Outside the triggers above, prepaid periods are non-refundable, except that Moonshot CrossFit may grant additional refunds in its sole discretion. My payment method is securely stored by Stripe; Moonshot CrossFit never sees or stores raw card details.</p>
 
-                    <h4>10. Governing Law & Severability</h4>
-                    <p>This agreement is governed by the laws of the State of Illinois. Any disputes shall be resolved exclusively in the state or federal courts located in Cook County, Illinois. If any provision is found unenforceable, the remaining provisions remain in full force and effect.</p>
+                    <h4>10. Governing Law, Severability &amp; Interpretation</h4>
+                    <p>This Agreement is governed by the laws of the State of Illinois. Any disputes shall be resolved exclusively in the state or federal courts located in Cook County, Illinois.</p>
+                    <p><strong>If any provision of this Agreement is held invalid or unenforceable, that provision shall be reformed by the court to the minimum extent necessary to render it enforceable, or, if reformation is impossible, severed; in either case the remainder of this Agreement shall remain in full force and effect, and the parties' intent that the Released Parties be released to the fullest extent permitted by Illinois law shall control interpretation.</strong></p>
 
                     <h4>11. Entire Agreement</h4>
-                    <p>This document constitutes the entire agreement between me and Moonshot CrossFit regarding 24/7 key fob access. <strong>I have read this document in its entirety, understand it, and sign it freely and voluntarily.</strong> I am of legal age (18 or older) and competent to sign this agreement.</p>
+                    <p>This document, together with the posted Facility rules and emergency procedures (incorporated herein by reference), constitutes the entire agreement between me and Moonshot CrossFit regarding 24/7 key fob access. This Agreement may be modified only in a writing signed by Moonshot CrossFit; <strong>no oral statement by any coach, trainer, or staff member may modify this Agreement</strong>.</p>
+                    <p><strong>I have read this Agreement in its entirety, understand it, and sign it freely and voluntarily.</strong> I am 18 years of age or older and competent to sign. I acknowledge that I was offered the option to sign on paper at no charge and chose to sign electronically, and that my typed signature is intended to have the same legal effect as a handwritten signature under the Illinois Uniform Electronic Transactions Act, 815 ILCS 333/, and the federal ESIGN Act, 15 U.S.C. § 7001 et seq.</p>
+
+                    <h4>Notice of Cancellation (815 ILCS 645/6)</h4>
+                    <p>You may cancel this Agreement, without penalty or further obligation, within <strong>three (3) business days</strong> of the date you signed it. To cancel, deliver a signed and dated copy of this notice or any other written notice stating your decision to cancel, or send an email to <strong>info@moonshotcrossfit.com</strong>, to: Moonshot CrossFit, 542 Busse Hwy, Park Ridge, IL 60068. If you cancel within the three-day period, Moonshot CrossFit will refund all payments made under this Agreement within ten (10) business days following receipt of your cancellation notice.</p>
+                    <p>Agreement version 2026-11-05.</p>
                 </div>
 
-                <!-- Acknowledgment checkboxes -->
-                <div class="space-y-2">
-                    <label class="checkbox-row"><input type="checkbox" name="ack_read" required><span class="text-brand-light text-sm">I have read the entire waiver above and understand its contents.</span></label>
-                    <label class="checkbox-row"><input type="checkbox" name="ack_risk" required><span class="text-brand-light text-sm">I voluntarily assume all risks of self-directed, unsupervised training at Moonshot CrossFit.</span></label>
-                    <label class="checkbox-row"><input type="checkbox" name="ack_release" required><span class="text-brand-light text-sm">I release and waive claims against Moonshot CrossFit and the Released Parties as described above.</span></label>
-                    <label class="checkbox-row"><input type="checkbox" name="ack_rules" required><span class="text-brand-light text-sm">I agree to the fob access rules: no sharing, no guests, cameras on, self-directed only. Violation = revocation, no refund.</span></label>
-                    <label class="checkbox-row"><input type="checkbox" name="ack_age" required><span class="text-brand-light text-sm">I am 18 years of age or older and competent to sign this agreement.</span></label>
+                <!-- Acknowledgment checkboxes (each timestamped individually at click) -->
+                <div class="space-y-2" id="ack-group">
+                    <label class="checkbox-row"><input type="checkbox" name="ack_read" required><span class="text-brand-light text-sm">I have read this Agreement in its entirety and understand its contents. I was given the opportunity to print or save a copy.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_risk" required><span class="text-brand-light text-sm">I voluntarily and expressly assume all risks of self-directed, unsupervised training at Moonshot CrossFit, including the specific risks in §1 and risks arising from the <strong>negligence</strong> of Moonshot CrossFit and the Released Parties.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_release" required><span class="text-brand-light text-sm">I release and waive claims against Moonshot CrossFit and the Released Parties, <strong>including for their own negligence</strong>, as described in §4, except for willful and wanton misconduct.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_medical" required><span class="text-brand-light text-sm">I can truthfully make every medical representation in §3, or I have provided written physician clearance for unsupervised exercise to Moonshot CrossFit.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_rules" required><span class="text-brand-light text-sm">I agree to the Facility rules in §6: no fob sharing, no guests, video-only cameras on, self-directed only, no firearms/alcohol/drugs, no minors during fob hours. Violation = revocation, no refund.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_emergency" required><span class="text-brand-light text-sm">I understand no one is on duty during fob hours. I will carry a charged mobile phone capable of calling 911 while training, and I will be shown the AED location before my fob is activated.</span></label>
+                    <label class="checkbox-row"><input type="checkbox" name="ack_age" required><span class="text-brand-light text-sm">I am 18 years of age or older and competent to sign this Agreement. I understand my three-day right of cancellation.</span></label>
                 </div>
             </div>
 
             <!-- Signature -->
             <div class="bg-brand-slate/30 border border-brand-gray/20 rounded-xl p-6">
                 <h3 class="text-lg font-bold text-brand-light font-heading uppercase tracking-wider mb-4">Digital Signature</h3>
-                <p class="text-brand-gray text-sm mb-4">Type your full legal name exactly as entered above. This typed signature has the same legal effect as a handwritten one under the Illinois Electronic Commerce Security Act.</p>
+                <p class="text-brand-gray text-sm mb-4">Type your full legal name exactly as entered above. This typed signature has the same legal effect as a handwritten one under the Illinois Uniform Electronic Transactions Act (815 ILCS 333/) and the federal ESIGN Act.</p>
                 <label class="form-label">Signature *</label>
                 <p class="text-brand-gold text-sm mb-2" id="signature-helper">Type your full legal name from the field above, exactly as you entered it.</p>
                 <input class="form-input signature-input" name="signature" required placeholder="Your full legal name">
@@ -164,7 +213,7 @@
                 <!-- Couple second signature -->
                 <div id="couple-sig-section" class="hidden mt-6 pt-6 border-t border-brand-gray/20">
                     <p class="text-brand-light text-sm font-bold mb-2">Second Member Signature *</p>
-                    <p class="text-brand-gray text-sm mb-3">Each member must sign separately. By signing, the second member acknowledges and agrees to the same waiver above.</p>
+                    <p class="text-brand-gray text-sm mb-3">Each member must sign separately. By signing, the second member confirms they have read this Agreement, can make the same medical representations, and agree to every acknowledgment above. One fob is issued per signature.</p>
                     <input class="form-input signature-input" name="member2_signature" placeholder="Second member's full legal name">
                 </div>
             </div>
@@ -289,6 +338,17 @@
             }
         }
 
+        // ─── Agreement version, per-checkbox timestamps, print ──────────
+        const WAIVER_VERSION = '2026-11-05.v2';
+        const ackTimestamps = {};
+        document.querySelectorAll('#ack-group input[type=checkbox]').forEach(cb => {
+            cb.addEventListener('change', () => {
+                if (cb.checked) ackTimestamps[cb.name] = new Date().toISOString();
+                else delete ackTimestamps[cb.name];
+            });
+        });
+        document.getElementById('print-agreement').addEventListener('click', () => window.print());
+
         // ─── Submit ──────────────────────────────────────────────────
         document.getElementById('waiver-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -338,7 +398,10 @@
                 price_usd: fullPrice,
                 member: data,
                 signed_at: new Date().toISOString(),
-                user_agent: navigator.userAgent
+                user_agent: navigator.userAgent,
+                waiver_version: WAIVER_VERSION,
+                ack_timestamps: ackTimestamps,
+                agreement_text: document.getElementById('agreement-text').innerText
             };
 
             try {

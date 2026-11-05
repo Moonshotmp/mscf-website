@@ -13,7 +13,7 @@ const REQUIRED_MEMBER_FIELDS = [
   'signature'
 ];
 
-const REQUIRED_ACK = ['ack_read', 'ack_risk', 'ack_release', 'ack_rules', 'ack_age'];
+const REQUIRED_ACK = ['ack_read', 'ack_risk', 'ack_release', 'ack_medical', 'ack_rules', 'ack_emergency', 'ack_age'];
 const REQUIRED_COUPLE_FIELDS = ['member2_full_name', 'member2_dob', 'member2_email', 'member2_phone', 'member2_signature'];
 
 function bad(msg, status = 400) {
@@ -33,7 +33,7 @@ export default async (req) => {
     return bad('Invalid JSON');
   }
 
-  const { tier, people, interval, mode, price_usd, member, signed_at, user_agent } = payload;
+  const { tier, people, interval, mode, price_usd, member, signed_at, user_agent, waiver_version, ack_timestamps, agreement_text } = payload;
 
   if (!VALID_TIERS.includes(tier)
       || !VALID_PEOPLE.includes(people)
@@ -75,6 +75,12 @@ export default async (req) => {
     member,
     signed_at: signed_at || new Date().toISOString(),
     user_agent: user_agent || null,
+    waiver_version: waiver_version || 'v1',
+    ack_timestamps: (ack_timestamps && typeof ack_timestamps === 'object') ? ack_timestamps : null,
+    // SHA-256 of the agreement text the member saw, so a stored record can be tied to an exact version.
+    agreement_sha256: typeof agreement_text === 'string' && agreement_text.length > 0
+      ? crypto.createHash('sha256').update(agreement_text).digest('hex')
+      : null,
     ip,
     status: 'pending_payment',
     stripe_session_id: null,

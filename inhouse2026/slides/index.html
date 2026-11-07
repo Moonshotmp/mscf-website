@@ -112,6 +112,11 @@
       .slide { display: flex; position: relative; height: 100vh; page-break-after: always; }
       .nav, .hit { display: none; }
     }
+    /* auto-fit: grow each column of the workout area to fill the space above the heats (Tom 11/06) */
+    html.fit .slide .body { grid-template-rows: minmax(0, 1fr); }
+    html.fit .slide .body > * { min-width: 0; min-height: 0; overflow: hidden; }
+    html.fit .slide.e1 .body { grid-template-columns: 1.35fr .65fr; }
+    .nw { white-space: nowrap; }
     /* floaters (one slide) */
     .slide.fl { font-size: .84em; }
     .body.fl { grid-template-columns: 1fr 1fr; gap: 1.6em; }
@@ -154,9 +159,9 @@
         <table>
           <thead><tr><th>Movement</th><th class="lv">Freedom</th><th class="lv">Independence</th><th class="lv">Liberty</th></tr></thead>
           <tbody>
-            <tr><td>Pull</td><td class="mw"><b>Men</b> 6 muscle-ups<br><span class="or">or</span>12 chest-to-bar<br><b>Women</b> 5 muscle-ups<br><span class="or">or</span>10 chest-to-bar</td><td>8 chest-to-bar<span class="or">or</span>12 pull-ups<span class="or">or</span>16 jumping pull-ups</td><td>6 pull-ups<span class="or">or</span>20 ring rows</td></tr>
-            <tr><td>Box</td><td class="mw">10 jump-overs<br><b>Men</b> 30 in<br><b>Women</b> 24 in</td><td class="mw">10 jump-overs<br><b>Men</b> 24 in<br><b>Women</b> 20 in</td><td class="mw">10 step-overs<br><b>Men</b> 16 in<br><b>Women</b> 12 in</td></tr>
-            <tr><td>Core</td><td>15 toes-to-bar</td><td>10 toes-to-bar<span class="or">or</span>20 knees-to-parallel</td><td>20 hanging knee raises</td></tr>
+            <tr><td>Pull</td><td class="mw"><b>Men</b> <span class="nw">6 muscle-ups</span><br><span class="or">or</span><span class="nw">12 chest-to-bar</span><br><b>Women</b> <span class="nw">5 muscle-ups</span><br><span class="or">or</span><span class="nw">10 chest-to-bar</span></td><td class="mw">8 chest-to-bar<br><span class="or">or</span>12 pull-ups<br><span class="or">or</span>16 jumping pull-ups</td><td class="mw">6 pull-ups<br><span class="or">or</span>20 ring rows</td></tr>
+            <tr><td>Box</td><td class="mw"><span class="nw">10 jump-overs</span><br><b>Men</b> 30 in<br><b>Women</b> 24 in</td><td class="mw"><span class="nw">10 jump-overs</span><br><b>Men</b> 24 in<br><b>Women</b> 20 in</td><td class="mw"><span class="nw">10 step-overs</span><br><b>Men</b> 16 in<br><b>Women</b> 12 in</td></tr>
+            <tr><td>Core</td><td><span class="nw">15 toes-to-bar</span></td><td class="mw">10 toes-to-bar<br><span class="or">or</span>20 knees-to-parallel</td><td class="mw">20 hanging<br>knee raises</td></tr>
           </tbody>
         </table>
         <div class="cap">Loads and heights are <b>men / women</b>. Everyone does their own level's reps no matter who is on their team.</div>
@@ -323,7 +328,23 @@
     cnt.textContent = (i + 1) + ' / ' + slides.length;
     document.title = (slides[i].getAttribute('data-name') || 'Slides') + ' · In-House Throwdown 2026';
     if (history.replaceState) history.replaceState(null, '', '#' + (i + 1));
+    fit(slides[i]);
   }
+  // auto-fit (Tom 11/06): each column of .body grows until it would overflow; heats strip untouched
+  var mq = window.matchMedia('(max-width: 760px)');
+  function fitsBox(c) { return c.scrollHeight <= c.clientHeight + 1 && c.scrollWidth <= c.clientWidth + 1; }
+  function fit(s) {
+    var body = s && s.querySelector('.body'); if (!body) return;
+    var cols = Array.prototype.slice.call(body.children);
+    if (mq.matches) { document.documentElement.classList.remove('fit'); cols.forEach(function (c) { c.style.fontSize = ''; }); return; }
+    document.documentElement.classList.add('fit');
+    cols.forEach(function (c) {
+      var lo = 0.8, hi = 2.4;
+      for (var n = 0; n < 14; n++) { var m = (lo + hi) / 2; c.style.fontSize = m + 'em'; if (fitsBox(c)) lo = m; else hi = m; }
+      c.style.fontSize = (lo * 0.97) + 'em';
+    });
+  }
+  function refit() { fit(slides[i]); }
   function fromHash() { var n = parseInt((location.hash || '').replace('#', ''), 10); go(isNaN(n) ? 0 : n - 1); }
   document.addEventListener('keydown', function (e) {
     if (e.target && /input|textarea/i.test(e.target.tagName)) return;
@@ -350,6 +371,8 @@
   document.getElementById('fs').addEventListener('click', toggleFs);
   window.addEventListener('hashchange', fromHash);
   fromHash();
+  window.addEventListener('resize', refit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
 })();
 </script>
 </body>

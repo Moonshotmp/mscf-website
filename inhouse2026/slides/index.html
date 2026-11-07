@@ -117,6 +117,7 @@
     html.fit .slide .body > * { min-width: 0; min-height: 0; overflow: hidden; }
     html.fit .slide.e1 .body { grid-template-columns: 1.35fr .65fr; }
     .nw { white-space: nowrap; }
+    .slide table:not(.plain) th:nth-child(3), .slide table:not(.plain) td:nth-child(3) { background: rgba(140,178,245,.07); }
     /* floaters (one slide) */
     .slide.fl { font-size: .84em; }
     .body.fl { grid-template-columns: 1fr 1fr; gap: 1.6em; }
@@ -264,7 +265,7 @@
       <div class="panel">
         <h2>Bermuda Triangle <i>Total calories</i></h2>
         <p class="lead">All three work at once · 0:15 to rotate<br><em>row → ski → bike</em></p>
-        <table>
+        <table class="plain">
           <thead><tr><th>Interval</th><th class="lv">Athlete A</th><th class="lv">Athlete B</th><th class="lv">Athlete C</th></tr></thead>
           <tbody>
             <tr><td>1:00</td><td>Row</td><td>Ski</td><td>Bike</td></tr>

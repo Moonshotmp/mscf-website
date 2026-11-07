@@ -57,11 +57,12 @@
     .slide.ev { font-size: .84em; padding-bottom: 7vh; }
     .slide.ev .top { margin-bottom: .8em; }
     .slide.ev .body { gap: 1.8em; }
-    .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1em; margin-top: .9em; padding-top: .7em; border-top: 2px solid rgba(184,152,110,.55); }
-    .strip .hh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .2em; }
+    .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6em; margin-top: .8em; }
+    .strip > div { min-width: 0; background: rgba(44,53,62,.55); border: 1px solid rgba(184,152,110,.45); border-radius: .4em; padding: .35em .55em .45em; }
+    .strip .hh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .25em; padding-bottom: .2em; border-bottom: 1px solid rgba(184,152,110,.3); }
     .strip .hh b { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 1.05em; color: #fff; letter-spacing: .04em; }
     .strip .hh span { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.25em; color: var(--gold); font-variant-numeric: tabular-nums; }
-    .strip .ln { display: grid; grid-template-columns: 1.5em 2.1em 1fr; gap: .3em; font-size: .9em; line-height: 1.32; white-space: nowrap; }
+    .strip .ln { display: grid; grid-template-columns: 1.25em 1.9em 1fr; gap: .25em; font-size: .87em; line-height: 1.32; white-space: nowrap; }
     .strip .ln i { font-style: normal; font-family: 'Oswald', sans-serif; font-weight: 700; color: var(--gold); }
     .strip .ln em { font-style: normal; color: var(--gray); font-size: .85em; }
     .strip .ln span { overflow: hidden; text-overflow: ellipsis; color: var(--light); }

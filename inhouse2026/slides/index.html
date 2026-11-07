@@ -111,6 +111,17 @@
       .slide { display: flex; position: relative; height: 100vh; page-break-after: always; }
       .nav, .hit { display: none; }
     }
+    /* floaters (one slide) */
+    .slide.fl { font-size: .84em; }
+    .body.fl { grid-template-columns: 1fr 1fr; gap: 1.6em; }
+    .body.fl .panel { overflow: hidden; }
+    .body.fl td { padding-top: .45em; padding-bottom: .45em; }
+    .body.fl .panel { display: flex; flex-direction: column; gap: .7em; padding: 1.1em 1.4em; }
+    .body.fl h2 { margin: 0; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.9em; line-height: 1; text-transform: uppercase; color: #fff; display: flex; justify-content: space-between; align-items: baseline; gap: .6em; }
+    .body.fl h2 i { font-style: normal; font-size: .5em; font-weight: 600; color: var(--gold); letter-spacing: .06em; }
+    .body.fl .lead { margin: 0; font-size: 1em; color: var(--light); line-height: 1.35; }
+    .body.fl .lead em { font-style: normal; color: var(--gold); font-weight: 600; }
+    .body.fl ul.rules li { font-size: .9em; }
   </style>
 </head>
 <body>
@@ -236,16 +247,17 @@
     <!-- STRIP:3 --><div class="strip"><div><div class="hh"><b>Heat 1</b><span>11:05</span></div><div class="ln"><i>L1</i><em>T1</em><span>Charlie · Val · Tim</span></div><div class="ln"><i>L2</i><em>T2</em><span>Chris · Christina W · Rob</span></div><div class="ln"><i>L3</i><em>T3</em><span>Claire · Pete · Henry</span></div><div class="ln open"><i>L4</i><em></em><span>open</span></div></div><div><div class="hh"><b>Heat 2</b><span>11:27</span></div><div class="ln"><i>L1</i><em>T7</em><span>Keil · Maria · Cesar</span></div><div class="ln"><i>L2</i><em>T6</em><span>MJ · Anthony · Christina R</span></div><div class="ln"><i>L3</i><em>T5</em><span>Michael · Erika · Ale</span></div><div class="ln"><i>L4</i><em>T4</em><span>Andrew · Colin · Jaci</span></div></div><div><div class="hh"><b>Heat 3</b><span>11:49</span></div><div class="ln"><i>L1</i><em>T8</em><span>Dede · Molly · George</span></div><div class="ln"><i>L2</i><em>T11</em><span>Jillian · David · Eva</span></div><div class="ln"><i>L3</i><em>T10</em><span>Jana · Joe · Kathleen</span></div><div class="ln"><i>L4</i><em>T9</em><span>Sarah DeCicco · John · Ana</span></div></div><div><div class="hh"><b>Heat 4</b><span>12:11</span></div><div class="ln"><i>L1</i><em>T12</em><span>Edwin · Patrick · Megan</span></div><div class="ln"><i>L2</i><em>T13</em><span>Tom · Demetri · Angelica</span></div><div class="ln"><i>L3</i><em>T14</em><span>Niko · Sarah Donnelly · Rick</span></div><div class="ln"><i>L4</i><em>T15</em><span>Kevin · Frankie · Diana</span></div></div></div><!-- /STRIP:3 -->
   </section>
 
-  <!-- 4 · Floater · Bermuda Triangle -->
-  <section class="slide" data-name="Floater · Bermuda Triangle">
+  <!-- 4 · Floaters -->
+  <section class="slide fl" data-name="Floaters · Bermuda Triangle + Get Yoked">
     <div class="top">
-      <div class="num"><small>Floater</small>BT</div>
-      <h1>Bermuda Triangle<span class="sub">(Get Lost) · Row · Ski · Bike · all three athletes work at once</span></h1>
-      <div class="fmt"><b>Total calories</b><span>Any time 8:00 to 11:05 · sign up at the floater board</span></div>
+      <div class="num"><small>Floaters</small>F</div>
+      <h1>Floaters<span class="sub">Bermuda Triangle + Get Yoked · sign up at the floater board</span></h1>
+      <div class="fmt"><b>8:00 to 11:05</b><span>Both close when Event 3 starts</span></div>
     </div>
-    <div class="body">
-      <div>
-        <p class="flow big">1:00 work · 0:15 rotate · 1:00 · 0:15 · 1:00<br><em>row → ski → bike → row</em></p>
+    <div class="body fl">
+      <div class="panel">
+        <h2>Bermuda Triangle <i>Total calories</i></h2>
+        <p class="lead">All three work at once · 0:15 to rotate<br><em>row → ski → bike</em></p>
         <table>
           <thead><tr><th>Interval</th><th class="lv">Athlete A</th><th class="lv">Athlete B</th><th class="lv">Athlete C</th></tr></thead>
           <tbody>
@@ -254,46 +266,28 @@
             <tr><td>1:00</td><td>Bike</td><td>Row</td><td>Ski</td></tr>
           </tbody>
         </table>
-        <div class="cap"><b>No levels.</b> Everyone does the same thing. Score is the team's total calories across all nine minutes of work.</div>
-      </div>
-      <div class="panel">
-        <p class="kicker">Standards and rules</p>
         <ul class="rules">
-          <li>Each athlete starts on a different machine. Everyone uses the same bike.</li>
-          <li>Calories as the monitor shows them. Monitors are reset before each team starts; the judge reads them at the end of each minute.</li>
-          <li>Hands off the handle, paddle or pedals until "go" and at "time".</li>
-          <li>Any damper or resistance setting.</li>
-          <li>Both floaters close when Event 3 starts at 11:05. Get them done early.</li>
-          <li>Floater scores count the same as the three events.</li>
+          <li><b>No levels.</b> Team total calories.</li>
+          <li>Each athlete starts on a different machine.</li>
+          <li>Calories as the monitor shows. Any damper.</li>
+          <li>Hands off until "go" and at "time".</li>
         </ul>
       </div>
-    </div>
-  </section>
-
-  <!-- 5 · Floater · Get Yoked -->
-  <section class="slide" data-name="Floater · Get Yoked">
-    <div class="top">
-      <div class="num"><small>Floater</small>GY</div>
-      <h1>Get Yoked<span class="sub">Sandbag over a 4 ft yoke · one athlete at a time</span></h1>
-      <div class="fmt"><b>Total reps</b><span>Any time 8:00 to 11:05 · sign up at the floater board</span></div>
-    </div>
-    <div class="body">
-      <div>
-        <p class="flow big">1:00 each athlete<br><em>as many bags over the bar as possible · team total</em></p>
+      <div class="panel">
+        <h2>Get Yoked <i>Total reps</i></h2>
+        <p class="lead">Sandbag over a 4 ft yoke · 1:00 each<br><em>one athlete at a time · back to back</em></p>
         <table>
           <thead><tr><th>Sandbag</th><th class="lv">Freedom</th><th class="lv">Independence</th><th class="lv">Liberty</th></tr></thead>
-          <tbody><tr><td>Men / women</td><td>100 / 80 lb</td><td>80 / 60 lb</td><td>60 / 40 lb</td></tr></tbody>
+          <tbody>
+            <tr><td>Men</td><td>100 lb</td><td>80 lb</td><td>60 lb</td></tr>
+            <tr><td>Women</td><td>80 lb</td><td>60 lb</td><td>40 lb</td></tr>
+          </tbody>
         </table>
-        <div class="cap">Bag weight is set by <b>your level</b>. Walk around the yoke to retrieve the bag; the clock keeps running.</div>
-      </div>
-      <div class="panel">
-        <p class="kicker">Standards and rules</p>
         <ul class="rules">
-          <li>The bag must pass fully over the 4 ft yoke bar and land on the other side.</li>
-          <li>Any method: shoulder, bear hug, throw. The bag may touch the bar on the way over.</li>
-          <li>One athlete works at a time, 1:00 each, three athletes back to back.</li>
-          <li>Score is the team total. A no-rep is repeated, head judge has the final call.</li>
-          <li>Both floaters close when Event 3 starts at 11:05.</li>
+          <li>Bag goes fully over and lands on the far side. It may touch the bar.</li>
+          <li>Any method. Walk around for the bag; the clock runs.</li>
+          <li>A no-rep is repeated. Head judge has the final call.</li>
+          <li>Floaters score the same as an event.</li>
         </ul>
       </div>
     </div>
